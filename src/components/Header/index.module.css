@@ -1,0 +1,198 @@
+/* src/components/Header/index.module.css */
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #000000;
+  padding: 0;
+  z-index: 1000;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  height: 70px;
+}
+
+.container1 {
+  display: flex;
+  align-items: center;
+  gap: 80px;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.whiteBgsvgFill {
+  display: flex;
+  align-items: center;
+}
+
+.rectangleParent {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.icon {
+  height: auto;
+}
+
+.container2 {
+  display: flex;
+  align-items: center;
+  gap: 70px;
+}
+
+/* 솔루션 메뉴 (드롭다운 있음) */
+.solutionMenu {
+  position: relative;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.solutionMenu:hover .div {
+  color: #583CF2;
+}
+
+.solutionMenu:hover .dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* 드롭다운 메뉴 */
+.dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: -60px;
+  background-color: #000000;
+  border: 1px solid #3d3d3d;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgb(0, 0, 1);
+  padding: 2px 0;
+  min-width: 180px;
+  opacity: 0.1;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.dropdownItem {
+  padding: 12px 20px;
+  font-size: 14px;
+  color: #e4e4e7;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.dropdownItem:hover {
+  background-color: #583CF2;
+  color:  #e4e4e7;
+}
+
+/* 나머지 메뉴들 (화살표 없음) */
+.buttonMenu,
+.buttonMenu1,
+.buttonMenu2,
+.buttonMenu3 {
+  position: relative;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.buttonMenu:hover,
+.buttonMenu1:hover,
+.buttonMenu2:hover,
+.buttonMenu3:hover {
+  color: #583CF2;
+}
+
+/* buttonMenu에도 드롭다운 효과 추가 */
+.buttonMenu:hover .dropdown,
+.buttonMenu1:hover .dropdown,
+.buttonMenu2:hover .dropdown,
+.buttonMenu3:hover .dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* 단순한 컨테이너 (화살표 없는 메뉴용) - 호버 효과 추가 */
+.simpleContainer {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.simpleContainer:hover .div {
+  color: #583CF2;
+}
+
+.container3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.container4 {
+  display: flex;
+  align-items: center;
+}
+
+.div {
+  font-size: 16px;
+  font-weight: 500;
+  color: #e4e4e7;
+}
+
+.component1 {
+  display: flex;
+  align-items: center;
+}
+
+.vectorIcon {
+  opacity: 0.6;
+}
+
+.container11 {
+  display: flex;
+  align-items: center;
+}
+
+.button1 {
+  background-color: #583CF2;
+  color: #e4e4e7;
+  padding: 12px 24px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.button1:hover {
+  background-color: #4b2fec;
+}
+
+.b {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.button1:hover .b {
+  color: #d7d7d7;
+}

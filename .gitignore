@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# explicitly ignore dist and env.local
+/dist/
+/.env.local
