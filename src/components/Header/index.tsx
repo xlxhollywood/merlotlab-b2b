@@ -18,7 +18,7 @@ const Header: React.FC = () => {
   
   return (
     <div className="fixed top-0 left-0 w-full bg-black p-0 z-[1000]">
-      <div className="max-w-[1200px] mx-auto flex items-center px-4 md:px-5 h-[60px] md:h-[70px]" onClick={onContainerClick}>
+      <div className="max-w-[1200px] mx-auto flex items-center justify-between lg:justify-start px-4 md:px-5 h-[60px] md:h-[70px]" onClick={onContainerClick}>
         {/* 로고 */}
         <div className="flex items-center">
           <div className="flex items-center relative">
