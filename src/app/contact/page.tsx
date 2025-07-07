@@ -112,10 +112,14 @@ export default function MerlotlabTossStyle() {
               </p>
               <button
                 onClick={() => {
-                  quoteFormRef.current?.scrollIntoView({
-                    behavior: "smooth",
-                    block: "center", // 또는 "start", "end", "nearest"
-                  })
+                  // 모의 견적 탭으로 설정하고 스크롤
+                  setSelectedInquiry("quote")
+                  setTimeout(() => {
+                    quoteFormRef.current?.scrollIntoView({
+                      behavior: "smooth",
+                      block: "center",
+                    })
+                  }, 100)
                 }}
                 className="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-3 sm:py-5 bg-[#583CF2]/5 rounded-xl sm:rounded-2xl"
               >
@@ -311,12 +315,14 @@ export default function MerlotlabTossStyle() {
 
           {selectedInquiry === "quote" ? (
             <FadeInUp>
-              <QuoteForm
-                selectedInquiry={selectedInquiry}
-                setSelectedInquiry={setSelectedInquiry}
-                selectedBusinessType={selectedBusinessType}
-                setSelectedBusinessType={setSelectedBusinessType}
-              />
+              <div ref={quoteFormRef}>
+                <QuoteForm
+                  selectedInquiry={selectedInquiry}
+                  setSelectedInquiry={setSelectedInquiry}
+                  selectedBusinessType={selectedBusinessType}
+                  setSelectedBusinessType={setSelectedBusinessType}
+                />
+              </div>
             </FadeInUp>
           ) : (
             <FadeInUp threshold={0.3} rootMargin="150px 0px" delay={100}>
