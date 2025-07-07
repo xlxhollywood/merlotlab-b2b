@@ -44,8 +44,8 @@ export default function QuoteForm({
     "주거 시설": 0.2,
     "물류 창고": 0.5,
     "제조 시설": 0.3,
-    주차장: 0.5,
-    사무실: 0.3,
+    "주차장": 0.5,
+    "사무실": 0.3,
   }
 
   const handleInputChange = (field: string, value: string) => {
@@ -55,49 +55,41 @@ export default function QuoteForm({
     }))
   }
 
-  const calculateQuote = (e: React.FormEvent) => {
+ const calculateQuote = (e: React.FormEvent) => {
   e.preventDefault();
 
-  const { generalHours, annualDays, electricityRate } = formData;
+  const { generalCount, generalPower, generalHours, annualDays, electricityRate } = formData;
+  // (입력값 검증 생략…)
 
-  // 1) 필수 입력 체크
-  if (!generalHours || !annualDays || !electricityRate) {
-    alert("사용 시간·사용 일수·전기 요금을 모두 입력해주세요.");
-    return;
-  }
+  const count       = parseFloat(generalCount);
+  const power       = parseFloat(generalPower);      // W
+  const hoursPerDay = parseFloat(generalHours);      // h/day
+  const daysPerYear = parseFloat(annualDays);        // days
+  const rate        = parseFloat(electricityRate);   // 원/kWh
 
-  // 2) 사업장 유형 체크
-  if (!selectedBusinessType) {
-    alert("사업장 유형을 선택해주세요.");
-    return;
-  }
+  // 1) 연간 사용 시간
+  const annualHours = hoursPerDay * daysPerYear;
 
-  // 3) 연간 총 사용 시간 계산
-  const annualHours = parseFloat(generalHours) * parseFloat(annualDays);
+  // 2) 교체 전 전기비용 (Wh → kWh)
+  const beforeCost = (count * power * annualHours * rate) / 1000;
 
-  // 4) 교체 전 연간 전기 비용
-  const beforeCost = (annualHours * parseFloat(electricityRate)) / 1000;
+  // 3) 사업장 유형별 절감율 조회
+  const savingsRate =
+    businessTypeSavings[selectedBusinessType as keyof typeof businessTypeSavings] ?? 0;
 
-  // 5) 절감률 조회 (매핑이 없으면 undefined)
-  const savingsRateRaw = businessTypeSavings[selectedBusinessType as keyof typeof businessTypeSavings];
-  if (savingsRateRaw == null) {
-    alert("유효한 사업장 유형을 선택해주세요.");
-    return;
-  }
-  const savingsRate = savingsRateRaw;
-
-  // 6) 교체 후 비용 및 절감액 계산
+  // 4) 교체 후 비용과 절감액
   const afterCost = beforeCost * (1 - savingsRate);
-  const savings = beforeCost - afterCost;
+  const savings   = beforeCost - afterCost;
 
   setCalculationResult({
     beforeCost,
     afterCost,
     savings,
-    savingsRate: savingsRate * 100,
+    savingsRate: savingsRate * 100,  // % 단위로 변환
     annualHours,
   });
 };
+
 
 
   const formatCurrency = (amount: number) => {
@@ -324,7 +316,11 @@ export default function QuoteForm({
             </div>
 
             <div className="mt-6">
-              <Button className="w-full bg-[#583CF2] hover:bg-[#583CF2]/90 h-12 rounded-xl text-base font-semibold transition-all duration-300">
+              <Button
+                type="button"
+                onClick={() => setSelectedInquiry("business")}
+                className="w-full bg-[#583CF2] hover:bg-[#583CF2]/90 h-12 rounded-xl text-base font-semibold transition-all duration-300"
+              >
                 정확한 견적 문의하기
               </Button>
             </div>
