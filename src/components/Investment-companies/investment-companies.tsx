@@ -5,44 +5,54 @@ import Image from "next/image"
 export default function InvestmentCompanies() {
   const companies = [
     {
-      name: "한국동서발전",
-      logo: "/swf-red.png",
-      alt: "한국동서발전 로고",
+      name: "삼성전자",
+      logo: "/삼성전자.png",
+      alt: "삼성전자 로고",
     },
     {
-      name: "한국남동발전",
-      logo: "/koen.png",
-      alt: "한국남동발전 로고",
+      name: "현대모비스",
+      logo: "/현대모비스.png",
+      alt: "현대모비스 로고",
     },
     {
-      name: "한국수력원자력",
-      logo: "/green-logo.png",
-      alt: "한국수력원자력 로고",
+      name: "SK텔레콤",
+      logo: "/SKT.png",
+      alt: "SK텔레콤 로고",
     },
     {
-      name: "한국남부발전",
-      logo: "/blue-logo.png",
-      alt: "한국남부발전 로고",
+      name: "GS리테일",
+      logo: "/GS리테일.png",
+      alt: "GS리테일 로고",
     },
     {
-      name: "한국중부발전",
-      logo: "/blue-radial.png",
-      alt: "한국중부발전 로고",
+      name: "GS네트웍스",
+      logo: "/GS네트웍스.png",
+      alt: "GS네트웍스 로고",
     },
     {
-      name: "캡코이에스",
-      logo: "/kes-yellow.png",
-      alt: "캡코이에스 로고",
+      name: "CJ대한통운",
+      logo: "/CJ대한통운.png",
+      alt: "CJ대한통운 로고",
     },
     {
-      name: "한국서부발전",
-      logo: "/cwp.png",
-      alt: "한국서부발전 로고",
+      name: "이마트",
+      logo: "/이마트.png",
+      alt: "이마트 로고",
     },
     {
-      name: "한국서부발전",
-      logo: "/swf-red-alt.png",
-      alt: "한국서부발전 로고",
+      name: "BGF로지스",
+      logo: "/BGF로지스.png",
+      alt: "BGF로지스 로고",
+    },
+    {
+      name: "NH투자증권",
+      logo: "/NH투자증권.png",
+      alt: "NH투자증권 로고",
+    },
+    {
+      name: "신한은행",
+      logo: "/신한은행.png",
+      alt: "신한은행 로고",
     },
   ]
 
@@ -52,8 +62,7 @@ export default function InvestmentCompanies() {
   return (
     <div className="w-full max-w-[1150px] mx-auto px-4 py-8">
       <div className="text-center mb-8">
-        <h2 className="text-2xl font-bold text-gray-900 mb-2">투자지원사</h2>
-        
+        <h2 className="text-2xl font-bold text-gray-900 mb-2">솔루션 도입사</h2>
       </div>
 
       <div className="relative overflow-hidden bg-gradient-to-r from-gray-50 via-white to-gray-50 rounded-xl py-6">
@@ -68,10 +77,15 @@ export default function InvestmentCompanies() {
           }}
         >
           {duplicatedCompanies.map((company, index) => {
-            // 한국중부발전만 크기를 10px 줄임
-            const isKoreaMiddlePower = company.name === "한국중부발전"
-            const imgBox = "w-24 h-24"
-            const imgSize = isKoreaMiddlePower ? 70 : 96
+            // 각 회사별로 적절한 크기 설정
+            let imgSize = 118 // 기본 크기
+            if (company.name === "NH투자증권") imgSize = 150
+            if (company.name === "GS리테일") imgSize = 110
+            if (company.name === "이마트") imgSize = 100
+            if (company.name === "GS네트웍스") imgSize = 200
+            if (company.name === "CJ대한통운") imgSize = 140
+
+            const imgBox = "w-36 h-36"
 
             return (
               <div key={`${company.name}-${index}`} className="flex flex-col items-center flex-shrink-0 h-32">
@@ -96,7 +110,7 @@ export default function InvestmentCompanies() {
       </div>
 
       <div className="text-center mt-6">
-        <p className="text-sm text-gray-500">신뢰할 수 있는 투자 지원사와 함께 성장하고 있습니다</p>
+        <p className="text-sm text-gray-500">메를로랩은 고객사의 지속적인 성장을 지원합니다</p>
       </div>
 
       <style jsx>{`
@@ -105,15 +119,12 @@ export default function InvestmentCompanies() {
             transform: translate3d(0, 0, 0);
           }
           100% {
-            transform: translate3d(-${companies.length * 160}px, 0, 0);
+            transform: translate3d(-50%, 0, 0);
           }
         }
         .animate-scroll {
           animation: scroll 20s linear infinite;
           will-change: transform;
-        }
-        .pause-animation:hover .animate-scroll {
-          animation-play-state: paused;
         }
         .hover\\:pause-animation:hover {
           animation-play-state: paused;
