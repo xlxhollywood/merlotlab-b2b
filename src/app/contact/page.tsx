@@ -1,6 +1,4 @@
 "use client"
-
-import type React from "react"
 import { Zap, Shield, Cpu, TrendingUp, ArrowRight } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import { useEffect, useState, useRef } from "react"
@@ -12,13 +10,16 @@ import dynamic from "next/dynamic"
 import { useInView } from "react-intersection-observer"
 import SplitText from "@/components/Animation/SplitText"
 import FadeInUp from "@/components/Animation/FadeInUp"
-
+import { useSearchParams } from "next/navigation"
 
 const CountUp = dynamic(() => import("react-countup"), {
   ssr: false,
 })
 
 export default function MerlotlabTossStyle() {
+  const searchParams = useSearchParams()
+  const tabParam = searchParams.get("tab")
+
   const { ref: costRef, inView: costInView } = useInView({
     triggerOnce: true,
     threshold: 0.6,
@@ -26,30 +27,48 @@ export default function MerlotlabTossStyle() {
 
   const [scrollY, setScrollY] = useState(0)
   const [activeSection, setActiveSection] = useState(0)
+
   const pricingData = [
     { title: "제품 공급가", subtitle: "(모델 별 상이)", price: 0, unit: "원", icon: Cpu },
-    { title: "설치 공사비", subtitle: " ", price: 0,unit: "원", icon: Shield },
-    { title: "무선 통신비", subtitle: " ", price: 0,unit: "원", icon: Zap },
-    { title: "시스템 구축비", subtitle: " ", price: 0,unit: "원", icon: Cpu },
+    { title: "설치 공사비", subtitle: " ", price: 0, unit: "원", icon: Shield },
+    { title: "무선 통신비", subtitle: " ", price: 0, unit: "원", icon: Zap },
+    { title: "시스템 구축비", subtitle: " ", price: 0, unit: "원", icon: Cpu },
     { title: "컨설팅 및 설계비", subtitle: "(에너지 진단, 설계 컨설팅 포함)", price: 0, unit: "원", icon: Shield },
   ]
+
   const quoteFormRef = useRef<HTMLDivElement>(null)
-  const [selectedInquiry, setSelectedInquiry] = useState<"business"|"quote">("business")
 
-// inquiry 타입에 따라 default 값을 초기화
-const [selectedBusinessType, setSelectedBusinessType] = useState<string>(
-  selectedInquiry === "business" ? "개인" : "주거 시설"
-)
+  // URL 파라미터에 따라 초기 탭 설정
+  const [selectedInquiry, setSelectedInquiry] = useState<"business" | "quote">(
+    tabParam === "business" ? "business" : "quote",
+  )
 
-useEffect(() => {
-  if (selectedInquiry === "business") {
-    setSelectedBusinessType("개인")
-  } else {
-    setSelectedBusinessType("주거 시설")
-  }
-}, [selectedInquiry])
+  // inquiry 타입에 따라 default 값을 초기화
+  const [selectedBusinessType, setSelectedBusinessType] = useState<string>(
+    selectedInquiry === "business" ? "개인" : "주차장",
+  )
 
-  
+  useEffect(() => {
+    if (selectedInquiry === "business") {
+      setSelectedBusinessType("개인")
+    } else {
+      setSelectedBusinessType("주차장")
+    }
+  }, [selectedInquiry])
+
+  // URL 파라미터 변경 감지
+  useEffect(() => {
+    if (tabParam === "business") {
+      setSelectedInquiry("business")
+      // 문의 폼으로 스크롤 (200px 오프셋)
+      setTimeout(() => {
+        quoteFormRef.current?.scrollIntoView({
+          behavior: "smooth",
+          block: "center", // 또는 "start", "end", "nearest"
+        })
+      }, 100)
+    }
+  }, [tabParam])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -60,7 +79,6 @@ useEffect(() => {
       sections.forEach((section, index) => {
         const sectionTop = section.offsetTop
         const sectionBottom = sectionTop + section.offsetHeight
-
         if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
           setActiveSection(index)
         }
@@ -83,8 +101,7 @@ useEffect(() => {
                 <span className="text-[#583CF2]">
                   <SplitText text="메를로랩" delay={400} />
                 </span>
-                을
-                <br />
+                을<br />
                 선택할까요?
               </h1>
             </div>
@@ -95,7 +112,10 @@ useEffect(() => {
               </p>
               <button
                 onClick={() => {
-                  quoteFormRef.current?.scrollIntoView({ behavior: "smooth" })
+                  quoteFormRef.current?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "center", // 또는 "start", "end", "nearest"
+                  })
                 }}
                 className="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-3 sm:py-5 bg-[#583CF2]/5 rounded-xl sm:rounded-2xl"
               >
@@ -149,93 +169,84 @@ useEffect(() => {
 
       {/* Pricing Section */}
       <section className="min-h-screen py-8 px-4 sm:px-6 lg:px-8 bg-gray-50">
-      <div className="max-w-6xl mx-auto py-16 sm:py-24 lg:py-32">
-        {/* Header Section */}
-        <div className="text-center mb-12 sm:mb-16 lg:mb-20">
-          <h2
-            ref={costRef}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 sm:mb-6"
-          >
-            초기 투자 비용 {costInView && <CountUp start={1000000} end={0} duration={2} separator="," />}원
-          </h2>
-          <p className="text-lg sm:text-xl text-gray-600">투명하고 합리적인 가격 정책</p>
-        </div>
-
-        {/* Cards Grid - 6 column grid for offset positioning */}
-<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4 sm:gap-6 lg:gap-4">
-  {pricingData.map((item, idx) => {
-    // 여기서 훅 호출
-    const { ref: cardRef, inView: cardInView } = useInView({
-      triggerOnce: true,
-      threshold: 0.5,
-    })
-
-    return (
-      // Card에 ref={cardRef} 추가
-      <Card
-        key={idx}
-        ref={cardRef}
-        className={`
-          border border-gray-200 shadow-lg transition-all duration-300 bg-white group
-          hover:shadow-xl hover:scale-105 hover:border-[#583CF2]/20
-          ${
-            idx <= 2
-              ? "lg:col-span-2"
-              : idx === 3
-                ? "lg:col-start-2 lg:col-span-2"
-                : "lg:col-start-4 lg:col-span-2"
-          }
-        `}
-      >
-        <CardContent className="p-6 sm:p-8 text-center h-full flex flex-col justify-between">
-                <div className="space-y-3 sm:space-y-4">
-                  {/* Icon */}
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[#583CF2]/10 rounded-xl sm:rounded-2xl flex items-center justify-center mx-auto group-hover:bg-[#583CF2]/20 transition-colors duration-300">
-                    <item.icon className="w-5 h-5 sm:w-6 sm:h-6 text-[#583CF2] group-hover:scale-110 transition-transform duration-300" />
-                  </div>
-
-                  {/* Title and Subtitle */}
-                  <div className="min-h-[3rem] sm:min-h-[3.5rem] flex flex-col justify-center">
-                    <h3 className="text-base sm:text-lg font-semibold text-gray-900 leading-tight">{item.title}</h3>
-                    {item.subtitle && item.subtitle.trim() && (
-                      <p className="text-xs sm:text-sm text-gray-500 mt-1 leading-tight">{item.subtitle}</p>
-                    )}
-                  </div>
-
-                  {/* Price */}
-                  <div className="pt-2">
-                    <p className="text-xl sm:text-2xl font-bold text-[#583CF2] group-hover:text-[#4c35d1] transition-colors duration-300">
-                     {cardInView
-                ? <CountUp start={100000} end={item.price} duration={2} separator="," />
-                : 0
-              }
-              {item.unit}
-            </p>
-            </div> 
+        <div className="max-w-6xl mx-auto py-16 sm:py-24 lg:py-32">
+          {/* Header Section */}
+          <div className="text-center mb-12 sm:mb-16 lg:mb-20">
+            <h2
+              ref={costRef}
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 sm:mb-6"
+            >
+              초기 투자 비용 {costInView && <CountUp start={1000000} end={0} duration={2} separator="," />}원
+            </h2>
+            <p className="text-lg sm:text-xl text-gray-600">투명하고 합리적인 가격 정책</p>
           </div>
-        </CardContent>
-      </Card>
-    )
-  })}
-</div>
 
+          {/* Cards Grid - 6 column grid for offset positioning */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4 sm:gap-6 lg:gap-4">
+            {pricingData.map((item, idx) => {
+              return (
+                <Card
+                  key={idx}
+                  className={`
+                    border border-gray-200 shadow-lg transition-all duration-300 bg-white group
+                    hover:shadow-xl hover:scale-105 hover:border-[#583CF2]/20
+                    ${
+                      idx <= 2
+                        ? "lg:col-span-2"
+                        : idx === 3
+                          ? "lg:col-start-2 lg:col-span-2"
+                          : "lg:col-start-4 lg:col-span-2"
+                    }
+                  `}
+                >
+                  <CardContent className="p-6 sm:p-8 text-center h-full flex flex-col justify-between">
+                    <div className="space-y-3 sm:space-y-4">
+                      {/* Icon */}
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[#583CF2]/10 rounded-xl sm:rounded-2xl flex items-center justify-center mx-auto group-hover:bg-[#583CF2]/20 transition-colors duration-300">
+                        <item.icon className="w-5 h-5 sm:w-6 sm:h-6 text-[#583CF2] group-hover:scale-110 transition-transform duration-300" />
+                      </div>
 
-        {/* Footer Note */}
-        <div className="text-center mt-8 sm:mt-12 lg:mt-16">
-          <p className="text-xs sm:text-sm text-gray-500">*해당 가격은 에너지 효율화 사업에 한해 적용됩니다</p>
+                      {/* Title and Subtitle */}
+                      <div className="min-h-[3rem] sm:min-h-[3.5rem] flex flex-col justify-center">
+                        <h3 className="text-base sm:text-lg font-semibold text-gray-900 leading-tight">{item.title}</h3>
+                        {item.subtitle && item.subtitle.trim() && (
+                          <p className="text-xs sm:text-sm text-gray-500 mt-1 leading-tight">{item.subtitle}</p>
+                        )}
+                      </div>
+
+                      {/* Price */}
+                      <div className="pt-2">
+                        <p className="text-xl sm:text-2xl font-bold text-[#583CF2] group-hover:text-[#4c35d1] transition-colors duration-300">
+                          {item.price}
+                          {item.unit}
+                        </p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              )
+            })}
+          </div>
+
+          {/* Footer Note */}
+          <div className="text-center mt-8 sm:mt-12 lg:mt-16">
+            <p className="text-xs sm:text-sm text-gray-500">*해당 가격은 에너지 효율화 사업에 한해 적용됩니다</p>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
       {/* Process Section */}
       <section className="py-16 sm:py-24 lg:py-32 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-4xl mx-auto">
           <FadeInUp>
             <div className="text-center mb-12 sm:mb-16 lg:mb-20">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 sm:mb-6">도입 프로세스</h2>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 sm:mb-6">
+                도입 프로세스
+              </h2>
               <p className="text-lg sm:text-xl text-gray-600">간단하고 체계적인 5단계 프로세스</p>
             </div>
           </FadeInUp>
+
           <div className="space-y-6 sm:space-y-8">
             {[
               {
@@ -268,17 +279,17 @@ useEffect(() => {
             ].map((item, idx) => (
               <FadeInUp key={item.step /* 또는 key={idx} */}>
                 <Card className="border border-gray-100 shadow-lg transition-all duration-300 bg-white group">
-                    <CardContent className="p-6 sm:p-8">
-                      <div className="flex items-start gap-4 sm:gap-6">
-                        <div className="flex-shrink-0">
-                          <div className="text-[#583CF2] text-xl sm:text-2xl lg:text-3xl font-bold">{item.step}</div>
-                        </div>
-                        <div className="space-y-2 flex-1">
-                          <h3 className="text-lg sm:text-xl font-bold text-gray-900">{item.title}</h3>
-                          <p className="text-sm sm:text-base text-gray-600 leading-relaxed">{item.description}</p>
-                        </div>
+                  <CardContent className="p-6 sm:p-8">
+                    <div className="flex items-start gap-4 sm:gap-6">
+                      <div className="flex-shrink-0">
+                        <div className="text-[#583CF2] text-xl sm:text-2xl lg:text-3xl font-bold">{item.step}</div>
                       </div>
-                    </CardContent>
+                      <div className="space-y-2 flex-1">
+                        <h3 className="text-lg sm:text-xl font-bold text-gray-900">{item.title}</h3>
+                        <p className="text-sm sm:text-base text-gray-600 leading-relaxed">{item.description}</p>
+                      </div>
+                    </div>
+                  </CardContent>
                 </Card>
               </FadeInUp>
             ))}
@@ -289,7 +300,7 @@ useEffect(() => {
       {/* Contact Form Section */}
       <section className="py-16 sm:py-24 lg:py-32 px-4 sm:px-6 lg:px-8 bg-gray-50">
         <div className="max-w-4xl mx-auto">
-          <FadeInUp> 
+          <FadeInUp>
             <div className="text-center mb-12 sm:mb-16">
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 sm:mb-6 leading-tight">
                 편하게 연락주세요, 자세히 상담해드립니다
@@ -297,24 +308,25 @@ useEffect(() => {
               <p className="text-lg sm:text-xl text-gray-600">궁금하신 점을 언제든 편하게 문의해 주세요</p>
             </div>
           </FadeInUp>
+
           {selectedInquiry === "quote" ? (
             <FadeInUp>
-            <QuoteForm
-              selectedInquiry={selectedInquiry}
-              setSelectedInquiry={setSelectedInquiry}
-              selectedBusinessType={selectedBusinessType}
-              setSelectedBusinessType={setSelectedBusinessType}
-            />
-            </FadeInUp> 
+              <QuoteForm
+                selectedInquiry={selectedInquiry}
+                setSelectedInquiry={setSelectedInquiry}
+                selectedBusinessType={selectedBusinessType}
+                setSelectedBusinessType={setSelectedBusinessType}
+              />
+            </FadeInUp>
           ) : (
             <FadeInUp threshold={0.3} rootMargin="150px 0px" delay={100}>
               <div ref={quoteFormRef}>
-            <BusinessInquiryForm
-              selectedInquiry={selectedInquiry}
-              setSelectedInquiry={setSelectedInquiry}
-              selectedBusinessType={selectedBusinessType}
-              setSelectedBusinessType={setSelectedBusinessType}
-            />
+                <BusinessInquiryForm
+                  selectedInquiry={selectedInquiry}
+                  setSelectedInquiry={setSelectedInquiry}
+                  selectedBusinessType={selectedBusinessType}
+                  setSelectedBusinessType={setSelectedBusinessType}
+                />
               </div>
             </FadeInUp>
           )}
