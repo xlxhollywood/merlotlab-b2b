@@ -27,11 +27,11 @@ export default function MerlotlabTossStyle() {
   const [scrollY, setScrollY] = useState(0)
   const [activeSection, setActiveSection] = useState(0)
   const pricingData = [
-    { title: "제품 공급가", subtitle: "(모델 별 상이)", price: "0원", icon: Cpu },
-    { title: "설치 공사비", subtitle: " ", price: "0원", icon: Shield },
-    { title: "무선 통신비", subtitle: " ", price: "0원", icon: Zap },
-    { title: "시스템 구축비", subtitle: " ", price: "0원", icon: Cpu },
-    { title: "컨설팅 및 설계비", subtitle: "(에너지 진단, 설계 컨설팅 포함)", price: "0원", icon: Shield },
+    { title: "제품 공급가", subtitle: "(모델 별 상이)", price: 0, unit: "원", icon: Cpu },
+    { title: "설치 공사비", subtitle: " ", price: 0,unit: "원", icon: Shield },
+    { title: "무선 통신비", subtitle: " ", price: 0,unit: "원", icon: Zap },
+    { title: "시스템 구축비", subtitle: " ", price: 0,unit: "원", icon: Cpu },
+    { title: "컨설팅 및 설계비", subtitle: "(에너지 진단, 설계 컨설팅 포함)", price: 0, unit: "원", icon: Shield },
   ]
   const quoteFormRef = useRef<HTMLDivElement>(null)
   const [selectedInquiry, setSelectedInquiry] = useState<"business"|"quote">("business")
@@ -162,31 +162,32 @@ useEffect(() => {
         </div>
 
         {/* Cards Grid - 6 column grid for offset positioning */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4 sm:gap-6 lg:gap-4">
-          {pricingData.map((item, idx) => (
-            <Card
-              key={idx}
-              className={`
-                border border-gray-200 shadow-lg transition-all duration-300 bg-white group
-                hover:shadow-xl hover:scale-105 hover:border-[#583CF2]/20
-                ${
-                  // 첫 번째 행: 각각 2열씩 차지
-                  idx === 0
-                    ? "lg:col-span-2"
-                    : idx === 1
-                      ? "lg:col-span-2"
-                      : idx === 2
-                        ? "lg:col-span-2"
-                        : // 두 번째 행: 첫 번째 행 카드들 사이에 배치
-                          idx === 3
-                          ? "lg:col-start-2 lg:col-span-2"
-                          : idx === 4
-                            ? "lg:col-start-4 lg:col-span-2"
-                            : ""
-                }
-              `}
-            >
-              <CardContent className="p-6 sm:p-8 text-center h-full flex flex-col justify-between">
+<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4 sm:gap-6 lg:gap-4">
+  {pricingData.map((item, idx) => {
+    // 여기서 훅 호출
+    const { ref: cardRef, inView: cardInView } = useInView({
+      triggerOnce: true,
+      threshold: 0.5,
+    })
+
+    return (
+      // Card에 ref={cardRef} 추가
+      <Card
+        key={idx}
+        ref={cardRef}
+        className={`
+          border border-gray-200 shadow-lg transition-all duration-300 bg-white group
+          hover:shadow-xl hover:scale-105 hover:border-[#583CF2]/20
+          ${
+            idx <= 2
+              ? "lg:col-span-2"
+              : idx === 3
+                ? "lg:col-start-2 lg:col-span-2"
+                : "lg:col-start-4 lg:col-span-2"
+          }
+        `}
+      >
+        <CardContent className="p-6 sm:p-8 text-center h-full flex flex-col justify-between">
                 <div className="space-y-3 sm:space-y-4">
                   {/* Icon */}
                   <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[#583CF2]/10 rounded-xl sm:rounded-2xl flex items-center justify-center mx-auto group-hover:bg-[#583CF2]/20 transition-colors duration-300">
@@ -204,18 +205,24 @@ useEffect(() => {
                   {/* Price */}
                   <div className="pt-2">
                     <p className="text-xl sm:text-2xl font-bold text-[#583CF2] group-hover:text-[#4c35d1] transition-colors duration-300">
-                      {item.price}
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+                     {cardInView
+                ? <CountUp start={100000} end={item.price} duration={2} separator="," />
+                : 0
+              }
+              {item.unit}
+            </p>
+            </div> 
+          </div>
+        </CardContent>
+      </Card>
+    )
+  })}
+</div>
+
 
         {/* Footer Note */}
         <div className="text-center mt-8 sm:mt-12 lg:mt-16">
-          <p className="text-xs sm:text-sm text-gray-500">*부가세 미포함 가격입니다</p>
+          <p className="text-xs sm:text-sm text-gray-500">*해당 가격은 에너지 효율화 사업에 한해 적용됩니다</p>
         </div>
       </div>
     </section>
