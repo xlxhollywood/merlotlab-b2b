@@ -22,6 +22,7 @@ const Header: React.FC = () => {
         {/* 로고 */}
         <div className="flex items-center">
           <div className="flex items-center relative">
+            <Link href="/" className="flex items-center relative">
             <Image 
               className="h-auto w-[120px] md:w-[150px]" 
               width={150} 
@@ -30,6 +31,7 @@ const Header: React.FC = () => {
               src="/메를로랩 로고.png" 
               unoptimized
             />
+            </Link>
           </div>
         </div>
         
