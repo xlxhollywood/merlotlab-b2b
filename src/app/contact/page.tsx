@@ -25,15 +25,22 @@ export default function MerlotlabTossStyle() {
     threshold: 0.6,
   })
 
+  // 카드 섹션을 위한 별도의 useInView 추가
+  const { ref: cardsRef, inView: cardsInView } = useInView({
+    triggerOnce: true,
+    threshold: 0.3,
+  })
+
   const [scrollY, setScrollY] = useState(0)
   const [activeSection, setActiveSection] = useState(0)
 
+  // 실제 가격 데이터로 변경 (애니메이션 효과를 보기 위해)
   const pricingData = [
-    { title: "제품 공급가", subtitle: "(모델 별 상이)", price: 0, unit: "원", icon: Cpu },
-    { title: "설치 공사비", subtitle: " ", price: 0, unit: "원", icon: Shield },
-    { title: "무선 통신비", subtitle: " ", price: 0, unit: "원", icon: Zap },
-    { title: "시스템 구축비", subtitle: " ", price: 0, unit: "원", icon: Cpu },
-    { title: "컨설팅 및 설계비", subtitle: "(에너지 진단, 설계 컨설팅 포함)", price: 0, unit: "원", icon: Shield },
+    { title: "제품 공급가", subtitle: "(모델 별 상이)", price: 1500000, unit: "원", icon: Cpu },
+    { title: "설치 공사비", subtitle: " ", price: 800000, unit: "원", icon: Shield },
+    { title: "무선 통신비", subtitle: " ", price: 200000, unit: "원", icon: Zap },
+    { title: "시스템 구축비", subtitle: " ", price: 1200000, unit: "원", icon: Cpu },
+    { title: "컨설팅 및 설계비", subtitle: "(에너지 진단, 설계 컨설팅 포함)", price: 500000, unit: "원", icon: Shield },
   ]
 
   const quoteFormRef = useRef<HTMLDivElement>(null)
@@ -186,7 +193,7 @@ export default function MerlotlabTossStyle() {
           </div>
 
           {/* Cards Grid - 6 column grid for offset positioning */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4 sm:gap-6 lg:gap-4">
+          <div ref={cardsRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4 sm:gap-6 lg:gap-4">
             {pricingData.map((item, idx) => {
               return (
                 <Card
@@ -218,10 +225,20 @@ export default function MerlotlabTossStyle() {
                         )}
                       </div>
 
-                      {/* Price */}
+                      {/* Price with Animation */}
                       <div className="pt-2">
                         <p className="text-xl sm:text-2xl font-bold text-[#583CF2] group-hover:text-[#4c35d1] transition-colors duration-300">
-                          {item.price}
+                          {cardsInView ? (
+                            <CountUp
+                              start={item.price}
+                              end={0}
+                              duration={2} // 2.5에서 2로 변경 (헤더와 동일하게)
+                              delay={0} // idx * 0.2에서 0으로 변경 (동시 시작)
+                              separator=","
+                            />
+                          ) : (
+                            item.price.toLocaleString()
+                          )}
                           {item.unit}
                         </p>
                       </div>
@@ -255,30 +272,28 @@ export default function MerlotlabTossStyle() {
             {[
               {
                 step: "01",
-                title: "사업장 정보 전달",
-                description: "첫 문의 후 안내에 따라 발전소 주소, 발전 용량 등의 정보를 전달해주세요.",
+                title: "기초 진단 & 현장 실사",
+                description: "현장을 방문해 기초 진단을 수행하고, 맞춤형 설계를 위한 실사를 진행합니다",
               },
               {
                 step: "02",
-                title: "검토 및 견적 회신",
-                description: "효과적인 솔루션 배치와 경제적인 서비스 구성 제안과 함께 견적을 드립니다.",
+                title: " 효율화 방안 제안",
+                description: "진단 결과를 바탕으로 에너지 절감을 위한 최적의 효율화 방안을 제안드립니다",
               },
               {
                 step: "03",
-                title: "도입 일정 확인",
-                description: "발전소의 규모와 재고 상황에 따라 선금일 기준 30일 이내에 설치 일자 확정이 가능합니다.",
+                title: "세부 설계 및 최종 제안",
+                description: "구체적인 협의를 통해 세부 설계를 확정하고, 최종 제안서를 제공합니다",
               },
               {
                 step: "04",
-                title: "현장 방문 설치",
-                description:
-                  "발전소 위치와 유형, 규모에 따라 전문 협력사가 시공을 진행합니다. 100kW 기준 1~2일 내 작업이 가능합니다.",
+                title: "계약 체결 및 IoT 시스템 구축",
+                description: "계약 체결 후, 현장 환경에 최적화된 스마트 IoT 시스템을 구축합니다",
               },
               {
                 step: "05",
-                title: "실측 확인 및 검수",
-                description:
-                  "14일간 집중 모니터링을 통해 적합한 초기값을 조절합니다. 세팅이 완료된 시스템은 모니터링 매뉴얼과 함께 제공드립니다.",
+                title: "절감 효과 검증 및 운영 지원",
+                description: "절감 효과를 검증하고, 안정적인 운영을 위한 지원을 제공합니다",
               },
             ].map((item, idx) => (
               <FadeInUp key={item.step /* 또는 key={idx} */}>
