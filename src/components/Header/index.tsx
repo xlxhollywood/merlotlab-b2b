@@ -69,7 +69,7 @@ const Header: React.FC = () => {
           <div className="relative cursor-pointer transition-colors duration-200 group">
             <div className="flex items-center">
               <div className="text-sm xl:text-base font-medium text-zinc-200 group-hover:text-[#583CF2] transition-colors duration-200">
-                고객지원
+                회사소개
               </div>
             </div>
           </div>
@@ -78,7 +78,7 @@ const Header: React.FC = () => {
           <div className="relative cursor-pointer transition-colors duration-200 group">
             <div className="flex items-center">
               <div className="text-sm xl:text-base font-medium text-zinc-200 group-hover:text-[#583CF2] transition-colors duration-200">
-                회사소개
+                탄소배출권
               </div>
             </div>
           </div>
