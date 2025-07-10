@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react"
 import { ArrowRight } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
-import InvestmentCompanies from '../Investment-companies/investment-companies';
+import LogoCarouselContact from "@/components/carousel/logo-carousel-contact"
 
 interface AnimationPhase {
   investment: boolean
@@ -336,7 +336,7 @@ export default function AnimatedEnergyChart() {
           </CardContent>
         </Card>
       </div>
-      <InvestmentCompanies />
+      <LogoCarouselContact />
     </div>
   )
 }

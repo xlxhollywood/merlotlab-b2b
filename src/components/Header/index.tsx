@@ -1,5 +1,4 @@
 "use client"
-
 import type React from "react"
 import { useCallback, useState } from "react"
 import Image from "next/image"
@@ -43,7 +42,7 @@ const Header: React.FC = () => {
 
         {/* 데스크톱 네비게이션 메뉴 */}
         <div className="hidden lg:flex items-center gap-12 xl:gap-[70px] ml-20">
-          {/* 솔루션 메뉴 (드롭다운 제거, 직접 링크) */}
+          {/* 솔루션 메뉴 */}
           <Link href="/contact" className="relative cursor-pointer transition-colors duration-200 group">
             <div className="flex items-center">
               <div
@@ -56,14 +55,18 @@ const Header: React.FC = () => {
             </div>
           </Link>
 
-          {/* 도입 사례 */}
-          <div className="relative cursor-pointer transition-colors duration-200 group">
+          {/* 도입 사례 - 수정된 부분 */}
+          <Link href="/use-cases" className="relative cursor-pointer transition-colors duration-200 group">
             <div className="flex items-center">
-              <div className="text-sm xl:text-base font-medium text-zinc-200 group-hover:text-[#583CF2] transition-colors duration-200">
+              <div
+                className={`text-sm xl:text-base font-medium transition-colors duration-200 ${
+                  pathname === "/use-cases" ? "text-[#583CF2]" : "text-zinc-200 group-hover:text-[#583CF2]"
+                }`}
+              >
                 도입 사례
               </div>
             </div>
-          </div>
+          </Link>
 
           {/* 고객지원 */}
           <div className="relative cursor-pointer transition-colors duration-200 group">
@@ -109,7 +112,7 @@ const Header: React.FC = () => {
         }`}
       >
         <div className="px-4 py-4 space-y-4">
-          {/* 솔루션 (드롭다운 제거) */}
+          {/* 솔루션 */}
           <Link href="/contact" className="block">
             <div
               className={`text-base font-medium cursor-pointer transition-colors duration-200 py-2 ${
@@ -120,10 +123,17 @@ const Header: React.FC = () => {
             </div>
           </Link>
 
-          {/* 다른 메뉴들 */}
-          <div className="text-base font-medium text-zinc-200 hover:text-[#583CF2] cursor-pointer transition-colors duration-200 py-2">
-            도입 사례
-          </div>
+          {/* 도입 사례 - 모바일에서도 수정 */}
+          <Link href="/use-cases" className="block">
+            <div
+              className={`text-base font-medium cursor-pointer transition-colors duration-200 py-2 ${
+                pathname === "/use-cases" ? "text-[#583CF2]" : "text-zinc-200 hover:text-[#583CF2]"
+              }`}
+            >
+              도입 사례
+            </div>
+          </Link>
+
           <div className="text-base font-medium text-zinc-200 hover:text-[#583CF2] cursor-pointer transition-colors duration-200 py-2">
             고객지원
           </div>

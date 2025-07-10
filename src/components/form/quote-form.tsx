@@ -61,6 +61,16 @@ export default function QuoteForm({
     annualDays: "",
   })
 
+  const businessTypeLightMapping = {
+    "물류 창고": "투광등",
+    "제조 시설": "투광등",
+    사무실: "면조명",
+    주차장: "레이스웨이",
+  }
+
+  const [selectedLightType, setSelectedLightType] = useState(
+    businessTypeLightMapping[selectedBusinessType as keyof typeof businessTypeLightMapping] || "레이스웨이",
+  )
   const [calculationResult, setCalculationResult] = useState<CalculationResult | null>(null)
   const [costComparison, setCostComparison] = useState<CostComparison | null>(null)
 
@@ -72,10 +82,26 @@ export default function QuoteForm({
   }
 
   const businessTypeElectricityRates = {
-    "물류 창고": 160,
-    "제조 시설": 170,
+    "물류 창고": 152,
+    "제조 시설": 180,
     주차장: 150,
-    사무실: 160,
+    사무실: 150,
+  }
+
+  // 조명 종류별 가격 정보
+  const lightTypePrices = {
+    레이스웨이: {
+      productCost: 80000, // 제품 공급가
+      installationCost: 18000, // 설치 공사비
+    },
+    면조명: {
+      productCost: 85000, // 제품 공급가
+      installationCost: 18000, // 설치 공사비
+    },
+    투광등: {
+      productCost: 160000, // 제품 공급가
+      installationCost: 25000, // 설치 공사비
+    },
   }
 
   const handleInputChange = (field: string, value: string) => {
@@ -85,20 +111,23 @@ export default function QuoteForm({
     }))
   }
 
-  const calculateCostComparison = (count: number) => {
+  const calculateCostComparison = (count: number, lightType: string) => {
+    // 선택된 조명 종류의 가격 정보
+    const selectedPrice = lightTypePrices[lightType as keyof typeof lightTypePrices]
+
     // 일반 LED 비용 (개당)
     const generalLEDUnitCosts = {
-      productCost: 50000, // 제품 공급가
-      installationCost: 30000, // 설치 공사비
-      communicationCost: 0, // 무선 통신비 (일반 LED는 없음)
-      systemCost: 0, // 시스템 구축비 (일반 LED는 없음)
-      consultingCost: 5000, // 컨설팅 및 설계비
+      productCost: selectedPrice.productCost, // 제품 공급가
+      installationCost: selectedPrice.installationCost, // 설치 공사비
+      communicationCost: 10000, // 무선 통신비 (센서, 리피터, 컨트롤 패널)
+      systemCost: 14000, // 시스템 구축비 (소프트웨어)
+      consultingCost: 16000, // 컨설팅 및 설계비 (시스템 설계 및 세팅)
     }
 
-    // 우리 제품 비용 (개당)
+    // 메를로랩 시스템 비용 (모두 0원)
     const ourProductUnitCosts = {
-      productCost: 0, // 제품 공급가 (스마트 기능 포함)
-      installationCost: 0, // 설치 공사비 (더 간편한 설치)
+      productCost: 0, // 제품 공급가
+      installationCost: 0, // 설치 공사비
       communicationCost: 0, // 무선 통신비
       systemCost: 0, // 시스템 구축비
       consultingCost: 0, // 컨설팅 및 설계비
@@ -129,7 +158,6 @@ export default function QuoteForm({
 
   const calculateQuote = (e: React.FormEvent) => {
     e.preventDefault()
-
     const { generalCount, generalPower, generalHours, annualDays } = formData
 
     // 입력값 검증
@@ -178,7 +206,7 @@ export default function QuoteForm({
     })
 
     // 비용 비교 계산
-    const comparison = calculateCostComparison(count)
+    const comparison = calculateCostComparison(count, selectedLightType)
     setCostComparison(comparison)
   }
 
@@ -251,7 +279,10 @@ export default function QuoteForm({
               {["주차장", "사무실", "물류 창고", "제조 시설"].map((type) => (
                 <div
                   key={type}
-                  onClick={() => setSelectedBusinessType(type)}
+                  onClick={() => {
+                    setSelectedBusinessType(type)
+                    setSelectedLightType(businessTypeLightMapping[type as keyof typeof businessTypeLightMapping])
+                  }}
                   className={`justify-center border-2 rounded-xl sm:rounded-2xl p-3 sm:p-4 h-auto cursor-pointer transition-all flex items-center ${
                     selectedBusinessType === type || (selectedBusinessType === "" && type === "주차장")
                       ? "border-[#583CF2] opacity-100"
@@ -364,7 +395,22 @@ export default function QuoteForm({
                   <p className="text-gray-600">메를로랩 시스템으로 교체하면 이만큼 절약할 수 있어요</p>
                 </div>
 
-                {/* 메인 절감 효과 - 2개 카드로 분리 */}
+                {/* 고객사 수익 - 전체 너비 */}
+                <div className="mb-6">
+                  <div className="bg-gradient-to-br from-amber-50 to-orange-100 border border-amber-200 rounded-2xl p-6">
+                    <div className="text-center">
+                      <div className="text-sm text-gray-600 mb-1">고객사 예상 수익 (연간)</div>
+                      <div className="text-3xl font-bold text-amber-600 mb-2">
+                        {formatCurrency(calculationResult.savings * 0.2)}원
+                      </div>
+                      <div className="text-sm text-gray-500">
+                        절약 금액의 20% • 월 평균 {formatCurrency((calculationResult.savings * 0.2) / 12)}원
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 절감 효과 - 2개 카드 */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                   {/* 비용 절감 */}
                   <div className="bg-gradient-to-br from-[#583CF2]/5 to-[#583CF2]/10 border border-[#583CF2]/20 rounded-2xl p-6">
@@ -408,7 +454,6 @@ export default function QuoteForm({
                       {formatPower(calculationResult.beforePowerConsumption)} kWh/년
                     </div>
                   </div>
-
                   <div className="border border-gray-200 rounded-xl p-5">
                     <div className="flex items-center justify-between mb-2">
                       <span className="text-sm font-medium text-gray-600">교체 후</span>
@@ -450,14 +495,14 @@ export default function QuoteForm({
               <TabsContent value="comparison" className="space-y-6">
                 <div className="mb-8">
                   <h2 className="text-2xl font-bold text-gray-900 mb-2">비용 비교</h2>
-                  <p className="text-gray-600">일반 LED 조명과 메를로랩 시스템의 비용을 비교해보세요</p>
+                  <p className="text-gray-600">기존 유선 IoT LED 조명과 메를로랩 시스템의 비용을 비교해보세요</p>
                 </div>
 
                 {/* 총 비용 비교 */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
                   <div className="border border-gray-200 rounded-xl p-6">
                     <div className="flex items-center justify-between mb-4">
-                      <span className="text-lg font-semibold text-gray-700">일반 LED</span>
+                      <span className="text-lg font-semibold text-gray-700">유선 IoT LED </span>
                       <div className="w-4 h-4 bg-gray-400 rounded-full"></div>
                     </div>
                     <div className="text-3xl font-bold text-gray-900 mb-2">
@@ -465,7 +510,6 @@ export default function QuoteForm({
                     </div>
                     <div className="text-sm text-gray-500">총 도입 비용</div>
                   </div>
-
                   <div className="border border-[#583CF2] rounded-xl p-6 bg-[#583CF2]/5">
                     <div className="flex items-center justify-between mb-4">
                       <span className="text-lg font-semibold text-[#583CF2]">메를로랩 시스템</span>
@@ -504,7 +548,7 @@ export default function QuoteForm({
                               )}
                               원
                             </span>
-                            <div className="text-xs text-gray-500">일반 LED</div>
+                            <div className="text-xs text-gray-500">유선 IoT LED</div>
                           </div>
                           <div className="text-right">
                             <span className="text-[#583CF2] font-semibold">
@@ -526,13 +570,12 @@ export default function QuoteForm({
                   <div className="text-center">
                     <div className="text-sm text-[#583CF2] mb-1">초기 도입비용 차액</div>
                     <div className="text-2xl font-bold text-[#583CF2]">
-                      {costComparison.ourProduct.total > costComparison.generalLED.total ? "-" : ""}
-                      {formatCurrency(costComparison.ourProduct.total - costComparison.generalLED.total)}원
+                      {costComparison.ourProduct.total > costComparison.generalLED.total ? "+" : "-"}
+                      {formatCurrency(Math.abs(costComparison.ourProduct.total - costComparison.generalLED.total))}원
                     </div>
                     <div className="text-sm text-[#583CF2] mt-2">
-                      {costComparison.ourProduct.total > costComparison.generalLED.total
-                        ? "도입 비용 없이 메를로랩 시스템으로 에너지 비용을 절감해보세요"
-                        : "도입 비용 없이 메를로랩 시스템으로 에너지 비용을 절감해보세요"}
+                      도입 비용 없이 메를로랩 시스템으로 에너지 비용을 절감해보세요
+                      <div className="mt-4 text-xs">*해당 비용은 에너지 효율화 사업에 한해 적용됩니다</div>
                     </div>
                   </div>
                 </div>

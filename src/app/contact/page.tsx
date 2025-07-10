@@ -2,21 +2,21 @@
 import { Zap, Shield, Cpu, TrendingUp, ArrowRight } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import { useEffect, useState, useRef } from "react"
-import Footer from "@/components/Footer"
-import QuoteForm from "@/components/QuoteForm"
-import BusinessInquiryForm from "@/components/BusinessInquiryForm"
-import AnimatedEnergyChart from "@/components/Chart/energy"
+import Footer from "@/components/footer"
+import QuoteForm from "@/components/form/quote-form"
+import BusinessInquiryForm from "@/components/form/buiness-inquiry-form"
+import AnimatedEnergyChart from "@/components/chart/energy"
 import dynamic from "next/dynamic"
 import { useInView } from "react-intersection-observer"
-import SplitText from "@/components/Animation/SplitText"
-import FadeInUp from "@/components/Animation/FadeInUp"
+import SplitText from "@/components/animation/split-text"
+import FadeInUp from "@/components/animation/fade-in-up"
 import { useSearchParams } from "next/navigation"
 
 const CountUp = dynamic(() => import("react-countup"), {
   ssr: false,
 })
 
-export default function MerlotlabTossStyle() {
+export default function MerlotlabContact() {
   const searchParams = useSearchParams()
   const tabParam = searchParams.get("tab")
 
@@ -109,7 +109,7 @@ export default function MerlotlabTossStyle() {
                   <SplitText text="메를로랩" delay={400} />
                 </span>
                 을<br />
-                선택할까요?
+                <div className="mt-2">선택할까요?</div>
               </h1>
             </div>
             <div className="max-w-2xl lg:max-w-4xl mx-auto space-y-6 sm:space-y-8 lg:space-y-10">
@@ -139,11 +139,11 @@ export default function MerlotlabTossStyle() {
       </section>
 
       {/* 에너지 효율화 사업이란 섹션 */}
-      <section className="py-24 sm:py-32 lg:py-40 px-4 sm:px-6 lg:px-8 bg-white">
+      <section className="mt-4 sm:mt-4 lg:mt-4 mb-24 sm:mb-32 lg:mb-40 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12 sm:mb-16 lg:mb-20">
             <div className="space-y-6 sm:space-y-8 lg:space-y-10">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 sm:mb-6">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold text-gray-900 mb-4 sm:mb-6">
                 <span className="text-[#583CF2]">
                   <SplitText text="에너지 효율화" delay={400} />
                 </span>{" "}
@@ -159,25 +159,6 @@ export default function MerlotlabTossStyle() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="w-full relative bg-[#583cf2] flex flex-col items-center justify-start py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 text-center text-white">
-        <div className="w-full max-w-4xl flex flex-col items-center justify-start">
-          <div className="flex flex-col items-center justify-start gap-6 sm:gap-8">
-            <div className="flex flex-col items-center justify-start">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight font-bold px-4">
-                내 사업장에도 적용되는지 궁금하시다면?
-              </h2>
-            </div>
-            <button className="shadow-sm rounded-lg bg-white border border-gray-200 h-12 sm:h-14 flex items-center justify-center py-2 px-6 sm:px-8 gap-2 text-base sm:text-lg text-zinc-800 hover:bg-gray-50 transition-colors cursor-pointer">
-              <div className="flex items-center gap-2">
-                <span className="leading-7 font-medium">도입 사례 보기</span>
-                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
-              </div>
-            </button>
-          </div>
-        </div>
-      </section>
-
       {/* Pricing Section */}
       <section className="min-h-screen py-8 px-4 sm:px-6 lg:px-8 bg-gray-50">
         <div className="max-w-6xl mx-auto py-16 sm:py-24 lg:py-32">
@@ -185,7 +166,7 @@ export default function MerlotlabTossStyle() {
           <div className="text-center mb-12 sm:mb-16 lg:mb-20">
             <h2
               ref={costRef}
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 sm:mb-6"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold text-gray-900 mb-4 sm:mb-6"
             >
               초기 투자 비용 {costInView && <CountUp start={1000000} end={0} duration={2} separator="," />}원
             </h2>
@@ -316,6 +297,25 @@ export default function MerlotlabTossStyle() {
         </div>
       </section>
 
+       {/* CTA Section */}
+      <section className="w-full relative bg-[#583cf2] flex flex-col items-center justify-start py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 text-center text-white">
+        <div className="w-full max-w-4xl flex flex-col items-center justify-start">
+          <div className="flex flex-col items-center justify-start gap-6 sm:gap-8">
+            <div className="flex flex-col items-center justify-start">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight font-bold px-4">
+                내 사업장에도 적용되는지 궁금하시다면?
+              </h2>
+            </div>
+            <button className="shadow-sm rounded-lg bg-white border border-gray-200 h-12 sm:h-14 flex items-center justify-center py-2 px-6 sm:px-8 gap-2 text-base sm:text-lg text-zinc-800 hover:bg-gray-50 transition-colors cursor-pointer">
+              <div className="flex items-center gap-2">
+                <span className="leading-7 font-medium">도입 사례 보기</span>
+                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
+              </div>
+            </button>
+          </div>
+        </div>
+      </section>
+
       {/* Contact Form Section */}
       <section className="py-16 sm:py-24 lg:py-32 px-4 sm:px-6 lg:px-8 bg-gray-50">
         <div className="max-w-4xl mx-auto">
@@ -352,9 +352,9 @@ export default function MerlotlabTossStyle() {
             </FadeInUp>
           )}
         </div>
+        
       </section>
-
-      <Footer />
+    <Footer />
     </div>
   )
 }
