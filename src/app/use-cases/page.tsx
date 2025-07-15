@@ -4,6 +4,7 @@ import { useState } from "react"
 import Statistics from "@/components/statistics/statistics"
 import PortfolioUseCases from "@/components/card/portfolio-use-cases"
 import SplitText from "@/components/animation/split-text"
+import Header from "@/components/header"
 import { Button } from "@/components/ui/button"
 
 const stats = [
@@ -50,6 +51,7 @@ export default function UseCases() {
 
   return (
     <main className="min-h-screen">
+      <Header/>
       <section className="relative w-full px-5 py-24 bg-white text-center">
         <div className="inner-container relative max-w-[1120px] mx-auto">
           <div className="py-48 text-center text-gray-700">

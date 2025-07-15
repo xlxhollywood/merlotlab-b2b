@@ -2,7 +2,9 @@
 import { Zap, Shield, Cpu, TrendingUp, ArrowRight } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import { useEffect, useState, useRef } from "react"
+import Header from "@/components/header"
 import Footer from "@/components/footer"
+import Link from "next/link"
 import QuoteForm from "@/components/form/quote-form"
 import BusinessInquiryForm from "@/components/form/buiness-inquiry-form"
 import AnimatedEnergyChart from "@/components/chart/energy"
@@ -98,6 +100,7 @@ export default function MerlotlabContact() {
 
   return (
     <div className="min-h-screen bg-white">
+      <Header/>
       {/* Hero Section */}
       <section className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto w-full">
@@ -242,7 +245,7 @@ export default function MerlotlabContact() {
         <div className="max-w-4xl mx-auto">
           <FadeInUp>
             <div className="text-center mb-12 sm:mb-16 lg:mb-20">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 sm:mb-6">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold text-gray-900 mb-4 sm:mb-6">
                 도입 프로세스
               </h2>
               <p className="text-lg sm:text-xl text-gray-600">간단하고 체계적인 5단계 프로세스</p>
@@ -307,10 +310,12 @@ export default function MerlotlabContact() {
               </h2>
             </div>
             <button className="shadow-sm rounded-lg bg-white border border-gray-200 h-12 sm:h-14 flex items-center justify-center py-2 px-6 sm:px-8 gap-2 text-base sm:text-lg text-zinc-800 hover:bg-gray-50 transition-colors cursor-pointer">
-              <div className="flex items-center gap-2">
-                <span className="leading-7 font-medium">도입 사례 보기</span>
-                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
-              </div>
+              <Link href="/use-cases" className="no-underline">
+                <div className="flex items-center gap-2">
+                  <span className="leading-7 font-medium">도입 사례 보기</span>
+                  <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
+                </div>
+              </Link>
             </button>
           </div>
         </div>

@@ -65,27 +65,28 @@ export default function QuoteForm({
     "물류 창고": "투광등",
     "제조 시설": "투광등",
     사무실: "면조명",
-    주차장: "레이스웨이",
+    "아파트 주차장": "레이스웨이",
   }
 
   const [selectedLightType, setSelectedLightType] = useState(
     businessTypeLightMapping[selectedBusinessType as keyof typeof businessTypeLightMapping] || "레이스웨이",
   )
+
   const [calculationResult, setCalculationResult] = useState<CalculationResult | null>(null)
   const [costComparison, setCostComparison] = useState<CostComparison | null>(null)
 
   const businessTypeSavings = {
-    "물류 창고": 0.5,
+    "물류 창고": 0.4,
     "제조 시설": 0.3,
-    주차장: 0.5,
+    "아파트 주차장": 0.5,
     사무실: 0.3,
   }
 
   const businessTypeElectricityRates = {
     "물류 창고": 152,
     "제조 시설": 180,
-    주차장: 150,
-    사무실: 150,
+    "아파트 주차장": 150,
+    사무실: 160,
   }
 
   // 조명 종류별 가격 정보
@@ -113,7 +114,7 @@ export default function QuoteForm({
 
   const calculateCostComparison = (count: number, lightType: string) => {
     // 선택된 조명 종류의 가격 정보
-    const selectedPrice = lightTypePrices[lightType as keyof typeof lightTypePrices]
+    const selectedPrice = lightTypePrices[lightType as keyof typeof lightTypePrices] || lightTypePrices["레이스웨이"]
 
     // 일반 LED 비용 (개당)
     const generalLEDUnitCosts = {
@@ -158,6 +159,7 @@ export default function QuoteForm({
 
   const calculateQuote = (e: React.FormEvent) => {
     e.preventDefault()
+
     const { generalCount, generalPower, generalHours, annualDays } = formData
 
     // 입력값 검증
@@ -276,7 +278,7 @@ export default function QuoteForm({
               사업장 유형 <span className="text-red-500">*</span>
             </Label>
             <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-              {["주차장", "사무실", "물류 창고", "제조 시설"].map((type) => (
+              {["아파트 주차장", "사무실", "물류 창고", "제조 시설"].map((type) => (
                 <div
                   key={type}
                   onClick={() => {
@@ -284,7 +286,7 @@ export default function QuoteForm({
                     setSelectedLightType(businessTypeLightMapping[type as keyof typeof businessTypeLightMapping])
                   }}
                   className={`justify-center border-2 rounded-xl sm:rounded-2xl p-3 sm:p-4 h-auto cursor-pointer transition-all flex items-center ${
-                    selectedBusinessType === type || (selectedBusinessType === "" && type === "주차장")
+                    selectedBusinessType === type || (selectedBusinessType === "" && type === "아파트 주차장")
                       ? "border-[#583CF2] opacity-100"
                       : "border-gray-200 opacity-50 hover:opacity-75"
                   } bg-transparent`}
@@ -363,7 +365,7 @@ export default function QuoteForm({
           <div className="space-y-4 sm:space-y-6 pt-4">
             <Button
               type="submit"
-              disabled={!selectedBusinessType && selectedBusinessType !== "주차장"}
+              disabled={!selectedBusinessType}
               size="lg"
               className="w-full bg-[#583CF2] hover:bg-[#583CF2]/90 h-12 sm:h-14 rounded-xl text-base sm:text-lg font-semibold transition-all duration-300 hover:scale-105"
             >
@@ -395,55 +397,11 @@ export default function QuoteForm({
                   <p className="text-gray-600">메를로랩 시스템으로 교체하면 이만큼 절약할 수 있어요</p>
                 </div>
 
-                {/* 고객사 수익 - 전체 너비 */}
-                <div className="mb-6">
-                  <div className="bg-gradient-to-br from-amber-50 to-orange-100 border border-amber-200 rounded-2xl p-6">
-                    <div className="text-center">
-                      <div className="text-sm text-gray-600 mb-1">고객사 예상 수익 (연간)</div>
-                      <div className="text-3xl font-bold text-amber-600 mb-2">
-                        {formatCurrency(calculationResult.savings * 0.2)}원
-                      </div>
-                      <div className="text-sm text-gray-500">
-                        절약 금액의 20% • 월 평균 {formatCurrency((calculationResult.savings * 0.2) / 12)}원
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* 절감 효과 - 2개 카드 */}
+                {/* 1행: 교체 전/후 - 테두리만 색상 유지, 폰트는 일반 색상 */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                  {/* 비용 절감 */}
-                  <div className="bg-gradient-to-br from-[#583CF2]/5 to-[#583CF2]/10 border border-[#583CF2]/20 rounded-2xl p-6">
-                    <div className="text-center">
-                      <div className="text-sm text-gray-600 mb-1">연간 절약 금액</div>
-                      <div className="text-3xl font-bold text-[#583CF2] mb-2">
-                        {formatCurrency(calculationResult.savings)}원
-                      </div>
-                      <div className="text-sm text-gray-500">
-                        월 평균 {formatCurrency(calculationResult.savings / 12)}원 절약
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* 전력 절감 */}
-                  <div className="bg-gradient-to-br from-green-50 to-green-100 border border-green-200 rounded-2xl p-6">
-                    <div className="text-center">
-                      <div className="text-sm text-gray-600 mb-1">연간 전력 절감량</div>
-                      <div className="text-3xl font-bold text-green-600 mb-2">
-                        {formatPower(calculationResult.powerSavings)} kWh
-                      </div>
-                      <div className="text-sm text-gray-500">
-                        월 평균 {formatPower(calculationResult.powerSavings / 12)} kWh 절약
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* 비교 카드들 */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                  <div className="border border-gray-200 rounded-xl p-5">
+                  <div className="border-2 border-red-300 bg-white rounded-xl p-5">
                     <div className="flex items-center justify-between mb-2">
-                      <span className="text-sm font-medium text-gray-600">교체 전</span>
+                      <span className="text-sm font-medium text-gray-700">교체 전</span>
                       <div className="w-3 h-3 bg-red-400 rounded-full"></div>
                     </div>
                     <div className="text-2xl font-bold text-gray-900">
@@ -454,9 +412,9 @@ export default function QuoteForm({
                       {formatPower(calculationResult.beforePowerConsumption)} kWh/년
                     </div>
                   </div>
-                  <div className="border border-gray-200 rounded-xl p-5">
+                  <div className="border-2 border-[#583CF2] bg-white rounded-xl p-5">
                     <div className="flex items-center justify-between mb-2">
-                      <span className="text-sm font-medium text-gray-600">교체 후</span>
+                      <span className="text-sm font-medium text-gray-700">교체 후</span>
                       <div className="w-3 h-3 bg-[#583CF2] rounded-full"></div>
                     </div>
                     <div className="text-2xl font-bold text-gray-900">
@@ -469,13 +427,55 @@ export default function QuoteForm({
                   </div>
                 </div>
 
+                {/* 2행: 3개 카드 한 행에 - 색상 제거 */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                  {/* 고객사 예상 수익 */}
+                  <div className="border border-gray-200 rounded-xl p-5">
+                    <div className="text-center">
+                      <div className="text-sm text-gray-600 mb-1">고객사 예상 수익 (연간)</div>
+                      <div className="text-2xl font-bold text-gray-900 mb-2">
+                        {formatCurrency(calculationResult.savings * 0.2)}원
+                      </div>
+                      <div className="text-sm text-gray-500">
+                        절약 금액의 20% • 월 평균 {formatCurrency((calculationResult.savings * 0.2) / 12)}원
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* 연간 절약 금액 */}
+                  <div className="border border-gray-200 rounded-xl p-5">
+                    <div className="text-center">
+                      <div className="text-sm text-gray-600 mb-1">연간 절약 금액</div>
+                      <div className="text-2xl font-bold text-gray-900 mb-2">
+                        {formatCurrency(calculationResult.savings)}원
+                      </div>
+                      <div className="text-sm text-gray-500">
+                        월 평균 {formatCurrency(calculationResult.savings / 12)}원 절약
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* 연간 전력 절감량 */}
+                  <div className="border border-gray-200 rounded-xl p-5">
+                    <div className="text-center">
+                      <div className="text-sm text-gray-600 mb-1">연간 전력 절감량</div>
+                      <div className="text-2xl font-bold text-gray-900 mb-2">
+                        {formatPower(calculationResult.powerSavings)} kWh
+                      </div>
+                      <div className="text-sm text-gray-500">
+                        월 평균 {formatPower(calculationResult.powerSavings / 12)} kWh 절약
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
                 {/* 상세 정보 */}
                 <div className="bg-gray-50 rounded-xl p-4 mb-6">
                   <h3 className="text-sm font-semibold text-gray-900 mb-3">상세 정보</h3>
                   <div className="space-y-3">
                     <div className="flex justify-between items-center py-2">
                       <span className="text-gray-600">사업장 유형</span>
-                      <span className="font-medium text-[#583CF2]">{selectedBusinessType || "주차장"}</span>
+                      <span className="font-medium text-[#583CF2]">{selectedBusinessType || "아파트 주차장"}</span>
                     </div>
                     <div className="flex justify-between items-center py-2">
                       <span className="text-gray-600">전기 요금 단가</span>

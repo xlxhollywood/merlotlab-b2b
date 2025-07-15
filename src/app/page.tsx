@@ -1,13 +1,13 @@
 "use client"
 
-import { useCallback } from "react"
+import type React from "react"
+import { useCallback, useState, useEffect, useRef } from "react"
+import { Package, Factory, Car, Users } from "lucide-react"
 import Footer from "@/components/footer"
+import Header from "@/components/header"
 import Link from "next/link"
-import LogoCarouselMain from "@/components/carousel/logo-carousel-main"
 import Image from "next/image"
-import TimelineCards from '@/components/card/timeline';
-import { Card, CardContent } from "@/components/ui/card"
-import ExpandingCard from "@/components/card/expanding-card"
+import LogoCarouselMain from "@/components/carousel/logo-carousel-main"
 import Statistics from "@/components/statistics/statistics"
 import PortfolioCardMain from "@/components/card/portfolio-main"
 import CompanyStrengths from "@/components/card/company-strength"
@@ -15,34 +15,250 @@ import { ArrowRight } from "lucide-react"
 import SplitText from "@/components/animation/split-text"
 import FadeInUp from "@/components/animation/fade-in-up"
 
-export default function Landing() {
-  const cards = [
-    {
-      title: "초기 비용 없이 시작",
-      description: "설치비 0원, 조명 인프라를 스마트하게 전환",
-      image: "/image 70.png",
-      icon: "dollar" as const,
-      iconColor: "text-green-600",
-      bgColor: "bg-green-100",
-    },
-    {
-      title: "IoT 기반 지능형 조명 제어",
-      description: "어플로 조도·사용 실시간 감지 & 자동 제어",
-      image: "/image 72.png",
-      icon: "lightbulb" as const,
-      iconColor: "text-blue-600",
-      bgColor: "bg-blue-100",
-    },
-    {
-      title: "에너지 절감 + 전기요금 절약",
-      description: "전력 낭비 방지 및 피크 시간대 요금 전략 대응",
-      image: "/image 73.png",
-      icon: "trending-down" as const,
-      iconColor: "text-orange-600",
-      bgColor: "bg-orange-100",
-    },
-  ]
+interface SolutionItemProps {
+  title: string
+  description: string
+  imageSrc: string
+  imageAlt: string
+  imageWidth: number
+  reverse?: boolean
+  badgeText: string
+  badgeIcon: React.ReactNode
+}
 
+function SolutionItem({
+  title,
+  description,
+  imageSrc,
+  imageAlt,
+  imageWidth,
+  reverse = false,
+  badgeText,
+  badgeIcon,
+}: SolutionItemProps) {
+  const [isVisible, setIsVisible] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true)
+        }
+      },
+      { threshold: 0.5 },
+    )
+
+    if (ref.current) {
+      observer.observe(ref.current)
+    }
+
+    return () => observer.disconnect()
+  }, [])
+
+  return (
+    <div ref={ref} className="mb-16 sm:mb-20 md:mb-24">
+      <div
+        style={{
+          opacity: isVisible ? 1 : 0,
+          transform: isVisible ? "none" : "translateY(20px)",
+          transitionDuration: "500ms",
+          transitionDelay: "0ms",
+          transitionTimingFunction: "linear",
+        }}
+      >
+        <div
+          className={`flex flex-col lg:flex-row items-center gap-32 lg:gap-32 xl:gap-56 ${
+            reverse ? "lg:flex-row-reverse" : ""
+          }`}
+        >
+          <div className="flex-1 flex justify-center">
+            <Image
+              src={imageSrc || "/placeholder.svg"}
+              alt={imageAlt}
+              width={imageWidth}
+              height={300}
+              draggable={false}
+              className="max-w-full h-auto rounded-3xl"
+            />
+          </div>
+          <div className="flex-1 text-center lg:text-left">
+            {/* 작은 배지 추가 */}
+            <div className="flex items-center gap-2 mb-2 sm:mb-3 justify-center lg:justify-start">
+              {badgeIcon}
+              <span className="text-primary text-sm sm:text-base font-medium">{badgeText}</span>
+            </div>
+            <h3
+              style={{ color: "#333d4b" }}
+              className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-4 sm:mb-6 leading-tight"
+              dangerouslySetInnerHTML={{ __html: title }}
+            />
+            <p
+              style={{ color: "#4e5968" }}
+              className="text-lg sm:text-xl md:text-2xl font-medium text-gray-700 leading-relaxed"
+              dangerouslySetInnerHTML={{ __html: description }}
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// 토스 스타일 섹션 컴포넌트
+function TossStyleSection() {
+  const [isVisible, setIsVisible] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true)
+        }
+      },
+      { threshold: 0.3 },
+    )
+
+    if (ref.current) {
+      observer.observe(ref.current)
+    }
+
+    return () => observer.disconnect()
+  }, [])
+
+  return (
+    <section ref={ref} className="py-16 sm:py-20 md:py-24 lg:py-32 px-4 sm:px-5 bg-gray-50 overflow-hidden">
+      <div className="max-w-[1200px] mx-auto">
+        {/* 상단 헤더 텍스트 */}
+        <div
+          className="text-center mb-16 lg:mb-20"
+          style={{
+            opacity: isVisible ? 1 : 0,
+            transform: isVisible ? "none" : "translateY(-20px)",
+            transitionDuration: "600ms",
+            transitionDelay: "100ms",
+            transitionTimingFunction: "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+          }}
+        >
+          <div className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight sm:leading-[50px] md:leading-[60px] text-center text-gray-700">
+            <div className="m-0">손쉬운 자동화 시스템으로</div>
+            <div className="m-0">
+              <span className="text-primary">
+                <SplitText text="에너지 손실 최소화" delay={100} />
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* 메인 콘텐츠 영역 */}
+        <div className="relative">
+          {/* 중앙 스마트폰 이미지 */}
+          <div
+            className="flex justify-center items-center mb-8 lg:mb-12"
+            style={{
+              opacity: isVisible ? 1 : 0,
+              transform: isVisible ? "none" : "translateY(40px)",
+              transitionDuration: "800ms",
+              transitionDelay: "300ms",
+              transitionTimingFunction: "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+            }}
+          >
+            <div className="relative">
+              <Image
+                src="/grid phone.png"
+                alt="전력 관리 앱 화면"
+                width={600}
+                height={1200}
+                className="max-w-[400px] sm:max-w-[450px] md:max-w-[500px] lg:max-w-[550px] h-auto drop-shadow-2xl"
+                draggable={false}
+              />
+            </div>
+          </div>
+
+          {/* 좌측 텍스트 */}
+          <div
+            className="absolute left-24 top-1/2 transform -translate-y-1/2 hidden lg:block"
+            style={{
+              opacity: isVisible ? 1 : 0,
+              transform: isVisible ? "translateY(-50%)" : "translate(-30px, -50%)",
+              transitionDuration: "700ms",
+              transitionDelay: "400ms",
+              transitionTimingFunction: "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+            }}
+          >
+            <p className="text-xl xl:text-2xl font-bold text-gray-800 leading-relaxed max-w-[250px]">
+              <span className="block">이해하기 쉬운 용어</span>
+              <span className="block">설명이 필요 없는</span>
+              <span className="block text-primary">직관적인 화면 구성</span>
+            </p>
+          </div>
+
+          {/* 우측 텍스트 - 새로 추가 */}
+          <div
+            className="absolute right-40 top-1/4 transform -translate-y-1/2 hidden lg:block"
+            style={{
+              opacity: isVisible ? 1 : 0,
+              transform: isVisible ? "translateY(-50%)" : "translate(30px, -50%)",
+              transitionDuration: "700ms",
+              transitionDelay: "450ms",
+              transitionTimingFunction: "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+            }}
+          >
+            <p className="text-xl xl:text-2xl font-bold text-gray-800 leading-relaxed max-w-[250px]">
+              <span className="block">현장 실태에 맞춘</span>
+              <span className="block text-primary">맞춤형 제안부터</span>
+              <span className="block">실행까지 한 번에</span>
+            </p>
+          </div>
+
+          {/* 모바일용 텍스트들 */}
+          <div
+            className="text-center lg:hidden mb-8 space-y-6"
+            style={{
+              opacity: isVisible ? 1 : 0,
+              transform: isVisible ? "none" : "translateY(20px)",
+              transitionDuration: "700ms",
+              transitionDelay: "400ms",
+              transitionTimingFunction: "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+            }}
+          >
+            <p className="text-lg sm:text-xl font-bold text-gray-800 leading-relaxed">
+              <span className="block">이해하기 쉬운 용어</span>
+              <span className="block">설명이 필요 없는</span>
+              <span className="block text-primary">직관적인 화면 구성</span>
+            </p>
+            <p className="text-lg sm:text-xl font-bold text-gray-800 leading-relaxed">
+              <span className="block">송금처럼 쉬운</span>
+              <span className="block text-primary">구매 경험</span>
+              <span className="block">그리고 투자 판단에</span>
+              <span className="block">도움을 주는 콘텐츠까지</span>
+            </p>
+          </div>
+        </div>
+
+        {/* 하단 설명 텍스트 */}
+        <div
+          className="text-center"
+          style={{
+            opacity: isVisible ? 1 : 0,
+            transform: isVisible ? "none" : "translateY(20px)",
+            transitionDuration: "600ms",
+            transitionDelay: "500ms",
+            transitionTimingFunction: "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+          }}
+        >
+          <p className="text-base sm:text-lg md:text-xl text-gray-600 leading-relaxed">
+            <span className="block">유선 공사 없이 지금 시설 그대로</span>
+            <span className="block font-semibold">맞춤형 자동화 운영 방식을 컨설팅합니다.</span>
+          </p>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+export default function Landing() {
   const stats = [
     {
       label: "도입 사업장",
@@ -70,138 +286,95 @@ export default function Landing() {
     },
   ]
 
+  // 토스 스타일 스마트 조명 솔루션 데이터
+  const solutionData = [
+    {
+      title: "물류 센터",
+      description:
+        "대대형 창고와 물류 시설의 운영 효율성을 높여, 에너지 비용을 절감하는 맞춤형 솔루션을 <br> 제공합니다.",
+      imageSrc: "/물류.png",
+      imageAlt: "물류센터 스마트 조명",
+      imageWidth: 450,
+      badgeText: "물류 동선 최적화",
+      badgeIcon: <Package className="w-4 h-4 text-primary" />,
+    },
+    {
+      title: "제조 시설",
+      description:
+        "제조 환경에 최적화된 조도로 작업 정확도를 <br>높이고, 불필요한 에너지 낭비를 줄이는 <br> 컨설팅을 제공합니다.",
+      imageSrc: "/공장3.png",
+      imageAlt: "제조시설 조명",
+      imageWidth: 450,
+      reverse: true,
+      badgeText: "생산성 중심 설계",
+      badgeIcon: <Factory className="w-4 h-4 text-primary" />,
+    },
+    {
+      title: "주차장",
+      description:
+        "차량 이동과 사람의 통행이 빈번한 주차장 환경에 맞춰, 감지 기반 조명 스케줄과 밝기 설정을 최적화합니다.",
+      imageSrc: "/주차장.png",
+      imageAlt: "주차장",
+      imageWidth: 450,
+      badgeText: "감지 기반 운영",
+      badgeIcon: <Car className="w-4 h-4 text-primary" />,
+    },
+    {
+      title: "사무실",
+      description:
+        "눈의 피로를 줄이고 집중력을 높이는 설계로, <br> 쾌적한 근무 환경과 에너지 절감 효과를 동시에 누리세요.",
+      imageSrc: "/사무실.png",
+      imageAlt: "사무실 스마트 조명",
+      imageWidth: 450,
+      reverse: true,
+      badgeText: "업무 집중도 향상",
+      badgeIcon: <Users className="w-4 h-4 text-primary" />,
+    },
+  ]
+
   const onButtonContainerClick = useCallback(() => {
     // 버튼 클릭 로직
   }, [])
 
   return (
     <div className="w-full">
-      {/* Header */}
-      <header>{/* 기존 Header 컴포넌트 */}</header>
+      {/* Header 추가 */}
+      <Header />
 
-      {/* Hero Section */}
-      <section className="relative min-h-screen bg-black text-white h-[1200px] overflow-hidden text-center">
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: "url('/placeholder.svg?height=1200&width=1920')" }}
-        >
-          <div className="absolute top-[557px] left-[910px] bg-black w-[330px] h-[85px]" />
-          <Image
-            className="absolute top-[575.5px] left-[928.29px] object-cover"
-            width={240}
-            height={40}
-            alt="메를로랩 로고"
-            src="/메를로랩 로고.png"
-          />
-        </div>
-        <div className="absolute top-[540px] left-[528.3px] flex items-center px-5">
-          <div className="border-r-4 border-gray-200 flex flex-col items-end pr-9">
-            <h1 className="text-5xl font-bold leading-[60px] text-right">
-              <p className="m-0">메를로랩의</p>
-              <p className="m-0">에너지 솔루션</p>
+      {/* 1st section */}
+      <section className="relative bg-white text-white overflow-hidden text-center pt-2 sm:pt-[10px]">
+        {/* Background Image - 반응형 */}
+        <div className="relative w-full h-screen bg-cover bg-center bg-no-repeat hero-bg">
+          {/* Gradient Overlay */}
+          <div className="relative z-10 flex justify-center absolute top-14 sm:top-14 h-full px-4">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold leading-tight sm:leading-[58px] md:leading-[58px] lg:leading-[58px] text-center text-gray-700 drop-shadow-lg">
+              <p className="text-primary">
+                <SplitText text="전력 절감의 시작" delay={100} />
+              </p>
+              <p className="m-0">메를로랩에서 간편하게</p>
             </h1>
           </div>
+          <div className="absolute top-0 left-0 w-full h-[70%] bg-gradient-to-b from-white/100 via-white/10 to-transparent z-[1]" />
+          <div className="absolute bottom-0 left-0 w-full h-[30%] bg-gradient-to-t from-white/100 via-white/10 to-transparent z-[1]" />
         </div>
+        <style jsx>{`
+          .hero-bg {
+            background-image: url(/hero-image.png);
+          }
+          @media (min-width: 1024px) {
+            .hero-bg {
+              background-image: url(/hero-image2.jpg);
+            }
+          }
+        `}</style>
       </section>
 
-      {/* Problems Section */}
-      <section className="bg-gray-50 py-24 px-5">
-        <div className="max-w-[1120px] mx-auto flex flex-col gap-20">
-          <div className="text-5xl font-bold leading-[60px] text-center text-gray-700">
-            <h1 className="text-primary m-0">
-              <SplitText text="높아지는 전기 요금" delay={100} />
-            </h1>
-            <div className="m-0">어떻게 관리할 수 있을까요?</div>
-          </div>
-          <div className="h-[512px] flex flex-col items-center justify-center relative">
-            <Image
-              className="w-full max-w-[1120px] h-[539px] object-cover"
-              width={1120}
-              height={539}
-              alt="공장 이미지"
-              src="/factory.png"
-            />
-            {/* Problem Cards */}
-            <div className="absolute inset-0 z-10">
-              {/* Problem 1 - macOS Style Alert */}
-              <div className="absolute top-[-40px] left-16 w-[400px] bg-white/95 backdrop-blur-xl rounded-xl shadow-2xl border border-white/20">
-                {/* macOS Window Controls */}
-                <div className="flex items-center justify-between px-4 py-3 border-b border-gray-200/50">
-                  <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                    <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                    <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                  </div>
-                  <div className="text-gray-600 text-sm font-medium">PROBLEM 1</div>
-                  <div className="w-6"></div>
-                </div>
-                <div className="p-6 flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-full overflow-hidden flex-shrink-0">
-                    <img className="w-full h-full object-cover" src="/warn.png" alt="경고 아이콘" />
-                  </div>
-                  <div className="flex-1 text-gray-700 text-base leading-6">
-                    <p className="m-0 font-medium">예측 없이 사용하는 설비 전력으로 불필요한</p>
-                    <p className="m-0 font-medium">에너지 비용이 지속적으로 발생</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Problem 2 - macOS Style Alert */}
-              <div className="absolute top-[173px] right-20 w-[400px] bg-white/95 backdrop-blur-xl rounded-xl shadow-2xl border border-white/20">
-                {/* macOS Window Controls */}
-                <div className="flex items-center justify-between px-4 py-3 border-b border-gray-200/50">
-                  <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                    <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                    <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                  </div>
-                  <div className="text-gray-600 text-sm font-medium">PROBLEM 2</div>
-                  <div className="w-6"></div>
-                </div>
-                <div className="p-6 flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-full overflow-hidden flex-shrink-0">
-                    <img className="w-full h-full object-cover" src="/warn.png" alt="경고 아이콘" />
-                  </div>
-                  <div className="text-gray-700 text-base leading-6">
-                    <p className="m-0 font-medium">이상 상황 발생 시, 인력 의존적 대응으로</p>
-                    <p className="m-0 font-medium">조치의 낮은 효율성과 어려움</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Problem 3 - macOS Style Alert */}
-              <div className="absolute bottom-[-40px] left-[280px] w-[400px] bg-white/95 backdrop-blur-xl rounded-xl shadow-2xl border border-white/20">
-                {/* macOS Window Controls */}
-                <div className="flex items-center justify-between px-4 py-3 border-b border-gray-200/50">
-                  <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                    <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                    <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                  </div>
-                  <div className="text-gray-600 text-sm font-medium">PROBLEM 3</div>
-                  <div className="w-6"></div>
-                </div>
-                <div className="p-6 flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-full overflow-hidden flex-shrink-0">
-                    <img className="w-full h-full object-cover" src="/warn.png" alt="경고 아이콘" />
-                  </div>
-                  <div className="text-gray-700 text-base leading-6">
-                    <p className="m-0 font-medium">계약전력 초과, 피크 시간 사용 등</p>
-                    <p className="m-0 font-medium">요금 체계에 대한 무지로 불필요 비용 발생</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Solutions Section */}
-      <section className="py-24 px-5">
-        <div className="max-w-[1120px] mx-auto flex flex-col gap-20">
+      {/* 2nd section */}
+      <section className="py-12 sm:py-16 md:py-24 lg:py-8 px-4 sm:px-5 rounded">
+        <div className="max-w-[1120px] mt-32 mx-auto flex flex-col gap-40 sm:gap-40 md:gap-40">
           <div className="flex flex-col items-center">
-            <div className="text-5xl font-bold leading-[60px] text-center text-gray-700">
-              <div className="m-0">메를로랩의 에너지 솔루션으로</div>
+            <div className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight sm:leading-[50px] md:leading-[60px] text-center text-gray-700">
+              <div className="m-0">사업장 유형에 알맞은 솔루션으로</div>
               <div className="m-0">
                 <span className="text-primary">
                   <SplitText text="전기 요금을 절약" delay={100} />
@@ -210,108 +383,51 @@ export default function Landing() {
               </div>
             </div>
           </div>
-          <FadeInUp>
-            <div className="h-[476px] flex items-center justify-center gap-10">
-              {/* Grid 3.0 Card */}
-              <Card
-                className="w-[720px] h-full shadow-lg border border-gray-200 rounded-[10px] cursor-pointer overflow-hidden relative"
-                onClick={onButtonContainerClick}
-              >
-                <div className="absolute top-[21.01%] left-[0.14%] right-[0.14%] bottom-[-20.66%] rounded-lg overflow-hidden">
-                  <Image
-                    className="w-full h-full object-center"
-                    width={718}
-                    height={574}
-                    alt="Grid 3.0"
-                    quality={100}
-                    src="/Grid 3.0.png"
-                  />
-                </div>
-                <CardContent className="relative z-10 absolute top-0 left-[0.14%] rounded-[10px] p-10 flex justify-between items-start gap-[311.4px]">
-                  <div className="flex flex-col gap-3 min-w-[286.59px]">
-                    <h3 className="text-3xl font-bold text-primary">그리드 3.0</h3>
-                    <p className="text-gray-500 text-base">
-                      <span className="block">공장, 건물 등 다양한 환경에 최적화된</span>
-                      <span className="block text-primary">자동화 시스템 솔루션</span>
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
-
-              {/* IoT LED Card */}
-              <Card className="w-[720px] h-full shadow-lg border border-gray-200 rounded-[10px] overflow-hidden relative">
-                <div className="absolute top-[21.01%] left-[0.14%] right-[0.14%] bottom-[-20.66%] rounded-lg overflow-hidden">
-                  <Image
-                    className="w-full h-full object-center"
-                    width={500}
-                    height={400}
-                    alt="IoT LED"
-                    quality={100}
-                    src="/메를로랩 IoT LED.png"
-                  />
-                </div>
-                <CardContent className="relative z-10 absolute top-0 left-[0.14%] rounded-[10px] p-10 flex justify-between items-start gap-[311.4px]">
-                  <div className="flex flex-col gap-3 min-w-[286.59px]">
-                    <h3 className="text-3xl font-bold text-primary">레시피</h3>
-                    <p className="text-gray-500 text-base">
-                      <span className="block">집안 곳곳을 손쉽게 관리할 수 있는</span>
-                      <span className="block text-primary">가정용 IoT 원격 제어 솔루션</span>
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          </FadeInUp>
-        </div>
-      </section>
-
-      <section className="bg-gray-50 py-24 px-5">
-      <TimelineCards cards={cards} />
-
-      </section>
-
-      {/* Features Section */}
-      <section className="bg-gray-50 py-24 px-5">
-        <div className="max-w-[1120px] mx-auto flex flex-col gap-20">
-          <div className="flex flex-col items-center">
-            <h2 className="text-5xl font-bold leading-[60px] text-center text-gray-700">
-              <p className="m-0">최적의 상태로 끌어올리는</p>
-              <p className="m-0 text-primary">
-                <SplitText text="그룹 단위 관리 솔루션" delay={100} />
-              </p>
-            </h2>
+          <div>
+            {solutionData.map((item, index) => (
+              <SolutionItem
+                key={index}
+                title={item.title}
+                description={item.description}
+                imageSrc={item.imageSrc}
+                imageAlt={item.imageAlt}
+                imageWidth={item.imageWidth}
+                reverse={item.reverse}
+                badgeText={item.badgeText}
+                badgeIcon={item.badgeIcon}
+              />
+            ))}
           </div>
-
-          
-
-
-          <FadeInUp>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-              {cards.map((card, index) => (
-                <ExpandingCard
-                  key={index}
-                  title={card.title}
-                  description={card.description}
-                  image={card.image}
-                  icon={card.icon}
-                  iconColor={card.iconColor}
-                  bgColor={card.bgColor}
-                />
-              ))}
-            </div>
-          </FadeInUp>
         </div>
+      </section>
+
+      {/* 토스 스타일 섹션 추가 */}
+      <TossStyleSection />
+
+      {/* 3rd section */}
+      <section className="bg-white py-28 sm:py-32 md:py-36 lg:py-40 px-4 sm:px-5">
+        <div className="text-center mb-24 sm:mb-32 md:mb-40 gap-32">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight sm:leading-[50px] md:leading-[60px] text-center text-gray-700">
+            <span className="text-primary block">
+              <SplitText text="품질, 기술, 경제성" delay={100} />
+            </span>
+            <span className="text-gray-700">어느 하나 놓치지 않습니다</span>
+          </h2>
+        </div>
+        <FadeInUp>
+          <CompanyStrengths />
+        </FadeInUp>
       </section>
 
       {/* Portfolio Section */}
-      <section className="relative w-full px-5 mt-24 mb-10 bg-white text-center">
+      <section className="relative w-full px-4 sm:px-5 py-12 sm:py-16 md:py-20 lg:py-24 bg-gray-50 text-center">
         <div className="inner-container relative max-w-[1120px] mx-auto">
-          <div className="text-center text-gray-700">
-            <h2 className="text-5xl font-bold leading-[60px] text-center text-gray-700">
-              에너지 문제를
+          <div className="text-center text-gray-700 mb-16 sm:mb-20 md:mb-24 lg:mb-32">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight sm:leading-[50px] md:leading-[60px] text-center text-gray-700">
+              수많은 사업장의 변화를
               <br />
               <span className="text-primary block mb-2">
-                <SplitText text="효율적으로 해결합니다" delay={100} />
+                <SplitText text="함께하고 있습니다" delay={100} />
               </span>
             </h2>
           </div>
@@ -319,9 +435,9 @@ export default function Landing() {
           <PortfolioCardMain />
           {/* More Cases Button */}
           <Link href="/use-cases" className="no-underline">
-            <button className="focus-visible:ring-ring inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 overflow-hidden border-input bg-background hover:bg-accent hover:text-accent-foreground border shadow-sm rounded-md px-8 mt-10 h-14">
+            <button className="focus-visible:ring-ring inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 overflow-hidden border-input bg-background hover:bg-accent hover:text-accent-foreground border shadow-sm rounded-md px-4 sm:px-6 md:px-8 mt-6 sm:mt-8 md:mt-10 h-12 sm:h-14">
               <svg
-                className="!size-6"
+                className="!size-4 sm:!size-5 md:!size-6"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -332,46 +448,30 @@ export default function Landing() {
                 <path d="M5 12h14" />
                 <path d="m12 5 7 7-7 7" />
               </svg>
-              <span className="md:text-lg font-medium">더 많은 사례 보기</span>
+              <span className="text-sm sm:text-base md:text-lg font-medium">더 많은 사례 보기</span>
             </button>
           </Link>
         </div>
       </section>
 
       {/* Partners Section */}
-      <section className="bg-white py-19 overflow-hidden">
+      <section className="bg-gray-50 overflow-hidden">
         <LogoCarouselMain />
       </section>
 
-      {/* Company Strengths Section */}
-      <section className="bg-gray-50 py-24 px-5">
-        <div className="text-center mb-20">
-          <h2 className="text-5xl font-bold leading-[60px] text-center text-gray-700">
-            <span className="text-primary block">
-              <SplitText text="품질, 기술, 경제성" delay={100} />
-            </span>
-            <span className="text-gray-700">어느 하나 놓치지 않습니다</span>
-          </h2>
-          <div className="mt-8">
-            <p className="text-xl font-medium text-gray-600 max-w-3xl mx-auto">
-              메를로랩은 국내 에너지 절감 산업을 주도하는 에너지 컨설팅 전문 기업입니다
-            </p>
-          </div>
-        </div>
-        <FadeInUp>
-          <CompanyStrengths />
-        </FadeInUp>
-      </section>
-
       {/* CTA Section */}
-      <section className="py-20 px-5 text-white" style={{ backgroundColor: "#583CF2" }}>
+      <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-5 text-white bg-primary">
         <div className="max-w-[1120px] mx-auto">
-          <div className="flex flex-col items-center gap-8">
-            <div className="flex flex-col items-center gap-4">
-              <div className="text-3xl font-bold text-center">내 사업장에 가장 알맞은 관리</div>
-              <h2 className="text-5xl font-bold text-center">전기요금 최적화 지금 시작하세요</h2>
+          <div className="flex flex-col items-center gap-6 sm:gap-8">
+            <div className="flex flex-col items-center gap-2 sm:gap-4">
+              <div className="text-xl sm:text-2xl md:text-3xl font-bold text-center px-4">
+                내 사업장에 가장 알맞은 관리
+              </div>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center px-4">
+                전기요금 최적화 지금 시작하세요
+              </h2>
             </div>
-            <button className="shadow-sm rounded-lg bg-white border border-gray-200 h-12 sm:h-14 flex items-center justify-center py-2 px-6 sm:px-8 gap-2 text-base sm:text-lg text-zinc-800 hover:bg-gray-50 transition-colors cursor-pointer">
+            <button className="shadow-sm rounded-lg bg-white border border-gray-200 h-12 sm:h-14 flex items-center justify-center py-2 px-4 sm:px-6 md:px-8 gap-2 text-sm sm:text-base md:text-lg text-zinc-800 hover:bg-gray-50 transition-colors cursor-pointer">
               <Link href="/contact?tab=business" className="no-underline">
                 <div className="flex items-center gap-2">
                   <span className="leading-7 font-medium">문의 하기</span>

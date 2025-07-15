@@ -46,13 +46,13 @@ export default function PortfolioCard() {
     {
       title: "GS네트웍스 양산 물류센터",
       subtitle: "일/평균전력사용량 62.9% 절감",
-      tags: ["물류센터", "사무실"],
+      tags: ["물류 센터", "사무실"],
       image: "/물류센터2.jpg",
     },
   ]
 
   return (
-    <div className="mt-10 relative">
+    <div className="mt-10 relative bg-gray-50">
       {caseStudies.map((caseStudy, index) => (
         <div key={index} className="w-full border-t border-gray-200 px-2 py-6 text-left xs:px-5">
           <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-2">
@@ -79,7 +79,7 @@ export default function PortfolioCard() {
             <div className="relative rounded-md" style={{ height: "250px" }}>
               <img
                 alt={`${caseStudy.title} 이미지`}
-                src={caseStudy.image || "/placeholder.svg?height=250&width=400"}
+                src={caseStudy.image || "/placeholder.svg"}
                 className="h-full w-full rounded-md object-cover brightness-100"
               />
             </div>
@@ -87,11 +87,9 @@ export default function PortfolioCard() {
         </div>
       ))}
 
-      {/* 마지막 카드까지 덮는 큰 gradient overlay */}
-      <div className="absolute bottom-0 left-0 right-0 h-30 bg-gradient-to-t from-white via-white/90 via-white/70 to-transparent pointer-events-none" />
-
-      {/* 더 강한 하단 gradient */}
-      <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-white to-transparent pointer-events-none" />
+      
+      {/* <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-gray-50 via-gray-50/95 via-gray-50/80 via-gray-50/60 via-gray-50/40 via-gray-50/20 to-transparent pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-gray-50 via-gray-50/90 to-transparent pointer-events-none" /> */}
     </div>
   )
 }

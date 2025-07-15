@@ -1,171 +1,185 @@
-import React, { useEffect, useRef, useState } from 'react';
+"use client"
+
+import type React from "react"
+import { useEffect, useRef, useState } from "react"
+import { DollarSign, Smartphone, TrendingDown } from "lucide-react"
 
 interface TimelineCard {
-  title: string;
-  description: string;
-  image: string;
+  title: string
+  description: string
+  image: string
+  icon?: React.ReactNode
 }
 
 interface TimelineCardsProps {
-  cards: TimelineCard[];
-  className?: string;
+  cards: TimelineCard[]
+  className?: string
 }
 
 const TimelineCards: React.FC<TimelineCardsProps> = ({ cards, className = "" }) => {
-  const [visibleCards, setVisibleCards] = useState<boolean[]>(new Array(cards.length).fill(false));
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const sectionRef = useRef<HTMLDivElement>(null);
+  const [visibleCards, setVisibleCards] = useState<boolean[]>(new Array(cards.length).fill(false))
+  const [scrollProgress, setScrollProgress] = useState(0)
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([])
+  const sectionRef = useRef<HTMLDivElement>(null)
+
+  // 기본 아이콘 배열 - 시그니처 컬러 적용
+  const defaultIcons = [
+    <DollarSign key="dollar" className="w-7 h-7" />,
+    <Smartphone key="smartphone" className="w-7 h-7" />,
+    <TrendingDown key="trending" className="w-7 h-7" />,
+  ]
 
   useEffect(() => {
-    const observers: IntersectionObserver[] = [];
-
+    const observers: IntersectionObserver[] = []
     cardRefs.current.forEach((cardRef, index) => {
       if (cardRef) {
         const observer = new IntersectionObserver(
           (entries) => {
             entries.forEach((entry) => {
               if (entry.isIntersecting) {
-                setVisibleCards(prev => {
-                  const newVisible = [...prev];
-                  newVisible[index] = true;
-                  return newVisible;
-                });
+                setVisibleCards((prev) => {
+                  const newVisible = [...prev]
+                  newVisible[index] = true
+                  return newVisible
+                })
               }
-            });
+            })
           },
           {
-            threshold: 0.2,
-            rootMargin: '-50px 0px -50px 0px'
-          }
-        );
-
-        observer.observe(cardRef);
-        observers.push(observer);
+            threshold: 0.3,
+            rootMargin: "-50px 0px -50px 0px",
+          },
+        )
+        observer.observe(cardRef)
+        observers.push(observer)
       }
-    });
+    })
 
     return () => {
-      observers.forEach(observer => observer.disconnect());
-    };
-  }, [cards.length]);
+      observers.forEach((observer) => observer.disconnect())
+    }
+  }, [cards.length])
 
   // 스크롤 진행도 추적
   useEffect(() => {
     const handleScroll = () => {
       if (sectionRef.current) {
-        const rect = sectionRef.current.getBoundingClientRect();
-        const sectionHeight = sectionRef.current.offsetHeight;
-        const windowHeight = window.innerHeight;
-        
-        // 섹션이 뷰포트에 들어오기 시작할 때부터 완전히 지나갈 때까지의 진행도 계산
-        const scrollStart = -rect.top;
-        const scrollEnd = sectionHeight + windowHeight;
-        const progress = Math.max(0, Math.min(1, scrollStart / scrollEnd));
-        
-        setScrollProgress(progress);
+        const rect = sectionRef.current.getBoundingClientRect()
+        const sectionHeight = sectionRef.current.offsetHeight
+        const windowHeight = window.innerHeight
+        const scrollStart = -rect.top
+        const scrollEnd = sectionHeight + windowHeight
+        const progress = Math.max(0, Math.min(1, scrollStart / scrollEnd))
+        setScrollProgress(progress)
       }
-    };
+    }
 
-    window.addEventListener('scroll', handleScroll);
-    handleScroll(); // 초기 계산
+    window.addEventListener("scroll", handleScroll)
+    handleScroll()
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
+      window.removeEventListener("scroll", handleScroll)
+    }
+  }, [])
 
   return (
-    <section ref={sectionRef} className={`bg-gray-50 py-24 px-5 ${className}`}>
-      <div className="max-w-[1800px] mx-auto">
-        {/* Timeline Layout */}
-        <div className="relative">
-          {/* 중앙 수직선 - 스크롤 진행도에 따라 투명도 변화 */}
-          <div 
-            className="absolute left-1/2 transform -translate-x-1/2 top-0 bottom-0 w-1 transition-opacity duration-300"
-            style={{ 
-              backgroundColor: `rgba(88, 60, 242, ${0.2 + (scrollProgress * 0.6)})` // 0.2에서 0.8까지 변화
-            }}
-          ></div>
-          
-          {/* Timeline Cards */}
-          <div className="space-y-32">
-            {cards.map((card, index) => (
-              <div 
-                key={index} 
-                className="relative"
-                ref={el => { cardRefs.current[index] = el; }}
-              >
-                {/* Timeline Node */}
-                <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 top-1/2 z-20">
-                  <div 
-                    className={`w-4 h-4 rounded-full shadow-lg transition-all duration-700 ${
-                      visibleCards[index] 
-                        ? 'scale-100 opacity-100' 
-                        : 'scale-50 opacity-50'
+    <div ref={sectionRef} className={`min-h-screen bg-gray-50 py-16 px-6 ${className}`}>
+      <div className="max-w-6xl mx-auto">
+        {/* Timeline Layout - 지그재그 배치 */}
+        <div className="max-w-5xl mx-auto">
+          <div className="relative">
+            {/* Timeline line - 중앙에 배치 */}
+            <div
+              className="absolute left-1/2 top-0 bottom-0 w-1 transition-all duration-300 rounded-full transform -translate-x-1/2"
+              style={{
+                backgroundColor: `rgba(88, 60, 242, ${0.2 + scrollProgress * 0.6})`,
+              }}
+            ></div>
+
+            <div className="space-y-16">
+              {cards.map((card, index) => (
+                <div
+                  key={index}
+                  className={`relative flex items-start ${index % 2 === 1 ? "flex-row-reverse" : ""}`}
+                  ref={(el) => {
+                    cardRefs.current[index] = el
+                  }}
+                >
+                  {/* Timeline dot with icon - 중앙에 배치 */}
+                  <div
+                    className={`absolute left-1/2 transform -translate-x-1/2 w-20 h-20 bg-white border-4 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-700 shadow-lg z-10 ${
+                      visibleCards[index] ? "scale-100 opacity-100" : "scale-75 opacity-50"
                     }`}
-                    style={{ backgroundColor: "#583CF2" }}
-                  ></div>
-                </div>
-                
-                {/* Card Container */}
-                <div className={`flex ${index % 2 === 0 ? 'justify-start' : 'justify-end'}`}>
-                  <div className={`w-full max-w-4xl ${index % 2 === 0 ? 'pr-32' : 'pl-32'}`}>
-                    {/* Card */}
-                    <div 
-                      className={`group bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden hover:shadow-2xl transition-all duration-700 transform hover:-translate-y-3 ${
-                        visibleCards[index]
-                          ? 'opacity-100 translate-y-0'
-                          : 'opacity-0 translate-y-16'
-                      }`}
+                    style={{
+                      borderColor: visibleCards[index] ? "#583CF2" : "#D1D5DB",
+                      transitionDelay: visibleCards[index] ? `${index * 150}ms` : "0ms",
+                    }}
+                  >
+                    <span
+                      className="transition-colors duration-500"
                       style={{
-                        transitionDelay: visibleCards[index] ? `${index * 200}ms` : '0ms'
+                        color: visibleCards[index] ? "#583CF2" : "#9CA3AF",
                       }}
                     >
-                      {/* Card Content - Horizontal Layout */}
-                      <div className={`flex ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'} h-96`}>
-                        {/* Image Section */}
-                        <div className="w-2/5 relative overflow-hidden">
-                          <img 
-                            src={card.image} 
-                            alt={card.title}
-                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-r from-black/20 to-transparent" />
+                      {card.icon || defaultIcons[index % defaultIcons.length]}
+                    </span>
+                  </div>
+
+                  {/* Card - 지그재그 배치, 중앙선에서 떨어뜨리기 */}
+                  <div
+                    className={`w-2/5 bg-white border border-gray-200 rounded-xl shadow-lg hover:shadow-xl transition-all duration-700 overflow-hidden hover:-translate-y-2 ${
+                      visibleCards[index] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
+                    } ${index % 2 === 1 ? "mr-16" : "ml-16"}`}
+                    style={{
+                      transitionDelay: visibleCards[index] ? `${index * 150 + 200}ms` : "0ms",
+                    }}
+                  >
+                    <div className="p-8">
+                      <div className={`flex items-center gap-8 ${index % 2 === 1 ? "flex-row-reverse" : ""}`}>
+                        <div className="flex-1">
+                          <h3 className="text-2xl font-bold text-gray-900 mb-4 leading-tight">{card.title}</h3>
+                          <p className="text-lg text-gray-600 leading-relaxed">{card.description}</p>
                         </div>
-                        
-                        {/* Text Content */}
-                        <div className="w-3/5 p-12 flex flex-col justify-center">
-                          <h3 className="text-3xl font-bold text-gray-800 mb-6 leading-tight">
-                            {card.title}
-                          </h3>
-                          
-                          <p className="text-lg text-gray-600 leading-relaxed">
-                            {card.description}
-                          </p>
+                        <div className="w-48 h-36 relative flex-shrink-0 rounded-lg overflow-hidden">
+                          <img
+                            src={card.image || "/placeholder.svg"}
+                            alt={card.title}
+                            className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-r from-black/10 to-transparent" />
                         </div>
                       </div>
                     </div>
-                    
-                    {/* Connection Line to Timeline */}
-                    <div className={`absolute top-1/2 transform -translate-y-1/2 w-32 h-0.5 bg-gray-300 transition-all duration-700 ${
-                      index % 2 === 0 ? 'right-0' : 'left-0'
-                    } ${
-                      visibleCards[index] ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'
-                    }`}
-                    style={{
-                      transformOrigin: index % 2 === 0 ? 'right center' : 'left center',
-                      transitionDelay: visibleCards[index] ? `${index * 200 + 300}ms` : '0ms'
-                    }}></div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </div>
-    </section>
-  );
-};
+    </div>
+  )
+}
 
-export default TimelineCards;
+// 사용 예시
+export default function SimpleTimeline() {
+  const cardData = [
+    {
+      title: "초기 비용 없이 시작",
+      description: "설치비 0원, 조명 인프라를 스마트하게 전환",
+      image: "/placeholder.svg?height=200&width=300&text=Warehouse",
+    },
+    {
+      title: "IoT 기반 지능형 조명 제어",
+      description: "어플로 조도·사용 실시간 감지 & 자동 제어",
+      image: "/placeholder.svg?height=200&width=300&text=Mobile+App",
+    },
+    {
+      title: "에너지 절감 + 전기요금 절약",
+      description: "전력 낭비 방지 및 피크 시간대 요금 전략 대응",
+      image: "/placeholder.svg?height=200&width=300&text=Analytics",
+    },
+  ]
+
+  return <TimelineCards cards={cardData} />
+}
