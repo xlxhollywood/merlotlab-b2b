@@ -56,10 +56,10 @@ export default function UseCases() {
         <div className="inner-container relative max-w-[1120px] mx-auto">
           <div className="py-48 text-center text-gray-700">
             <h2 className="text-6xl font-bold leading-[60px] text-center text-gray-700">
-              사업장 전력 절감 
+              <SplitText text="메를로랩이 사업장 전력 절감" delay={100} />
               <br />
               <span className="text-primary block mt-2">
-                <SplitText text="메를로랩이 " delay={100} />함께 하겠습니다
+                <SplitText text="함께 하겠습니다" delay={200} />
               </span>
             </h2>
           </div>
