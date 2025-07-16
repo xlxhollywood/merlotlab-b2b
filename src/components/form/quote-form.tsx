@@ -1,12 +1,11 @@
 "use client"
 
 import type React from "react"
-import { Calculator, Lightbulb, Zap } from "lucide-react"
+import { Calculator, Zap } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { useState, useEffect } from "react"
 
 interface QuoteFormProps {
@@ -29,24 +28,7 @@ interface CalculationResult {
   powerSavings: number // kWh
 }
 
-interface CostComparison {
-  generalLED: {
-    productCost: number
-    installationCost: number
-    communicationCost: number
-    systemCost: number
-    consultingCost: number
-    total: number
-  }
-  ourProduct: {
-    productCost: number
-    installationCost: number
-    communicationCost: number
-    systemCost: number
-    consultingCost: number
-    total: number
-  }
-}
+
 
 export default function QuoteForm({
   selectedInquiry,
@@ -75,7 +57,6 @@ export default function QuoteForm({
   )
 
   const [calculationResult, setCalculationResult] = useState<CalculationResult | null>(null)
-  const [costComparison, setCostComparison] = useState<CostComparison | null>(null)
 
   // selectedBusinessType이 변경될 때 selectedLightType도 자동 업데이트
   useEffect(() => {
@@ -103,21 +84,7 @@ export default function QuoteForm({
     사무실: 160,
   }
 
-  // 조명 종류별 가격 정보
-  const lightTypePrices = {
-    레이스웨이: {
-      productCost: 80000, // 제품 공급가
-      installationCost: 18000, // 설치 공사비
-    },
-    면조명: {
-      productCost: 85000, // 제품 공급가
-      installationCost: 18000, // 설치 공사비
-    },
-    투광등: {
-      productCost: 160000, // 제품 공급가
-      installationCost: 25000, // 설치 공사비
-    },
-  }
+
 
   const handleInputChange = (field: string, value: string) => {
     setFormData((prev) => ({
@@ -126,50 +93,7 @@ export default function QuoteForm({
     }))
   }
 
-  const calculateCostComparison = (count: number, lightType: string) => {
-    // 선택된 조명 종류의 가격 정보
-    const selectedPrice = lightTypePrices[lightType as keyof typeof lightTypePrices] || lightTypePrices["레이스웨이"]
 
-    // 일반 LED 비용 (개당)
-    const generalLEDUnitCosts = {
-      productCost: selectedPrice.productCost, // 제품 공급가
-      installationCost: selectedPrice.installationCost, // 설치 공사비
-      communicationCost: 10000, // 무선 통신비 (센서, 리피터, 컨트롤 패널)
-      systemCost: 14000, // 시스템 구축비 (소프트웨어)
-      consultingCost: 16000, // 컨설팅 및 설계비 (시스템 설계 및 세팅)
-    }
-
-    // 메를로랩 시스템 비용 (모두 0원)
-    const ourProductUnitCosts = {
-      productCost: 0, // 제품 공급가
-      installationCost: 0, // 설치 공사비
-      communicationCost: 0, // 무선 통신비
-      systemCost: 0, // 시스템 구축비
-      consultingCost: 0, // 컨설팅 및 설계비
-    }
-
-    const generalLED = {
-      productCost: generalLEDUnitCosts.productCost * count,
-      installationCost: generalLEDUnitCosts.installationCost * count,
-      communicationCost: generalLEDUnitCosts.communicationCost * count,
-      systemCost: generalLEDUnitCosts.systemCost * count,
-      consultingCost: generalLEDUnitCosts.consultingCost * count,
-      total: 0,
-    }
-    generalLED.total = Object.values(generalLED).reduce((sum, cost) => sum + cost, 0) - generalLED.total
-
-    const ourProduct = {
-      productCost: ourProductUnitCosts.productCost * count,
-      installationCost: ourProductUnitCosts.installationCost * count,
-      communicationCost: ourProductUnitCosts.communicationCost * count,
-      systemCost: ourProductUnitCosts.systemCost * count,
-      consultingCost: ourProductUnitCosts.consultingCost * count,
-      total: 0,
-    }
-    ourProduct.total = Object.values(ourProduct).reduce((sum, cost) => sum + cost, 0) - ourProduct.total
-
-    return { generalLED, ourProduct }
-  }
 
   const calculateQuote = (e: React.FormEvent) => {
     e.preventDefault()
@@ -227,10 +151,6 @@ export default function QuoteForm({
       afterPowerConsumption,
       powerSavings,
     })
-
-    // 비용 비교 계산
-    const comparison = calculateCostComparison(count, selectedLightType)
-    setCostComparison(comparison)
   }
 
   const formatCurrency = (amount: number) => {
@@ -426,27 +346,17 @@ export default function QuoteForm({
           </div>
         </form>
 
-        {/* 계산 결과 - 탭 구조 */}
-        {calculationResult && costComparison && (
+        {/* 계산 결과 */}
+        {calculationResult && (
           <div className="mt-8 pt-8 border-t border-gray-200">
-            <Tabs defaultValue="savings" className="w-full">
-              <TabsList className="grid w-full grid-cols-2 mb-8 bg-gray-100 rounded-lg p-1">
-                <TabsTrigger value="savings" className="flex items-center gap-2 rounded-md">
-                  <Zap className="w-4 h-4" />
-                  절감 효과
-                </TabsTrigger>
-                <TabsTrigger value="comparison" className="flex items-center gap-2 rounded-md">
-                  <Lightbulb className="w-4 h-4" />
-                  비용 비교
-                </TabsTrigger>
-              </TabsList>
+            <div className="w-full">
+              <div className="mb-8">
+                <h2 className="text-2xl font-bold text-gray-900 mb-2">견적 결과</h2>
+                <p className="text-gray-600">메를로 시스템으로 교체하면 이만큼 절약할 수 있어요</p>
+              </div>
 
-              {/* 절감 효과 탭 */}
-              <TabsContent value="savings" className="space-y-6">
-                <div className="mb-8">
-                  <h2 className="text-2xl font-bold text-gray-900 mb-2">견적 결과</h2>
-                  <p className="text-gray-600">메를로 시스템으로 교체하면 이만큼 절약할 수 있어요</p>
-                </div>
+              {/* 절감 효과 */}
+              <div className="space-y-6">
 
                 {/* 1행: 교체 전/후 - 테두리만 색상 유지, 폰트는 일반 색상 */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
@@ -540,98 +450,8 @@ export default function QuoteForm({
                     </div>
                   </div>
                 </div>
-              </TabsContent>
-
-              {/* 비용 비교 탭 */}
-              <TabsContent value="comparison" className="space-y-6">
-                <div className="mb-8">
-                  <h2 className="text-2xl font-bold text-gray-900 mb-2">비용 비교</h2>
-                  <p className="text-gray-600">기존 유선 IoT LED 조명과 메를로 시스템의 비용을 비교해보세요</p>
-                </div>
-
-                {/* 총 비용 비교 */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-                  <div className="border border-gray-200 rounded-xl p-6">
-                    <div className="flex items-center justify-between mb-4">
-                      <span className="text-lg font-semibold text-gray-700">유선 IoT LED </span>
-                      <div className="w-4 h-4 bg-gray-400 rounded-full"></div>
-                    </div>
-                    <div className="text-3xl font-bold text-gray-900 mb-2">
-                      {formatCurrency(costComparison.generalLED.total)}원
-                    </div>
-                    <div className="text-sm text-gray-500">총 도입 비용</div>
-                  </div>
-                  <div className="border border-[#583CF2] rounded-xl p-6 bg-[#583CF2]/5">
-                    <div className="flex items-center justify-between mb-4">
-                      <span className="text-lg font-semibold text-[#583CF2]">메를로 시스템</span>
-                      <div className="w-4 h-4 bg-[#583CF2] rounded-full"></div>
-                    </div>
-                    <div className="text-3xl font-bold text-[#583CF2] mb-2">
-                      {formatCurrency(costComparison.ourProduct.total)}원
-                    </div>
-                    <div className="text-sm text-gray-500">총 도입 비용</div>
-                  </div>
-                </div>
-
-                {/* 상세 비용 비교표 */}
-                <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
-                  <div className="bg-gray-50 px-6 py-4 border-b border-gray-200">
-                    <h3 className="text-lg font-semibold text-gray-900">상세 비용 분석</h3>
-                  </div>
-                  <div className="p-6">
-                    <div className="space-y-4">
-                      {[
-                        { key: "productCost", label: "제품 공급가" },
-                        { key: "installationCost", label: "설치 공사비" },
-                        { key: "communicationCost", label: "무선 통신비" },
-                        { key: "systemCost", label: "시스템 구축비" },
-                        { key: "consultingCost", label: "컨설팅 및 설계비" },
-                      ].map((item) => (
-                        <div
-                          key={item.key}
-                          className="grid grid-cols-1 md:grid-cols-3 gap-4 py-3 border-b border-gray-100 last:border-b-0"
-                        >
-                          <div className="font-medium text-gray-700">{item.label}</div>
-                          <div className="text-right">
-                            <span className="text-gray-900 font-semibold">
-                              {formatCurrency(
-                                costComparison.generalLED[item.key as keyof typeof costComparison.generalLED],
-                              )}
-                              원
-                            </span>
-                            <div className="text-xs text-gray-500">유선 IoT LED</div>
-                          </div>
-                          <div className="text-right">
-                            <span className="text-[#583CF2] font-semibold">
-                              {formatCurrency(
-                                costComparison.ourProduct[item.key as keyof typeof costComparison.ourProduct],
-                              )}
-                              원
-                            </span>
-                            <div className="text-xs text-gray-500">메를로 시스템</div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                {/* 차액 표시 */}
-                <div className="bg-[#583CF2]/5 border border-[#583CF2] rounded-xl p-6">
-                  <div className="text-center">
-                    <div className="text-sm text-[#583CF2] mb-1">초기 도입비용 차액</div>
-                    <div className="text-2xl font-bold text-[#583CF2]">
-                      {costComparison.ourProduct.total > costComparison.generalLED.total ? "+" : "-"}
-                      {formatCurrency(Math.abs(costComparison.ourProduct.total - costComparison.generalLED.total))}원
-                    </div>
-                    <div className="text-sm text-[#583CF2] mt-2">
-                      도입 비용 없이 메를로 시스템으로 에너지 비용을 절감해보세요
-                      <div className="mt-4 text-xs">*해당 비용은 에너지 효율화 사업에 한해 적용됩니다</div>
-                    </div>
-                  </div>
-                </div>
-              </TabsContent>
-            </Tabs>
+              </div>
+            </div>
 
             <div className="mt-8">
               <Button
