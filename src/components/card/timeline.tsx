@@ -1,185 +1,387 @@
 "use client"
 
-import type React from "react"
-import { useEffect, useRef, useState } from "react"
-import { DollarSign, Smartphone, TrendingDown } from "lucide-react"
+import { useState } from "react"
 
-interface TimelineCard {
-  title: string
+interface TimelineEvent {
+  month: string
   description: string
-  image: string
-  icon?: React.ReactNode
+  isHighlighted?: boolean
 }
 
-interface TimelineCardsProps {
-  cards: TimelineCard[]
-  className?: string
+interface TimelineYear {
+  year: string
+  color: string
+  bgColor: string
+  events: TimelineEvent[]
 }
 
-const TimelineCards: React.FC<TimelineCardsProps> = ({ cards, className = "" }) => {
-  const [visibleCards, setVisibleCards] = useState<boolean[]>(new Array(cards.length).fill(false))
-  const [scrollProgress, setScrollProgress] = useState(0)
-  const cardRefs = useRef<(HTMLDivElement | null)[]>([])
-  const sectionRef = useRef<HTMLDivElement>(null)
+const timelineData: TimelineYear[] = [
+  {
+    year: "2024",
+    color: "text-[#583CF2]",
+    bgColor: "bg-[#583CF2]",
+    events: [{ month: "04", description: "에너지 효율화동력 솔루션 위한 업무협약", isHighlighted: false }],
+  },
+  {
+    year: "2023",
+    color: "text-[#583CF2]",
+    bgColor: "bg-[#583CF2]",
+    events: [
+      {
+        month: "08",
+        description: "스마트조명을 활용한 ESG리드 설정과 홍보 및 고객유치 업무협약",
+        isHighlighted: false,
+      },
+      {
+        month: "08",
+        description: "국민DR 사업활성화 및 에지절감을 위한 실증재제 공동 추진 업무협약",
+        isHighlighted: false,
+      },
+      { month: "07", description: "우수제품지정(중소청)", isHighlighted: false },
+      { month: "06", description: "CPS 64억 투자유치성공", isHighlighted: true },
+      { month: "06", description: "전기산업진흥사 에너지수요효율화투자위한 업무협약", isHighlighted: false },
+      {
+        month: "06",
+        description: "스마트조명을 통한 건축물 에너지 절약 효율화 비즈니스를 위한 업무 협약",
+        isHighlighted: false,
+      },
+      {
+        month: "04",
+        description: "상업시설 대상 DR제도 연계 에너지 절약 실증을 위한 MOU체결(전력거래소외)",
+        isHighlighted: false,
+      },
+      {
+        month: "03",
+        description: "편의점 대상 AMI-스마트기기 기반 Auto DR실증 MOU체결(전력거래소외)",
+        isHighlighted: false,
+      },
+    ],
+  },
+  {
+    year: "2022",
+    color: "text-[#6D4CF5]",
+    bgColor: "bg-[#6D4CF5]",
+    events: [
+      { month: "12", description: "제4차 전력수급 활용한 주민신재생에너지협동조합 상생 수익", isHighlighted: false },
+      { month: "11", description: "IoT 스마트조명을 활용한 주민수익형 실증사업 상생 수익", isHighlighted: false },
+      { month: "11", description: "LH 인천부평 홈 IoT 명동 남부", isHighlighted: false },
+      {
+        month: "05",
+        description: "ICT 기술기반 에너지효율화사업 보급활성화 MOU체결(컬리아이스)",
+        isHighlighted: false,
+      },
+      { month: "02", description: "고효율에너지기자재 인증획득(스마트LED조명제어시스템)", isHighlighted: false },
+      { month: "01", description: "고효율에너지기자재 인증획득(스마트LED등기구)", isHighlighted: false },
+      { month: "01", description: "25억 투자유치성공", isHighlighted: true },
+    ],
+  },
+  {
+    year: "2021",
+    color: "text-[#7C3AED]",
+    bgColor: "bg-[#7C3AED]",
+    events: [
+      { month: "12", description: "LH 광주아파트를 통한 IoT 명동 남부", isHighlighted: false },
+      {
+        month: "11",
+        description: "IoT 스마트 조명을 활용한 주민수익형 실증 MOU체결(전력거래소)",
+        isHighlighted: false,
+      },
+      { month: "07", description: "RCPS 7억 투자유치성공", isHighlighted: true },
+      { month: "06", description: "소재부품위원전기업협인사", isHighlighted: false },
+      { month: "06", description: "RCPS 30억 투자유치성공", isHighlighted: true },
+      { month: "05", description: "제5회 CB 27.4억 발행", isHighlighted: false },
+      {
+        month: "03",
+        description: "ICT기술 기반의 시스템 공동개발 및 상호협력 MOU체결(한전산업개발)",
+        isHighlighted: false,
+      },
+      {
+        month: "01",
+        description: "2020년도 우수연구개발 혁신제품 지정 인증서(중소벤처기업부장관)",
+        isHighlighted: false,
+      },
+    ],
+  },
+  {
+    year: "2020",
+    color: "text-[#8B5CF6]",
+    bgColor: "bg-[#8B5CF6]",
+    events: [
+      { month: "08", description: "상생협력제품 확인서(중소벤처기업부장관)", isHighlighted: false },
+      { month: "07", description: "ISO 9001:2015(품질인증)", isHighlighted: false },
+      { month: "05", description: "브랜드K 인증서(중소벤처기업부장관) IoT공구", isHighlighted: false },
+      { month: "05", description: "상생협력 혁신제품 선정(중소벤처기업부장관)", isHighlighted: false },
+      { month: "04", description: "환경표지 인증서(한국환경산업기술원)", isHighlighted: false },
+      { month: "03", description: "자동형전력량 시업자 등록(산업자원부장관)", isHighlighted: false },
+      { month: "02", description: "제5회 CB 7.4억(NH)", isHighlighted: false },
+    ],
+  },
+  {
+    year: "2019",
+    color: "text-[#8B5CF6]",
+    bgColor: "bg-[#8B5CF6]",
+    events: [
+      { month: "11", description: "제3회 CB 30억(엔터)", isHighlighted: false },
+      {
+        month: "11",
+        description: "세계최초 완전 무선기반 발열, 공정 전용 IoT 모집 시스템 출시 'Grid'",
+        isHighlighted: true,
+      },
+      { month: "07", description: "스마트조명 '스승리 IoT 허브' 크라우드펀딩", isHighlighted: false },
+      { month: "06", description: "LED&OLED EXPO 신기술 및 우수제품 개발상(한국에너지공단)", isHighlighted: false },
+      { month: "06", description: "세계 최초 고효율 AC(125lm/W급) 공정등 출시", isHighlighted: true },
+    ],
+  },
+  {
+    year: "2018",
+    color: "text-[#9F7AEA]",
+    bgColor: "bg-[#9F7AEA]",
+    events: [
+      { month: "11", description: "KT Partner Award 스타트업분야 도전상 수상", isHighlighted: false },
+      { month: "10", description: "유상증자 6차(우리은행)", isHighlighted: false },
+      { month: "10", description: "2018년 Global Sources 홍콩 전시회 참가", isHighlighted: false },
+      { month: "08", description: "IoT 전구 및 방등 출시", isHighlighted: false },
+      { month: "03", description: "유상증자 5차(KT인정3차)", isHighlighted: false },
+    ],
+  },
+  {
+    year: "2017",
+    color: "text-[#9F7AEA]",
+    bgColor: "bg-[#9F7AEA]",
+    events: [
+      { month: "03", description: "RGB BULB 출시", isHighlighted: false },
+      { month: "02", description: "가정용 일반등 3종, 스마트등 3종 출시", isHighlighted: false },
+    ],
+  },
+  {
+    year: "2016",
+    color: "text-[#A78BFA]",
+    bgColor: "bg-[#A78BFA]",
+    events: [
+      { month: "12", description: "이노비즈인증획득", isHighlighted: false },
+      {
+        month: "11",
+        description: "2 Color Smart Bulb 인증/ 컴퓨터조명전시시스템 서울시정상 수상",
+        isHighlighted: false,
+      },
+      { month: "09", description: "제11회 디지털이노베이션대상수상(한국일보사, 마케팅조과학부)", isHighlighted: false },
+      { month: "08", description: "유상증자 4차(한국산업은행외2차)", isHighlighted: false },
+      { month: "05", description: "스마트 시스템 발등 3종 출시", isHighlighted: false },
+      { month: "02", description: "다운라이트 25W, 9W Bulb, Ball Bulb, 인증 및 제품 출시", isHighlighted: false },
+      { month: "02", description: "유상증자 3차(중소정책금융)", isHighlighted: false },
+    ],
+  },
+  {
+    year: "2015",
+    color: "text-[#A78BFA]",
+    bgColor: "bg-[#A78BFA]",
+    events: [
+      { month: "12", description: "다운라이트 18W 인증 및 제품출시", isHighlighted: false },
+      { month: "11", description: "M2500 출시, 투광등인증 및 제품출시", isHighlighted: false },
+      { month: "07", description: "발광소자를 이용한 디지털스텝 마크웨어, 중국특허 획득", isHighlighted: false },
+      { month: "01", description: "M3000 개발", isHighlighted: false },
+    ],
+  },
+  {
+    year: "2014",
+    color: "text-[#B794F6]",
+    bgColor: "bg-[#B794F6]",
+    events: [
+      { month: "10", description: "핸스트 파트너스 (유) 3차례정 유상증자", isHighlighted: false },
+      {
+        month: "01",
+        description: "엔젤세움, KB인베스트먼트, 원익투자파트너스(유)3차례정 유상증자",
+        isHighlighted: false,
+      },
+    ],
+  },
+  {
+    year: "2013",
+    color: "text-[#C4B5FD]",
+    bgColor: "bg-[#C4B5FD]",
+    events: [{ month: "02", description: "벤처기업인증(기술보증기금)", isHighlighted: false }],
+  },
+  {
+    year: "2012",
+    color: "text-[#DDD6FE]",
+    bgColor: "bg-[#DDD6FE]",
+    events: [
+      { month: "11", description: "기업부설연구소인증(한국산업기술진흥협회)", isHighlighted: false },
+      { month: "06", description: "회사설립", isHighlighted: true },
+    ],
+  },
+]
 
-  // 기본 아이콘 배열 - 시그니처 컬러 적용
-  const defaultIcons = [
-    <DollarSign key="dollar" className="w-7 h-7" />,
-    <Smartphone key="smartphone" className="w-7 h-7" />,
-    <TrendingDown key="trending" className="w-7 h-7" />,
-  ]
+const certifications = [
+  "ISO 9001:2015 품질경영시스템 인증",
+  "고효율에너지기자재 인증 (스마트LED조명제어시스템)",
+  "고효율에너지기자재 인증 (스마트LED등기구)",
+  "환경표지 인증 (한국환경산업기술원)",
+  "브랜드K 인증 (중소벤처기업부장관)",
+  "상생협력제품 확인서 (중소벤처기업부장관)",
+  "우수연구개발 혁신제품 지정 인증서",
+  "이노비즈 인증",
+  "벤처기업 인증 (기술보증기금)",
+]
 
-  useEffect(() => {
-    const observers: IntersectionObserver[] = []
-    cardRefs.current.forEach((cardRef, index) => {
-      if (cardRef) {
-        const observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                setVisibleCards((prev) => {
-                  const newVisible = [...prev]
-                  newVisible[index] = true
-                  return newVisible
-                })
-              }
-            })
-          },
-          {
-            threshold: 0.3,
-            rootMargin: "-50px 0px -50px 0px",
-          },
-        )
-        observer.observe(cardRef)
-        observers.push(observer)
-      }
-    })
+const patents = [
+  "발광소자를 이용한 디지털스텝 마크웨어 (중국특허)",
+  "IoT 기반 스마트조명 제어시스템",
+  "무선 전력 전송 기술",
+  "LED 조명 효율 최적화 기술",
+  "스마트 에너지 관리 시스템",
+]
 
-    return () => {
-      observers.forEach((observer) => observer.disconnect())
-    }
-  }, [cards.length])
-
-  // 스크롤 진행도 추적
-  useEffect(() => {
-    const handleScroll = () => {
-      if (sectionRef.current) {
-        const rect = sectionRef.current.getBoundingClientRect()
-        const sectionHeight = sectionRef.current.offsetHeight
-        const windowHeight = window.innerHeight
-        const scrollStart = -rect.top
-        const scrollEnd = sectionHeight + windowHeight
-        const progress = Math.max(0, Math.min(1, scrollStart / scrollEnd))
-        setScrollProgress(progress)
-      }
-    }
-
-    window.addEventListener("scroll", handleScroll)
-    handleScroll()
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll)
-    }
-  }, [])
+export default function Timeline() {
+  const [showAll, setShowAll] = useState(false)
+  
+  // 2021년도까지만 보여줄 데이터 (인덱스 0-3)
+  const visibleData = showAll ? timelineData : timelineData.slice(0, 4)
 
   return (
-    <div ref={sectionRef} className={`min-h-screen bg-gray-50 py-16 px-6 ${className}`}>
+    <section className="relative w-full px-5 py-24 bg-white">
       <div className="max-w-6xl mx-auto">
-        {/* Timeline Layout - 지그재그 배치 */}
-        <div className="max-w-5xl mx-auto">
-          <div className="relative">
-            {/* Timeline line - 중앙에 배치 */}
-            <div
-              className="absolute left-1/2 top-0 bottom-0 w-1 transition-all duration-300 rounded-full transform -translate-x-1/2"
-              style={{
-                backgroundColor: `rgba(88, 60, 242, ${0.2 + scrollProgress * 0.6})`,
-              }}
-            ></div>
+        {/* Header */}
+        <div className="text-center text-gray-700 py-16 mb-16">
+        <h2 className="text-4xl md:text-5xl font-bold mb-4">에너지의 미래를 바꿔온 기록, </h2>
+        <h2 className="text-4xl md:text-5xl font-bold text-primary">지금도 계속됩니다</h2>
+        </div>
 
-            <div className="space-y-16">
-              {cards.map((card, index) => (
-                <div
-                  key={index}
-                  className={`relative flex items-start ${index % 2 === 1 ? "flex-row-reverse" : ""}`}
-                  ref={(el) => {
-                    cardRefs.current[index] = el
-                  }}
-                >
-                  {/* Timeline dot with icon - 중앙에 배치 */}
-                  <div
-                    className={`absolute left-1/2 transform -translate-x-1/2 w-20 h-20 bg-white border-4 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-700 shadow-lg z-10 ${
-                      visibleCards[index] ? "scale-100 opacity-100" : "scale-75 opacity-50"
-                    }`}
-                    style={{
-                      borderColor: visibleCards[index] ? "#583CF2" : "#D1D5DB",
-                      transitionDelay: visibleCards[index] ? `${index * 150}ms` : "0ms",
-                    }}
-                  >
-                    <span
-                      className="transition-colors duration-500"
-                      style={{
-                        color: visibleCards[index] ? "#583CF2" : "#9CA3AF",
-                      }}
+        {/* Timeline */}
+        <div className="relative">
+          <div className="mx-auto grid w-fit grid-cols-[auto_auto_1fr] gap-x-8 sm:gap-x-10">
+            {visibleData.map((yearData, yearIndex) => (
+              <div key={yearData.year} className="contents">
+                {/* Year */}
+                <h3 className={`col-start-1 text-2xl font-bold ${yearData.color}`}>{yearData.year}</h3>
+
+                {/* Timeline Line */}
+                <div className="relative w-[3px] grow">
+                  <div className={`absolute top-0 h-[calc(100%+4px)] w-[3px] rounded-full ${yearData.bgColor}`}></div>
+                  <div className="absolute -left-3 translate-x-0.5">
+                    <div
+                      className={`flex items-center justify-center z-10 mt-2 w-6 h-6 rounded-full ${yearData.bgColor}`}
                     >
-                      {card.icon || defaultIcons[index % defaultIcons.length]}
-                    </span>
-                  </div>
-
-                  {/* Card - 지그재그 배치, 중앙선에서 떨어뜨리기 */}
-                  <div
-                    className={`w-2/5 bg-white border border-gray-200 rounded-xl shadow-lg hover:shadow-xl transition-all duration-700 overflow-hidden hover:-translate-y-2 ${
-                      visibleCards[index] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
-                    } ${index % 2 === 1 ? "mr-16" : "ml-16"}`}
-                    style={{
-                      transitionDelay: visibleCards[index] ? `${index * 150 + 200}ms` : "0ms",
-                    }}
-                  >
-                    <div className="p-8">
-                      <div className={`flex items-center gap-8 ${index % 2 === 1 ? "flex-row-reverse" : ""}`}>
-                        <div className="flex-1">
-                          <h3 className="text-2xl font-bold text-gray-900 mb-4 leading-tight">{card.title}</h3>
-                          <p className="text-lg text-gray-600 leading-relaxed">{card.description}</p>
-                        </div>
-                        <div className="w-48 h-36 relative flex-shrink-0 rounded-lg overflow-hidden">
-                          <img
-                            src={card.image || "/placeholder.svg"}
-                            alt={card.title}
-                            className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-r from-black/10 to-transparent" />
-                        </div>
-                      </div>
+                      <div className="w-4 h-4 rounded-full bg-white"></div>
                     </div>
                   </div>
                 </div>
-              ))}
+
+                {/* Events */}
+                <div
+                  className={`grid h-fit gap-x-10 pt-1.5 ${yearIndex === visibleData.length - 1 ? "pb-0" : "pb-20"} sm:grid-cols-[auto_1fr] sm:gap-y-6`}
+                >
+                  {yearData.events.map((event, eventIndex) => (
+                    <div key={eventIndex} className="contents">
+                      <p className="text-sm md:text-base mt-6 leading-7 font-medium text-gray-400 first:mt-0 sm:mt-0 sm:w-9 sm:text-right">
+                        {event.month}월
+                      </p>
+                      <p
+                        className={`md:text-lg font-medium ${
+                          event.isHighlighted ? "text-gray-700 font-bold" : "text-gray-400"
+                        }`}
+                      >
+                        {event.description}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* 페이드아웃 효과 */}
+          {!showAll && (
+            <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent pointer-events-none"></div>
+          )}
+
+          {/* 더보기 버튼 */}
+          {!showAll && (
+            <div className="flex justify-center mt-8">
+              <button
+                onClick={() => setShowAll(true)}
+                className="flex flex-col items-center gap-2 text-gray-500 hover:text-gray-700 transition-colors duration-300"
+              >
+                <span className="text-sm font-medium">더보기</span>
+                <svg 
+                  className="w-12 h-12 transition-transform duration-300" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
+                  strokeWidth={2.5}
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
             </div>
+          )}
+
+          {/* 접기 버튼 */}
+          {showAll && (
+            <div className="flex justify-center mt-8">
+              <button
+                onClick={() => setShowAll(false)}
+                className="flex flex-col items-center gap-2 text-gray-500 hover:text-gray-700 transition-colors duration-300"
+              >
+                <span className="text-sm font-medium">접기</span>
+                <svg 
+                  className="w-12 h-12 transition-transform duration-300 rotate-180" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
+                  strokeWidth={2.5}
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+            </div>
+          )}
+        </div>
+
+        {/* Certifications Section */}
+        <div className="mt-32">
+          <div className="text-center text-gray-700 mb-12">
+            <span className="text-[#583CF2] text-lg mb-2 block font-medium">Certifications</span>
+            <h3 className="text-2xl md:text-3xl font-bold">인증서</h3>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {certifications.map((cert, index) => (
+              <div
+                key={index}
+                className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-shadow"
+              >
+                {/* Image placeholder - you can add images here */}
+                <div className="w-full h-32 bg-gray-100 rounded-md mb-4 flex items-center justify-center">
+                  <span className="text-gray-400 text-sm">인증서 이미지</span>
+                </div>
+                <p className="text-gray-700 font-medium text-center">{cert}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Patents Section */}
+        <div className="mt-20">
+          <div className="text-center text-gray-700 mb-12">
+            <span className="text-[#583CF2] text-lg mb-2 block font-medium">Patents</span>
+            <h3 className="text-2xl md:text-3xl font-bold">특허</h3>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {patents.map((patent, index) => (
+              <div
+                key={index}
+                className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-shadow"
+              >
+                {/* Image placeholder - you can add images here */}
+                <div className="w-full h-32 bg-gray-100 rounded-md mb-4 flex items-center justify-center">
+                  <span className="text-gray-400 text-sm">특허 이미지</span>
+                </div>
+                <p className="text-gray-700 font-medium text-center">{patent}</p>
+              </div>
+            ))}
           </div>
         </div>
       </div>
-    </div>
+    </section>
   )
-}
-
-// 사용 예시
-export default function SimpleTimeline() {
-  const cardData = [
-    {
-      title: "초기 비용 없이 시작",
-      description: "설치비 0원, 조명 인프라를 스마트하게 전환",
-      image: "/placeholder.svg?height=200&width=300&text=Warehouse",
-    },
-    {
-      title: "IoT 기반 지능형 조명 제어",
-      description: "어플로 조도·사용 실시간 감지 & 자동 제어",
-      image: "/placeholder.svg?height=200&width=300&text=Mobile+App",
-    },
-    {
-      title: "에너지 절감 + 전기요금 절약",
-      description: "전력 낭비 방지 및 피크 시간대 요금 전략 대응",
-      image: "/placeholder.svg?height=200&width=300&text=Analytics",
-    },
-  ]
-
-  return <TimelineCards cards={cardData} />
 }
