@@ -28,9 +28,9 @@ const Footer: NextPage = () => {
           <div className="self-stretch flex flex-row items-start justify-center gap-4">
             <div className="self-stretch w-[552px] flex flex-col items-start justify-start">
               <div className="relative leading-6">
-                <p className="m-0">발전 자산의 디지털 전환부터 데이터 공유형 관리, 객관적 자산 교류까지</p>
+                <p className="m-0">설비 환경 분석부터 현장 최적화된 에너지 운영까지</p>
                 <p className="m-0 text-[#583cf2] font-bold">
-                  전기 에너지의 디지털 생태계를 구축합니다
+                절감의 패러다임을 바꿉니다
                 </p>
               </div>
             </div>
