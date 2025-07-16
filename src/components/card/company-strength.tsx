@@ -8,9 +8,9 @@ const strengths = [
     title: "세계 최고 수준의 독자 기술력",
     description: (
       <>
-        메쉬 네트워크와 Dual-Stack 통신 기술로 수만 대 <br />
-        기기를 단일 네트워크로 연결하여 기존 Zigbee, BLE <br />
-        대비 수백 배 뛰어난 성능을 자랑합니다.
+        메쉬 네트워크와 Dual-Stack 통신 기술로 <br /> 수만 대 
+        기기를 단일 네트워크로 연결하여  <br /> 기존 Zigbee, BLE
+        대비 수백 배 뛰어난  <br /> 성능을 자랑합니다.
       </>
     ),
   },
@@ -19,9 +19,9 @@ const strengths = [
     title: "국내 DR·VPP 분야 선도 기업",
     description: (
       <>
-        국내 최초 조명 기반 수요반응(DR) 시스템 구축과 <br />
-        가상발전소(VPP) 운영 경험 보유. 1.2GW 규모의 <br />
-        전력자원 확보 가능성을 입증했습니다.
+        국내 최초 조명 기반 수요반응 시스템 구축과 <br />
+        가상발전소(VPP) 운영 경험 보유. <br /> 1.2GW 규모의
+        전력자원 확보 가능성을  <br /> 입증했습니다.
       </>
     ),
   },
@@ -31,8 +31,8 @@ const strengths = [
     description: (
       <>
         IC 설계부터 하드웨어 개발, 네트워크 구축, <br />
-        소프트웨어 운영까지 전 과정을 자체 개발/관리하여 <br />
-        맞춤형 솔루션을 제공합니다.
+        소프트웨어 운영까지 전 과정을  <br /> 자체 개발/관리하여
+        맞춤형 솔루션을  <br />제공합니다.
       </>
     ),
   },
@@ -42,8 +42,8 @@ const strengths = [
     description: (
       <>
         별도 배선 공사 없이 기존 조명 교체만으로 <br />
-        스마트 빌딩 전환 가능하여 58~78% 전력 절감과 <br />
-        탄소 배출 감소를 동시에 달성합니다.
+        스마트 빌딩 전환 가능하여 58~78%  <br /> 전력 절감과
+        탄소 배출 감소를 동시에  <br /> 달성합니다.
       </>
     ),
   },
@@ -51,7 +51,7 @@ const strengths = [
 
 export default function FloatingCards() {
   return (
-    <div className="max-w-6xl mx-auto p-6">
+    <div className="max-w-[1550px] mx-auto px-6">
       <style jsx>{`
         @keyframes float {
           0%, 100% {
@@ -68,27 +68,28 @@ export default function FloatingCards() {
           animation: float 3s ease-in-out infinite;
         }
         .float-3 {
-          animation: float 4s ease-in-out infinite;
+          animation: float 3s ease-in-out infinite;
         }
         .float-4 {
-          animation: float 4s ease-in-out infinite;
+          animation: float 3s ease-in-out infinite;
         }
       `}</style>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-32">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {strengths.map((strength, index) => (
-          <div key={index} className="group transition-all duration-300 p-8">
-            <div className="flex flex-col items-center text-center">
-              <div className={`mb-6 p-4 float-${index + 1}`}>
+          <div key={index} className="group transition-all duration-300 p-2">
+            <div className="flex flex-col items-center text-center ">
+              <div className={`mb-10 float-${index + 1}`}>
                 <Image
                   src={strength.image || "/placeholder.svg"}
                   alt={strength.title}
-                  width={140}
-                  height={140}
-                  className="w-30 h-30 drop-shadow-lg"
+                  width={120}
+                  height={120}
+                  className="w-28 h-28 drop-shadow-lg"
                 />
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4 leading-tight">
+              
+              <h3 className="text-xl font-bold text-gray-900 mb-4 leading-tight">
                 {index === 0 && (
                   <>
                     세계 <span className="text-primary">최고 수준</span>의 독자 기술력
@@ -109,8 +110,9 @@ export default function FloatingCards() {
                     경제성과 환경 가치의 <span className="text-primary">동시 실현</span>
                   </>
                 )}
-              </h3>
-              <p className="text-xl text-gray-600 leading-relaxed">{strength.description}</p>
+              </h3>            
+              <div className="w-3/4 h-0.5 bg-gray-100 my-1 mb-4"></div>
+              <p className="text-base text-gray-600 leading-relaxed">{strength.description}</p>
             </div>
           </div>
         ))}
