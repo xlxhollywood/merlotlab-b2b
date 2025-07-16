@@ -212,25 +212,7 @@ const timelineData: TimelineYear[] = [
   },
 ]
 
-const certifications = [
-  "ISO 9001:2015 품질경영시스템 인증",
-  "고효율에너지기자재 인증 (스마트LED조명제어시스템)",
-  "고효율에너지기자재 인증 (스마트LED등기구)",
-  "환경표지 인증 (한국환경산업기술원)",
-  "브랜드K 인증 (중소벤처기업부장관)",
-  "상생협력제품 확인서 (중소벤처기업부장관)",
-  "우수연구개발 혁신제품 지정 인증서",
-  "이노비즈 인증",
-  "벤처기업 인증 (기술보증기금)",
-]
 
-const patents = [
-  "발광소자를 이용한 디지털스텝 마크웨어 (중국특허)",
-  "IoT 기반 스마트조명 제어시스템",
-  "무선 전력 전송 기술",
-  "LED 조명 효율 최적화 기술",
-  "스마트 에너지 관리 시스템",
-]
 
 export default function Timeline() {
   const [showAll, setShowAll] = useState(false)
@@ -248,7 +230,7 @@ export default function Timeline() {
         </div>
 
         {/* Timeline */}
-        <div className="relative">
+          <div className="relative">
           <div className="mx-auto grid w-fit grid-cols-[auto_auto_1fr] gap-x-8 sm:gap-x-10">
             {visibleData.map((yearData, yearIndex) => (
               <div key={yearData.year} className="contents">
@@ -283,9 +265,9 @@ export default function Timeline() {
                       >
                         {event.description}
                       </p>
-                    </div>
-                  ))}
                 </div>
+              ))}
+            </div>
               </div>
             ))}
           </div>
@@ -338,49 +320,7 @@ export default function Timeline() {
           )}
         </div>
 
-        {/* Certifications Section */}
-        <div className="mt-32">
-          <div className="text-center text-gray-700 mb-12">
-            <span className="text-[#583CF2] text-lg mb-2 block font-medium">Certifications</span>
-            <h3 className="text-2xl md:text-3xl font-bold">인증서</h3>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {certifications.map((cert, index) => (
-              <div
-                key={index}
-                className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-shadow"
-              >
-                {/* Image placeholder - you can add images here */}
-                <div className="w-full h-32 bg-gray-100 rounded-md mb-4 flex items-center justify-center">
-                  <span className="text-gray-400 text-sm">인증서 이미지</span>
-                </div>
-                <p className="text-gray-700 font-medium text-center">{cert}</p>
-              </div>
-            ))}
-          </div>
-        </div>
 
-        {/* Patents Section */}
-        <div className="mt-20">
-          <div className="text-center text-gray-700 mb-12">
-            <span className="text-[#583CF2] text-lg mb-2 block font-medium">Patents</span>
-            <h3 className="text-2xl md:text-3xl font-bold">특허</h3>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {patents.map((patent, index) => (
-              <div
-                key={index}
-                className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-shadow"
-              >
-                {/* Image placeholder - you can add images here */}
-                <div className="w-full h-32 bg-gray-100 rounded-md mb-4 flex items-center justify-center">
-                  <span className="text-gray-400 text-sm">특허 이미지</span>
-                </div>
-                <p className="text-gray-700 font-medium text-center">{patent}</p>
-              </div>
-            ))}
-          </div>
-        </div>
       </div>
     </section>
   )
