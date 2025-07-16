@@ -230,7 +230,7 @@ export default function Timeline() {
         </div>
 
         {/* Timeline */}
-          <div className="relative">
+        <div className="relative">
           <div className="mx-auto grid w-fit grid-cols-[auto_auto_1fr] gap-x-8 sm:gap-x-10">
             {visibleData.map((yearData, yearIndex) => (
               <div key={yearData.year} className="contents">
@@ -265,9 +265,9 @@ export default function Timeline() {
                       >
                         {event.description}
                       </p>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
               </div>
             ))}
           </div>
@@ -319,7 +319,6 @@ export default function Timeline() {
             </div>
           )}
         </div>
-
 
       </div>
     </section>
