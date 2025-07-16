@@ -348,10 +348,12 @@ export default function Landing() {
           {/* Gradient Overlay */}
           <div className="relative z-10 flex justify-center absolute top-14 sm:top-14 h-full px-4">
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold leading-tight sm:leading-[58px] md:leading-[58px] lg:leading-[58px] text-center text-gray-700 drop-shadow-lg">
-              <p className="text-primary">
-                <SplitText text="전력 절감의 시작" delay={100} />
+              <p>
+                <SplitText text="에너지 절감의 시작" delay={100} />
               </p>
-              <p className="m-0">메를로랩에서 간편하게</p>
+              <p  className="m-0 text-primary">
+                <SplitText text="메를로랩" delay={100} />
+              </p>
             </h1>
           </div>
           <div className="absolute top-0 left-0 w-full h-[70%] bg-gradient-to-b from-white/100 via-white/10 to-transparent z-[1]" />
@@ -374,12 +376,11 @@ export default function Landing() {
         <div className="max-w-[1120px] mt-32 mx-auto flex flex-col gap-40 sm:gap-40 md:gap-40">
           <div className="flex flex-col items-center">
             <div className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight sm:leading-[50px] md:leading-[60px] text-center text-gray-700">
-              <div className="m-0">사업장 유형에 알맞은 솔루션으로</div>
+              <div className="m-0">사업장 유형에 알맞은</div>
               <div className="m-0">
                 <span className="text-primary">
-                  <SplitText text="전기 요금을 절약" delay={100} />
+                  <SplitText text="전기 요금 솔루션" delay={100} />
                 </span>
-                <span>하세요</span>
               </div>
             </div>
           </div>
@@ -405,13 +406,15 @@ export default function Landing() {
       <TossStyleSection />
 
       {/* 3rd section */}
-      <section className="bg-white py-28 sm:py-32 md:py-36 lg:py-40 px-4 sm:px-5">
+      <section className="bg-white sm:py-20 md:py-24 lg:py-32 px-4 sm:px-5">
         <div className="text-center mb-24 sm:mb-32 md:mb-40 gap-32">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight sm:leading-[50px] md:leading-[60px] text-center text-gray-700">
-            <span className="text-primary block">
-              <SplitText text="품질, 기술, 경제성" delay={100} />
+            <span className="block">
+              핵심 가치를 모두 만족 시키는
             </span>
-            <span className="text-gray-700">어느 하나 놓치지 않습니다</span>
+            <span className="text-primary">
+              <SplitText text="에너지 솔루션" delay={100} />
+            </span>
           </h2>
         </div>
         <FadeInUp>
@@ -420,7 +423,7 @@ export default function Landing() {
       </section>
 
       {/* Portfolio Section */}
-      <section className="relative w-full px-4 sm:px-5 py-12 sm:py-16 md:py-20 lg:py-24 bg-gray-50 text-center">
+      <section className="relative w-full px-4 sm:px-5 sm:py-20 md:py-24 lg:py-32 bg-gray-50 text-center">
         <div className="inner-container relative max-w-[1120px] mx-auto">
           <div className="text-center text-gray-700 mb-16 sm:mb-20 md:mb-24 lg:mb-32">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight sm:leading-[50px] md:leading-[60px] text-center text-gray-700">
