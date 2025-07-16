@@ -13,6 +13,7 @@ interface AnimationPhase {
   secondArrow: boolean
   postRepaymentEnergyCost: boolean
   postRepaymentBenefit: boolean
+  shadows: boolean
 }
 
 export default function AnimatedEnergyChart() {
@@ -24,6 +25,7 @@ export default function AnimatedEnergyChart() {
     secondArrow: false,
     postRepaymentEnergyCost: false,
     postRepaymentBenefit: false,
+    shadows: false,
   })
 
   const [isAnimating, setIsAnimating] = useState(false)
@@ -46,6 +48,7 @@ export default function AnimatedEnergyChart() {
       secondArrow: false,
       postRepaymentEnergyCost: false,
       postRepaymentBenefit: false,
+      shadows: false,
     })
 
     // Animation sequence with delays
@@ -75,9 +78,13 @@ export default function AnimatedEnergyChart() {
 
     setTimeout(() => {
       setPhase((prev) => ({ ...prev, postRepaymentBenefit: true }))
+    }, 4900)
+
+    setTimeout(() => {
+      setPhase((prev) => ({ ...prev, shadows: true }))
       setIsAnimating(false)
       setAnimationComplete(true)
-    }, 4900)
+    }, 5900)
   }
 
   useEffect(() => {
@@ -109,6 +116,7 @@ export default function AnimatedEnergyChart() {
         secondArrow: true,
         postRepaymentEnergyCost: true,
         postRepaymentBenefit: true,
+        shadows: true,
       }
     : phase
 
@@ -125,7 +133,7 @@ export default function AnimatedEnergyChart() {
                     displayPhase.investment ? "h-full" : "h-0"
                   }`}
                   style={{
-                    boxShadow: "inset 0 -4px 8px rgba(0, 0, 0, 0.1), inset 2px 0 6px rgba(255, 255, 255, 0.2)",
+                    boxShadow: displayPhase.shadows ? "inset 0 -4px 8px rgba(0, 0, 0, 0.1), inset 2px 0 6px rgba(255, 255, 255, 0.2)" : "none",
                   }}
                 >
                   <div className="flex items-center justify-center h-full text-white font-semibold text-base text-center px-2 drop-shadow-sm">
@@ -166,7 +174,7 @@ export default function AnimatedEnergyChart() {
                     displayPhase.repaymentEnergyCost ? "h-48" : "h-0"
                   }`}
                   style={{
-                    boxShadow: "inset 0 -4px 8px rgba(0, 0, 0, 0.1), inset 2px 0 6px rgba(255, 255, 255, 0.2)",
+                    boxShadow: displayPhase.shadows ? "inset 0 -4px 8px rgba(0, 0, 0, 0.1), inset 2px 0 6px rgba(255, 255, 255, 0.2)" : "none",
                   }}
                 >
                   <div className="flex items-center justify-center h-full text-white font-semibold text-base text-center px-2 drop-shadow-sm">
@@ -174,19 +182,31 @@ export default function AnimatedEnergyChart() {
                   </div>
                 </div>
 
-                {/* Energy Savings Overlay */}
+                {/* Investment Repayment Overlay */}
                 <div
                   className={`absolute w-full bg-gradient-to-t from-[#FFBF54] to-[#FED82D] transition-all duration-1000 ease-out shadow-inner ${
-                    displayPhase.repaymentSavings ? "bottom-48 h-32" : "bottom-48 h-0"
+                    displayPhase.repaymentSavings ? "bottom-48 h-16" : "bottom-48 h-0"
                   }`}
                   style={{
-                    boxShadow: "inset 0 -4px 8px rgba(0, 0, 0, 0.1), inset 2px 0 6px rgba(255, 255, 255, 0.3)",
+                    boxShadow: displayPhase.shadows ? "inset 0 -4px 8px rgba(0, 0, 0, 0.1), inset 2px 0 6px rgba(255, 255, 255, 0.3)" : "none",
                   }}
                 >
-                  <div className="flex flex-col items-center justify-center h-full text-white font-semibold text-base text-center px-2 drop-shadow-sm">
-                    <span>에너지</span>
-                    <span>비용절감</span>
-                    <span className="text-sm">(=투자회수)</span>
+                  <div className="flex flex-col items-center justify-center h-full text-white font-semibold text-sm text-center px-2 drop-shadow-sm">
+                    <span>투자 회수</span>
+                  </div>
+                </div>
+
+                {/* Customer Profit Overlay */}
+                <div
+                  className={`absolute w-full bg-gradient-to-t from-green-500 to-green-400 transition-all duration-1000 ease-out shadow-inner ${
+                    displayPhase.repaymentSavings ? "bottom-64 h-16" : "bottom-64 h-0"
+                  }`}
+                  style={{
+                    boxShadow: displayPhase.shadows ? "inset 0 -4px 8px rgba(0, 0, 0, 0.1), inset 2px 0 6px rgba(255, 255, 255, 0.3)" : "none",
+                  }}
+                >
+                  <div className="flex flex-col items-center justify-center h-full text-white font-semibold text-sm text-center px-2 drop-shadow-sm">
+                    <span>사업 이익</span>
                   </div>
                 </div>
 
@@ -199,10 +219,16 @@ export default function AnimatedEnergyChart() {
                 )}
 
                 {displayPhase.repaymentSavings && (
-                  <div className="absolute -top-24 left-1/2 transform -translate-x-1/2 bg-[#FEAA1E] text-white text-sm font-bold px-3 py-2 rounded-lg shadow-xl border-2 border-white drop-shadow-md">
-                    +50%
-                    <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-[#FEAA1E] drop-shadow-sm"></div>
-                  </div>
+                  <>
+                    <div className="absolute -top-24 left-1/2 transform -translate-x-1/2 bg-[#FEAA1E] text-white text-sm font-bold px-3 py-2 rounded-lg shadow-xl border-2 border-white drop-shadow-md">
+                      +25%
+                      <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-[#FEAA1E] drop-shadow-sm"></div>
+                    </div>
+                    <div className="absolute -top-36 left-1/2 transform -translate-x-1/2 bg-green-600 text-white text-sm font-bold px-3 py-2 rounded-lg shadow-xl border-2 border-white drop-shadow-md">
+                      +25%
+                      <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-green-600 drop-shadow-sm"></div>
+                    </div>
+                  </>
                 )}
               </div>
               <div className="text-center">
@@ -230,7 +256,7 @@ export default function AnimatedEnergyChart() {
                     displayPhase.postRepaymentEnergyCost ? "h-48" : "h-0"
                   }`}
                   style={{
-                    boxShadow: "inset 0 -4px 8px rgba(0, 0, 0, 0.1), inset 2px 0 6px rgba(255, 255, 255, 0.2)",
+                    boxShadow: displayPhase.shadows ? "inset 0 -4px 8px rgba(0, 0, 0, 0.1), inset 2px 0 6px rgba(255, 255, 255, 0.2)" : "none",
                   }}
                 >
                   <div className="flex items-center justify-center h-full text-white font-semibold text-base text-center px-2 drop-shadow-sm">
@@ -244,7 +270,7 @@ export default function AnimatedEnergyChart() {
                     displayPhase.postRepaymentBenefit ? "bottom-48 h-32" : "bottom-48 h-0"
                   }`}
                   style={{
-                    boxShadow: "inset 0 -4px 8px rgba(0, 0, 0, 0.1), inset 2px 0 6px rgba(255, 255, 255, 0.3)",
+                    boxShadow: displayPhase.shadows ? "inset 0 -4px 8px rgba(0, 0, 0, 0.1), inset 2px 0 6px rgba(255, 255, 255, 0.3)" : "none",
                   }}
                 >
                   <div className="flex items-center justify-center h-full text-white font-semibold text-base text-center px-2 drop-shadow-sm">
