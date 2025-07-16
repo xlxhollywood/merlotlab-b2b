@@ -7,7 +7,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 interface QuoteFormProps {
   selectedInquiry: "business" | "quote"
@@ -61,6 +61,8 @@ export default function QuoteForm({
     annualDays: "",
   })
 
+  const [isSubmitted, setIsSubmitted] = useState(false)
+
   const businessTypeLightMapping = {
     "물류 창고": "투광등",
     "제조 시설": "투광등",
@@ -74,6 +76,13 @@ export default function QuoteForm({
 
   const [calculationResult, setCalculationResult] = useState<CalculationResult | null>(null)
   const [costComparison, setCostComparison] = useState<CostComparison | null>(null)
+
+  // selectedBusinessType이 변경될 때 selectedLightType도 자동 업데이트
+  useEffect(() => {
+    if (selectedBusinessType) {
+      setSelectedLightType(businessTypeLightMapping[selectedBusinessType as keyof typeof businessTypeLightMapping] || "레이스웨이")
+    }
+  }, [selectedBusinessType])
 
   // 폼 유효성 검사 함수
   const isFormValid = () => {
@@ -164,6 +173,7 @@ export default function QuoteForm({
 
   const calculateQuote = (e: React.FormEvent) => {
     e.preventDefault()
+    setIsSubmitted(true)
 
     const { generalCount, generalPower, generalHours, annualDays } = formData
 
@@ -270,7 +280,10 @@ export default function QuoteForm({
                       ? "border-[#583cf2] opacity-100"
                       : "border-zinc-300 opacity-50 hover:opacity-75"
                   }`}
-                  onClick={() => setSelectedInquiry("quote")}
+                  onClick={() => {
+                    setSelectedInquiry("quote")
+                    setSelectedBusinessType("아파트 주차장")
+                  }}
                 >
                   <div className="space-y-2">
                     <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold leading-tight text-zinc-800">모의 견적</h3>
@@ -306,7 +319,7 @@ export default function QuoteForm({
                 </div>
               ))}
             </div>
-            {!selectedBusinessType && (
+            {isSubmitted && !selectedBusinessType && (
               <p className="text-sm text-red-500 mt-2">사업장 유형을 선택해주세요</p>
             )}
           </div>
@@ -325,10 +338,10 @@ export default function QuoteForm({
                   value={formData.generalCount}
                   onChange={(e) => handleInputChange("generalCount", e.target.value)}
                   className={`h-10 sm:h-12 border-2 rounded-xl focus:ring-0 ${
-                    !formData.generalCount ? "border-red-300 focus:border-red-500" : "border-gray-200 focus:border-[#583CF2]"
+                    isSubmitted && !formData.generalCount ? "border-red-300 focus:border-red-500" : "border-gray-200 focus:border-[#583CF2]"
                   }`}
                 />
-                {!formData.generalCount && (
+                {isSubmitted && !formData.generalCount && (
                   <p className="text-xs text-red-500">조명 개수를 입력해주세요</p>
                 )}
               </div>
@@ -342,10 +355,10 @@ export default function QuoteForm({
                   value={formData.generalPower}
                   onChange={(e) => handleInputChange("generalPower", e.target.value)}
                   className={`h-10 sm:h-12 border-2 rounded-xl focus:ring-0 ${
-                    !formData.generalPower ? "border-red-300 focus:border-red-500" : "border-gray-200 focus:border-[#583CF2]"
+                    isSubmitted && !formData.generalPower ? "border-red-300 focus:border-red-500" : "border-gray-200 focus:border-[#583CF2]"
                   }`}
                 />
-                {!formData.generalPower && (
+                {isSubmitted && !formData.generalPower && (
                   <p className="text-xs text-red-500">평균 소비 전력을 입력해주세요</p>
                 )}
               </div>
@@ -369,12 +382,12 @@ export default function QuoteForm({
                   value={formData.generalHours}
                   onChange={(e) => handleInputChange("generalHours", e.target.value)}
                   className={`h-10 sm:h-12 border-2 rounded-xl focus:ring-0 ${
-                    !formData.generalHours ? "border-red-300 focus:border-red-500" : "border-gray-200 focus:border-[#583CF2]"
+                    isSubmitted && !formData.generalHours ? "border-red-300 focus:border-red-500" : "border-gray-200 focus:border-[#583CF2]"
                   }`}
                   required
                 />
                 <p className="text-xs text-gray-500">* 8시간 이상의 값만 입력 가능합니다</p>
-                {!formData.generalHours && (
+                {isSubmitted && !formData.generalHours && (
                   <p className="text-xs text-red-500">일일 사용 시간을 입력해주세요</p>
                 )}
               </div>
@@ -388,11 +401,11 @@ export default function QuoteForm({
                   value={formData.annualDays}
                   onChange={(e) => handleInputChange("annualDays", e.target.value)}
                   className={`h-10 sm:h-12 border-2 rounded-xl focus:ring-0 ${
-                    !formData.annualDays ? "border-red-300 focus:border-red-500" : "border-gray-200 focus:border-[#583CF2]"
+                    isSubmitted && !formData.annualDays ? "border-red-300 focus:border-red-500" : "border-gray-200 focus:border-[#583CF2]"
                   }`}
                   required
                 />
-                {!formData.annualDays && (
+                {isSubmitted && !formData.annualDays && (
                   <p className="text-xs text-red-500">연간 사용일수를 입력해주세요</p>
                 )}
               </div>
@@ -413,10 +426,23 @@ export default function QuoteForm({
           </div>
         </form>
 
-        {/* 계산 결과 */}
+        {/* 계산 결과 - 탭 구조 */}
         {calculationResult && costComparison && (
           <div className="mt-8 pt-8 border-t border-gray-200">
-            <div className="space-y-6">
+            <Tabs defaultValue="savings" className="w-full">
+              <TabsList className="grid w-full grid-cols-2 mb-8 bg-gray-100 rounded-lg p-1">
+                <TabsTrigger value="savings" className="flex items-center gap-2 rounded-md">
+                  <Zap className="w-4 h-4" />
+                  절감 효과
+                </TabsTrigger>
+                <TabsTrigger value="comparison" className="flex items-center gap-2 rounded-md">
+                  <Lightbulb className="w-4 h-4" />
+                  비용 비교
+                </TabsTrigger>
+              </TabsList>
+
+              {/* 절감 효과 탭 */}
+              <TabsContent value="savings" className="space-y-6">
                 <div className="mb-8">
                   <h2 className="text-2xl font-bold text-gray-900 mb-2">견적 결과</h2>
                   <p className="text-gray-600">메를로 시스템으로 교체하면 이만큼 절약할 수 있어요</p>
@@ -514,7 +540,98 @@ export default function QuoteForm({
                     </div>
                   </div>
                 </div>
-            </div>
+              </TabsContent>
+
+              {/* 비용 비교 탭 */}
+              <TabsContent value="comparison" className="space-y-6">
+                <div className="mb-8">
+                  <h2 className="text-2xl font-bold text-gray-900 mb-2">비용 비교</h2>
+                  <p className="text-gray-600">기존 유선 IoT LED 조명과 메를로 시스템의 비용을 비교해보세요</p>
+                </div>
+
+                {/* 총 비용 비교 */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                  <div className="border border-gray-200 rounded-xl p-6">
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="text-lg font-semibold text-gray-700">유선 IoT LED </span>
+                      <div className="w-4 h-4 bg-gray-400 rounded-full"></div>
+                    </div>
+                    <div className="text-3xl font-bold text-gray-900 mb-2">
+                      {formatCurrency(costComparison.generalLED.total)}원
+                    </div>
+                    <div className="text-sm text-gray-500">총 도입 비용</div>
+                  </div>
+                  <div className="border border-[#583CF2] rounded-xl p-6 bg-[#583CF2]/5">
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="text-lg font-semibold text-[#583CF2]">메를로 시스템</span>
+                      <div className="w-4 h-4 bg-[#583CF2] rounded-full"></div>
+                    </div>
+                    <div className="text-3xl font-bold text-[#583CF2] mb-2">
+                      {formatCurrency(costComparison.ourProduct.total)}원
+                    </div>
+                    <div className="text-sm text-gray-500">총 도입 비용</div>
+                  </div>
+                </div>
+
+                {/* 상세 비용 비교표 */}
+                <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
+                  <div className="bg-gray-50 px-6 py-4 border-b border-gray-200">
+                    <h3 className="text-lg font-semibold text-gray-900">상세 비용 분석</h3>
+                  </div>
+                  <div className="p-6">
+                    <div className="space-y-4">
+                      {[
+                        { key: "productCost", label: "제품 공급가" },
+                        { key: "installationCost", label: "설치 공사비" },
+                        { key: "communicationCost", label: "무선 통신비" },
+                        { key: "systemCost", label: "시스템 구축비" },
+                        { key: "consultingCost", label: "컨설팅 및 설계비" },
+                      ].map((item) => (
+                        <div
+                          key={item.key}
+                          className="grid grid-cols-1 md:grid-cols-3 gap-4 py-3 border-b border-gray-100 last:border-b-0"
+                        >
+                          <div className="font-medium text-gray-700">{item.label}</div>
+                          <div className="text-right">
+                            <span className="text-gray-900 font-semibold">
+                              {formatCurrency(
+                                costComparison.generalLED[item.key as keyof typeof costComparison.generalLED],
+                              )}
+                              원
+                            </span>
+                            <div className="text-xs text-gray-500">유선 IoT LED</div>
+                          </div>
+                          <div className="text-right">
+                            <span className="text-[#583CF2] font-semibold">
+                              {formatCurrency(
+                                costComparison.ourProduct[item.key as keyof typeof costComparison.ourProduct],
+                              )}
+                              원
+                            </span>
+                            <div className="text-xs text-gray-500">메를로 시스템</div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* 차액 표시 */}
+                <div className="bg-[#583CF2]/5 border border-[#583CF2] rounded-xl p-6">
+                  <div className="text-center">
+                    <div className="text-sm text-[#583CF2] mb-1">초기 도입비용 차액</div>
+                    <div className="text-2xl font-bold text-[#583CF2]">
+                      {costComparison.ourProduct.total > costComparison.generalLED.total ? "+" : "-"}
+                      {formatCurrency(Math.abs(costComparison.ourProduct.total - costComparison.generalLED.total))}원
+                    </div>
+                    <div className="text-sm text-[#583CF2] mt-2">
+                      도입 비용 없이 메를로 시스템으로 에너지 비용을 절감해보세요
+                      <div className="mt-4 text-xs">*해당 비용은 에너지 효율화 사업에 한해 적용됩니다</div>
+                    </div>
+                  </div>
+                </div>
+              </TabsContent>
+            </Tabs>
 
             <div className="mt-8">
               <Button
