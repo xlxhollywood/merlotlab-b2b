@@ -54,37 +54,37 @@ export default function AnimatedEnergyChart() {
     // Animation sequence with delays
     setTimeout(() => {
       setPhase((prev) => ({ ...prev, investment: true }))
-    }, 300)
-
-    setTimeout(() => {
-      setPhase((prev) => ({ ...prev, firstArrow: true }))
     }, 1000)
 
     setTimeout(() => {
+      setPhase((prev) => ({ ...prev, firstArrow: true }))
+    }, 1700)
+
+    setTimeout(() => {
       setPhase((prev) => ({ ...prev, repaymentEnergyCost: true }))
-    }, 1500)
+    }, 2200)
 
     setTimeout(() => {
       setPhase((prev) => ({ ...prev, repaymentSavings: true }))
-    }, 2500)
+    }, 3200)
 
     setTimeout(() => {
       setPhase((prev) => ({ ...prev, secondArrow: true }))
-    }, 3400)
+    }, 4100)
 
     setTimeout(() => {
       setPhase((prev) => ({ ...prev, postRepaymentEnergyCost: true }))
-    }, 3900)
+    }, 4600)
 
     setTimeout(() => {
       setPhase((prev) => ({ ...prev, postRepaymentBenefit: true }))
-    }, 4900)
+    }, 5600)
 
     setTimeout(() => {
       setPhase((prev) => ({ ...prev, shadows: true }))
       setIsAnimating(false)
       setAnimationComplete(true)
-    }, 5900)
+    }, 6600)
   }
 
   useEffect(() => {

@@ -146,16 +146,20 @@ export default function MerlotlabContact() {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12 sm:mb-16 lg:mb-20">
             <div className="space-y-6 sm:space-y-8 lg:space-y-10">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold text-gray-900 mb-4 sm:mb-6">
-                <span className="text-[#583CF2]">
-                  <SplitText text="에너지 효율화" delay={400} />
-                </span>{" "}
-                사업이란?
-              </h2>
-              <p className="text-base sm:text-lg lg:text-xl text-gray-600 leading-relaxed px-4 sm:px-0">
-                기존 설비를 고효율 설비로 교체하여 에너지 비용을 절감하는 것을 목표로 투자사가 초기 투자 비용을 전액
-                부담하여 <br className="hidden lg:block" /> 에너지 절감액으로 투자금을 회수하는 방식으로 진행됩니다.
-              </p>
+              <FadeInUp delay={300}>
+                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold text-gray-900 mb-4 sm:mb-6">
+                  <span className="text-[#583CF2]">
+                    에너지 효율화
+                  </span>{" "}
+                  사업이란?
+                </h2>
+              </FadeInUp>
+              <FadeInUp delay={600}>
+                <p className="text-base sm:text-lg lg:text-xl text-gray-600 leading-relaxed px-4 sm:px-0">
+                  기존 설비를 고효율 설비로 교체하여 에너지 비용을 절감하는 것을 목표로 투자사가 초기 투자 비용을 전액
+                  부담하여 <br className="hidden lg:block" /> 에너지 절감액으로 투자금을 회수하는 방식으로 진행됩니다.
+                </p>
+              </FadeInUp>
             </div>
           </div>
           <AnimatedEnergyChart />
@@ -243,14 +247,16 @@ export default function MerlotlabContact() {
       {/* Process Section */}
       <section className="py-16 sm:py-24 lg:py-32 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-4xl mx-auto">
-          <FadeInUp>
-            <div className="text-center mb-12 sm:mb-16 lg:mb-20">
+          <div className="text-center mb-12 sm:mb-16 lg:mb-20">
+            <FadeInUp delay={300}>
               <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold text-gray-900 mb-4 sm:mb-6">
                 도입 프로세스
               </h2>
+            </FadeInUp>
+            <FadeInUp delay={600}>
               <p className="text-lg sm:text-xl text-gray-600">간단하고 체계적인 5단계 프로세스</p>
-            </div>
-          </FadeInUp>
+            </FadeInUp>
+          </div>
 
           <div className="space-y-6 sm:space-y-8">
             {[
@@ -280,7 +286,7 @@ export default function MerlotlabContact() {
                 description: "절감 효과를 검증하고, 안정적인 운영을 위한 지원을 제공합니다",
               },
             ].map((item, idx) => (
-              <FadeInUp key={item.step /* 또는 key={idx} */}>
+              <FadeInUp key={item.step /* 또는 key={idx} */} delay={600}>
                 <Card className="border border-gray-100 shadow-lg transition-all duration-300 bg-white group">
                   <CardContent className="p-6 sm:p-8">
                     <div className="flex items-start gap-4 sm:gap-6">

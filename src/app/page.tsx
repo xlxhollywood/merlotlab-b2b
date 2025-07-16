@@ -348,12 +348,16 @@ export default function Landing() {
           {/* Gradient Overlay */}
           <div className="relative z-10 flex justify-center absolute top-14 sm:top-14 h-full px-4">
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold leading-tight sm:leading-[58px] md:leading-[58px] lg:leading-[58px] text-center text-gray-700 drop-shadow-lg">
-              <p>
-                <SplitText text="에너지 절감의 시작" delay={100} />
-              </p>
-              <p  className="m-0 text-primary">
-                <SplitText text="메를로랩" delay={100} />
-              </p>
+              <FadeInUp delay={300}>
+                <p>
+                  에너지 절감의 시작
+                </p>
+              </FadeInUp>
+              <FadeInUp delay={600}>
+                <p className="m-0 text-primary">
+                  메를로랩
+                </p>
+              </FadeInUp>
             </h1>
           </div>
           
@@ -422,27 +426,32 @@ export default function Landing() {
         <div className="max-w-[1120px] mt-32 mx-auto flex flex-col gap-40 sm:gap-40 md:gap-40">
           <div className="flex flex-col items-center">
             <div className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight sm:leading-[50px] md:leading-[60px] text-center text-gray-700">
-              <div className="m-0">사업장 유형에 알맞은</div>
-              <div className="m-0">
-                <span className="text-primary">
-                  <SplitText text="전기 요금 솔루션" delay={100} />
-                </span>
-              </div>
+              <FadeInUp delay={300}>
+                <div className="m-0">사업장 유형에 알맞은</div>
+              </FadeInUp>
+              <FadeInUp delay={600}>
+                <div className="m-0">
+                  <span className="text-primary">
+                    전기 요금 솔루션
+                  </span>
+                </div>
+              </FadeInUp>
             </div>
           </div>
           <div>
             {solutionData.map((item, index) => (
-              <SolutionItem
-                key={index}
-                title={item.title}
-                description={item.description}
-                imageSrc={item.imageSrc}
-                imageAlt={item.imageAlt}
-                imageWidth={item.imageWidth}
-                reverse={item.reverse}
-                badgeText={item.badgeText}
-                badgeIcon={item.badgeIcon}
-              />
+              <FadeInUp key={index} delay={200 + (index * 50)}>
+                <SolutionItem
+                  title={item.title}
+                  description={item.description}
+                  imageSrc={item.imageSrc}
+                  imageAlt={item.imageAlt}
+                  imageWidth={item.imageWidth}
+                  reverse={item.reverse}
+                  badgeText={item.badgeText}
+                  badgeIcon={item.badgeIcon}
+                />
+              </FadeInUp>
             ))}
           </div>
         </div>
@@ -455,15 +464,19 @@ export default function Landing() {
       <section className="bg-white sm:py-20 md:py-24 lg:py-32 px-4 sm:px-5">
         <div className="text-center mb-24 sm:mb-32 md:mb-40 gap-32">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight sm:leading-[50px] md:leading-[60px] text-center text-gray-700">
-            <span className="block">
-              핵심 가치를 모두 만족 시키는
-            </span>
-            <span className="text-primary">
-              <SplitText text="에너지 솔루션" delay={100} />
-            </span>
+            <FadeInUp delay={200}>
+              <span className="block">
+                핵심 가치를 모두 만족 시키는
+              </span>
+            </FadeInUp>
+            <FadeInUp delay={400}>
+              <span className="text-primary">
+                에너지 솔루션
+              </span>
+            </FadeInUp>
           </h2>
         </div>
-        <FadeInUp>
+        <FadeInUp delay={600}>
           <CompanyStrengths />
         </FadeInUp>
       </section>
@@ -481,25 +494,9 @@ export default function Landing() {
             </h2>
           </div>
           <Statistics stats={stats} />
-          <PortfolioCardMain />
-          {/* More Cases Button */}
-          <Link href="/use-cases" className="no-underline">
-            <button className="focus-visible:ring-ring inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 overflow-hidden border-input bg-background hover:bg-accent hover:text-accent-foreground border shadow-sm rounded-md px-4 sm:px-6 md:px-8 mt-6 sm:mt-8 md:mt-10 h-12 sm:h-14">
-              <svg
-                className="!size-4 sm:!size-5 md:!size-6"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M5 12h14" />
-                <path d="m12 5 7 7-7 7" />
-              </svg>
-              <span className="text-sm sm:text-base md:text-lg font-medium">더 많은 사례 보기</span>
-            </button>
-          </Link>
+          <FadeInUp delay={200}>
+            <PortfolioCardMain />
+          </FadeInUp>
         </div>
       </section>
 

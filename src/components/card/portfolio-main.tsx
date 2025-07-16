@@ -1,5 +1,7 @@
 "use client"
 
+import Link from "next/link"
+
 interface PortfolioCard {
   title: string
   subtitle: string
@@ -87,6 +89,26 @@ export default function PortfolioCard() {
         </div>
       ))}
 
+      {/* More Cases Button */}
+      <div className="text-center mt-6 sm:mt-8 md:mt-10">
+        <Link href="/use-cases" className="no-underline">
+          <button className="focus-visible:ring-ring inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 overflow-hidden border-input bg-background hover:bg-accent hover:text-accent-foreground border shadow-sm rounded-md px-4 sm:px-6 md:px-8 h-12 sm:h-14">
+            <svg
+              className="!size-4 sm:!size-5 md:!size-6"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M5 12h14" />
+              <path d="m12 5 7 7-7 7" />
+            </svg>
+            <span className="text-sm sm:text-base md:text-lg font-medium">더 많은 사례 보기</span>
+          </button>
+        </Link>
+      </div>
       
       {/* <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-gray-50 via-gray-50/95 via-gray-50/80 via-gray-50/60 via-gray-50/40 via-gray-50/20 to-transparent pointer-events-none" />
       <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-gray-50 via-gray-50/90 to-transparent pointer-events-none" /> */}

@@ -4,6 +4,7 @@ import { useState } from "react"
 import Statistics from "@/components/statistics/statistics"
 import PortfolioUseCases from "@/components/card/portfolio-use-cases"
 import SplitText from "@/components/animation/split-text"
+import FadeInUp from "@/components/animation/fade-in-up"
 import Header from "@/components/header"
 import { Button } from "@/components/ui/button"
 
@@ -55,18 +56,23 @@ export default function UseCases() {
       <section className="relative w-full px-5 py-24 bg-white text-center">
         <div className="inner-container relative max-w-[1120px] mx-auto">
           <div className="py-48 text-center text-gray-700">
-            <h2 className="text-6xl font-bold leading-[60px] text-center text-gray-700">
-              <SplitText text="메를로랩이 사업장 전력 절감" delay={100} />
-              <br />
-              <span className="text-primary block mt-2">
-                <SplitText text="함께 하겠습니다" delay={200} />
-              </span>
-            </h2>
+            <FadeInUp delay={300}>
+              <h2 className="text-6xl font-bold leading-[60px] text-center text-gray-700">
+                메를로랩이 사업장 전력 절감
+                <br />
+                <FadeInUp delay={400}>
+                <span className="text-primary block mt-2">
+                  함께 하겠습니다
+                </span>
+                </FadeInUp>
+              </h2>
+            </FadeInUp>
           </div>
 
           <Statistics stats={stats} />
 
           {/* 필터 섹션 */}
+          <FadeInUp delay={300} threshold={0.1}>
           <div className="my-12">
             <div className="flex flex-wrap justify-center gap-3 mb-8">
               {filterTypes.map((filter) => (
@@ -85,8 +91,10 @@ export default function UseCases() {
               ))}
             </div>
           </div>
-
+          </FadeInUp>
+          <FadeInUp delay={300} threshold={0.1}>
           <PortfolioUseCases />
+          </FadeInUp>
         </div>
       </section>
     </main>
