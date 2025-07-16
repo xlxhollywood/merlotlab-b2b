@@ -4,6 +4,7 @@ import { MeshGradientComponent } from "@/components/background/mesh-gradient"
 import Header from "@/components/header"
 import Timeline from "@/components/card/timeline"
 import Footer from "@/components/footer"
+import FadeInUp from "@/components/animation/fade-in-up"
 import Image from "next/image"
 import { useState, useRef, useEffect } from "react"
 import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react"
@@ -126,12 +127,12 @@ export default function About() {
         )}
 
         <div className="relative z-10 text-center text-white">
-          <div>
+          <FadeInUp delay={300}>
             <h1 className="text-4xl md:text-6xl font-bold mb-6">에너지 절감의</h1>
-          </div>
-          <div>
+          </FadeInUp>
+          <FadeInUp delay={600}>
             <h1 className="text-4xl md:text-6xl font-bold mb-6">새로운 기준을 만듭니다</h1>
-          </div>
+          </FadeInUp>
         </div>
       </section>
       
@@ -142,61 +143,64 @@ export default function About() {
       {/* 특허 섹션 */}
       <section className="relative w-full px-5 bg-white">
         <div className="max-w-6xl mx-auto mb-32">
-          <div className="text-center text-gray-700 py-8 mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">특허 및 인증서</h2>
-          </div>
+          <FadeInUp delay={300}>
+            <div className="text-center text-gray-700 py-8 mb-16">
+              <h2 className="text-4xl md:text-5xl font-bold mb-4">특허 및 인증서</h2>
+            </div>
+          </FadeInUp>
           
           {/* 특허 */}
-          <div>
-            
-            {/* 탭 버튼 */}
-            <div className="flex justify-center mb-16">
-              <div className="flex bg-gray-100 rounded-lg p-1">
-                <button
-                  onClick={() => setActivePatentTab('domestic')}
-                  className={`px-6 py-3 rounded-md font-medium transition-all duration-300 ${
-                    activePatentTab === 'domestic'
-                      ? 'bg-[#583CF2] text-white'
-                      : 'text-gray-600 hover:text-gray-800'
-                  }`}
-                >
-                  국내 특허 ({domesticPatents.length}건)
-                </button>
-                <button
-                  onClick={() => setActivePatentTab('international')}
-                  className={`px-6 py-3 rounded-md font-medium transition-all duration-300 ${
-                    activePatentTab === 'international'
-                      ? 'bg-[#583CF2] text-white'
-                      : 'text-gray-600 hover:text-gray-800'
-                  }`}
-                >
-                  해외 특허 ({internationalPatents.length}건)
-                </button>
+          <FadeInUp delay={600} threshold={0.1}>
+            <div>
+              
+              {/* 탭 버튼 */}
+              <div className="flex justify-center mb-16">
+                <div className="flex bg-gray-100 rounded-lg p-1">
+                  <button
+                    onClick={() => setActivePatentTab('domestic')}
+                    className={`px-6 py-3 rounded-md font-medium transition-all duration-300 ${
+                      activePatentTab === 'domestic'
+                        ? 'bg-[#583CF2] text-white'
+                        : 'text-gray-600 hover:text-gray-800'
+                    }`}
+                  >
+                    국내 특허 ({domesticPatents.length}건)
+                  </button>
+                  <button
+                    onClick={() => setActivePatentTab('international')}
+                    className={`px-6 py-3 rounded-md font-medium transition-all duration-300 ${
+                      activePatentTab === 'international'
+                        ? 'bg-[#583CF2] text-white'
+                        : 'text-gray-600 hover:text-gray-800'
+                    }`}
+                  >
+                    해외 특허 ({internationalPatents.length}건)
+                  </button>
+                </div>
+              </div>
+
+              {/* 특허 목록 */}
+              <div className="space-y-4">
+                {(activePatentTab === 'domestic' ? domesticPatents : internationalPatents).map((patent, index) => (
+                  <div
+                    key={index}
+                    className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-shadow"
+                  >
+                    <div className="flex items-center gap-4">
+                      <span className="text-2xl">{patent.flag}</span>
+                      <div className="flex items-center gap-3">
+                        <span className="bg-[#583CF2] text-white px-3 py-1 rounded-full text-sm font-medium">
+                          {patent.number}
+                        </span>
+                        <span className="text-gray-600 font-medium">{patent.country}</span>
+                      </div>
+                    </div>
+                    <h4 className="text-lg font-semibold text-gray-800 mt-4">{patent.title}</h4>
+                  </div>
+                ))}
               </div>
             </div>
-
-            {/* 특허 목록 */}
-            <div className="space-y-4">
-              {(activePatentTab === 'domestic' ? domesticPatents : internationalPatents).map((patent, index) => (
-                <div
-                  key={index}
-                  className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-shadow"
-                >
-                  <div className="flex items-center gap-4">
-                    <span className="text-2xl">{patent.flag}</span>
-                    <div className="flex items-center gap-3">
-                      <span className="bg-[#583CF2] text-white px-3 py-1 rounded-full text-sm font-medium">
-                        {patent.number}
-                      </span>
-                      <span className="text-gray-600 font-medium">{patent.country}</span>
-                    </div>
-                  </div>
-                  <h4 className="text-lg font-semibold text-gray-800 mt-4">{patent.title}</h4>
-                </div>
-              ))}
-            </div>
-          </div>
-          
+          </FadeInUp>
         </div>
       </section>
       

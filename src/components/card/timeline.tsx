@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import FadeInUp from "@/components/animation/fade-in-up"
 
 interface TimelineEvent {
   month: string
@@ -225,11 +226,13 @@ export default function Timeline() {
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center text-gray-700 py-16 mb-16">
-        <h2 className="text-4xl md:text-5xl font-bold mb-4">에너지의 미래를 바꿔온 기록, </h2>
-        <h2 className="text-4xl md:text-5xl font-bold text-primary">지금도 계속됩니다</h2>
+          <FadeInUp delay={300}>
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-700">회사 연혁</h1>
+          </FadeInUp>
         </div>
 
         {/* Timeline */}
+        <FadeInUp delay={600}>
         <div className="relative">
           <div className="mx-auto grid w-fit grid-cols-[auto_auto_1fr] gap-x-8 sm:gap-x-10">
             {visibleData.map((yearData, yearIndex) => (
@@ -319,7 +322,7 @@ export default function Timeline() {
             </div>
           )}
         </div>
-
+        </FadeInUp>
       </div>
     </section>
   )
