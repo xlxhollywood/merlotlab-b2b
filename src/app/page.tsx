@@ -356,6 +356,40 @@ export default function Landing() {
               </p>
             </h1>
           </div>
+          
+          {/* 스크롤 버튼 */}
+          <div className="absolute bottom-28 left-1/2 transform -translate-x-1/2 z-20">
+            <button
+              onClick={() => {
+                const nextSection = document.querySelector('section:nth-of-type(2)');
+                if (nextSection) {
+                  nextSection.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+              className="group hover:animate-none transition-all duration-300"
+              style={{
+                animation: 'customBounce 2s infinite',
+              }}
+            >
+              <svg 
+                width="40" 
+                height="40" 
+                viewBox="0 0 200 200" 
+                className="text-gray-700 group-hover:text-primary transition-colors duration-300"
+                style={{
+                  filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.1))',
+                }}
+              >
+                <g transform="matrix(0.31151700019836426,0,0,0.31151700019836426,11.684928894042969,90.30802154541016)" opacity="0.8">
+                  <path 
+                    fill="currentColor" 
+                    d="M283.4639892578125,274.375 C273.343994140625,274.375 263.2250061035156,272.17498779296875 253.79800415039062,267.7760009765625 C253.79800415039062,267.7760009765625 16.750999450683594,157.16299438476562 16.750999450683594,157.16299438476562 C4.238999843597412,151.32400512695312 -1.1710000038146973,136.447998046875 4.668000221252441,123.93599700927734 C10.505999565124512,111.42400360107422 25.381999969482422,106.01499938964844 37.89400100708008,111.85399627685547 C37.89400100708008,111.85399627685547 274.9410095214844,222.46600341796875 274.9410095214844,222.46600341796875 C280.3580017089844,224.9929962158203 286.5710144042969,224.99200439453125 291.98699951171875,222.46600341796875 C291.98699951171875,222.46600341796875 529.0349731445312,111.85399627685547 529.0349731445312,111.85399627685547 C541.5469970703125,106.01399993896484 556.4219970703125,111.42400360107422 562.260986328125,123.93599700927734 C568.0989990234375,136.447998046875 562.6890258789062,151.32400512695312 550.177001953125,157.16299438476562 C550.177001953125,157.16299438476562 313.1300048828125,267.7760009765625 313.1300048828125,267.7760009765625 C303.7040100097656,272.17498779296875 293.5840148925781,274.375 283.4639892578125,274.375z"
+                  />
+                </g>
+              </svg>
+            </button>
+          </div>
+          
           <div className="absolute top-0 left-0 w-full h-[70%] bg-gradient-to-b from-white/100 via-white/10 to-transparent z-[1]" />
           <div className="absolute bottom-0 left-0 w-full h-[30%] bg-gradient-to-t from-white/100 via-white/10 to-transparent z-[1]" />
         </div>
@@ -366,6 +400,18 @@ export default function Landing() {
           @media (min-width: 1024px) {
             .hero-bg {
               background-image: url(/hero-image2.jpg);
+            }
+          }
+          
+          @keyframes customBounce {
+            0%, 20%, 50%, 80%, 100% {
+              transform: translateY(0);
+            }
+            40% {
+              transform: translateY(-10px);
+            }
+            60% {
+              transform: translateY(-5px);
             }
           }
         `}</style>
