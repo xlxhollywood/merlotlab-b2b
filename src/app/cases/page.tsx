@@ -4,8 +4,8 @@ import { useState } from "react"
 import Statistics from "@/components/statistics/statistics"
 import PortfolioUseCases from "@/components/card/portfolio-use-cases"
 import FadeInUp from "@/components/animation/fade-in-up"
-import Header from "@/components/header"
-import Footer from "@/components/footer"
+import Header from "@/components/header/index"
+import Footer from "@/components/footer/index"
 import { Button } from "@/components/ui/button"
 
 const stats = [
