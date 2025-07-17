@@ -155,7 +155,7 @@ function TossStyleSection() {
         <div className="relative">
           {/* 중앙 스마트폰 이미지 */}
           <div
-            className="flex justify-center items-center mb-8 lg:mb-12"
+            className="flex justify-center items-center mb-4 lg:mb-0"
             style={{
               opacity: isVisible ? 1 : 0,
               transform: isVisible ? "none" : "translateY(40px)",
@@ -212,29 +212,7 @@ function TossStyleSection() {
             </p>
           </div>
 
-          {/* 모바일용 텍스트들 */}
-          <div
-            className="text-center lg:hidden mb-8 space-y-6"
-            style={{
-              opacity: isVisible ? 1 : 0,
-              transform: isVisible ? "none" : "translateY(20px)",
-              transitionDuration: "700ms",
-              transitionDelay: "400ms",
-              transitionTimingFunction: "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
-            }}
-          >
-            <p className="text-lg sm:text-xl font-bold text-gray-800 leading-relaxed">
-              <span className="block">이해하기 쉬운 용어</span>
-              <span className="block">설명이 필요 없는</span>
-              <span className="block text-primary">직관적인 화면 구성</span>
-            </p>
-            <p className="text-lg sm:text-xl font-bold text-gray-800 leading-relaxed">
-              <span className="block">송금처럼 쉬운</span>
-              <span className="block text-primary">구매 경험</span>
-              <span className="block">그리고 투자 판단에</span>
-              <span className="block">도움을 주는 콘텐츠까지</span>
-            </p>
-          </div>
+
         </div>
 
         {/* 하단 설명 텍스트 */}
@@ -461,8 +439,8 @@ export default function Landing() {
       <TossStyleSection />
 
       {/* 3rd section */}
-      <section className="bg-white sm:py-20 md:py-24 lg:py-32 px-4 sm:px-5">
-        <div className="text-center mb-24 sm:mb-32 md:mb-40 gap-32">
+      <section className="bg-white sm:py-20 md:py-24 lg:py-32 px-4 sm:px-5 pb-16">
+        <div className="text-center mb-24 sm:mb-32 md:mb-40 gap-32 pt-16 sm:pt-0">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight sm:leading-[50px] md:leading-[60px] text-center text-gray-700">
             <FadeInUp delay={200}>
               <span className="block">
@@ -484,7 +462,7 @@ export default function Landing() {
       {/* Portfolio Section */}
       <section className="relative w-full px-4 sm:px-5 sm:py-20 md:py-24 lg:py-32 bg-gray-50 text-center">
         <div className="inner-container relative max-w-[1120px] mx-auto">
-          <div className="text-center text-gray-700 mb-16 sm:mb-20 md:mb-24 lg:mb-32">
+          <div className="text-center text-gray-700 mb-16 sm:mb-20 md:mb-24 lg:mb-32 pt-16 sm:pt-0">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight sm:leading-[50px] md:leading-[60px] text-center text-gray-700">
               수많은 사업장의 변화를
               <br />
@@ -510,14 +488,14 @@ export default function Landing() {
         <div className="max-w-[1120px] mx-auto">
           <div className="flex flex-col items-center gap-6 sm:gap-8">
             <div className="flex flex-col items-center gap-2 sm:gap-4">
-              <div className="text-xl sm:text-2xl md:text-3xl font-bold text-center px-4">
+              <div className="text-lg sm:text-2xl md:text-3xl font-bold text-center px-4">
                 내 사업장에 가장 알맞은 관리
               </div>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center px-4">
+              <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold text-center px-4">
                 전기요금 최적화 지금 시작하세요
               </h2>
             </div>
-            <button className="shadow-sm rounded-lg bg-white border border-gray-200 h-12 sm:h-14 flex items-center justify-center py-2 px-4 sm:px-6 md:px-8 gap-2 text-sm sm:text-base md:text-lg text-zinc-800 hover:bg-gray-50 transition-colors cursor-pointer">
+            <button className="shadow-sm rounded-md bg-white border border-gray-200 h-12 sm:h-14 flex items-center justify-center py-2 px-4 sm:px-6 md:px-8 gap-2 text-sm sm:text-base md:text-lg text-zinc-800 hover:bg-gray-50 transition-colors cursor-pointer">
               <Link href="/solutions?tab=business" className="no-underline">
                 <div className="flex items-center gap-2">
                   <span className="leading-7 font-medium">문의 하기</span>

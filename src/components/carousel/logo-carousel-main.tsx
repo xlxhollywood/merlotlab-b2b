@@ -91,7 +91,7 @@ export default function LogoCarouselMain() {
   const triplicatedCompanies = [...companies, ...companies, ...companies]
 
   return (
-    <div className="w-full bg-white py-16 overflow-hidden">
+    <div className="w-full bg-white py-12 sm:py-16 overflow-hidden">
       <div className="relative">
         {/* Gradient overlays for smooth fade effect */}
         <div className="absolute left-0 top-0 w-32 h-full bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
@@ -106,7 +106,7 @@ export default function LogoCarouselMain() {
           {triplicatedCompanies.map((company, index) => (
             <div
               key={`${company.name}-${index}`}
-              className="flex items-center justify-center flex-shrink-0 h-24"
+              className="flex items-center justify-center flex-shrink-0 h-18 sm:h-24"
               style={{
                 width: `${logoContainerWidth}px`,
                 marginLeft: `${logoGap / 2}px`,

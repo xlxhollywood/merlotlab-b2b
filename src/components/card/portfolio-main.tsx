@@ -90,23 +90,23 @@ export default function PortfolioCard() {
       ))}
 
       {/* More Cases Button */}
-      <div className="text-center mt-6 sm:mt-8 md:mt-10">
+      <div className="text-center mt-6 sm:mt-8 md:mt-10 pb-12 sm:pb-0">
         <Link href="/cases" className="no-underline">
-          <button className="focus-visible:ring-ring inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 overflow-hidden border-input bg-background hover:bg-accent hover:text-accent-foreground border shadow-sm rounded-md px-4 sm:px-6 md:px-8 h-12 sm:h-14">
-            <svg
-              className="!size-4 sm:!size-5 md:!size-6"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M5 12h14" />
-              <path d="m12 5 7 7-7 7" />
-            </svg>
-            <span className="text-sm sm:text-base md:text-lg font-medium">더 많은 사례 보기</span>
-          </button>
+                      <button className="focus-visible:ring-ring inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 overflow-hidden border-input bg-background hover:bg-accent hover:text-accent-foreground border shadow-sm rounded-md px-4 sm:px-6 md:px-8 h-12 sm:h-14">
+              <span className="text-sm sm:text-base md:text-lg font-medium">더 많은 사례 보기</span>
+              <svg
+                className="!size-4 sm:!size-5 md:!size-6"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M5 12h14" />
+                <path d="m12 5 7 7-7 7" />
+              </svg>
+            </button>
         </Link>
       </div>
       

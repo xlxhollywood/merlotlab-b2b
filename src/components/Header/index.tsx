@@ -139,20 +139,23 @@ const Header: React.FC = () => {
           <Link href="/cases" className="block">
             <div
               className={`text-base font-medium cursor-pointer transition-colors duration-200 py-2 ${
-                pathname === "/cases" ? "text-[#583CF2]" : "text-gray-900 hover:text-[#583CF2]"
+                pathname === "/cases" ? "text-[#583CF2]" : "text-gray-700 hover:text-[#583CF2]"
               }`}
             >
               도입 사례
             </div>
           </Link>
 
-          <div className="text-base font-medium text-gray-700 hover:text-[#583CF2] cursor-pointer transition-colors duration-200 py-2">
-            고객지원
-          </div>
-
-          <div className="text-base font-medium text-gray-700 hover:text-[#583CF2] cursor-pointer transition-colors duration-200 py-2">
-            회사소개
-          </div>
+          {/* 회사 소개 */}
+          <Link href="/about" className="block">
+            <div
+              className={`text-base font-medium cursor-pointer transition-colors duration-200 py-2 ${
+                pathname === "/about" ? "text-[#583CF2]" : "text-gray-700 hover:text-[#583CF2]"
+              }`}
+            >
+              회사 소개
+            </div>
+          </Link>
 
           {/* 모바일 문의하기 버튼 */}
           <div className="pt-4">

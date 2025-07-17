@@ -144,7 +144,7 @@ export default function About() {
       <section className="relative w-full px-5 bg-gray-50">
         <div className="max-w-6xl mx-auto">
           <FadeInUp delay={300}>
-            <div className="text-center text-gray-700 py-8 mb-16">
+            <div className="text-center text-gray-700 py-8 mb-16 pt-16 sm:pt-0">
               <h2 className="text-4xl md:text-5xl font-bold mb-4">특허 및 인증서</h2>
             </div>
           </FadeInUp>
@@ -204,37 +204,62 @@ export default function About() {
           
           {/* 인증서 */}
           <div className="relative pt-20 pb-32">
-            {/* 이전 버튼 */}
-            <button
-              onClick={prevCert}
-              disabled={currentCertIndex === 0}
-              className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10 bg-white/80 hover:bg-white rounded-full p-2 shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              <ChevronLeft className="w-6 h-6 text-gray-700" />
-            </button>
+            {/* 데스크톱 버전 - 화살표 버튼 */}
+            <div className="hidden lg:block">
+              {/* 이전 버튼 */}
+              <button
+                onClick={prevCert}
+                disabled={currentCertIndex === 0}
+                className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10 bg-white/80 hover:bg-white rounded-full p-2 shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                <ChevronLeft className="w-6 h-6 text-gray-700" />
+              </button>
 
-            {/* 인증서 그리드 */}
-            <div className="grid grid-cols-3 gap-6 px-16">
-              {certifications.slice(currentCertIndex, currentCertIndex + 3).map((cert, index) => (
-                <div key={currentCertIndex + index} className="w-full h-96 relative overflow-hidden">
-                  <Image
-                    src={cert.image}
-                    alt={cert.title}
-                    fill
-                    className="object-contain"
-                  />
-                </div>
-              ))}
+              {/* 인증서 그리드 */}
+              <div className="grid grid-cols-3 gap-6 px-16">
+                {certifications.slice(currentCertIndex, currentCertIndex + 3).map((cert, index) => (
+                  <div key={currentCertIndex + index} className="w-full h-96 relative overflow-hidden">
+                    <Image
+                      src={cert.image}
+                      alt={cert.title}
+                      fill
+                      className="object-contain"
+                    />
+                  </div>
+                ))}
+              </div>
+
+              {/* 다음 버튼 */}
+              <button
+                onClick={nextCert}
+                disabled={currentCertIndex >= certifications.length - 3}
+                className="absolute right-4 top-1/2 transform -translate-y-1/2 z-10 bg-white/80 hover:bg-white rounded-full p-2 shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                <ChevronRight className="w-6 h-6 text-gray-700" />
+              </button>
             </div>
 
-            {/* 다음 버튼 */}
-            <button
-              onClick={nextCert}
-              disabled={currentCertIndex >= certifications.length - 3}
-              className="absolute right-4 top-1/2 transform -translate-y-1/2 z-10 bg-white/80 hover:bg-white rounded-full p-2 shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              <ChevronRight className="w-6 h-6 text-gray-700" />
-            </button>
+            {/* 모바일 버전 - 터치 스와이프 */}
+            <div className="lg:hidden">
+              <div className="overflow-x-auto scrollbar-hide">
+                <div className="flex gap-4 px-4" style={{ scrollSnapType: 'x mandatory' }}>
+                  {certifications.map((cert, index) => (
+                    <div 
+                      key={index} 
+                      className="flex-shrink-0 w-80 h-96 relative overflow-hidden rounded-lg"
+                      style={{ scrollSnapAlign: 'start' }}
+                    >
+                      <Image
+                        src={cert.image}
+                        alt={cert.title}
+                        fill
+                        className="object-contain"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
 
             {/* 인디케이터 */}
             <div className="flex justify-center mt-6 gap-2">
