@@ -6,6 +6,7 @@ import PortfolioUseCases from "@/components/card/portfolio-use-cases"
 import SplitText from "@/components/animation/split-text"
 import FadeInUp from "@/components/animation/fade-in-up"
 import Header from "@/components/header"
+import Footer from "@/components/footer"
 import { Button } from "@/components/ui/button"
 
 const stats = [
@@ -97,6 +98,9 @@ export default function UseCases() {
           </FadeInUp>
         </div>
       </section>
+      
+      {/* Footer */}
+      <Footer />
     </main>
   )
 }

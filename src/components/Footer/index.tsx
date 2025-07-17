@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const Footer: NextPage = () => {
   return (
-    <div className="w-full relative bg-black flex flex-col items-center justify-start px-5 py-16 box-border text-left text-base text-zinc-400 font-roboto">
+    <div className="w-full relative bg-[#1B2027] flex flex-col items-center justify-start px-5 py-16 box-border text-left text-base text-zinc-400 font-roboto">
       <div className="w-full max-w-[1120px] relative h-[237px]">
         <div className="absolute w-full top-0 right-0 left-0 flex flex-col items-start justify-start gap-6">
           <div className="overflow-hidden flex flex-col items-start justify-start max-w-[1120px]">
@@ -11,13 +11,13 @@ const Footer: NextPage = () => {
               <div className="overflow-hidden flex flex-col items-start justify-start max-w-40">
                 <div className="w-40 h-[35px] overflow-hidden flex-shrink-0 flex flex-col items-center justify-center">
                   <div className="self-stretch relative h-[34px]">
-                    <div className="absolute top-0 left-0 bg-black w-40 h-[34px]" />
+                    <div className="absolute top-0 left-0 bg-[#1B2027] w-40 h-[34px]" />
                     <Image 
                       className="absolute top-1 left-[5px] w-[150px] h-[25px] object-cover" 
                       width={150} 
                       height={25} 
                       alt="메를로랩 로고" 
-                      src="/메를로랩 로고.png" 
+                      src="/메를로랩 로고2.png" 
                       unoptimized
                     />
                   </div>
@@ -29,7 +29,7 @@ const Footer: NextPage = () => {
             <div className="self-stretch w-[552px] flex flex-col items-start justify-start">
               <div className="relative leading-6">
                 <p className="m-0">설비 환경 분석부터 현장 최적화된 에너지 운영까지</p>
-                <p className="m-0 text-[#583cf2] font-bold">
+                <p className="m-0 text-[#583cf2] font-semi-bold">
                 절감의 패러다임을 바꿉니다
                 </p>
               </div>
