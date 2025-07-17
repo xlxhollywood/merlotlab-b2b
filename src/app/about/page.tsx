@@ -146,7 +146,7 @@ export default function About() {
               "#6D54F9", // 연한 보라색
               "#FFFFFF"
             ]}
-            speed={1.0}
+            speed={3.0}
             style={{
               position: "absolute",
               top: 0,
