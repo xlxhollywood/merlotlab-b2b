@@ -1,7 +1,7 @@
 "use client"
 
 import type React from "react"
-import { useCallback, useState, useEffect, useRef } from "react"
+import { useState, useEffect, useRef } from "react"
 import { Package, Factory, Car, Users } from "lucide-react"
 import Footer from "@/components/footer"
 import Header from "@/components/header"
@@ -310,9 +310,7 @@ export default function Landing() {
     },
   ]
 
-  const onButtonContainerClick = useCallback(() => {
-    // 버튼 클릭 로직
-  }, [])
+
 
   return (
     <div className="w-full">

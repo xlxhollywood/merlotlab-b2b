@@ -1,4 +1,7 @@
 "use client"
+
+export const dynamic = "force-dynamic"
+
 import { Zap, Shield, Cpu, TrendingUp, ArrowRight } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import { useEffect, useState, useRef } from "react"
@@ -8,17 +11,18 @@ import Link from "next/link"
 import QuoteForm from "@/components/form/quote-form"
 import BusinessInquiryForm from "@/components/form/buiness-inquiry-form"
 import AnimatedEnergyChart from "@/components/chart/energy"
-import dynamic from "next/dynamic"
+import nextDynamic from "next/dynamic"
 import { useInView } from "react-intersection-observer"
 import SplitText from "@/components/animation/split-text"
 import FadeInUp from "@/components/animation/fade-in-up"
 import { useSearchParams } from "next/navigation"
+import { Suspense } from "react"
 
-const CountUp = dynamic(() => import("react-countup"), {
+const CountUp = nextDynamic(() => import("react-countup"), {
   ssr: false,
 })
 
-export default function MerlotlabSolutions() {
+function MerlotlabSolutions() {
   const searchParams = useSearchParams()
   const tabParam = searchParams.get("tab")
 
@@ -33,8 +37,7 @@ export default function MerlotlabSolutions() {
     threshold: 0.3,
   })
 
-  const [scrollY, setScrollY] = useState(0)
-  const [activeSection, setActiveSection] = useState(0)
+
 
   // 실제 가격 데이터로 변경 (애니메이션 효과를 보기 위해)
   const pricingData = [
@@ -47,9 +50,9 @@ export default function MerlotlabSolutions() {
 
   const quoteFormRef = useRef<HTMLDivElement>(null)
 
-  // URL 파라미터에 따라 초기 탭 설정
+  // URL 파라미터에 따라 초기 탭 설정 (기본값을 사업문의로 변경)
   const [selectedInquiry, setSelectedInquiry] = useState<"business" | "quote">(
-    tabParam === "business" ? "business" : "quote",
+    tabParam === "quote" ? "quote" : "business",
   )
 
   // inquiry 타입에 따라 default 값을 초기화
@@ -79,24 +82,7 @@ export default function MerlotlabSolutions() {
     }
   }, [tabParam])
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY)
-      const sections = document.querySelectorAll("section")
-      const scrollPosition = window.scrollY + window.innerHeight / 2
 
-      sections.forEach((section, index) => {
-        const sectionTop = section.offsetTop
-        const sectionBottom = sectionTop + section.offsetHeight
-        if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
-          setActiveSection(index)
-        }
-      })
-    }
-
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
 
   return (
     <div className="min-h-screen bg-white">
@@ -367,5 +353,13 @@ export default function MerlotlabSolutions() {
       </section>
     <Footer />
     </div>
+  )
+}
+
+export default function PageWithSuspenseWrapper(props: any) {
+  return (
+    <Suspense>
+      <MerlotlabSolutions {...props} />
+    </Suspense>
   )
 }

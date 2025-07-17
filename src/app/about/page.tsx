@@ -173,7 +173,7 @@ export default function About() {
       <Timeline />
       
       {/* 특허 및 인증서 섹션 */}
-      <section className="relative w-full px-5 bg-gray-50">
+      <section className="relative w-full px-5 bg-gray-50 pt-16 sm:pt-20 md:pt-24 lg:pt-32 pb-16 sm:pb-20 md:pb-24 lg:pb-32">
         <div className="max-w-6xl mx-auto">
           <FadeInUp delay={300}>
             <div className="text-center text-gray-700 py-8 mb-16 pt-16 sm:pt-0">

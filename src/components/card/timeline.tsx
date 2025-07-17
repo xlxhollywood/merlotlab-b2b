@@ -222,7 +222,7 @@ export default function Timeline() {
   const visibleData = showAll ? timelineData : timelineData.slice(0, 4)
 
   return (
-    <section className="relative w-full px-5 py-24 bg-white">
+    <section className="relative w-full px-5 py-24 pb-32 sm:pb-40 md:pb-48 lg:pb-56 bg-white">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center text-gray-700 py-16 mb-16">
