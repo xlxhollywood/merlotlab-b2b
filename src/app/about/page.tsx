@@ -140,9 +140,9 @@ export default function About() {
       {/* 타임라인 섹션 */}
       <Timeline />
       
-      {/* 특허 섹션 */}
-      <section className="relative w-full px-5 bg-white">
-        <div className="max-w-6xl mx-auto mb-32">
+      {/* 특허 및 인증서 섹션 */}
+      <section className="relative w-full px-5 bg-gray-50">
+        <div className="max-w-6xl mx-auto">
           <FadeInUp delay={300}>
             <div className="text-center text-gray-700 py-8 mb-16">
               <h2 className="text-4xl md:text-5xl font-bold mb-4">특허 및 인증서</h2>
@@ -151,7 +151,7 @@ export default function About() {
           
           {/* 특허 */}
           <FadeInUp delay={600} threshold={0.1}>
-            <div>
+            <div className="mb-16">
               
               {/* 탭 버튼 */}
               <div className="flex justify-center mb-16">
@@ -201,13 +201,9 @@ export default function About() {
               </div>
             </div>
           </FadeInUp>
-        </div>
-      </section>
-      
-      {/* 인증서 섹션 */}
-      <section className="bg-gray-50 py-24 w-full">
-        <div className="max-w-6xl mx-auto">
-          <div className="relative">
+          
+          {/* 인증서 */}
+          <div className="relative pt-20 pb-32">
             {/* 이전 버튼 */}
             <button
               onClick={prevCert}
