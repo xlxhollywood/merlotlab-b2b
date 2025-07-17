@@ -1,9 +1,9 @@
 "use client"
 
 import { MeshGradientComponent } from "@/components/background/mesh-gradient"
-import Header from "../../components/header"
+import Header from "@/components/header"
 import Timeline from "@/components/card/timeline"
-import Footer from "../../components/footer"
+import Footer from "@/components/footer"
 import FadeInUp from "@/components/animation/fade-in-up"
 import Image from "next/image"
 import { useState, useRef, useEffect } from "react"
