@@ -30,7 +30,7 @@ const timelineData: TimelineYear[] = [
     events: [
       {
         month: "08",
-        description: "스마트조명을 활용한 ESG리드 설정과 홍보 및 고객유치 업무협약",
+        description: "스마트조명을 활용한 ESG리드 설정과<br />홍보 및 고객유치 업무협약",
         isHighlighted: false,
       },
       {
@@ -43,17 +43,17 @@ const timelineData: TimelineYear[] = [
       { month: "06", description: "전기산업진흥사 에너지수요효율화투자위한 업무협약", isHighlighted: false },
       {
         month: "06",
-        description: "스마트조명을 통한 건축물 에너지 절약 효율화 비즈니스를 위한 업무 협약",
+        description: "스마트조명을 통한 건축물 에너지 절약<br />효율화 비즈니스를 위한 업무 협약",
         isHighlighted: false,
       },
       {
         month: "04",
-        description: "상업시설 대상 DR제도 연계 에너지 절약 실증을 위한 MOU체결(전력거래소외)",
+        description: "상업시설 대상 DR제도 연계 에너지 절약<br />실증을 위한 MOU체결(전력거래소외)",
         isHighlighted: false,
       },
       {
         month: "03",
-        description: "편의점 대상 AMI-스마트기기 기반 Auto DR실증 MOU체결(전력거래소외)",
+        description: "편의점 대상 AMI-스마트기기 기반<br />Auto DR실증 MOU체결(전력거래소외)",
         isHighlighted: false,
       },
     ],
@@ -63,12 +63,12 @@ const timelineData: TimelineYear[] = [
     color: "text-[#6D4CF5]",
     bgColor: "bg-[#6D4CF5]",
     events: [
-      { month: "12", description: "제4차 전력수급 활용한 주민신재생에너지협동조합 상생 수익", isHighlighted: false },
-      { month: "11", description: "IoT 스마트조명을 활용한 주민수익형 실증사업 상생 수익", isHighlighted: false },
+      { month: "12", description: "제4차 전력수급 활용한 주민신재생에너지<br />협동조합 상생 수익", isHighlighted: false },
+      { month: "11", description: "IoT 스마트조명을 활용한 주민수익형<br />실증사업 상생 수익", isHighlighted: false },
       { month: "11", description: "LH 인천부평 홈 IoT 명동 남부", isHighlighted: false },
       {
         month: "05",
-        description: "ICT 기술기반 에너지효율화사업 보급활성화 MOU체결(컬리아이스)",
+        description: "ICT 기술기반 에너지효율화사업<br />보급활성화 MOU체결(컬리아이스)",
         isHighlighted: false,
       },
       { month: "02", description: "고효율에너지기자재 인증획득(스마트LED조명제어시스템)", isHighlighted: false },
@@ -84,7 +84,7 @@ const timelineData: TimelineYear[] = [
       { month: "12", description: "LH 광주아파트를 통한 IoT 명동 남부", isHighlighted: false },
       {
         month: "11",
-        description: "IoT 스마트 조명을 활용한 주민수익형 실증 MOU체결(전력거래소)",
+        description: "IoT 스마트 조명을 활용한 주민수익형<br />실증 MOU체결(전력거래소)",
         isHighlighted: false,
       },
       { month: "07", description: "RCPS 7억 투자유치성공", isHighlighted: true },
@@ -93,12 +93,12 @@ const timelineData: TimelineYear[] = [
       { month: "05", description: "제5회 CB 27.4억 발행", isHighlighted: false },
       {
         month: "03",
-        description: "ICT기술 기반의 시스템 공동개발 및 상호협력 MOU체결(한전산업개발)",
+        description: "ICT기술 기반의 시스템 공동개발 및<br />상호협력 MOU체결(한전산업개발)",
         isHighlighted: false,
       },
       {
         month: "01",
-        description: "2020년도 우수연구개발 혁신제품 지정 인증서(중소벤처기업부장관)",
+        description: "2020년도 우수연구개발 혁신제품 지정<br />인증서(중소벤처기업부장관)",
         isHighlighted: false,
       },
     ],
@@ -110,10 +110,10 @@ const timelineData: TimelineYear[] = [
     events: [
       { month: "08", description: "상생협력제품 확인서(중소벤처기업부장관)", isHighlighted: false },
       { month: "07", description: "ISO 9001:2015(품질인증)", isHighlighted: false },
-      { month: "05", description: "브랜드K 인증서(중소벤처기업부장관) IoT공구", isHighlighted: false },
-      { month: "05", description: "상생협력 혁신제품 선정(중소벤처기업부장관)", isHighlighted: false },
+      { month: "05", description: "브랜드K 인증서(중소벤처기업부장관)<br />IoT공구", isHighlighted: false },
+      { month: "05", description: "상생협력 혁신제품 선정<br />(중소벤처기업부장관)", isHighlighted: false },
       { month: "04", description: "환경표지 인증서(한국환경산업기술원)", isHighlighted: false },
-      { month: "03", description: "자동형전력량 시업자 등록(산업자원부장관)", isHighlighted: false },
+      { month: "03", description: "자동형전력량 시업자 등록<br />(산업자원부장관)", isHighlighted: false },
       { month: "02", description: "제5회 CB 7.4억(NH)", isHighlighted: false },
     ],
   },
@@ -125,11 +125,11 @@ const timelineData: TimelineYear[] = [
       { month: "11", description: "제3회 CB 30억(엔터)", isHighlighted: false },
       {
         month: "11",
-        description: "세계최초 완전 무선기반 발열, 공정 전용 IoT 모집 시스템 출시 'Grid'",
+        description: "세계최초 완전 무선기반 발열, 공정 전용<br />IoT 모집 시스템 출시 'Grid'",
         isHighlighted: true,
       },
-      { month: "07", description: "스마트조명 '스승리 IoT 허브' 크라우드펀딩", isHighlighted: false },
-      { month: "06", description: "LED&OLED EXPO 신기술 및 우수제품 개발상(한국에너지공단)", isHighlighted: false },
+      { month: "07", description: "스마트조명 '스승리 IoT 허브'<br />크라우드펀딩", isHighlighted: false },
+      { month: "06", description: "LED&OLED EXPO 신기술 및 우수제품<br />개발상(한국에너지공단)", isHighlighted: false },
       { month: "06", description: "세계 최초 고효율 AC(125lm/W급) 공정등 출시", isHighlighted: true },
     ],
   },
@@ -140,7 +140,7 @@ const timelineData: TimelineYear[] = [
     events: [
       { month: "11", description: "KT Partner Award 스타트업분야 도전상 수상", isHighlighted: false },
       { month: "10", description: "유상증자 6차(우리은행)", isHighlighted: false },
-      { month: "10", description: "2018년 Global Sources 홍콩 전시회 참가", isHighlighted: false },
+      { month: "10", description: "2018년 Global Sources 홍콩<br />전시회 참가", isHighlighted: false },
       { month: "08", description: "IoT 전구 및 방등 출시", isHighlighted: false },
       { month: "03", description: "유상증자 5차(KT인정3차)", isHighlighted: false },
     ],
@@ -162,14 +162,14 @@ const timelineData: TimelineYear[] = [
       { month: "12", description: "이노비즈인증획득", isHighlighted: false },
       {
         month: "11",
-        description: "2 Color Smart Bulb 인증/ 컴퓨터조명전시시스템 서울시정상 수상",
+        description: "2 Color Smart Bulb 인증/ 컴퓨터조명전시시스템<br />서울시정상 수상",
         isHighlighted: false,
       },
-      { month: "09", description: "제11회 디지털이노베이션대상수상(한국일보사, 마케팅조과학부)", isHighlighted: false },
-      { month: "08", description: "유상증자 4차(한국산업은행외2차)", isHighlighted: false },
+      { month: "09", description: "제11회 디지털이노베이션대상수상<br />(한국일보사, 마케팅조과학부)", isHighlighted: false },
+      { month: "08", description: "유상증자 4차<br />(한국산업은행외2차)", isHighlighted: false },
       { month: "05", description: "스마트 시스템 발등 3종 출시", isHighlighted: false },
-      { month: "02", description: "다운라이트 25W, 9W Bulb, Ball Bulb, 인증 및 제품 출시", isHighlighted: false },
-      { month: "02", description: "유상증자 3차(중소정책금융)", isHighlighted: false },
+      { month: "02", description: "다운라이트 25W, 9W Bulb, Ball Bulb,<br />인증 및 제품 출시", isHighlighted: false },
+      { month: "02", description: "유상증자 3차<br />(중소정책금융)", isHighlighted: false },
     ],
   },
   {
@@ -178,8 +178,8 @@ const timelineData: TimelineYear[] = [
     bgColor: "bg-[#A78BFA]",
     events: [
       { month: "12", description: "다운라이트 18W 인증 및 제품출시", isHighlighted: false },
-      { month: "11", description: "M2500 출시, 투광등인증 및 제품출시", isHighlighted: false },
-      { month: "07", description: "발광소자를 이용한 디지털스텝 마크웨어, 중국특허 획득", isHighlighted: false },
+      { month: "11", description: "M2500 출시, 투광등인증 및<br />제품출시", isHighlighted: false },
+      { month: "07", description: "발광소자를 이용한 디지털스텝 마크웨어,<br />중국특허 획득", isHighlighted: false },
       { month: "01", description: "M3000 개발", isHighlighted: false },
     ],
   },
@@ -188,10 +188,10 @@ const timelineData: TimelineYear[] = [
     color: "text-[#B794F6]",
     bgColor: "bg-[#B794F6]",
     events: [
-      { month: "10", description: "핸스트 파트너스 (유) 3차례정 유상증자", isHighlighted: false },
+      { month: "10", description: "핸스트 파트너스 (유) 3차례정<br />유상증자", isHighlighted: false },
       {
         month: "01",
-        description: "엔젤세움, KB인베스트먼트, 원익투자파트너스(유)3차례정 유상증자",
+        description: "엔젤세움, KB인베스트먼트, 원익투자파트너스<br />(유)3차례정 유상증자",
         isHighlighted: false,
       },
     ],
@@ -207,7 +207,7 @@ const timelineData: TimelineYear[] = [
     color: "text-[#DDD6FE]",
     bgColor: "bg-[#DDD6FE]",
     events: [
-      { month: "11", description: "기업부설연구소인증(한국산업기술진흥협회)", isHighlighted: false },
+      { month: "11", description: "기업부설연구소인증<br />(한국산업기술진흥협회)", isHighlighted: false },
       { month: "06", description: "회사설립", isHighlighted: true },
     ],
   },
@@ -265,9 +265,8 @@ export default function Timeline() {
                         className={`md:text-lg font-medium ${
                           event.isHighlighted ? "text-gray-700 font-bold" : "text-gray-400"
                         }`}
-                      >
-                        {event.description}
-                      </p>
+                        dangerouslySetInnerHTML={{ __html: event.description }}
+                      />
                     </div>
                   ))}
                 </div>

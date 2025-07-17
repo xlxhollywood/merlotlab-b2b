@@ -16,6 +16,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "메를로랩",
   description: "메를로랩 B2B 사이트",
+  icons: {
+    icon: "/favicon.png",
+  },
 };
 
 export default function RootLayout({

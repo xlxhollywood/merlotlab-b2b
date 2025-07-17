@@ -75,7 +75,10 @@ export default function About() {
   const [currentCertIndex, setCurrentCertIndex] = useState(0)
   const [activePatentTab, setActivePatentTab] = useState<'domestic' | 'international'>('domestic')
   const [isHeroVisible, setIsHeroVisible] = useState(false)
+  const [mobileCertIndex, setMobileCertIndex] = useState(0)
+  const [isDesktop, setIsDesktop] = useState(false)
   const heroRef = useRef<HTMLElement>(null)
+  const certScrollRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -90,6 +93,35 @@ export default function About() {
     }
 
     return () => observer.disconnect()
+  }, [])
+
+  // 화면 크기 감지
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsDesktop(window.innerWidth >= 1024)
+    }
+    
+    checkScreenSize()
+    window.addEventListener('resize', checkScreenSize)
+    return () => window.removeEventListener('resize', checkScreenSize)
+  }, [])
+
+  // 모바일 인증서 스크롤 감지
+  useEffect(() => {
+    const handleScroll = () => {
+      if (certScrollRef.current) {
+        const scrollLeft = certScrollRef.current.scrollLeft
+        const itemWidth = 320 + 16 // w-80 (320px) + gap-4 (16px)
+        const currentIndex = Math.round(scrollLeft / itemWidth)
+        setMobileCertIndex(currentIndex)
+      }
+    }
+
+    const scrollContainer = certScrollRef.current
+    if (scrollContainer) {
+      scrollContainer.addEventListener('scroll', handleScroll)
+      return () => scrollContainer.removeEventListener('scroll', handleScroll)
+    }
   }, [])
 
   const nextCert = () => {
@@ -192,10 +224,10 @@ export default function About() {
                         <span className="bg-[#583CF2] text-white px-3 py-1 rounded-full text-sm font-medium">
                           {patent.number}
                         </span>
-                        <span className="text-gray-600 font-medium">{patent.country}</span>
+                        <span className="text-gray-700 font-medium">{patent.country}</span>
                       </div>
                     </div>
-                    <h4 className="text-lg font-semibold text-gray-800 mt-4">{patent.title}</h4>
+                    <h4 className="text-base sm:text-lg font-semibold text-gray-700 mt-4">{patent.title}</h4>
                   </div>
                 ))}
               </div>
@@ -241,7 +273,7 @@ export default function About() {
 
             {/* 모바일 버전 - 터치 스와이프 */}
             <div className="lg:hidden">
-              <div className="overflow-x-auto scrollbar-hide">
+              <div ref={certScrollRef} className="overflow-x-auto scrollbar-hide">
                 <div className="flex gap-4 px-4" style={{ scrollSnapType: 'x mandatory' }}>
                   {certifications.map((cert, index) => (
                     <div 
@@ -266,9 +298,22 @@ export default function About() {
               {Array.from({ length: Math.ceil(certifications.length / 3) }, (_, index) => (
                 <button
                   key={index}
-                  onClick={() => setCurrentCertIndex(index * 3)}
+                  onClick={() => {
+                    setCurrentCertIndex(index * 3)
+                    // 모바일에서 스크롤 위치도 함께 업데이트
+                    if (certScrollRef.current) {
+                      const itemWidth = 320 + 16 // w-80 (320px) + gap-4 (16px)
+                      certScrollRef.current.scrollTo({
+                        left: index * 3 * itemWidth,
+                        behavior: 'smooth'
+                      })
+                    }
+                  }}
                   className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                    Math.floor(currentCertIndex / 3) === index ? 'bg-[#583CF2]' : 'bg-gray-300'
+                    // 데스크톱에서는 currentCertIndex 기반, 모바일에서는 mobileCertIndex 기반
+                    (isDesktop ? Math.floor(currentCertIndex / 3) : Math.floor(mobileCertIndex / 3)) === index 
+                      ? 'bg-[#583CF2]' 
+                      : 'bg-gray-300'
                   }`}
                 />
               ))}
@@ -282,10 +327,10 @@ export default function About() {
         <div className="max-w-[1120px] mx-auto">
           <div className="flex flex-col items-center gap-6 sm:gap-8">
             <div className="flex flex-col items-center gap-2 sm:gap-4">
-              <div className="text-xl sm:text-2xl md:text-3xl font-bold text-center px-4">
+              <div className="text-lg sm:text-2xl md:text-3xl font-bold text-center px-4">
                 내 사업장에 가장 알맞은 관리
               </div>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center px-4">
+              <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold text-center px-4">
                 전기요금 최적화 지금 시작하세요
               </h2>
             </div>

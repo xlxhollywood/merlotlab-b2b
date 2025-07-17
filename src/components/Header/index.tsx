@@ -100,7 +100,7 @@ const Header: React.FC = () => {
         </div>
 
         {/* 데스크톱 문의하기 버튼 */}
-        <div className="hidden md:flex items-center ml-auto">
+        <div className="hidden lg:flex items-center ml-auto">
           <Link href="/solutions?tab=business" className="no-underline">
             <div className="bg-[#583CF2] text-white py-2 md:py-3 px-4 md:px-6 rounded-md cursor-pointer transition-all duration-200 hover:bg-[#4b2fec] group">
               <span className="text-xs md:text-sm font-semibold group-hover:text-zinc-300">문의하기</span>

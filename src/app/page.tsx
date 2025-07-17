@@ -444,7 +444,7 @@ export default function Landing() {
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight sm:leading-[50px] md:leading-[60px] text-center text-gray-700">
             <FadeInUp delay={200}>
               <span className="block">
-                핵심 가치를 모두 만족 시키는
+                핵심 가치를 만족 시키는
               </span>
             </FadeInUp>
             <FadeInUp delay={400}>
