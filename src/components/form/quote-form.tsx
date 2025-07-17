@@ -169,7 +169,7 @@ export default function QuoteForm({
         <form onSubmit={calculateQuote} className="space-y-6 sm:space-y-8">
           {/* 문의 구분 */}
           <div className="space-y-4">
-            <Label className="text-base sm:text-lg font-semibold text-gray-900">
+            <Label className="text-base sm:text-lg font-semibold text-gray-700">
               문의 구분 <span className="text-red-500">*</span>
             </Label>
             <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 lg:gap-10">
@@ -218,7 +218,7 @@ export default function QuoteForm({
 
           {/* 사업장 유형 */}
           <div className="space-y-4">
-            <Label className="text-base sm:text-lg font-semibold text-gray-900">
+            <Label className="text-base sm:text-lg font-semibold text-gray-700">
               사업장 유형 <span className="text-red-500">*</span>
             </Label>
             <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
@@ -246,10 +246,10 @@ export default function QuoteForm({
 
           {/* 1. 조명 정보 입력 */}
           <div className="space-y-4 sm:space-y-6">
-            <h2 className="text-lg sm:text-xl font-bold text-zinc-600">1. 조명 정보 입력</h2>
+            <h2 className="text-lg sm:text-xl font-bold text-gray-700">1. 조명 정보 입력</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               <div className="space-y-2">
-                <Label htmlFor="general-count" className="text-sm font-medium text-zinc-800">
+                <Label htmlFor="general-count" className="text-sm font-medium text-gray-700">
                   조명 개수 <span className="text-red-500">*</span>
                 </Label>
                 <Input
@@ -266,7 +266,7 @@ export default function QuoteForm({
                 )}
               </div>
               <div className="space-y-2">
-                <Label htmlFor="general-power" className="text-sm font-medium text-zinc-800">
+                <Label htmlFor="general-power" className="text-sm font-medium text-gray-700">
                   조명 평균 소비 전력 (W) <span className="text-red-500">*</span>
                 </Label>
                 <Input
@@ -287,10 +287,10 @@ export default function QuoteForm({
 
           {/* 2. 사용 조건 입력 */}
           <div className="space-y-4 sm:space-y-6">
-            <h2 className="text-lg sm:text-xl font-bold text-zinc-600">2. 사용 조건 입력</h2>
+            <h2 className="text-lg sm:text-xl font-bold text-gray-700">2. 사용 조건 입력</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
               <div className="space-y-2">
-                <Label htmlFor="general-hours" className="text-sm font-medium text-zinc-800">
+                <Label htmlFor="general-hours" className="text-sm font-medium text-gray-700">
                   조명 일일 사용 시간 (시간) <span className="text-red-500">*</span>
                 </Label>
                 <Input
@@ -312,7 +312,7 @@ export default function QuoteForm({
                 )}
               </div>
               <div className="space-y-2">
-                <Label htmlFor="annual-days" className="text-sm font-medium text-zinc-800">
+                <Label htmlFor="annual-days" className="text-sm font-medium text-gray-700">
                   연간 사용일수 (일) <span className="text-red-500">*</span>
                 </Label>
                 <Input
@@ -393,7 +393,7 @@ export default function QuoteForm({
                   {/* 고객사 예상 수익 */}
                   <div className="border border-gray-200 rounded-xl p-5">
                     <div className="text-center">
-                      <div className="text-sm text-gray-600 mb-1">고객사 예상 수익 (연간)</div>
+                      <div className="text-sm text-gray-600 mb-1">고객사 연간 최대 예상 수익</div>
                       <div className="text-2xl font-bold text-gray-900 mb-2">
                         {formatCurrency(calculationResult.beforeCost * ((calculationResult.savingsRate / 100) + 0.15) - (calculationResult.beforeCost * (calculationResult.savingsRate / 100) * 0.8))}원
                       </div>

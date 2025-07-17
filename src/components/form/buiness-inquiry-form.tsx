@@ -28,7 +28,7 @@ export default function BusinessInquiryForm({
         <form className="space-y-6 sm:space-y-8">
           {/* 문의 구분 */}
           <div className="space-y-4">
-            <Label className="text-base sm:text-lg font-semibold text-gray-900">
+            <Label className="text-base sm:text-lg font-semibold text-gray-700">
               문의 구분 <span className="text-red-500">*</span>
             </Label>
             <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 lg:gap-10">
@@ -74,7 +74,7 @@ export default function BusinessInquiryForm({
 
           {/* 사업장 유형 */}
           <div className="space-y-4">
-            <Label className="text-base sm:text-lg font-semibold text-gray-900">
+            <Label className="text-base sm:text-lg font-semibold text-gray-700">
               사업장 유형 <span className="text-red-500">*</span>
             </Label>
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
@@ -96,7 +96,7 @@ export default function BusinessInquiryForm({
 
           {/* 기본 정보 */}
           <div className="space-y-4 sm:space-y-6">
-            <Label className="text-base sm:text-lg font-semibold text-gray-900">기본 정보</Label>
+            <Label className="text-base sm:text-lg font-semibold text-gray-700">기본 정보</Label>
             <div className={`grid grid-cols-1 ${isPersonal ? "md:grid-cols-1" : "md:grid-cols-2"} gap-4 sm:gap-6`}>
               {/* 기관명 - 개인이 아닐 때만 표시 */}
               {!isPersonal && (
@@ -167,7 +167,7 @@ export default function BusinessInquiryForm({
 
           {/* 문의 내용 */}
           <div className="space-y-4">
-            <Label htmlFor="message" className="text-base sm:text-lg font-semibold text-gray-900">
+            <Label htmlFor="message" className="text-base sm:text-lg font-semibold text-gray-700">
               문의 내용 <span className="text-red-500">*</span>
             </Label>
             <Textarea

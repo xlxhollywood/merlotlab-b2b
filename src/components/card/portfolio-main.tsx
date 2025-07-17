@@ -91,7 +91,7 @@ export default function PortfolioCard() {
 
       {/* More Cases Button */}
       <div className="text-center mt-6 sm:mt-8 md:mt-10">
-        <Link href="/use-cases" className="no-underline">
+        <Link href="/cases" className="no-underline">
           <button className="focus-visible:ring-ring inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 overflow-hidden border-input bg-background hover:bg-accent hover:text-accent-foreground border shadow-sm rounded-md px-4 sm:px-6 md:px-8 h-12 sm:h-14">
             <svg
               className="!size-4 sm:!size-5 md:!size-6"

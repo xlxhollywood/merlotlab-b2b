@@ -60,11 +60,11 @@ const Header: React.FC = () => {
         {/* 데스크톱 네비게이션 메뉴 */}
         <div className="hidden lg:flex items-center gap-12 xl:gap-[70px] ml-20">
           {/* 솔루션 메뉴 */}
-          <Link href="/contact" className="relative cursor-pointer transition-colors duration-200 group">
+          <Link href="/solutions" className="relative cursor-pointer transition-colors duration-200 group">
             <div className="flex items-center">
               <div
                 className={`text-sm xl:text-base font-medium transition-colors duration-200 ${
-                  pathname === "/contact" ? "text-[#583CF2]" : "text-gray-700 group-hover:text-[#583CF2]"
+                  pathname === "/solutions" ? "text-[#583CF2]" : "text-gray-700 group-hover:text-[#583CF2]"
                 }`}
               >
                 솔루션
@@ -73,11 +73,11 @@ const Header: React.FC = () => {
           </Link>
 
           {/* 도입 사례 - 수정된 부분 */}
-          <Link href="/use-cases" className="relative cursor-pointer transition-colors duration-200 group">
+          <Link href="/cases" className="relative cursor-pointer transition-colors duration-200 group">
             <div className="flex items-center">
               <div
                 className={`text-sm xl:text-base font-medium transition-colors duration-200 ${
-                  pathname === "/use-cases" ? "text-[#583CF2]" : "text-gray-700 group-hover:text-[#583CF2]"
+                  pathname === "/cases" ? "text-[#583CF2]" : "text-gray-700 group-hover:text-[#583CF2]"
                 }`}
               >
                 도입 사례
@@ -101,7 +101,7 @@ const Header: React.FC = () => {
 
         {/* 데스크톱 문의하기 버튼 */}
         <div className="hidden md:flex items-center ml-auto">
-          <Link href="/contact?tab=business" className="no-underline">
+          <Link href="/solutions?tab=business" className="no-underline">
             <div className="bg-[#583CF2] text-white py-2 md:py-3 px-4 md:px-6 rounded-md cursor-pointer transition-all duration-200 hover:bg-[#4b2fec] group">
               <span className="text-xs md:text-sm font-semibold group-hover:text-zinc-300">문의하기</span>
             </div>
@@ -125,10 +125,10 @@ const Header: React.FC = () => {
       >
         <div className="px-4 py-4 space-y-4">
           {/* 솔루션 */}
-          <Link href="/contact" className="block">
+          <Link href="/solutions" className="block">
             <div
               className={`text-base font-medium cursor-pointer transition-colors duration-200 py-2 ${
-                pathname === "/contact" ? "text-[#583CF2]" : "text-gray-700 hover:text-[#583CF2]"
+                pathname === "/solutions" ? "text-[#583CF2]" : "text-gray-700 hover:text-[#583CF2]"
               }`}
             >
               솔루션
@@ -136,10 +136,10 @@ const Header: React.FC = () => {
           </Link>
 
           {/* 도입 사례 - 모바일에서도 수정 */}
-          <Link href="/use-cases" className="block">
+          <Link href="/cases" className="block">
             <div
               className={`text-base font-medium cursor-pointer transition-colors duration-200 py-2 ${
-                pathname === "/use-cases" ? "text-[#583CF2]" : "text-gray-900 hover:text-[#583CF2]"
+                pathname === "/cases" ? "text-[#583CF2]" : "text-gray-900 hover:text-[#583CF2]"
               }`}
             >
               도입 사례
@@ -156,7 +156,7 @@ const Header: React.FC = () => {
 
           {/* 모바일 문의하기 버튼 */}
           <div className="pt-4">
-            <Link href="/contact?tab=business" className="no-underline">
+            <Link href="/solutions?tab=business" className="no-underline">
               <div className="bg-[#583CF2] text-white py-3 px-6 rounded-md cursor-pointer transition-all duration-200 hover:bg-[#4b2fec] w-full text-center">
                 <span className="text-sm font-semibold">문의하기</span>
               </div>

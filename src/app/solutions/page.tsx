@@ -18,7 +18,7 @@ const CountUp = dynamic(() => import("react-countup"), {
   ssr: false,
 })
 
-export default function MerlotlabContact() {
+export default function MerlotlabSolutions() {
   const searchParams = useSearchParams()
   const tabParam = searchParams.get("tab")
 
@@ -106,7 +106,7 @@ export default function MerlotlabContact() {
         <div className="max-w-4xl mx-auto w-full">
           <div className="text-center space-y-6 sm:space-y-8">
             <div className="space-y-4 pt-12 sm:pt-16 lg:pt-20">
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 leading-tight">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-700 leading-tight">
                 왜{" "}
                 <span className="text-[#583CF2]">
                   <SplitText text="메를로랩" delay={400} />
@@ -147,7 +147,7 @@ export default function MerlotlabContact() {
           <div className="text-center mb-12 sm:mb-16 lg:mb-20">
             <div className="space-y-6 sm:space-y-8 lg:space-y-10">
               <FadeInUp delay={300}>
-                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold text-gray-900 mb-4 sm:mb-6">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold text-gray-700 mb-4 sm:mb-6">
                   <span className="text-[#583CF2]">
                     에너지 효율화
                   </span>{" "}
@@ -173,7 +173,7 @@ export default function MerlotlabContact() {
           <div className="text-center mb-12 sm:mb-16 lg:mb-20">
             <h2
               ref={costRef}
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold text-gray-900 mb-4 sm:mb-6"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold text-gray-700 mb-4 sm:mb-6"
             >
               초기 투자 비용 {costInView && <CountUp start={1000000} end={0} duration={2} separator="," />}원
             </h2>
@@ -249,7 +249,7 @@ export default function MerlotlabContact() {
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12 sm:mb-16 lg:mb-20">
             <FadeInUp delay={300}>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold text-gray-900 mb-4 sm:mb-6">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold text-gray-700 mb-4 sm:mb-6">
                 도입 프로세스
               </h2>
             </FadeInUp>
@@ -294,8 +294,8 @@ export default function MerlotlabContact() {
                         <div className="text-[#583CF2] text-xl sm:text-2xl lg:text-3xl font-bold">{item.step}</div>
                       </div>
                       <div className="space-y-2 flex-1">
-                        <h3 className="text-lg sm:text-xl font-bold text-gray-900">{item.title}</h3>
-                        <p className="text-sm sm:text-base text-gray-600 leading-relaxed">{item.description}</p>
+                        <h3 className="text-lg sm:text-xl font-bold text-gray-700">{item.title}</h3>
+                        <p className="text-sm sm:text-base text-gray-700 leading-relaxed">{item.description}</p>
                       </div>
                     </div>
                   </CardContent>
@@ -316,7 +316,7 @@ export default function MerlotlabContact() {
               </h2>
             </div>
             <button className="shadow-sm rounded-lg bg-white border border-gray-200 h-12 sm:h-14 flex items-center justify-center py-2 px-6 sm:px-8 gap-2 text-base sm:text-lg text-zinc-800 hover:bg-gray-50 transition-colors cursor-pointer">
-              <Link href="/use-cases" className="no-underline">
+              <Link href="/cases" className="no-underline">
                 <div className="flex items-center gap-2">
                   <span className="leading-7 font-medium">도입 사례 보기</span>
                   <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -327,12 +327,12 @@ export default function MerlotlabContact() {
         </div>
       </section>
 
-      {/* Contact Form Section */}
+      {/* Solutions Form Section */}
       <section className="py-16 sm:py-24 lg:py-32 px-4 sm:px-6 lg:px-8 bg-gray-50">
         <div className="max-w-4xl mx-auto">
           <FadeInUp>
             <div className="text-center mb-12 sm:mb-16">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 sm:mb-6 leading-tight">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-700 mb-4 sm:mb-6 leading-tight">
                 편하게 연락주세요, 자세히 상담해드립니다
               </h2>
               <p className="text-lg sm:text-xl text-gray-600">궁금하신 점을 언제든 편하게 문의해 주세요</p>

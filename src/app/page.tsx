@@ -440,7 +440,7 @@ export default function Landing() {
           </div>
           <div>
             {solutionData.map((item, index) => (
-              <FadeInUp key={index} delay={200 + (index * 50)}>
+              <FadeInUp key={index} delay={200 + (index * 80)}>
                 <SolutionItem
                   title={item.title}
                   description={item.description}
@@ -518,7 +518,7 @@ export default function Landing() {
               </h2>
             </div>
             <button className="shadow-sm rounded-lg bg-white border border-gray-200 h-12 sm:h-14 flex items-center justify-center py-2 px-4 sm:px-6 md:px-8 gap-2 text-sm sm:text-base md:text-lg text-zinc-800 hover:bg-gray-50 transition-colors cursor-pointer">
-              <Link href="/contact?tab=business" className="no-underline">
+              <Link href="/solutions?tab=business" className="no-underline">
                 <div className="flex items-center gap-2">
                   <span className="leading-7 font-medium">문의 하기</span>
                   <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
