@@ -225,14 +225,14 @@ export default function Timeline() {
     <section className="relative w-full px-5 py-24 pb-32 sm:pb-40 md:pb-48 lg:pb-56 bg-white">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
-        <div className="text-center text-gray-700 py-16 mb-16">
+        <div className="text-center text-gray-700 py-8 mb-12">
           <FadeInUp delay={300}>
             <h1 className="text-4xl md:text-5xl font-bold text-gray-700">회사 연혁</h1>
           </FadeInUp>
         </div>
 
         {/* Timeline */}
-        <FadeInUp delay={600} threshold={0.1}>
+        <FadeInUp delay={600} threshold={0.1} rootMargin="100px">
         <div className="relative">
           <div className="mx-auto grid w-fit grid-cols-[auto_auto_1fr] gap-x-8 sm:gap-x-10">
             {visibleData.map((yearData, yearIndex) => (
