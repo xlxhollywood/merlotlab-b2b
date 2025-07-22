@@ -98,14 +98,7 @@ const Header: React.FC = () => {
           </Link>
         </div>
 
-        {/* 데스크톱 문의하기 버튼 */}
-        <div className="hidden lg:flex items-center ml-auto">
-          <Link href="/solutions?tab=business" className="no-underline">
-            <div className="bg-[#583CF2] hover:bg-[#583CF2]/90 text-white py-2 md:py-3 px-4 md:px-6 rounded-lg font-medium text-xs md:text-sm transition-all duration-300 transform hover:scale-105 shadow-lg">
-              <span>문의하기</span>
-            </div>
-          </Link>
-        </div>
+
 
         {/* 모바일 햄버거 메뉴 버튼 */}
         <button
@@ -167,14 +160,7 @@ const Header: React.FC = () => {
             </div>
           </Link>
 
-          {/* 모바일 문의하기 버튼 */}
-          <div className="pt-4">
-            <Link href="/solutions?tab=business" className="no-underline">
-              <div className="bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-lg font-medium text-lg transition-all duration-300 transform hover:scale-105 shadow-lg w-full text-center">
-                <span>문의하기</span>
-              </div>
-            </Link>
-          </div>
+
         </div>
       </div>
     </div>

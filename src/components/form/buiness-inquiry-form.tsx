@@ -32,25 +32,6 @@ export default function BusinessInquiryForm({
               문의 구분 <span className="text-red-500">*</span>
             </Label>
             <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 lg:gap-10">
-              {/* 사업 문의 */}
-              <div className="flex-1">
-                <div
-                  className={`rounded-xl sm:rounded-2xl bg-white border-2 h-auto sm:h-[120px] lg:h-[143px] p-4 sm:p-6 lg:p-10 cursor-pointer transition-all ${
-                    selectedInquiry === "business"
-                      ? "border-[#583cf2] opacity-100"
-                      : "border-zinc-300 opacity-50 hover:opacity-75"
-                  }`}
-                  onClick={() => setSelectedInquiry("business")}
-                >
-                  <div className="space-y-2">
-                    <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold leading-tight text-zinc-800">사업 문의</h3>
-                    <p className="text-sm sm:text-base leading-relaxed text-zinc-500">
-                      환경에 최적화된 솔루션을 제안해 드립니다
-                    </p>
-                  </div>
-                </div>
-              </div>
-
               {/* 모의 견적 */}
               <div className="flex-1">
                 <div
@@ -65,6 +46,25 @@ export default function BusinessInquiryForm({
                     <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold leading-tight text-zinc-800">모의 견적</h3>
                     <p className="text-sm sm:text-base leading-relaxed text-zinc-500">
                       모의 견적은 실제 견적과 다를 수 있습니다
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* 사업 문의 */}
+              <div className="flex-1">
+                <div
+                  className={`rounded-xl sm:rounded-2xl bg-white border-2 h-auto sm:h-[120px] lg:h-[143px] p-4 sm:p-6 lg:p-10 cursor-pointer transition-all ${
+                    selectedInquiry === "business"
+                      ? "border-[#583cf2] opacity-100"
+                      : "border-zinc-300 opacity-50 hover:opacity-75"
+                  }`}
+                  onClick={() => setSelectedInquiry("business")}
+                >
+                  <div className="space-y-2">
+                    <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold leading-tight text-zinc-800">사업 문의</h3>
+                    <p className="text-sm sm:text-base leading-relaxed text-zinc-500">
+                      환경에 최적화된 솔루션을 제안해 드립니다
                     </p>
                   </div>
                 </div>
@@ -172,7 +172,7 @@ export default function BusinessInquiryForm({
             </Label>
             <Textarea
               id="message"
-              placeholder="문의하실 내용을 작성해주세요"
+              placeholder="사업장의 유형, 면적 등 상세한 정보를 주시면 더 자세한 견적을 제공해드립니다."
               className="min-h-[100px] sm:min-h-[120px] rounded-xl border-2 border-gray-200 focus:border-[#583CF2] focus:ring-0 resize-none"
             />
           </div>

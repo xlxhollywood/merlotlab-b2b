@@ -1,5 +1,7 @@
 "use client"
+
 import Image from "next/image"
+
 
 export default function LogoCarouselMain() {
   // 갭 조절 변수들
@@ -91,11 +93,16 @@ export default function LogoCarouselMain() {
   const triplicatedCompanies = [...companies, ...companies, ...companies]
 
   return (
-    <div className="w-full bg-gray-50 py-12 sm:py-16 overflow-hidden">
-      <div className="relative">
-        {/* Gradient overlays for smooth fade effect */}
-        <div className="absolute left-0 top-0 w-32 h-full bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
-        <div className="absolute right-0 top-0 w-32 h-full bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
+    <div className="w-full bg-gray-50/80 py-12 sm:py-16 overflow-hidden border-t border-gray-100">
+      {/* 제목 섹션 */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8 sm:mb-12">
+        <div className="text-center">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-3 sm:mb-4">주요 도입사</h2>
+        </div>
+      </div>
+
+      {/* 로고 캐러셀을 아래로 이동 */}
+      <div className="relative mt-12 sm:mt-16">
 
         <div
           className="flex items-center animate-scroll hover:pause-animation"
@@ -118,13 +125,14 @@ export default function LogoCarouselMain() {
                 alt={company.alt}
                 width={company.width}
                 height={company.height}
-                className="object-contain max-w-full max-h-full"
+                className="object-contain max-w-full max-h-full opacity-100 transition-opacity duration-300"
               />
             </div>
           ))}
         </div>
       </div>
 
+      {/* 스타일은 그대로 유지 */}
       <style jsx>{`
         @keyframes scroll {
           0% {

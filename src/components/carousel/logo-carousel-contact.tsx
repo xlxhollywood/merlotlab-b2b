@@ -137,7 +137,7 @@ export default function LogoCarouselContact() {
       </div>
 
       <div className="text-center mt-6">
-        <p className="text-sm text-gray-500">메를로랩은 고객사의 지속적인 성장을 지원합니다</p>
+        <p className="text-sm text-gray-500">메를로랩은 고객사의 효율적인 에너지 관리를 지원합니다</p>
       </div>
 
       <style jsx>{`

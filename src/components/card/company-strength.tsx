@@ -15,11 +15,11 @@ const strengths = [
   },
   {
     image: "/flash.png",
-    title: "국내 DR·VPP 분야 선도 기업",
+    title: "국내 DR 분야 선도 기업",
     description: (
       <>
         국내 최초 조명 기반 DR 시스템을 구축 <br />
-        설치된 건물의 조명 에너지를 분산 자원으로 <br /> 바꿉니다.
+        설치된 건물의 에너지를 분산 자원으로 <br /> 바꿉니다.
       </>
     ),
   },
@@ -96,7 +96,7 @@ export default function FloatingCards() {
                 )}
                 {index === 1 && (
                   <>
-                    국내 DR·VPP 분야 <span className="text-primary">선도 기업</span>
+                    국내 DR 분야 <span className="text-primary">선도 기업</span>
                   </>
                 )}
                 {index === 2 && (

@@ -534,7 +534,7 @@ export default function AnimatedEnergyChart() {
           </CardContent>
         </Card>
       </div>
-      <LogoCarouselContact />
+
     </div>
   )
 }
