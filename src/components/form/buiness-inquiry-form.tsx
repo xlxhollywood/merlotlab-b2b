@@ -62,9 +62,9 @@ export default function BusinessInquiryForm({
                   onClick={() => setSelectedInquiry("business")}
                 >
                   <div className="space-y-2">
-                    <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold leading-tight text-zinc-800">사업 문의</h3>
+                    <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold leading-tight text-zinc-800">견적 문의</h3>
                     <p className="text-sm sm:text-base leading-relaxed text-zinc-500">
-                      환경에 최적화된 솔루션을 제안해 드립니다
+                    문의 기준으로 상세 견적을 안내합니다
                     </p>
                   </div>
                 </div>
