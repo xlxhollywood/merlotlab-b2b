@@ -1,7 +1,6 @@
 "use client"
-
 import type React from "react"
-import { useCallback, useState, useEffect } from "react"
+import { useCallback, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { Menu, X } from "lucide-react"
@@ -20,11 +19,9 @@ const Header: React.FC = () => {
   }
 
   return (
-    <div
-      className="sticky top-0 left-0 w-full p-0 z-[1000] transition-all duration-300 bg-white border-b border-gray-200"
-    >
+    <div className="sticky top-0 left-0 w-full p-0 z-[1000] transition-all duration-300 bg-white border-b border-gray-200">
       <div
-        className="max-w-[1700px] mx-auto flex items-center justify-between lg:justify-start px-4 md:px-5 h-[60px] md:h-[70px]"
+        className="max-w-7xl mx-auto flex items-center justify-between lg:justify-start px-4 md:px-6 h-16"
         onClick={onContainerClick}
       >
         {/* 로고 */}
@@ -32,7 +29,7 @@ const Header: React.FC = () => {
           <div className="flex items-center relative">
             <Link href="/" className="flex items-center relative">
               <Image
-                className="h-auto w-[120px] md:w-[150px]"
+                className="h-auto w-36"
                 width={150}
                 height={25}
                 alt="메를로랩 로고"
@@ -44,12 +41,12 @@ const Header: React.FC = () => {
         </div>
 
         {/* 데스크톱 네비게이션 메뉴 */}
-        <div className="hidden lg:flex items-center gap-12 xl:gap-[70px] ml-20">
+        <div className="hidden lg:flex items-center gap-16 ml-20">
           {/* 솔루션 메뉴 */}
           <Link href="/solutions" className="relative cursor-pointer transition-colors duration-200 group">
             <div className="flex items-center">
               <div
-                className={`text-sm xl:text-base font-medium transition-colors duration-200 ${
+                className={`text-base font-medium transition-colors duration-200 ${
                   pathname === "/solutions" ? "text-[#583CF2]" : "text-gray-700 group-hover:text-[#583CF2]"
                 }`}
               >
@@ -58,11 +55,11 @@ const Header: React.FC = () => {
             </div>
           </Link>
 
-          {/* 도입 사례 - 수정된 부분 */}
+          {/* 도입 사례 */}
           <Link href="/cases" className="relative cursor-pointer transition-colors duration-200 group">
             <div className="flex items-center">
               <div
-                className={`text-sm xl:text-base font-medium transition-colors duration-200 ${
+                className={`text-base font-medium transition-colors duration-200 ${
                   pathname === "/cases" ? "text-[#583CF2]" : "text-gray-700 group-hover:text-[#583CF2]"
                 }`}
               >
@@ -75,7 +72,7 @@ const Header: React.FC = () => {
           <Link href="/about" className="relative cursor-pointer transition-colors duration-200 group">
             <div className="flex items-center">
               <div
-                className={`text-sm xl:text-base font-medium transition-colors duration-200 ${
+                className={`text-base font-medium transition-colors duration-200 ${
                   pathname === "/about" ? "text-[#583CF2]" : "text-gray-700 group-hover:text-[#583CF2]"
                 }`}
               >
@@ -88,7 +85,7 @@ const Header: React.FC = () => {
           <Link href="/ir" className="relative cursor-pointer transition-colors duration-200 group">
             <div className="flex items-center">
               <div
-                className={`text-sm xl:text-base font-medium transition-colors duration-200 ${
+                className={`text-base font-medium transition-colors duration-200 ${
                   pathname === "/ir" ? "text-[#583CF2]" : "text-gray-700 group-hover:text-[#583CF2]"
                 }`}
               >
@@ -97,8 +94,6 @@ const Header: React.FC = () => {
             </div>
           </Link>
         </div>
-
-
 
         {/* 모바일 햄버거 메뉴 버튼 */}
         <button
@@ -127,7 +122,7 @@ const Header: React.FC = () => {
             </div>
           </Link>
 
-          {/* 도입 사례 - 모바일에서도 수정 */}
+          {/* 도입 사례 */}
           <Link href="/cases" className="block">
             <div
               className={`text-base font-medium cursor-pointer transition-colors duration-200 py-2 ${
@@ -159,8 +154,6 @@ const Header: React.FC = () => {
               IR Center
             </div>
           </Link>
-
-
         </div>
       </div>
     </div>

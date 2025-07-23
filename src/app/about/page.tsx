@@ -1,13 +1,11 @@
 "use client"
-
-import { MeshGradientComponent } from "@/components/background/mesh-gradient"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
 import FadeInUp from "@/components/animation/fade-in-up"
 import KakaoMap from "@/components/ui/kakao-map"
 import Image from "next/image"
 import { useState, useRef, useEffect } from "react"
-import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 import Link from "next/link"
 
 const certifications = [
@@ -18,18 +16,6 @@ const certifications = [
   {
     title: "고효율에너지기자재 인증 (스마트LED조명제어시스템)",
     image: "/about/인증서2.png",
-  },
-  {
-    title: "고효율에너지기자재 인증 (스마트LED등기구)",
-    image: "/about/인증서3.png",
-  },
-  {
-    title: "환경표지 인증 (한국환경산업기술원)",
-    image: "/about/인증서4.png",
-  },
-  {
-    title: "브랜드K 인증 (중소벤처기업부장관)",
-    image: "/about/인증서5.png",
   },
   {
     title: "상생협력제품 확인서 (중소벤처기업부장관)",
@@ -103,27 +89,23 @@ export default function About() {
       <Header />
 
       {/* Hero Section */}
-      <section ref={heroRef} className="relative h-screen flex items-center justify-center px-4">
+      <section ref={heroRef} className="relative h-screen flex items-center justify-center px-4 overflow-hidden">
+        {/* 배경 비디오 */}
         {isHeroVisible && (
-          <MeshGradientComponent
-            colors={[
-              "#A68FFF", // 더 연한 보라색
-              "#EBE7FF", // 매우 연한 보라색
-              "#583CF2", // 보라색
-              "#6D54F9", // 연한 보라색
-              "#FFFFFF",
-            ]}
-            speed={3.0}
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              zIndex: 0,
-              width: "100%",
-              height: "100%",
-            }}
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="absolute top-0 left-0 w-full h-full object-cover z-0 scale-[1.01]"
+            src="/about/hero-compressed.mp4"
           />
         )}
+
+        {/* 검정색 그라디언트 오버레이 추가 */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/50 z-[1]"></div>
+
+        {/* 텍스트 콘텐츠 */}
         <div className="relative z-10 text-center text-white max-w-4xl mx-auto">
           <FadeInUp delay={300}>
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6">에너지 절감의</h1>
@@ -141,7 +123,7 @@ export default function About() {
             <div className="text-center text-gray-700 py-8 mb-8 sm:mb-12 lg:mb-16">
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">특허 및 인증서</h2>
               <p className="text-base sm:text-lg text-gray-600 px-4">
-                메를로랩의 기술력과 품질을 인정받은 특허 및 인증서입니다.
+                메를로랩의 기술력과 품질을 인정받은 <br className="sm:hidden" /> 특허 및 인증서입니다
               </p>
             </div>
           </FadeInUp>
@@ -192,34 +174,16 @@ export default function About() {
           {/* 인증서 */}
           <FadeInUp delay={600} threshold={0.1}>
             <div className="relative pt-20 pb-32">
-              {/* 데스크톱 버전 - 화살표 버튼 */}
+              {/* 데스크톱 버전 - 화살표 버튼 제거 */}
               <div className="hidden lg:block">
-                {/* 이전 버튼 */}
-                <button
-                  onClick={prevCert}
-                  disabled={currentCertIndex === 0}
-                  className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10 bg-white/80 hover:bg-white rounded-full p-2 shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  <ChevronLeft className="w-6 h-6 text-gray-700" />
-                </button>
-
                 {/* 인증서 그리드 */}
                 <div className="grid grid-cols-3 gap-6 px-16">
-                  {certifications.slice(currentCertIndex, currentCertIndex + 3).map((cert, index) => (
-                    <div key={currentCertIndex + index} className="w-full h-96 relative overflow-hidden">
+                  {certifications.map((cert, index) => (
+                    <div key={index} className="w-full h-96 relative overflow-hidden">
                       <Image src={cert.image || "/placeholder.svg"} alt={cert.title} fill className="object-contain" />
                     </div>
                   ))}
                 </div>
-
-                {/* 다음 버튼 */}
-                <button
-                  onClick={nextCert}
-                  disabled={currentCertIndex >= certifications.length - 3}
-                  className="absolute right-4 top-1/2 transform -translate-y-1/2 z-10 bg-white/80 hover:bg-white rounded-full p-2 shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  <ChevronRight className="w-6 h-6 text-gray-700" />
-                </button>
               </div>
 
               {/* 모바일 버전 - 터치 스와이프 */}
@@ -242,32 +206,27 @@ export default function About() {
                     ))}
                   </div>
                 </div>
-              </div>
 
-              {/* 인디케이터 */}
-              <div className="flex justify-center mt-6 gap-2">
-                {Array.from({ length: Math.ceil(certifications.length / 3) }, (_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => {
-                      setCurrentCertIndex(index * 3)
-                      // 모바일에서 스크롤 위치도 함께 업데이트
-                      if (certScrollRef.current) {
-                        const itemWidth = 320 + 16 // w-80 (320px) + gap-4 (16px)
-                        certScrollRef.current.scrollTo({
-                          left: index * 3 * itemWidth,
-                          behavior: "smooth",
-                        })
-                      }
-                    }}
-                    className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                      // 데스크톱에서는 currentCertIndex 기반, 모바일에서는 mobileCertIndex 기반
-                      (isDesktop ? Math.floor(currentCertIndex / 3) : Math.floor(mobileCertIndex / 3)) === index
-                        ? "bg-[#583CF2]"
-                        : "bg-gray-300"
-                    }`}
-                  />
-                ))}
+                {/* 모바일 인디케이터 - 3개 */}
+                <div className="flex justify-center mt-6 gap-2">
+                  {certifications.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => {
+                        if (certScrollRef.current) {
+                          const itemWidth = 320 + 16 // w-80 (320px) + gap-4 (16px)
+                          certScrollRef.current.scrollTo({
+                            left: index * itemWidth,
+                            behavior: "smooth",
+                          })
+                        }
+                      }}
+                      className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                        mobileCertIndex === index ? "bg-[#583CF2]" : "bg-gray-300"
+                      }`}
+                    />
+                  ))}
+                </div>
               </div>
             </div>
           </FadeInUp>
@@ -310,6 +269,7 @@ export default function About() {
                       <div className="w-px bg-[#404040] h-32"></div>
                     </div>
                   </div>
+
                   {/* 상세 정보 섹션 */}
                   <div className="space-y-3 ml-16">
                     <div className="flex">
@@ -366,12 +326,10 @@ export default function About() {
                       서울특별시 금천구 디지털로9길 68 (가산동) <br /> 대륭포스트 타워 5차 2002~2005호
                     </div>
                   </div>
-
                   <div className="flex items-center gap-2 h-6">
                     <div className="font-bold text-gray-50 w-16 flex-shrink-0 items-center p-0">운영시간</div>
                     <div className="text-zinc-300 text-sm sm:text-base">09:00 ~ 18:00 (토, 일, 공휴일 휴무)</div>
                   </div>
-
                   <div className="flex items-center gap-2 h-6">
                     <div className="font-bold text-gray-50 w-16 flex-shrink-0 items-center p-0">이메일</div>
                     <div>
@@ -385,7 +343,6 @@ export default function About() {
                       </a>
                     </div>
                   </div>
-
                   <div className="flex items-center gap-2 h-6">
                     <div className="font-bold text-gray-50 w-16 flex-shrink-0 items-center p-0">연락처</div>
                     <div className="text-zinc-300 text-sm sm:text-base items-center p-0">02) 862 - 1700</div>
@@ -418,6 +375,7 @@ export default function About() {
                   <div className="text-gray-600">가산디지털단지역 4번 출구 도보 10분</div>
                 </div>
               </article>
+
               {/* 버스 */}
               <article className="pb-6 border-b border-dashed border-gray-300">
                 <div className="mb-4">
@@ -443,6 +401,7 @@ export default function About() {
                   <div className="text-gray-600">가산디지털단지역 입구 정류장 하차</div>
                 </div>
               </article>
+
               {/* 자가용 */}
               <article className="pb-6">
                 <div className="mb-4">

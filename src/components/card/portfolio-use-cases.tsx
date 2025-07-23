@@ -1,134 +1,155 @@
 "use client"
 
 import { useState, useEffect, useRef, useCallback, useMemo } from "react"
-import { Search, X } from "lucide-react"
+import { Search, X, ChevronLeft, ChevronRight } from "lucide-react"
+import { supabase, type LocationData } from "@/components/lib/supabase"
 
 interface PortfolioCard {
+  id: string
   title: string
   subtitle: string
   tags: string[]
-  image: string
+  images: string[]
+  description: string | null
 }
 
-// 데이터를 컴포넌트 외부로 이동 (또는 상단으로)
-const allCaseStudies: PortfolioCard[] = [
-  {
-    title: "CJ대한통운 동탄 현장",
-    subtitle: "전력량 52% 절감",
-    tags: ["물류 센터"],
-    image: "/물류센터1.png",
-  },
-  {
-    title: "GS네트웍스 양산 물류센터",
-    subtitle: "일/평균전력사용량 62.9% 절감",
-    tags: ["물류센터", "사무실"],
-    image: "/물류센터2.jpg",
-  },
-  {
-    title: "현대자동차 울산공장",
-    subtitle: "전력 사용량 48% 절감",
-    tags: ["제조업", "공장"],
-    image: "/placeholder.svg?height=250&width=400",
-  },
-  {
-    title: "롯데마트 김포점",
-    subtitle: "냉장/냉동 전력 35% 절감",
-    tags: ["유통업", "마트"],
-    image: "/placeholder.svg?height=250&width=400",
-  },
-  {
-    title: "삼성전자 기흥사업장",
-    subtitle: "생산라인 전력 효율 44% 향상",
-    tags: ["전자제조", "반도체"],
-    image: "/placeholder.svg?height=250&width=400",
-  },
-  {
-    title: "포스코 광양제철소",
-    subtitle: "제철공정 전력 28% 절감",
-    tags: ["철강업", "제조업"],
-    image: "/placeholder.svg?height=250&width=400",
-  },
-  {
-    title: "SK하이닉스 이천캠퍼스",
-    subtitle: "클린룸 전력 효율 39% 개선",
-    tags: ["반도체", "클린룸"],
-    image: "/placeholder.svg?height=250&width=400",
-  },
-  {
-    title: "LG화학 여수공장",
-    subtitle: "화학공정 전력 31% 절감",
-    tags: ["화학공업", "공장"],
-    image: "/placeholder.svg?height=250&width=400",
-  },
-  {
-    title: "네이버 데이터센터",
-    subtitle: "서버 냉각 전력 45% 절감",
-    tags: ["데이터센터", "IT"],
-    image: "/placeholder.svg?height=250&width=400",
-  },
-  {
-    title: "신세계백화점 강남점",
-    subtitle: "조명/공조 전력 42% 절감",
-    tags: ["유통업", "백화점"],
-    image: "/placeholder.svg?height=250&width=400",
-  },
-  {
-    title: "한국전력공사 본사",
-    subtitle: "사무용 전력 36% 절감",
-    tags: ["공공기관", "사무실"],
-    image: "/placeholder.svg?height=250&width=400",
-  },
-  {
-    title: "부산항 컨테이너터미널",
-    subtitle: "크레인 운영 전력 29% 절감",
-    tags: ["항만", "물류"],
-    image: "/placeholder.svg?height=250&width=400",
-  },
-  {
-    title: "카카오 데이터센터",
-    subtitle: "AI 서버 전력 효율 41% 개선",
-    tags: ["데이터센터", "AI"],
-    image: "/placeholder.svg?height=250&width=400",
-  },
-  {
-    title: "이마트 트레이더스 월계점",
-    subtitle: "대형 냉장고 전력 38% 절감",
-    tags: ["유통업", "창고형마트"],
-    image: "/placeholder.svg?height=250&width=400",
-  },
-  {
-    title: "두산중공업 창원공장",
-    subtitle: "생산설비 전력 33% 절감",
-    tags: ["중공업", "제조업"],
-    image: "/placeholder.svg?height=250&width=400",
-  },
-]
+interface PortfolioInfiniteScrollProps {
+  activeFilter?: string
+}
 
 const itemsPerLoad = 5
 
-export default function PortfolioInfiniteScroll() {
+export default function PortfolioInfiniteScroll({ activeFilter = "all" }: PortfolioInfiniteScrollProps) {
   const [searchQuery, setSearchQuery] = useState("")
   const [displayedItems, setDisplayedItems] = useState<PortfolioCard[]>([])
+  const [allCaseStudies, setAllCaseStudies] = useState<PortfolioCard[]>([])
   const [isLoading, setIsLoading] = useState(false)
   const [hasMore, setHasMore] = useState(true)
   const [page, setPage] = useState(1)
+  const [isInitialLoading, setIsInitialLoading] = useState(true)
+  const [imageIndexes, setImageIndexes] = useState<{ [key: string]: number }>({})
+  const [preloadedImages, setPreloadedImages] = useState<Set<string>>(new Set())
+  const [imageLoadingStates, setImageLoadingStates] = useState<{ [key: string]: boolean }>({})
   const observerRef = useRef<HTMLDivElement>(null)
+  const [newlyAddedItems, setNewlyAddedItems] = useState<Set<string>>(new Set())
+
+  // 카테고리 한글 변환 함수
+  const getCategoryInKorean = (category: string): string => {
+    const categoryMap: { [key: string]: string } = {
+      logistics_center: "물류센터",
+      parking_lot: "주차장",
+      factory: "공장",
+      office: "사무실",
+      warehouse: "창고",
+      retail: "소매점",
+      hospital: "병원",
+      school: "학교",
+      apartment: "아파트",
+      hotel: "호텔",
+    }
+    return categoryMap[category] || category
+  }
+
+  // 이미지 프리로딩 함수
+  const preloadImages = useCallback(
+    (imageUrls: string[]) => {
+      imageUrls.forEach((url) => {
+        if (!preloadedImages.has(url) && url) {
+          setImageLoadingStates((prev) => ({ ...prev, [url]: true }))
+
+          const img = new Image()
+          img.crossOrigin = "anonymous"
+          img.onload = () => {
+            setPreloadedImages((prev) => new Set([...prev, url]))
+            setImageLoadingStates((prev) => ({ ...prev, [url]: false }))
+          }
+          img.onerror = () => {
+            setImageLoadingStates((prev) => ({ ...prev, [url]: false }))
+          }
+          img.src = url
+        }
+      })
+    },
+    [preloadedImages],
+  )
+
+  // Supabase에서 데이터 가져오기
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data, error } = await supabase.from("locations").select("*")
+        if (error) {
+          console.error("Error fetching data:", error)
+          return
+        }
+
+        // 데이터 변환 부분에서 카테고리를 한글로 변환
+        const transformedData: PortfolioCard[] = data.map((item: LocationData) => ({
+          id: item.id,
+          title: item.korean_name || item.place_name,
+          subtitle: item.description || "전력 절감 사례",
+          tags: [getCategoryInKorean(item.category)],
+          images: item.image_urls || [],
+          description: item.description,
+        }))
+
+        // 모든 이미지 URL 수집 및 프리로딩
+        const allImageUrls = transformedData.flatMap((item) => item.images).filter(Boolean)
+        preloadImages(allImageUrls)
+
+        setAllCaseStudies(transformedData)
+        setIsInitialLoading(false)
+      } catch (error) {
+        console.error("Error:", error)
+        setIsInitialLoading(false)
+      }
+    }
+
+    fetchData()
+  }, [])
 
   // 검색어에 따라 필터링된 데이터
   const filteredCaseStudies = useMemo(() => {
-    if (!searchQuery.trim()) {
-      return allCaseStudies
+    let filtered = allCaseStudies
+
+    // 카테고리 필터 적용
+    if (activeFilter && activeFilter !== "all") {
+      // filterToKorean을 getCategoryInKorean과 동일하게 수정
+      const filterToKorean: { [key: string]: string } = {
+        logistics_center: "물류센터",
+        parking_lot: "주차장",
+        factory: "공장",
+        office: "사무실",
+        warehouse: "창고",
+        retail: "소매점",
+        hospital: "병원",
+        school: "학교",
+        apartment: "아파트",
+        hotel: "호텔",
+      }
+
+      const targetCategory = filterToKorean[activeFilter]
+      if (targetCategory) {
+        filtered = filtered.filter((item) => {
+          return item.tags.some((tag) => tag === targetCategory)
+        })
+      }
     }
 
-    const query = searchQuery.toLowerCase()
-    return allCaseStudies.filter((item) => {
-      return (
-        item.title.toLowerCase().includes(query) ||
-        item.subtitle.toLowerCase().includes(query) ||
-        item.tags.some((tag) => tag.toLowerCase().includes(query))
-      )
-    })
-  }, [searchQuery])
+    // 검색어 필터 적용
+    if (searchQuery.trim()) {
+      const query = searchQuery.toLowerCase()
+      filtered = filtered.filter((item) => {
+        return (
+          item.title.toLowerCase().includes(query) ||
+          item.subtitle.toLowerCase().includes(query) ||
+          item.tags.some((tag) => tag.toLowerCase().includes(query))
+        )
+      })
+    }
+
+    return filtered
+  }, [searchQuery, allCaseStudies, activeFilter])
 
   // 검색어가 변경될 때 결과 초기화
   useEffect(() => {
@@ -144,7 +165,6 @@ export default function PortfolioInfiniteScroll() {
     if (isLoading || !hasMore) return
 
     setIsLoading(true)
-    // 추가 로딩에만 지연 적용 (초기 로딩 제외)
     await new Promise((resolve) => setTimeout(resolve, 800))
 
     const startIndex = page * itemsPerLoad
@@ -154,8 +174,18 @@ export default function PortfolioInfiniteScroll() {
     if (newItems.length === 0) {
       setHasMore(false)
     } else {
+      // 새로 추가되는 아이템들의 ID를 저장
+      const newItemIds = new Set(newItems.map((item) => item.id))
+      setNewlyAddedItems(newItemIds)
+
       setDisplayedItems((prev) => [...prev, ...newItems])
       setPage((prev) => prev + 1)
+
+      // 애니메이션이 끝난 후 새로 추가된 아이템 표시 제거
+      setTimeout(() => {
+        setNewlyAddedItems(new Set())
+      }, 1000)
+
       if (endIndex >= filteredCaseStudies.length) {
         setHasMore(false)
       }
@@ -194,6 +224,32 @@ export default function PortfolioInfiniteScroll() {
     setSearchQuery("")
   }
 
+  // 이미지 슬라이더 함수들
+  const nextImage = (itemId: string, totalImages: number) => {
+    setImageIndexes((prev) => ({
+      ...prev,
+      [itemId]: ((prev[itemId] || 0) + 1) % totalImages,
+    }))
+  }
+
+  const prevImage = (itemId: string, totalImages: number) => {
+    setImageIndexes((prev) => ({
+      ...prev,
+      [itemId]: ((prev[itemId] || 0) - 1 + totalImages) % totalImages,
+    }))
+  }
+
+  if (isInitialLoading) {
+    return (
+      <div className="mt-10">
+        <div className="text-center py-12">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#583CF2] mx-auto"></div>
+          <p className="mt-4 text-gray-600">데이터를 불러���는 중...</p>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="mt-10">
       {/* 검색창 */}
@@ -215,7 +271,6 @@ export default function PortfolioInfiniteScroll() {
             </button>
           )}
         </div>
-
         {/* 검색 결과 정보 */}
         {searchQuery && (
           <div className="text-center mt-4">
@@ -245,44 +300,102 @@ export default function PortfolioInfiniteScroll() {
       {/* 포트폴리오 카드들 */}
       {filteredCaseStudies.length > 0 && (
         <div className="space-y-0">
-          {displayedItems.map((caseStudy, index) => (
-            <div
-              key={`${caseStudy.title}-${index}`}
-              className="w-full border-t border-gray-200 px-2 py-6 text-left xs:px-5 animate-in fade-in duration-500"
-              style={{ animationDelay: `${(index % itemsPerLoad) * 100}ms` }}
-            >
-              <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-2">
-                <div>
-                  <h5 className="my-6 truncate font-bold text-gray-600">
-                    {caseStudy.title}
-                    <br />
-                    {caseStudy.subtitle}
-                  </h5>
+          {displayedItems.map((caseStudy, index) => {
+            const currentImageIndex = imageIndexes[caseStudy.id] || 0
+            const hasMultipleImages = caseStudy.images.length > 1
+            const currentImageUrl = caseStudy.images[currentImageIndex]
+            const isImageLoading = imageLoadingStates[currentImageUrl]
+            const isNewlyAdded = newlyAddedItems.has(caseStudy.id)
+
+            // 새로 추가된 아이템의 경우 해당 배치에서의 순서를 계산
+            const animationDelay = isNewlyAdded ? `${(index % itemsPerLoad) * 150}ms` : "0ms"
+
+            return (
+              <div
+                key={`${caseStudy.id}-${index}`}
+                className={`w-full border-t border-gray-200 px-2 py-6 text-left xs:px-5 transition-all duration-700 ${
+                  isNewlyAdded ? "animate-in fade-in slide-in-from-bottom-4" : "opacity-100"
+                }`}
+                style={{
+                  animationDelay,
+                  animationFillMode: "both",
+                }}
+              >
+                <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-2">
                   <div>
-                    <div className="flex flex-wrap gap-2">
-                      {caseStudy.tags.map((tag, tagIndex) => (
-                        <span
-                          key={tagIndex}
-                          className="text-sm h-fit w-fit rounded-md px-3 py-1.5 text-white"
-                          style={{ backgroundColor: "#583CF2" }}
-                        >
-                          {tag}
-                        </span>
-                      ))}
+                    <h5 className="my-6 truncate font-bold text-gray-600">
+                      {caseStudy.title}
+                      <br />
+                      {caseStudy.subtitle}
+                    </h5>
+                    <div>
+                      <div className="flex flex-wrap gap-2">
+                        {caseStudy.tags.map((tag, tagIndex) => (
+                          <span
+                            key={tagIndex}
+                            className="text-sm h-fit w-fit rounded-md px-3 py-1.5 text-white"
+                            style={{ backgroundColor: "#583CF2" }}
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div className="relative rounded-md" style={{ height: "250px" }}>
-                  <img
-                    alt={`${caseStudy.title} 이미지`}
-                    src={caseStudy.image || "/placeholder.svg?height=250&width=400"}
-                    className="h-full w-full rounded-md object-cover brightness-100 transition-transform duration-300 hover:scale-105"
-                    loading="lazy"
-                  />
+                  <div className="relative rounded-md" style={{ height: "250px" }}>
+                    {caseStudy.images.length > 0 ? (
+                      <>
+                        {isImageLoading && (
+                          <div className="absolute inset-0 bg-gray-200 rounded-md flex items-center justify-center z-10">
+                            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#583CF2]"></div>
+                          </div>
+                        )}
+                        <img
+                          alt={`${caseStudy.title} 이미지 ${currentImageIndex + 1}`}
+                          src={currentImageUrl || "/placeholder.svg?height=250&width=400&query=portfolio image"}
+                          className={`h-full w-full rounded-md object-cover brightness-100 transition-all duration-300 hover:scale-105 ${
+                            isImageLoading ? "opacity-0" : "opacity-100"
+                          }`}
+                          style={{
+                            transition: "opacity 0.3s ease-in-out, transform 0.3s ease-in-out",
+                          }}
+                        />
+                        {/* 이미지 슬라이더 컨트롤 */}
+                        {hasMultipleImages && (
+                          <>
+                            {/* 이전 버튼 */}
+                            <button
+                              onClick={() => prevImage(caseStudy.id, caseStudy.images.length)}
+                              className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-transparent hover:bg-white/20 text-white p-2 rounded-full transition-all duration-200"
+                              aria-label="이전 이미지"
+                            >
+                              <ChevronLeft className="w-4 h-4" />
+                            </button>
+                            {/* 다음 버튼 */}
+                            <button
+                              onClick={() => nextImage(caseStudy.id, caseStudy.images.length)}
+                              className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-transparent hover:bg-white/20 text-white p-2 rounded-full transition-all duration-200"
+                              aria-label="다음 이미지"
+                            >
+                              <ChevronRight className="w-4 h-4" />
+                            </button>
+                            {/* 이미지 카운터 */}
+                            <div className="absolute top-2 right-2 bg-black/50 text-white px-2 py-1 rounded text-xs">
+                              {currentImageIndex + 1} / {caseStudy.images.length}
+                            </div>
+                          </>
+                        )}
+                      </>
+                    ) : (
+                      <div className="h-full w-full rounded-md bg-gray-200 flex items-center justify-center">
+                        <span className="text-gray-500">이미지 없음</span>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            )
+          })}
         </div>
       )}
 

@@ -140,10 +140,9 @@ function LandingPage() {
   return (
     <div className="w-full">
       <Header />
-
       {/* 첫 번째 히어로 섹션: 에너지 절감의 시작 + 이미지 슬라이더 */}
       <FadeInUp delay={200}>
-        <section className="min-h-screen">
+        <section className="min-h-screen relative">
           <div className="flex flex-col lg:grid lg:grid-cols-10 min-h-[70vh]">
             {/* 텍스트 섹션 */}
             <div className="lg:col-span-5 flex items-center justify-center lg:justify-end px-4 sm:px-6 lg:px-8 xl:pr-16 2xl:pr-24 py-8 lg:py-0">
