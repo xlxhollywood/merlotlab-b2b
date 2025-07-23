@@ -329,26 +329,22 @@ export default function Solutions() {
         </FadeInUp>
       </section>
 
-      {/* CTA 섹션: 도입 사례 보기 */}
-      <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-5 text-white bg-primary">
-        <div className="max-w-[1120px] mx-auto">
-          <div className="flex flex-col items-center gap-6 sm:gap-8">
+      {/* CTA Section */}
+      <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 text-white bg-primary">
+        <div className="max-w-4xl mx-auto">
+          <div className="flex flex-col items-center gap-6 sm:gap-8 text-center">
             <div className="flex flex-col items-center gap-2 sm:gap-4">
-              <div className="text-lg sm:text-2xl md:text-3xl font-bold text-center px-4">
-                내 사업장에 가장 알맞은 관리
-              </div>
-              <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold text-center px-4">
+              <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold">내 사업장에 가장 알맞은 관리</div>
+              <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold">
                 전기요금 최적화 지금 시작하세요
               </h2>
             </div>
-                         <button className="shadow-sm rounded-md bg-white border border-gray-200 h-12 sm:h-14 flex items-center justify-center py-2 px-4 sm:px-6 md:px-8 gap-2 text-sm sm:text-base md:text-lg text-zinc-800 hover:bg-gray-50 transition-colors cursor-pointer">
-               <Link href="/?tab=form" className="no-underline">
-                 <div className="flex items-center gap-2">
-                   <span className="leading-7 font-medium">문의하기</span>
-                   <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
-                 </div>
-               </Link>
-             </button>
+            <Link href="/?tab=business" className="no-underline">
+              <button className="shadow-sm rounded-lg bg-white border border-gray-200 h-12 sm:h-14 flex items-center justify-center py-2 px-6 sm:px-8 gap-2 text-sm sm:text-base md:text-lg text-zinc-800 hover:bg-gray-50 transition-colors cursor-pointer">
+                <span className="leading-7 font-medium">문의 하기</span>
+                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
+              </button>
+            </Link>
           </div>
         </div>
       </section>

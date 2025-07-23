@@ -499,7 +499,7 @@ export default function About() {
                 전기요금 최적화 지금 시작하세요
               </h2>
             </div>
-            <Link href="/solutions?tab=business" className="no-underline">
+            <Link href="/?tab=business" className="no-underline">
               <button className="shadow-sm rounded-lg bg-white border border-gray-200 h-12 sm:h-14 flex items-center justify-center py-2 px-6 sm:px-8 gap-2 text-sm sm:text-base md:text-lg text-zinc-800 hover:bg-gray-50 transition-colors cursor-pointer">
                 <span className="leading-7 font-medium">문의 하기</span>
                 <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
