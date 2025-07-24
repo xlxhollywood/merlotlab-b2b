@@ -67,7 +67,7 @@ export default function IRDetailPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white overflow-y-scroll">
+    <div className="min-h-screen bg-white">
       <Header />
 
       {/* Hero Section with Grid Background and White Gradient */}

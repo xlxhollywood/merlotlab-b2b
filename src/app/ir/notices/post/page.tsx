@@ -48,7 +48,6 @@ export default function IRDetailPage() {
   const [activeTab, setActiveTab] = useState("announcement") // "disclosure"에서 "announcement"로 변경
 
   const handleAnnouncementClick = () => {
-    console.log("공고 사항 버튼 클릭됨") // 디버깅용 로그 추가
     router.push("/ir/disclosures")
   }
 
@@ -69,7 +68,7 @@ export default function IRDetailPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white pr-3.5">
+    <div className="min-h-screen bg-white">
       <Header />
 
       {/* Hero Section with Grid Background and White Gradient */}
