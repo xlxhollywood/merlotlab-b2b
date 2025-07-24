@@ -82,7 +82,7 @@ const Header: React.FC = () => {
           </Link>
 
           {/* IR Center */}
-          <Link href="/ir" className="relative cursor-pointer transition-colors duration-200 group">
+          <Link href="/ir/disclosures" className="relative cursor-pointer transition-colors duration-200 group">
             <div className="flex items-center">
               <div
                 className={`text-base font-medium transition-colors duration-200 ${
@@ -145,7 +145,7 @@ const Header: React.FC = () => {
           </Link>
 
           {/* IR Center */}
-          <Link href="/ir" className="block">
+          <Link href="/ir/disclosures" className="block">
             <div
               className={`text-base font-medium cursor-pointer transition-colors duration-200 py-2 ${
                 pathname === "/ir" ? "text-[#583CF2]" : "text-gray-700 hover:text-[#583CF2]"

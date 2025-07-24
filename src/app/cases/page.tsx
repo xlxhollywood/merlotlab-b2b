@@ -11,25 +11,25 @@ import { Button } from "@/components/ui/button"
 const stats = [
   {
     label: "도입 사업장",
-    value: 1034,
+    value: 54,
     unit: "개소",
-    description: "24.01 ~25.02, 17MW",
+    description: "23.01 ~ 25.07",
   },
   {
-    label: "누적 절감 전력량",
-    value: 21500,
-    unit: "TWh",
-    description: "전환 시스템을 통해 누적된 절감량",
+    label: "누적 설치량",
+    value: 86763,
+    unit: "개",
+    description: "전환 시스템을 개수로 표기",
   },
   {
     label: "평균 설치 소요 기간",
-    value: 11.4,
+    value: 10,
     unit: "일",
     description: "사업장 한 곳 설치 완료 기준",
   },
   {
     label: "사업장 전력량 절감 평균",
-    value: 52.5,
+    value: 49.5,
     unit: "%",
     description: "시스템 도입 후 절감된 평균 수치",
   },

@@ -153,10 +153,9 @@ function LandingPage() {
                 <div className="mb-4 flex justify-center lg:justify-start">
                   <img src="/메를로랩 로고.png" alt="메를로랩" className="h-8 sm:h-10 lg:h-12" />
                 </div>
-                <p className="text-lg sm:text-xl lg:text-2xl text-gray-800 mt-6 lg:mt-10 mb-8 lg:mb-16 leading-relaxed">
-                  수많은 사업장의 전력 소비를 분석하고 최적화하여,
-                  <br className="hidden sm:block" />
-                  지속 가능한 에너지 운영의 미래를 함께 만들어가고 있습니다.
+                <p className="text-base sm:text-xl lg:text-2xl text-gray-800 mt-6 lg:mt-10 mb-8 lg:mb-16 leading-relaxed">
+                  수많은 사업장의 전력 소비를 분석하고 최적화하여, <br />
+                  에너지 운영의 미래를 함께 만들어가고 있습니다.
                 </p>
                 <a href="/cases" className="inline-block">
                   <button className="bg-primary hover:bg-primary/90 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-medium text-base sm:text-lg transition-all duration-300 transform hover:scale-105 shadow-lg">
@@ -276,10 +275,14 @@ function LandingPage() {
             </div>
             <div className="max-w-2xl lg:max-w-4xl mx-auto space-y-6 sm:space-y-8 lg:space-y-10">
               <p className="text-base sm:text-lg lg:text-xl text-gray-600 leading-relaxed px-4 sm:px-0">
-                메를로랩은 설치비 없이 에너지 절감 솔루션을 제공하고, 절감된 전기요금에서 일부만 비용으로 받습니다.
-                <br />
-                초기 부담 없이 전기요금 절감을 시작해보세요.
+                메를로랩은 설치비 없이 에너지 절감 솔루션을 <br className="block sm:hidden" /> 제공하고, 절감된 전기요금에서 일부만 <br className="block sm:hidden" /> 비용으로
+                받습니다.<br/>
+                <span className="block mt-10 text-sm sm:inline sm:mt-0 sm:text-xl">초기 부담 없이  <br className="block sm:hidden" />  전기요금 절감을 시작해보세요.
+                </span>
+
               </p>
+              
+
               <button
                 onClick={() => {
                   // 모의 견적 탭으로 설정하고 스크롤
@@ -305,7 +308,7 @@ function LandingPage() {
       <section className="mt-4 sm:mt-4 lg:mt-4 mb-24 sm:mb-32 lg:mb-40 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12 sm:mb-16 lg:mb-20">
-            <div className="space-y-6 sm:space-y-8 lg:space-y-10">
+            <div className="space-y-6 sm:space-y-8 lg:space-y-10 mb-24 sm:mb-0">
               <FadeInUp delay={300}>
                 <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold text-gray-700 mb-4 sm:mb-6">
                   <span className="text-[#583CF2]">에너지 효율화</span> 사업이란?
@@ -313,8 +316,7 @@ function LandingPage() {
               </FadeInUp>
               <FadeInUp delay={600}>
                 <p className="text-base sm:text-lg lg:text-xl text-gray-600 leading-relaxed px-4 sm:px-0">
-                  기존 설비를 고효율 설비로 교체하여 에너지 비용을 절감하는 것을 목표로 투자사가 초기 투자 비용을
-                  <br className="sm:hidden" /> 전액 부담하여 <br className="hidden lg:block" /> 에너지 절감액으로
+                  에너지 비용을 절감하는 것을 목표로 투자사가 <br className="sm:hidden" />초기 설비 투자 비용을 전액 부담하여 <br className="hidden sm:block" />절감액으로 <br className="sm:hidden" />
                   투자금을 회수하는 방식으로 진행됩니다.
                 </p>
               </FadeInUp>
@@ -426,7 +428,7 @@ function LandingPage() {
               {
                 step: "02",
                 title: " 효율화 방안 제안",
-                description: "진단 결과를 바탕으로 에너지 절감을 위한 최적의 효율화 방안을 제안드립니다",
+                description: "진단 결과를 바탕으로 에너지 절감을 위한 최적의 솔루션을 제안드립니다",
               },
               {
                 step: "03",
@@ -491,9 +493,9 @@ function LandingPage() {
           <FadeInUp>
             <div className="text-center mb-12 sm:mb-16">
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-700 mb-4 sm:mb-6 leading-tight">
-                편하게 연락주세요, 자세히 상담해드립니다
+                편하게 연락주세요,  <br className="block sm:hidden" /> 자세히 상담해드립니다
               </h2>
-              <p className="text-lg sm:text-xl text-gray-600">궁금하신 점을 언제든 편하게 문의해 주세요</p>
+              <p className="text-base sm:text-xl text-gray-600">궁금하신 점을 언제든 편하게 문의해 주세요</p>
             </div>
           </FadeInUp>
 

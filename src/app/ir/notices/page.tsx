@@ -5,6 +5,7 @@ import Header from "@/components/header"
 import Footer from "@/components/footer"
 import FadeInUp from "@/components/animation/fade-in-up"
 import { Search, ChevronLeft, ChevronRight, Download } from "lucide-react"
+import { useRouter } from "next/navigation"
 
 // Titillium Web 폰트 import
 import { Titillium_Web } from "next/font/google"
@@ -99,7 +100,8 @@ const disclosureData: DisclosureItem[] = [
 export default function IRPage() {
   const [searchTerm, setSearchTerm] = useState("")
   const [currentPage, setCurrentPage] = useState(1)
-  const [activeTab, setActiveTab] = useState("disclosure")
+  const [activeTab, setActiveTab] = useState("announcement") // "disclosure"에서 "announcement"로 변경
+  const router = useRouter()
   const itemsPerPage = 10
 
   const totalPages = Math.ceil(disclosureData.length / itemsPerPage)
@@ -107,6 +109,11 @@ export default function IRPage() {
   const filteredData = disclosureData.filter((item) => item.title.toLowerCase().includes(searchTerm.toLowerCase()))
 
   const currentData = filteredData.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
+
+  const handleAnnouncementClick = () => {
+    console.log("공고 사항 버튼 클릭됨") // 디버깅용 로그 추가
+    router.push("/ir/disclosures")
+  }
 
   const handleDownload = (url: string, title: string) => {
     // 실제 다운로드 로직 구현
@@ -116,10 +123,7 @@ export default function IRPage() {
   return (
     <div className="min-h-screen bg-white">
       <Header />
-
-      {/* Hero Section with Grid Background and White Gradient */}
       <section className="relative h-32 sm:h-40 lg:h-48 overflow-hidden">
-        {/* Grid Background */}
         <svg
           className="absolute inset-0 w-full h-full z-0 pointer-events-none"
           xmlns="http://www.w3.org/2000/svg"
@@ -150,14 +154,14 @@ export default function IRPage() {
 
       {/* Main Content */}
       <FadeInUp delay={300}>
-        <section className="bg-white mb-6 sm:mb-8 lg:mb-16">
+        <section className="bg-white mb-6 sm:mb-8 lg:mb-12 sm:mt-8">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col lg:flex-row gap-6 sm:gap-8 lg:gap-20">
               {/* Mobile Tabs - 모바일에서는 상단에 탭으로 표시 */}
               <div className="lg:hidden">
                 <div className="flex space-x-1 bg-gray-100 p-1 rounded-lg">
                   <button
-                    onClick={() => setActiveTab("disclosure")}
+                    onClick={handleAnnouncementClick}
                     className={`flex-1 px-3 sm:px-4 py-2 text-sm font-medium rounded-md transition-colors ${
                       activeTab === "disclosure" ? "bg-[#583CF2] text-white" : "text-gray-600 hover:text-gray-800"
                     }`}
@@ -179,7 +183,7 @@ export default function IRPage() {
               <div className="hidden lg:block lg:w-64 flex-shrink-0">
                 <div className="space-y-4">
                   <button
-                    onClick={() => setActiveTab("disclosure")}
+                    onClick={handleAnnouncementClick}
                     className={`w-full text-left px-4 py-3 rounded-lg transition-colors ${
                       activeTab === "disclosure"
                         ? "bg-[#583CF2] text-white"

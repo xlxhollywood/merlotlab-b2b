@@ -475,11 +475,11 @@ export default function AnimatedEnergyChart() {
       </CardContent>
       
       {/*3카드 섹션 - PC용 (lg 이상) */}
-      <div className="hidden lg:flex flex-col md:flex-row px-4 md:px-16 gap-6 sm:gap-8">
+      <div className="hidden lg:flex flex-col md:flex-row px-4 gap-6 sm:gap-16 lg:px-40 xl:px-32 ">
         
         {/* 첫 번째 카드 */}
-        <Card className="w-full max-w-[220px] mx-auto border-none bg-white shadow-none">
-          <CardContent className="p-0 flex flex-col items-center justify-center text-center">
+        <Card className="w-full max-w-[220px] mx-auto border-none shadow-none w-64">
+        <CardContent className="p-0 flex flex-col items-center justify-center">
             <div className="space-y-3 md:space-y-4">
               <div className="flex items-start space-x-2">
                 <Circle className="w-2 h-2 text-primary mt-1.5 sm:mt-2 flex-shrink-0 fill-current" />
@@ -498,8 +498,8 @@ export default function AnimatedEnergyChart() {
         </Card>
 
         {/* 두 번째 카드 */}
-        <Card className="w-full max-w-[220px] mx-auto border-none bg-white shadow-none">
-          <CardContent className="p-0 flex flex-col items-center justify-center text-center">
+        <Card className="w-full max-w-[220px] mx-auto border-none bg-white shadow-none  w-64">
+          <CardContent className="p-0 flex flex-col items-center justify-center">
             <div className="space-y-3 md:space-y-4">
               <div className="flex items-start space-x-2">
                 <Circle className="w-2 h-2 text-primary mt-1.5 sm:mt-2 flex-shrink-0 fill-current" />
@@ -518,12 +518,12 @@ export default function AnimatedEnergyChart() {
         </Card>
 
         {/* 세 번째 카드 */}
-        <Card className="w-full max-w-[220px] mx-auto border-none bg-white shadow-none">
-          <CardContent className="p-0 flex flex-col items-center justify-center text-center">
+        <Card className="w-full max-w-[220px] mx-auto border-none shadow-none w-64">
+          <CardContent className="p-0 flex flex-col items-center justify-center">
             <div className="space-y-3 md:space-y-4">
               <div className="flex items-start space-x-2">
                 <Circle className="w-2 h-2 text-primary mt-1.5 sm:mt-2 flex-shrink-0 fill-current" />
-                <p className="font-semibold text-gray-900 sm:text-base">에너지 비용 지속적 절감
+                <p className="font-semibold text-gray-900 sm:text-base">에너지 비용 지속 절감
                 </p>
               </div>
               <div className="flex items-start space-x-2">

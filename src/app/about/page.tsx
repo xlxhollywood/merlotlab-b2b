@@ -159,7 +159,7 @@ export default function About() {
                 {/* 인증서 */}
                 <div className="bg-white p-6 sm:p-8 rounded-lg shadow-sm border border-gray-100 text-center hover:shadow-md transition-shadow sm:col-span-2 lg:col-span-1">
                   <div className="flex items-center justify-center mb-4">
-                    <div className="text-2xl sm:text-3xl mr-2">🏆</div>
+                    <div className="text-2xl sm:text-3xl mr-2">📑</div>
                     <div className="text-base sm:text-lg font-semibold text-gray-700">인증서</div>
                   </div>
                   <div className="flex items-center justify-center gap-1">
