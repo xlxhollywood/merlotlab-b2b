@@ -1,6 +1,8 @@
 "use client"
 
 import { useState } from "react"
+import { useEffect } from "react"
+import { getNotices, Notice } from "@/sanity/lib/sanity"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
 import FadeInUp from "@/components/animation/fade-in-up"
@@ -16,110 +18,54 @@ const titilliumWeb = Titillium_Web({
   variable: "--font-titillium-web",
 })
 
-interface DisclosureItem {
-  id: string
-  title: string
-  date: string
-  category: string
-  pdfUrl: string
-}
-
-const disclosureData: DisclosureItem[] = [
-  {
-    id: "14760",
-    title: "주주명부 기준일 설정 공고",
-    date: "2025.06.27",
-    category: "50",
-    pdfUrl: "https://example.com/disclosure1.pdf",
-  },
-  {
-    id: "14758",
-    title: "[주요 경영상황 공시] 주주총회소집 결의",
-    date: "2025.06.27",
-    category: "40",
-    pdfUrl: "https://example.com/disclosure2.pdf",
-  },
-  {
-    id: "14756",
-    title: "임원 선임 공시",
-    date: "2025.06.27",
-    category: "41",
-    pdfUrl: "https://example.com/disclosure3.pdf",
-  },
-  {
-    id: "13650",
-    title: "주식보상 부여 및 취소",
-    date: "2025.04.30",
-    category: "50",
-    pdfUrl: "https://example.com/disclosure4.pdf",
-  },
-  {
-    id: "13648",
-    title: "[주요 경영상황 공시] 주식매수선택권 부여 취소",
-    date: "2025.04.30",
-    category: "40",
-    pdfUrl: "https://example.com/disclosure5.pdf",
-  },
-  {
-    id: "13646",
-    title: "[주요 경영상황 공시] 자기주식 처분 결정",
-    date: "2025.04.30",
-    category: "40",
-    pdfUrl: "https://example.com/disclosure6.pdf",
-  },
-  {
-    id: "13016",
-    title: "임원 선임 및 사임 공시",
-    date: "2025.03.28",
-    category: "41",
-    pdfUrl: "https://example.com/disclosure7.pdf",
-  },
-  {
-    id: "13014",
-    title: "주주총회 결과 공시",
-    date: "2025.03.28",
-    category: "41",
-    pdfUrl: "https://example.com/disclosure8.pdf",
-  },
-  {
-    id: "13012",
-    title: "[주요 경영상황 공시] 주식매수선택권 부여",
-    date: "2025.03.28",
-    category: "40",
-    pdfUrl: "https://example.com/disclosure9.pdf",
-  },
-  {
-    id: "12740",
-    title: "임원 선임 공시",
-    date: "2025.03.12",
-    category: "41",
-    pdfUrl: "https://example.com/disclosure10.pdf",
-  },
-]
-
 export default function IRPage() {
   const [searchTerm, setSearchTerm] = useState("")
   const [currentPage, setCurrentPage] = useState(1)
   const [activeTab, setActiveTab] = useState("announcement") // "disclosure"에서 "announcement"로 변경
+  const [loading, setLoading] = useState(true)
   const router = useRouter()
   const itemsPerPage = 10
+  const [notices, setNotices] = useState<Notice[]>([])  // disclosureData를 notices로 변경
 
-  const totalPages = Math.ceil(disclosureData.length / itemsPerPage)
-
-  const filteredData = disclosureData.filter((item) => item.title.toLowerCase().includes(searchTerm.toLowerCase()))
+  const totalPages = Math.ceil(notices.length / itemsPerPage)
+  const filteredData = notices.filter((item) => 
+    item.title.toLowerCase().includes(searchTerm.toLowerCase())
+  )
 
   const currentData = filteredData.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
 
   const handleAnnouncementClick = () => {
-    console.log("공고 사항 버튼 클릭됨") // 디버깅용 로그 추가
     router.push("/ir/disclosures")
   }
+
+const handleNoticeClick = (id: string) => {
+  router.push(`/ir/notices/${id}`)
+}
 
   const handleDownload = (url: string, title: string) => {
     // 실제 다운로드 로직 구현
     window.open(url, "_blank")
   }
-
+  useEffect(() => {
+    async function fetchNotices() {
+      try {
+        const data = await getNotices()
+        setNotices(data)
+      } catch (error) {
+        console.error('Error:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchNotices()
+  }, [])
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="text-gray-500">로딩 중...</div>
+      </div>
+    )
+  }
   return (
     <div className="min-h-screen bg-white">
       <Header />
@@ -233,7 +179,8 @@ export default function IRPage() {
                     ) : (
                       currentData.map((item) => (
                         <div
-                          key={item.id}
+                          key={item._id}
+                          onClick={() => handleNoticeClick(item._id)}
                           className="block p-4 sm:p-5 lg:p-6 bg-white border border-gray-200 rounded-lg hover:shadow-md transition-shadow cursor-pointer"
                         >
                           <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-3 sm:gap-4">
@@ -242,18 +189,6 @@ export default function IRPage() {
                                 {item.title}
                               </h3>
                               <span className="text-xs sm:text-sm text-gray-500">{item.date}</span>
-                            </div>
-                            <div className="flex-shrink-0 self-start">
-                              <button
-                                onClick={(e) => {
-                                  e.preventDefault()
-                                  handleDownload(item.pdfUrl, item.title)
-                                }}
-                                className="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-2 text-xs sm:text-sm font-semibold text-gray-700 bg-gray-100 hover:bg-gray-200 rounded transition-colors w-full sm:w-auto justify-center min-w-[80px] sm:min-w-[100px]"
-                              >
-                                <Download className="h-3 w-3 sm:h-4 sm:w-4" />
-                                <span>다운로드</span>
-                              </button>
                             </div>
                           </div>
                         </div>

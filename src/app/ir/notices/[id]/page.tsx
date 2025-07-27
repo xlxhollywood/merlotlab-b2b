@@ -3,8 +3,10 @@
 import { useRouter } from "next/navigation"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
-import { Download } from "lucide-react"
 import { useState } from "react"
+import { getNotice, Notice } from "@/sanity/lib/sanity"
+import { useParams } from "next/navigation"
+import { useEffect } from "react"
 
 // Titillium Web 폰트 import
 import { Titillium_Web } from "next/font/google"
@@ -27,44 +29,60 @@ interface DisclosureDetail {
   }[]
 }
 
-// 상세 데이터 (실제로는 API에서 가져올 데이터)
-const disclosureDetail: DisclosureDetail = {
-  id: "14760",
-  title: "주주명부 기준일 설정 공고",
-  date: "2025.06.27",
-  author: "관리자",
-  content:
-    "상법 제354조 및 당사 정관 제15조에 의거하여 임시주주총회 주주확정을 위한 주주명부 기준일 설정을 첨부와 같이 공고합니다.",
-  attachments: [
-    {
-      name: "(토스증권) 주주명부 기준일 공고.pdf",
-      url: "https://home-files.tossinvest.com/files/disclosure/d81f3fa5-77a6-4c5b-949b-d09b4fcc48a9.pdf",
-    },
-  ],
-}
 
 export default function IRDetailPage() {
   const router = useRouter()
+  const params = useParams() // 추가
   const [activeTab, setActiveTab] = useState("announcement") // "disclosure"에서 "announcement"로 변경
+
+  const [notice, setNotice] = useState<Notice | null>(null)
+  const [loading, setLoading] = useState(true)
+
+    // 추가: 데이터 가져오기
+    // useEffect 안에 로그 추가해서 디버깅
+useEffect(() => {
+  async function fetchNotice() {
+    console.log('params.id:', params.id) // ID가 제대로 들어오는지 확인
+    if (params.id) {
+      try {
+        console.log('Fetching notice...') // API 호출 시작
+        const data = await getNotice(params.id as string)
+        console.log('Fetched data:', data) // 받은 데이터 확인
+        setNotice(data)
+      } catch (error) {
+        console.error('Error fetching notice:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+  }
+  fetchNotice()
+}, [params.id])
 
   const handleAnnouncementClick = () => {
     router.push("/ir/disclosures")
   }
 
-  const handleDownload = (url: string, filename: string) => {
-    // 실제 다운로드 로직 구현
-    const link = document.createElement("a")
-    link.href = url
-    link.download = filename
-    link.target = "_blank"
-    document.body.appendChild(link)
-    link.click()
-    document.body.removeChild(link)
-  }
-
   const handleBackToList = () => {
     // 실제로는 router.back() 또는 특정 경로로 이동
-    router.back()
+    router.push("/ir/notices")
+  }
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="text-gray-500">로딩 중...</div>
+      </div>
+    )
+  }
+
+  // 데이터가 없을 때
+  if (!notice) {
+    return (
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="text-gray-500">공고를 찾을 수 없습니다.</div>
+      </div>
+    )
   }
 
   return (
@@ -164,16 +182,16 @@ export default function IRDetailPage() {
                   <header className="border-b border-gray-200 pb-6 mb-8">
                     <div className="space-y-6">
                       <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#333d4b] leading-tight">
-                        {disclosureDetail.title}
+                        {notice?.title}
                       </h1>
                       <div className="flex flex-col sm:flex-row gap-2 sm:gap-6 text-sm text-[#8b95a1]">
                         <div className="flex items-center gap-2">
                           <span className="font-medium text-[#4e5968]">작성일</span>
-                          <span>{disclosureDetail.date}</span>
+                          <span>{notice?.date}</span>
                         </div>
                         <div className="flex items-center gap-2">
                           <span className="font-medium text-[#4e5968]">작성자</span>
-                          <span>{disclosureDetail.author}</span>
+                          <span>{notice?.author}</span>
                         </div>
                       </div>
                     </div>
@@ -182,34 +200,9 @@ export default function IRDetailPage() {
                   {/* Article Body */}
                   <div className="prose prose-gray max-w-none mb-8">
                     <div className="text-gray-700 leading-relaxed text-sm sm:text-base lg:text-lg">
-                      <p>{disclosureDetail.content}</p>
+                      <p>{notice?.content}</p>
                     </div>
                   </div>
-
-                  {/* Attachments Section */}
-                  {disclosureDetail.attachments.length > 0 && (
-                    <div className="border-t border-gray-200 pt-6">
-                      <div className="space-y-4">
-                        <h3 className="text-base font-semibold text-[#4e5968]">첨부파일</h3>
-                        <div className="space-y-3">
-                          {disclosureDetail.attachments.map((attachment, index) => (
-                            <div key={index} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-                              <div className="flex-1 min-w-0">
-                                <p className="text-sm sm:text-base text-[#4e5968] truncate">{attachment.name}</p>
-                              </div>
-                              <button
-                                onClick={() => handleDownload(attachment.url, attachment.name)}
-                                className="ml-4 inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-[#583CF2] hover:bg-[#4c35d1] rounded-lg transition-colors flex-shrink-0"
-                              >
-                                <Download className="h-4 w-4" />
-                                <span>다운로드</span>
-                              </button>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  )}
 
                   {/* Bottom Actions */}
                   <div className="border-t border-gray-200 pt-8 mt-8">

@@ -145,8 +145,8 @@ function LandingPage() {
         <section className="min-h-screen relative">
           <div className="flex flex-col lg:grid lg:grid-cols-10 min-h-[70vh]">
             {/* 텍스트 섹션 */}
-            <div className="lg:col-span-5 flex items-center justify-center lg:justify-end px-4 sm:px-6 lg:px-8 xl:pr-16 2xl:pr-24 py-8 lg:py-0">
-              <div className="text-gray-900 text-center lg:text-left max-w-2xl lg:max-w-none">
+            <div className="lg:col-span-5 flex items-center justify-center lg:justify-end px-4 sm:px-6 lg:px-8 xl:pr-16 2xl:pr-36 py-8 lg:py-0">
+              <div className="text-gray-900 text-center lg:text-left max-w-2xl lg:max-w-none.,">
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#333132] mb-6 lg:mb-8">
                   에너지 절감의 시작
                 </h1>
@@ -170,7 +170,7 @@ function LandingPage() {
 
             {/* 이미지 슬라이더 섹션 */}
             <div className="lg:col-span-5 flex items-center justify-center px-4 sm:px-6 lg:px-8 py-8 lg:py-0">
-              <div className="relative w-full max-w-[600px] lg:max-w-[700px] xl:max-w-[800px] 2xl:max-w-[950px] aspect-[16/10] overflow-hidden rounded-xl shadow-2xl">
+              <div className="relative w-full max-w-[600px] lg:max-w-[700px] xl:max-w-[800px] 2xl:max-w-[800px] aspect-[16/10] overflow-hidden rounded-xl shadow-2xl">
                 <div
                   className="flex transition-transform duration-700 ease-out h-full"
                   style={{ transform: `translateX(-${currentImageIndex * 100}%)` }}
@@ -437,8 +437,8 @@ function LandingPage() {
               },
               {
                 step: "04",
-                title: "계약 체결 및 IoT 시스템 구축",
-                description: "계약 체결 후, 현장 환경에 최적화된 스마트 IoT 시스템을 구축합니다",
+                title: "계약 체결 및 EMS 시스템 구축",
+                description: "계약 체결 후, 현장 환경에 최적화된 IoT기반 EMS 시스템을 구축합니다",
               },
               {
                 step: "05",

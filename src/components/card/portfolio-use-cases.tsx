@@ -87,7 +87,7 @@ export default function PortfolioInfiniteScroll({ activeFilter = "all" }: Portfo
         const transformedData: PortfolioCard[] = data.map((item: LocationData) => ({
           id: item.id,
           title: item.korean_name || item.place_name,
-          subtitle: item.description || "전력 절감 사례",
+          subtitle: item.description || "시스템 도입 사례",
           tags: [getCategoryInKorean(item.category)],
           images: item.image_urls || [],
           description: item.description,
