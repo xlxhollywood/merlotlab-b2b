@@ -74,9 +74,17 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    // 🔥 환경변수 디버깅
+    console.log('=== 환경변수 확인 ===')
+    console.log('ADMIN_EMAIL:', process.env.ADMIN_EMAIL)
+    console.log('RESEND_API_KEY exists:', !!process.env.RESEND_API_KEY)
+    
     // 4. 관리자에게 이메일 발송
     try {
-      await resend.emails.send({
+      console.log('=== 관리자 메일 발송 시작 ===')
+      console.log('발송 대상:', process.env.ADMIN_EMAIL)
+      
+      const adminEmailResult = await resend.emails.send({
         from: 'onboarding@resend.dev', 
         to: [process.env.ADMIN_EMAIL!],
         subject: `[메를로랩] 새로운 ${inquiryType === 'business' ? '견적 문의' : '모의 견적'}: ${managerName}`,
@@ -112,14 +120,22 @@ export async function POST(request: NextRequest) {
           </div>
         `,
       })
+      
+      console.log('✅ 관리자 메일 발송 성공!')
+      console.log('응답 데이터:', adminEmailResult)
+      
     } catch (emailError) {
-      console.error('Email error:', emailError)
+      console.error('❌ 관리자 메일 발송 실패!')
+      console.error('에러 상세:', emailError)
       // 이메일 실패해도 데이터는 저장되었으므로 성공으로 처리
     }
 
     // 5. 고객에게 자동 응답 이메일 발송
     try {
-      await resend.emails.send({
+      console.log('=== 고객 자동응답 메일 발송 시작 ===')
+      console.log('발송 대상:', email)
+      
+      const autoReplyResult = await resend.emails.send({
         from: 'onboarding@resend.dev',
         to: [email],
         subject: '[메를로랩] 문의 접수 완료',
@@ -155,9 +171,16 @@ export async function POST(request: NextRequest) {
           </div>
         `,
       })
+      
+      console.log('✅ 고객 자동응답 메일 발송 성공!')
+      console.log('응답 데이터:', autoReplyResult)
+      
     } catch (autoReplyError) {
-      console.error('Auto-reply error:', autoReplyError)
+      console.error('❌ 고객 자동응답 메일 발송 실패!')
+      console.error('에러 상세:', autoReplyError)
     }
+
+    console.log('=== 전체 프로세스 완료 ===')
 
     return NextResponse.json(
       { 
