@@ -69,7 +69,7 @@ export async function POST(request: NextRequest) {
     // 4. 관리자에게 이메일 발송
     try {
       await resend.emails.send({
-        from: 'contact@merlotlab.com', // 나중에 도메인 인증 시 변경
+        from: 'onboarding@resend.dev', 
         to: [process.env.ADMIN_EMAIL!],
         subject: `[메를로랩] 새로운 ${inquiryType === 'business' ? '견적 문의' : '모의 견적'}: ${managerName}`,
         html: `
@@ -112,7 +112,7 @@ export async function POST(request: NextRequest) {
     // 5. 고객에게 자동 응답 이메일 발송
     try {
       await resend.emails.send({
-        from: 'contact@merlotlab.com',
+        from: 'onboarding@resend.dev',
         to: [email],
         subject: '[메를로랩] 문의 접수 완료',
         html: `
