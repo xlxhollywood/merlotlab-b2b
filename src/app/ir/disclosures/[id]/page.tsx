@@ -14,6 +14,8 @@ import {
 import { useParams } from "next/navigation"
 import { useEffect } from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
+import Image from "next/image"
+import { urlFor } from '@/sanity/lib/image'
 
 // Titillium Web 폰트 import
 import { Titillium_Web } from "next/font/google"
@@ -219,31 +221,36 @@ export default function IRDetailPage() {
 
                     {/* 대표 이미지 표시 */}
                     {disclosure?.featuredImage && (
-                      <div className="mb-8">
-                        <img
-                          src={`https://cdn.sanity.io/images/p9w07cg8/production/${disclosure.featuredImage.asset._ref.replace("image-", "").replace("-jpg", ".jpg").replace("-png", ".png").replace("-webp", ".webp")}`}
-                          alt={disclosure.featuredImage.alt || disclosure.title}
-                          className="w-full h-auto rounded-lg shadow-sm"
-                        />
-                      </div>
-                    )}
+  <div className="mb-8 not-prose">
+    <Image
+      src={urlFor(disclosure.featuredImage).width(800).url()}
+      alt={disclosure.featuredImage.alt || disclosure.title || '대표 이미지'}
+      width={800}
+      height={600}
+      className="w-full h-auto"
+      priority
+    />
+  </div>
+)}
 
                     {/* 첨부파일 갤러리 */}
                     {disclosure?.attachments && disclosure.attachments.length > 0 && (
-                      <div className="mt-8">
-                        <h3 className="text-lg font-semibold mb-4">첨부파일</h3>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                          {disclosure.attachments.map((attachment: any, index: number) => (
-                            <img
-                              key={index}
-                              src={`https://cdn.sanity.io/images/p9w07cg8/production/${attachment.asset._ref.replace("image-", "").replace("-jpg", ".jpg").replace("-png", ".png").replace("-webp", ".webp")}`}
-                              alt={attachment.alt || `첨부파일 ${index + 1}`}
-                              className="w-full h-48 object-cover rounded-lg shadow-sm"
-                            />
-                          ))}
-                        </div>
-                      </div>
-                    )}
+  <div className="mt-8">
+    <h3 className="text-lg font-semibold mb-4">첨부파일</h3>
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      {disclosure.attachments.map((attachment: any, index: number) => (
+        <Image
+          key={index}
+          src={urlFor(attachment).width(400).height(192).url()}
+          alt={attachment.alt || `첨부파일 ${index + 1}`}
+          width={400}
+          height={192}
+          className="w-full h-48 object-cover"
+        />
+      ))}
+    </div>
+  </div>
+)}
                   </div>
 
                   {/* 이전글/다음글 네비게이션 */}

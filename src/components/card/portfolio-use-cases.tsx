@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from "react"
 import { Search, X, ChevronLeft, ChevronRight } from "lucide-react"
 import { supabase, type LocationData } from "@/components/lib/supabase"
+import Image from "next/image"
 
 interface PortfolioCard {
   id: string
@@ -57,7 +58,8 @@ export default function PortfolioInfiniteScroll({ activeFilter = "all" }: Portfo
         if (!preloadedImages.has(url) && url) {
           setImageLoadingStates((prev) => ({ ...prev, [url]: true }))
 
-          const img = new Image()
+          // 🔥 이 부분 수정
+          const img = document.createElement('img') // new Image() 대신
           img.crossOrigin = "anonymous"
           img.onload = () => {
             setPreloadedImages((prev) => new Set([...prev, url]))
@@ -71,7 +73,7 @@ export default function PortfolioInfiniteScroll({ activeFilter = "all" }: Portfo
       })
     },
     [preloadedImages],
-  )
+)
 
   // Supabase에서 데이터 가져오기
   useEffect(() => {
@@ -350,15 +352,18 @@ export default function PortfolioInfiniteScroll({ activeFilter = "all" }: Portfo
                             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#583CF2]"></div>
                           </div>
                         )}
-                        <img
-                          alt={`${caseStudy.title} 이미지 ${currentImageIndex + 1}`}
-                          src={currentImageUrl || "/placeholder.svg?height=250&width=400&query=portfolio image"}
-                          className={`h-full w-full rounded-md object-cover brightness-100 transition-all duration-300 hover:scale-105 ${
-                            isImageLoading ? "opacity-0" : "opacity-100"
-                          }`}
-                          style={{
-                            transition: "opacity 0.3s ease-in-out, transform 0.3s ease-in-out",
-                          }}
+                        <Image
+                        alt={`${caseStudy.title} 이미지 ${currentImageIndex + 1}`}
+                        src={currentImageUrl || "/placeholder.svg"}
+                        width={400}
+                        height={250}
+                        className={`h-full w-full rounded-md object-cover brightness-100 transition-all duration-300 hover:scale-105 ${
+                          isImageLoading ? "opacity-0" : "opacity-100"
+                        }`}
+                        style={{
+                          transition: "opacity 0.3s ease-in-out, transform 0.3s ease-in-out",
+                        }}
+                        priority={index < 2}
                         />
                         {/* 이미지 슬라이더 컨트롤 */}
                         {hasMultipleImages && (
