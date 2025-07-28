@@ -1,8 +1,10 @@
 "use client"
 
+import type React from "react"
+
 import { useState } from "react"
 import { useEffect } from "react"
-import { getDisclosures, Disclosure } from "@/sanity/lib/sanity"
+import { getDisclosures, type Disclosure } from "@/sanity/lib/sanity"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
 import FadeInUp from "@/components/animation/fade-in-up"
@@ -21,44 +23,107 @@ const titilliumWeb = Titillium_Web({
 export default function IRPage() {
   const [searchTerm, setSearchTerm] = useState("")
   const [currentPage, setCurrentPage] = useState(1)
-  const [activeTab, setActiveTab] = useState("disclosure") 
+  const [activeTab, setActiveTab] = useState("disclosure")
   const [loading, setLoading] = useState(true)
   const router = useRouter()
   const itemsPerPage = 10
-  const [disclosures, setDisclosures] = useState<Disclosure[]>([])  // disclosureData를 disclosures로 변경
+  const [disclosures, setDisclosures] = useState<Disclosure[]>([]) // disclosureData를 disclosures로 변경
 
   const totalPages = Math.ceil(disclosures.length / itemsPerPage)
-  const filteredData = disclosures.filter((item) => 
-    item.title.toLowerCase().includes(searchTerm.toLowerCase())
-  )
+
+  const filteredData = disclosures.filter((item) => item.title.toLowerCase().includes(searchTerm.toLowerCase()))
 
   const currentData = filteredData.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
 
   const handleAnnouncementClick = () => {
+    setActiveTab("announcement") // 탭 상태 업데이트
     router.push("/ir/notices")
   }
 
-const handleDisclosureClick = (id: string) => {
-  router.push(`/ir/disclosures/${id}`)
-}
-
-  const handleDownload = (url: string, title: string) => {
-    // 실제 다운로드 로직 구현
-    window.open(url, "_blank")
+  const handleDisclosureClick = (id: string) => {
+    router.push(`/ir/disclosures/${id}`)
   }
+
+  const handleDownload = async (e: React.MouseEvent, url: string, title: string) => {
+    e.stopPropagation() // 카드 클릭 이벤트 방지
+
+    // URL이 유효하지 않으면 리턴
+    if (!url || url === "#" || !url.startsWith("http")) {
+      alert("다운로드할 파일이 없습니다.")
+      return
+    }
+
+    try {
+      // fetch로 파일 가져오기
+      const response = await fetch(url)
+      if (!response.ok) throw new Error("파일을 가져올 수 없습니다.")
+
+      // blob으로 변환
+      const blob = await response.blob()
+
+      // 파일 확장자 추출 (URL에서 또는 Content-Type에서)
+      const contentType = response.headers.get("content-type") || ""
+      let extension = ""
+
+      // 이미지 파일 확장자 우선 처리
+      if (contentType.includes("image/jpeg")) extension = ".jpg"
+      else if (contentType.includes("image/png")) extension = ".png"
+      else if (contentType.includes("image/gif")) extension = ".gif"
+      else if (contentType.includes("image/webp")) extension = ".webp"
+      // PDF, Word, Excel 등 다른 문서 타입 처리
+      else if (contentType.includes("application/pdf")) extension = ".pdf"
+      else if (
+        contentType.includes("application/msword") ||
+        contentType.includes("application/vnd.openxmlformats-officedocument.wordprocessingml.document")
+      )
+        extension = ".docx"
+      else if (
+        contentType.includes("application/vnd.ms-excel") ||
+        contentType.includes("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+      )
+        extension = ".xlsx"
+      else {
+        // URL에서 확장자 추출 시도 (fallback)
+        const urlExtension = url.split(".").pop()
+        if (urlExtension && urlExtension.length <= 4) {
+          // 간단한 확장자 길이 체크
+          extension = `.${urlExtension}`
+        }
+      }
+
+      // 다운로드 링크 생성
+      const downloadUrl = window.URL.createObjectURL(blob)
+      const link = document.createElement("a")
+      link.href = downloadUrl
+      link.download = `${title}${extension}` // 제목 + 확장자
+
+      // 다운로드 실행
+      document.body.appendChild(link)
+      link.click()
+
+      // 정리
+      document.body.removeChild(link)
+      window.URL.revokeObjectURL(downloadUrl)
+    } catch (error) {
+      console.error("다운로드 오류:", error)
+      alert("파일 다운로드 중 오류가 발생했습니다.")
+    }
+  }
+
   useEffect(() => {
     async function fetchDisclosures() {
       try {
         const data = await getDisclosures()
         setDisclosures(data)
       } catch (error) {
-        console.error('Error:', error)
+        console.error("Error:", error)
       } finally {
         setLoading(false)
       }
     }
     fetchDisclosures()
   }, [])
+
   if (loading) {
     return (
       <div className="min-h-screen bg-white flex items-center justify-center">
@@ -66,9 +131,11 @@ const handleDisclosureClick = (id: string) => {
       </div>
     )
   }
+
   return (
     <div className="min-h-screen bg-white">
       <Header />
+
       <section className="relative h-32 sm:h-40 lg:h-48 overflow-hidden">
         <svg
           className="absolute inset-0 w-full h-full z-0 pointer-events-none"
@@ -89,8 +156,10 @@ const handleDisclosureClick = (id: string) => {
         {/* Content */}
         <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center pb-8">
           <div className="text-start">
-          <h1 className={`text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold text-[#333132] ${titilliumWeb.className}`}>
-              IR 
+            <h1
+              className={`text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold text-[#333132] ${titilliumWeb.className}`}
+            >
+              IR
               <span className="inline-block w-1 h-1 sm:w-2 sm:h-2 rounded-full bg-primary align-baseline translate-y-[2px] ml-0.5 mr-0.4 sm:ml-1 sm:mr-1" />
               <span className="text-[#605d5f]">Center</span>
             </h1>
@@ -107,7 +176,7 @@ const handleDisclosureClick = (id: string) => {
               <div className="lg:hidden">
                 <div className="flex space-x-1 bg-gray-100 p-1 rounded-lg">
                   <button
-                    onClick={handleAnnouncementClick}
+                    onClick={() => setActiveTab("disclosure")} // 탭 상태 업데이트
                     className={`flex-1 px-3 sm:px-4 py-2 text-sm font-medium rounded-md transition-colors ${
                       activeTab === "disclosure" ? "bg-[#583CF2] text-white" : "text-gray-600 hover:text-gray-800"
                     }`}
@@ -129,7 +198,7 @@ const handleDisclosureClick = (id: string) => {
               <div className="hidden lg:block lg:w-64 flex-shrink-0">
                 <div className="space-y-4">
                   <button
-                    onClick={handleAnnouncementClick}
+                    onClick={() => setActiveTab("disclosure")} // 탭 상태 업데이트
                     className={`w-full text-left px-4 py-3 rounded-lg transition-colors ${
                       activeTab === "disclosure"
                         ? "bg-[#583CF2] text-white"
@@ -177,22 +246,45 @@ const handleDisclosureClick = (id: string) => {
                         <p>검색 결과가 없습니다.</p>
                       </div>
                     ) : (
-                      currentData.map((item) => (
-                        <div
-                          key={item._id}
-                          onClick={() => handleDisclosureClick(item._id)}
-                          className="block p-4 sm:p-5 lg:p-6 bg-white border border-gray-200 rounded-lg hover:shadow-md transition-shadow cursor-pointer"
-                        >
-                          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-3 sm:gap-4">
-                            <div className="flex-1 min-w-0">
-                              <h3 className="text-sm sm:text-base lg:text-lg font-semibold text-gray-900 mb-2 break-words leading-tight">
-                                {item.title}
-                              </h3>
-                              <span className="text-xs sm:text-sm text-gray-500">{item.date}</span>
+                      currentData.map((item) => {
+                        // 디버깅: item.imageUrl 값 확인
+                        console.log(`Item ID: ${item._id}, Title: ${item.title}, Image URL: ${item.imageUrl}`)
+                        return (
+                          <div
+                            key={item._id}
+                            onClick={() => handleDisclosureClick(item._id)}
+                            className="block p-4 sm:p-5 lg:p-6 bg-white border border-gray-200 rounded-lg hover:shadow-md transition-shadow cursor-pointer"
+                          >
+                            <div className="flex justify-between items-start gap-3 sm:gap-4">
+                              <div className="flex-1 min-w-0">
+                                <h3 className="text-sm sm:text-base lg:text-lg font-semibold text-gray-900 mb-2 break-words leading-tight">
+                                  {item.title}
+                                </h3>
+                                <span className="text-xs sm:text-sm text-gray-500">{item.date}</span>
+                              </div>
+
+                              {/* Download Button */}
+                              {item.imageUrl ? (
+                                <button
+                                  onClick={(e) => handleDownload(e, item.imageUrl as string, item.title)}
+                                  className="flex-shrink-0 p-2 sm:p-2.5 text-gray-400 hover:text-[#583CF2] hover:bg-gray-50 rounded-lg transition-colors group"
+                                  title="이미지 다운로드" // 툴팁 변경
+                                  type="button"
+                                >
+                                  <Download className="h-4 w-4 sm:h-5 sm:w-5 group-hover:scale-110 transition-transform" />
+                                </button>
+                              ) : (
+                                <div
+                                  className="flex-shrink-0 p-2 sm:p-2.5 text-gray-300 cursor-not-allowed"
+                                  title="다운로드할 이미지가 없습니다" // 툴팁 변경
+                                >
+                                  <Download className="h-4 w-4 sm:h-5 sm:w-5 opacity-30" />
+                                </div>
+                              )}
                             </div>
                           </div>
-                        </div>
-                      ))
+                        )
+                      })
                     )}
                   </div>
 
