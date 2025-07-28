@@ -46,12 +46,19 @@ export default function BusinessInquiryForm({
     e.preventDefault()
     setIsSubmitting(true)
 
-    // 필수 필드 검증
-    if (!selectedBusinessType || !formData.managerName || !formData.phone || !formData.email || !formData.message) {
-      alert('필수 항목을 모두 입력해주세요.')
-      setIsSubmitting(false)
-      return
-    }
+    // 기본 필수 필드 검증
+  if (!selectedBusinessType || !formData.managerName || !formData.phone || !formData.email || !formData.message) {
+    alert('필수 항목을 모두 입력해주세요.')
+    setIsSubmitting(false)
+    return
+  }
+
+  // 🔥 NEW: 개인이 아닌 경우 기관명 검증
+  if (!isPersonal && (!formData.companyName || formData.companyName.trim() === "")) {
+    alert('기관명을 입력해주세요.')
+    setIsSubmitting(false)
+    return
+  }
 
     try {
       const response = await fetch('/api/contact', {
@@ -147,7 +154,7 @@ export default function BusinessInquiryForm({
           {/* 사업장 유형 */}
           <div className="space-y-4">
             <Label className="text-base sm:text-lg font-semibold text-gray-700">
-              사업장 유형 <span className="text-red-500">*</span>
+              문의 기관 유형 <span className="text-red-500">*</span>
             </Label>
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
               {["개인", "사업자", "공공 기관", "비영리기관", "기타"].map((type) => (

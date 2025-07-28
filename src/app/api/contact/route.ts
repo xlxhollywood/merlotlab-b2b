@@ -24,10 +24,18 @@ export async function POST(request: NextRequest) {
       message 
     } = body
 
-    // 1. 입력값 검증
+    // 1. 입력값 검증 - 이 부분을 수정
     if (!inquiryType || !businessType || !managerName || !phone || !email || !message) {
       return NextResponse.json(
         { error: '필수 항목을 모두 입력해주세요.' },
+        { status: 400 }
+      )
+    }
+
+    // 🔥 개인이 아닌 경우 기관명 검증 추가
+    if (businessType !== "개인" && !companyName) {
+      return NextResponse.json(
+        { error: '기관명을 입력해주세요.' },
         { status: 400 }
       )
     }
@@ -126,7 +134,7 @@ export async function POST(request: NextRequest) {
             <div style="background-color: #f9f9f9; padding: 20px; border-radius: 8px; margin: 20px 0;">
               <h3 style="margin-top: 0; color: #333;">접수된 문의 정보</h3>
               <p><strong>문의 구분:</strong> ${inquiryType === 'business' ? '견적 문의' : '모의 견적'}</p>
-              <p><strong>사업장 유형:</strong> ${businessType}</p>
+              <p><strong>신청자 유형:</strong> ${businessType}</p>
               <p><strong>접수 시간:</strong> ${new Date().toLocaleString('ko-KR')}</p>
             </div>
             

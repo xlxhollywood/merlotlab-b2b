@@ -551,7 +551,7 @@ export default function MerlotlabTossStyle() {
                 {/* 사업장 유형 */}
                 <div className="space-y-4">
                   <Label className="text-lg font-semibold text-gray-900">
-                    사업장 유형 <span className="text-red-500">*</span>
+                    신청자 유형 <span className="text-red-500">*</span>
                   </Label>
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                     {["일반 빌딩", "물류 창고", "제조 시설", "공공 기관", "생활 시설", "기타"].map((type) => (
