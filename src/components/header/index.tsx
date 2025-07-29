@@ -41,7 +41,7 @@ const Header: React.FC = () => {
         </div>
 
         {/* 데스크톱 네비게이션 메뉴 */}
-        <div className="hidden lg:flex items-center gap-16 ml-20">
+        <div className="hidden lg:flex items-center gap-16 ml-32">
           {/* 솔루션 메뉴 */}
           <Link href="/solutions" className="relative cursor-pointer transition-colors duration-200 group">
             <div className="flex items-center">

@@ -79,7 +79,11 @@ export default function PortfolioInfiniteScroll({ activeFilter = "all" }: Portfo
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data, error } = await supabase.from("locations").select("*")
+        const { data, error } = await supabase
+          .from("locations")
+          .select("*")
+          .order("description", { ascending: false, nullsFirst: false })
+          
         if (error) {
           console.error("Error fetching data:", error)
           return
