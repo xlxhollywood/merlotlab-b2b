@@ -26,7 +26,7 @@ function LandingPage() {
   const searchParams = useSearchParams()
   const tabParam = searchParams.get("tab")
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
-  const images = ["/landing/3.jpg", "/landing/2.jpeg", "/landing/4.png", "/landing/1.png", "/landing/5.png"]
+  const images = ["/landing/3.png", "/landing/2.png", "/landing/4.png", "/landing/1.png", "/landing/5.png"]
 
   const { ref: costRef, inView: costInView } = useInView({
     triggerOnce: true,
