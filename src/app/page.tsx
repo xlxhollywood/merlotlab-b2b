@@ -147,8 +147,8 @@ function LandingPage() {
             {/* 텍스트 섹션 */}
             <div className="lg:col-span-4 flex items-center justify-center lg:justify-end px-4 sm:px-6 lg:px-8 xl:pr-16 2xl:pr-0 py-8 lg:py-0">
               <div className="text-gray-900 text-center lg:text-left max-w-2xl lg:max-w-none.,">
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#333132] mb-6 lg:mb-8">
-                  에너지 절감의 시작
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 lg:mb-8 text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-[#583CF2] to-gray-700">
+                    에너지 절감<span className="text-gray-700">의 시작</span>
                 </h1>
                 <div className="mb-4 flex justify-center lg:justify-start">
                   <img src="/메를로랩 로고.png" alt="메를로랩" className="h-8 sm:h-10 lg:h-12" />
