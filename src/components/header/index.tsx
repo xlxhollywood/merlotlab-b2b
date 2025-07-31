@@ -23,7 +23,7 @@ const Header: React.FC = () => {
   return (
     <div className="sticky top-0 left-0 w-full p-0 z-[1000] transition-all duration-300 border-b border-gray-200">
       <div
-        className="max-w-[1880px] mx-auto flex items-center justify-between lg:justify-start px-4 md:px-6 h-16 bg-blue-500"
+        className="max-w-[1880px] mx-auto flex items-center justify-between lg:justify-start px-4 md:px-6 h-16"
         onClick={onContainerClick}
       >
         {/* 로고 */}
