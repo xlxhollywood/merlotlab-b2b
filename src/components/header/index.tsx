@@ -21,13 +21,13 @@ const Header: React.FC = () => {
   }
 
   return (
-    <div className="sticky top-0 left-0 w-full p-0 z-[1000] transition-all duration-300 bg-white border-b border-gray-200">
+    <div className="sticky top-0 left-0 w-full p-0 z-[1000] transition-all duration-300 border-b border-gray-200">
       <div
-        className="max-w-[1500px] mx-auto flex items-center justify-between lg:justify-start px-4 md:px-6 h-16"
+        className="max-w-[1880px] mx-auto flex items-center justify-between lg:justify-start px-4 md:px-6 h-16 bg-blue-500"
         onClick={onContainerClick}
       >
         {/* 로고 */}
-        <div>
+        <div className="sm:ml-2 md:m-2 lg:ml-2 xl:ml-2 2xl:ml-48">
           <div className="flex items-center relative">
             <Link href="/" className="flex items-center relative">
               <Image
@@ -85,7 +85,7 @@ const Header: React.FC = () => {
           </Link>
         </div>
         {/* 데스크톱 문의하기 버튼 */}
-        <div className="hidden lg:block ml-auto">
+        <div className="hidden lg:block ml-auto 2xl:mr-2 xl:mr-10">
           <Button asChild className="bg-[#583CF2] hover:bg-[#4a32d0] text-white">
             {/* 여기를 수정합니다: 현재 페이지의 폼 섹션으로 이동 */}
             <Link href="/?tab=business">문의하기</Link>
