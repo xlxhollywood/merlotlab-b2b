@@ -1,5 +1,4 @@
 "use client"
-
 import { useState, useEffect, useRef, useCallback, useMemo } from "react"
 import { Search, X, ChevronLeft, ChevronRight } from "lucide-react"
 import { supabase, type LocationData } from "@/components/lib/supabase"
@@ -57,9 +56,7 @@ export default function PortfolioInfiniteScroll({ activeFilter = "all" }: Portfo
       imageUrls.forEach((url) => {
         if (!preloadedImages.has(url) && url) {
           setImageLoadingStates((prev) => ({ ...prev, [url]: true }))
-
-          // 🔥 이 부분 수정
-          const img = document.createElement('img') // new Image() 대신
+          const img = document.createElement("img") // new Image() 대신
           img.crossOrigin = "anonymous"
           img.onload = () => {
             setPreloadedImages((prev) => new Set([...prev, url]))
@@ -73,7 +70,7 @@ export default function PortfolioInfiniteScroll({ activeFilter = "all" }: Portfo
       })
     },
     [preloadedImages],
-)
+  )
 
   // Supabase에서 데이터 가져오기
   useEffect(() => {
@@ -83,7 +80,6 @@ export default function PortfolioInfiniteScroll({ activeFilter = "all" }: Portfo
           .from("locations")
           .select("*")
           .order("description", { ascending: false, nullsFirst: false })
-          
         if (error) {
           console.error("Error fetching data:", error)
           return
@@ -102,7 +98,6 @@ export default function PortfolioInfiniteScroll({ activeFilter = "all" }: Portfo
         // 모든 이미지 URL 수집 및 프리로딩
         const allImageUrls = transformedData.flatMap((item) => item.images).filter(Boolean)
         preloadImages(allImageUrls)
-
         setAllCaseStudies(transformedData)
         setIsInitialLoading(false)
       } catch (error) {
@@ -110,7 +105,6 @@ export default function PortfolioInfiniteScroll({ activeFilter = "all" }: Portfo
         setIsInitialLoading(false)
       }
     }
-
     fetchData()
   }, [])
 
@@ -133,7 +127,6 @@ export default function PortfolioInfiniteScroll({ activeFilter = "all" }: Portfo
         apartment: "아파트",
         hotel: "호텔",
       }
-
       const targetCategory = filterToKorean[activeFilter]
       if (targetCategory) {
         filtered = filtered.filter((item) => {
@@ -153,7 +146,6 @@ export default function PortfolioInfiniteScroll({ activeFilter = "all" }: Portfo
         )
       })
     }
-
     return filtered
   }, [searchQuery, allCaseStudies, activeFilter])
 
@@ -169,7 +161,6 @@ export default function PortfolioInfiniteScroll({ activeFilter = "all" }: Portfo
   // 데이터 로드 함수
   const loadMoreData = useCallback(async () => {
     if (isLoading || !hasMore) return
-
     setIsLoading(true)
     await new Promise((resolve) => setTimeout(resolve, 800))
 
@@ -183,7 +174,6 @@ export default function PortfolioInfiniteScroll({ activeFilter = "all" }: Portfo
       // 새로 추가되는 아이템들의 ID를 저장
       const newItemIds = new Set(newItems.map((item) => item.id))
       setNewlyAddedItems(newItemIds)
-
       setDisplayedItems((prev) => [...prev, ...newItems])
       setPage((prev) => prev + 1)
 
@@ -196,7 +186,6 @@ export default function PortfolioInfiniteScroll({ activeFilter = "all" }: Portfo
         setHasMore(false)
       }
     }
-
     setIsLoading(false)
   }, [page, isLoading, hasMore, filteredCaseStudies])
 
@@ -250,7 +239,7 @@ export default function PortfolioInfiniteScroll({ activeFilter = "all" }: Portfo
       <div className="mt-10">
         <div className="text-center py-12">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#583CF2] mx-auto"></div>
-          <p className="mt-4 text-gray-600">데이터를 불러���는 중...</p>
+          <p className="mt-4 text-gray-600">데이터를 불러오는 중...</p>
         </div>
       </div>
     )
@@ -281,7 +270,9 @@ export default function PortfolioInfiniteScroll({ activeFilter = "all" }: Portfo
         {searchQuery && (
           <div className="text-center mt-4">
             <p className="text-sm text-gray-600">
-              "{searchQuery}"에 대한 검색 결과: {filteredCaseStudies.length}개
+              {'"'}
+              {searchQuery}
+              {'"'}에 대한 검색 결과: {filteredCaseStudies.length}개
             </p>
           </div>
         )}
@@ -305,23 +296,20 @@ export default function PortfolioInfiniteScroll({ activeFilter = "all" }: Portfo
 
       {/* 포트폴리오 카드들 */}
       {filteredCaseStudies.length > 0 && (
-        <div className="space-y-0">
+        <div className="space-y-4">
           {displayedItems.map((caseStudy, index) => {
             const currentImageIndex = imageIndexes[caseStudy.id] || 0
             const hasMultipleImages = caseStudy.images.length > 1
             const currentImageUrl = caseStudy.images[currentImageIndex]
             const isImageLoading = imageLoadingStates[currentImageUrl]
             const isNewlyAdded = newlyAddedItems.has(caseStudy.id)
-
             // 새로 추가된 아이템의 경우 해당 배치에서의 순서를 계산
             const animationDelay = isNewlyAdded ? `${(index % itemsPerLoad) * 150}ms` : "0ms"
 
             return (
               <div
                 key={`${caseStudy.id}-${index}`}
-                className={`w-full border-t border-gray-200 px-2 py-6 text-left xs:px-5 transition-all duration-700 ${
-                  isNewlyAdded ? "animate-in fade-in slide-in-from-bottom-4" : "opacity-100"
-                }`}
+                className={`w-full border border-gray-200 shadow-md rounded-md py-6 pl-4 pr-4 sm:pl-12 sm:pr-0  md:pl-14 md:pr-0 text-left transition-all duration-700 ${isNewlyAdded ? "animate-in fade-in slide-in-from-bottom-4" : "opacity-100"}`}
                 style={{
                   animationDelay,
                   animationFillMode: "both",
@@ -348,7 +336,7 @@ export default function PortfolioInfiniteScroll({ activeFilter = "all" }: Portfo
                       </div>
                     </div>
                   </div>
-                  <div className="relative rounded-md" style={{ height: "250px" }}>
+                  <div className="relative rounded-md w-full md:w-[80%] md:mx-auto" style={{ height: "250px" }}>
                     {caseStudy.images.length > 0 ? (
                       <>
                         {isImageLoading && (
@@ -357,17 +345,15 @@ export default function PortfolioInfiniteScroll({ activeFilter = "all" }: Portfo
                           </div>
                         )}
                         <Image
-                        alt={`${caseStudy.title} 이미지 ${currentImageIndex + 1}`}
-                        src={currentImageUrl || "/placeholder.svg"}
-                        width={400}
-                        height={250}
-                        className={`h-full w-full rounded-md object-cover brightness-100 transition-all duration-300 hover:scale-105 ${
-                          isImageLoading ? "opacity-0" : "opacity-100"
-                        }`}
-                        style={{
-                          transition: "opacity 0.3s ease-in-out, transform 0.3s ease-in-out",
-                        }}
-                        priority={index < 2}
+                          alt={`${caseStudy.title} 이미지 ${currentImageIndex + 1}`}
+                          src={currentImageUrl || "/placeholder.svg"}
+                          width={400}
+                          height={250}
+                          className={`h-full w-full rounded-md object-cover brightness-100 transition-all duration-300 ${isImageLoading ? "opacity-0" : "opacity-100"}`}
+                          style={{
+                            transition: "opacity 0.3s ease-in-out, transform 0.3s ease-in-out",
+                          }}
+                          priority={index < 2}
                         />
                         {/* 이미지 슬라이더 컨트롤 */}
                         {hasMultipleImages && (

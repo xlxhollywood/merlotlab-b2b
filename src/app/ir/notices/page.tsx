@@ -1,64 +1,55 @@
 "use client"
-
 import { useState } from "react"
 import { useEffect } from "react"
-import { getNotices, Notice } from "@/sanity/lib/sanity"
+import { getNotices, type Notice } from "@/sanity/lib/sanity"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
 import FadeInUp from "@/components/animation/fade-in-up"
-import { Search, ChevronLeft, ChevronRight, Download } from "lucide-react"
+import { Search, ChevronLeft, ChevronRight } from "lucide-react"
 import { useRouter } from "next/navigation"
+import IrHero from "@/components/hero/ir-hero" // IrHero 컴포넌트 임포트
 
-// Titillium Web 폰트 import
-import { Titillium_Web } from "next/font/google"
-
-const titilliumWeb = Titillium_Web({
-  subsets: ["latin"],
-  weight: ["200", "300", "400", "600", "700", "900"],
-  variable: "--font-titillium-web",
-})
-
-export default function IRPage() {
+export default function NoticesPage() {
   const [searchTerm, setSearchTerm] = useState("")
   const [currentPage, setCurrentPage] = useState(1)
-  const [activeTab, setActiveTab] = useState("announcement") // "disclosure"에서 "announcement"로 변경
+  const [activeTab, setActiveTab] = useState("announcement") // 이 페이지는 '공고 사항'이므로 기본 탭은 announcement
   const [loading, setLoading] = useState(true)
   const router = useRouter()
+
   const itemsPerPage = 10
-  const [notices, setNotices] = useState<Notice[]>([])  // disclosureData를 notices로 변경
-
+  const [notices, setNotices] = useState<Notice[]>([])
   const totalPages = Math.ceil(notices.length / itemsPerPage)
-  const filteredData = notices.filter((item) => 
-    item.title.toLowerCase().includes(searchTerm.toLowerCase())
-  )
-
+  const filteredData = notices.filter((item) => item.title.toLowerCase().includes(searchTerm.toLowerCase()))
   const currentData = filteredData.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
 
-  const handleAnnouncementClick = () => {
-    router.push("/ir/disclosures")
+  // '공시 정보' 탭으로 이동하는 함수 (정확한 경로로 수정)
+  const handleDisclosureTabClick = () => {
+    router.push("/ir/disclosures") // 공시 정보 페이지 경로로 정확히 이동
   }
 
-const handleNoticeClick = (id: string) => {
-  router.push(`/ir/notices/${id}`)
-}
-
-  const handleDownload = (url: string, title: string) => {
-    // 실제 다운로드 로직 구현
-    window.open(url, "_blank")
+  const handleNoticeClick = (id: string) => {
+    router.push(`/ir/notices/${id}`)
   }
+
+  // handleDownload 함수는 이 페이지에서 사용되지 않으므로 제거합니다.
+  // const handleDownload = (url: string, title: string) => {
+  //   window.open(url, "_blank")
+  // }
+
   useEffect(() => {
     async function fetchNotices() {
       try {
         const data = await getNotices()
         setNotices(data)
       } catch (error) {
-        console.error('Error:', error)
+        console.error("Error:", error)
       } finally {
         setLoading(false)
       }
     }
     fetchNotices()
   }, [])
+
   if (loading) {
     return (
       <div className="min-h-screen bg-white flex items-center justify-center">
@@ -66,38 +57,11 @@ const handleNoticeClick = (id: string) => {
       </div>
     )
   }
+
   return (
     <div className="min-h-screen bg-white">
       <Header />
-      <section className="relative h-32 sm:h-40 lg:h-48 overflow-hidden">
-        <svg
-          className="absolute inset-0 w-full h-full z-0 pointer-events-none"
-          xmlns="http://www.w3.org/2000/svg"
-          preserveAspectRatio="none"
-        >
-          <defs>
-            <pattern id="gridPattern" width="40" height="40" patternUnits="userSpaceOnUse">
-              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#e5e7eb" strokeWidth="1" />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#gridPattern)" />
-        </svg>
-
-        {/* White Gradient Overlay - 아래에서 위로 올라오는 그라디언트 */}
-        <div className="absolute inset-x-0 bottom-0 h-1/6 bg-gradient-to-t from-white via-white/60 via-white/30 to-transparent z-10 pointer-events-none" />
-
-        {/* Content */}
-        <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center pb-8">
-          <div className="text-start">
-          <h1 className={`text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold text-[#333132] ${titilliumWeb.className}`}>
-              IR 
-              <span className="inline-block w-1 h-1 sm:w-2 sm:h-2 rounded-full bg-primary align-baseline translate-y-[2px] ml-0.5 mr-0.4 sm:ml-1 sm:mr-1" />
-              <span className="text-[#605d5f]">Center</span>
-            </h1>
-          </div>
-        </div>
-      </section>
-
+      <IrHero /> {/* IrHero 컴포넌트 사용 */}
       {/* Main Content */}
       <FadeInUp delay={300}>
         <section className="bg-white mb-6 sm:mb-8 lg:mb-12 sm:mt-8">
@@ -107,50 +71,36 @@ const handleNoticeClick = (id: string) => {
               <div className="lg:hidden">
                 <div className="flex space-x-1 bg-gray-100 p-1 rounded-lg">
                   <button
-                    onClick={handleAnnouncementClick}
-                    className={`flex-1 px-3 sm:px-4 py-2 text-sm font-medium rounded-md transition-colors ${
-                      activeTab === "disclosure" ? "bg-[#583CF2] text-white" : "text-gray-600 hover:text-gray-800"
-                    }`}
+                    onClick={handleDisclosureTabClick} // 공시 정보 탭으로 정확히 이동
+                    className={`flex-1 px-3 sm:px-4 py-2 text-sm font-medium rounded-md transition-colors ${activeTab === "disclosure" ? "bg-[#583CF2] text-white" : "text-gray-600 hover:text-gray-800"}`}
                   >
                     공시 정보
                   </button>
                   <button
-                    onClick={() => setActiveTab("announcement")}
-                    className={`flex-1 px-3 sm:px-4 py-2 text-sm font-medium rounded-md transition-colors ${
-                      activeTab === "announcement" ? "bg-[#583CF2] text-white" : "text-gray-600 hover:text-gray-800"
-                    }`}
+                    onClick={() => setActiveTab("announcement")} // 현재 페이지이므로 탭 상태만 변경
+                    className={`flex-1 px-3 sm:px-4 py-2 text-sm font-medium rounded-md transition-colors ${activeTab === "announcement" ? "bg-[#583CF2] text-white" : "text-gray-600 hover:text-gray-800"}`}
                   >
                     공고 사항
                   </button>
                 </div>
               </div>
-
               {/* Desktop Sidebar - 데스크톱에서만 표시 */}
               <div className="hidden lg:block lg:w-64 flex-shrink-0">
                 <div className="space-y-4">
                   <button
-                    onClick={handleAnnouncementClick}
-                    className={`w-full text-left px-4 py-3 rounded-lg transition-colors ${
-                      activeTab === "disclosure"
-                        ? "bg-[#583CF2] text-white"
-                        : "text-gray-600 hover:text-gray-800 hover:bg-gray-50"
-                    }`}
+                    onClick={handleDisclosureTabClick} // 공시 정보 탭으로 정확히 이동
+                    className={`w-full text-left px-4 py-3 rounded-lg transition-colors ${activeTab === "disclosure" ? "bg-[#583CF2] text-white" : "text-gray-600 hover:text-gray-800 hover:bg-gray-50"}`}
                   >
                     공시 정보
                   </button>
                   <button
-                    onClick={() => setActiveTab("announcement")}
-                    className={`w-full text-left px-4 py-3 rounded-lg transition-colors ${
-                      activeTab === "announcement"
-                        ? "bg-[#583CF2] text-white"
-                        : "text-gray-600 hover:text-gray-800 hover:bg-gray-50"
-                    }`}
+                    onClick={() => setActiveTab("announcement")} // 현재 페이지이므로 탭 상태만 변경
+                    className={`w-full text-left px-4 py-3 rounded-lg transition-colors ${activeTab === "announcement" ? "bg-[#583CF2] text-white" : "text-gray-600 hover:text-gray-800 hover:bg-gray-50"}`}
                   >
                     공고 사항
                   </button>
                 </div>
               </div>
-
               {/* Main Content Area */}
               <div className="flex-1 min-w-0">
                 <div className="space-y-6 sm:space-y-8 lg:space-y-12">
@@ -169,8 +119,7 @@ const handleNoticeClick = (id: string) => {
                       />
                     </div>
                   </div>
-
-                  {/* Disclosure List */}
+                  {/* Notice List */}
                   <div className="space-y-3 lg:space-y-4">
                     {currentData.length === 0 ? (
                       <div className="text-center py-12 text-gray-500">
@@ -195,7 +144,6 @@ const handleNoticeClick = (id: string) => {
                       ))
                     )}
                   </div>
-
                   {/* Pagination */}
                   {totalPages > 1 && (
                     <nav className="flex justify-center pt-4">
@@ -209,12 +157,10 @@ const handleNoticeClick = (id: string) => {
                             <ChevronLeft className="h-4 w-4" />
                           </button>
                         </li>
-
                         {/* 페이지 번호들 - 모바일에서는 더 적게 표시 */}
                         {(() => {
                           const maxVisible = typeof window !== "undefined" && window.innerWidth < 640 ? 3 : 5
                           const pages = []
-
                           if (totalPages <= maxVisible) {
                             for (let i = 1; i <= totalPages; i++) {
                               pages.push(i)
@@ -223,32 +169,24 @@ const handleNoticeClick = (id: string) => {
                             const half = Math.floor(maxVisible / 2)
                             let start = Math.max(1, currentPage - half)
                             const end = Math.min(totalPages, start + maxVisible - 1)
-
                             if (end - start + 1 < maxVisible) {
                               start = Math.max(1, end - maxVisible + 1)
                             }
-
                             for (let i = start; i <= end; i++) {
                               pages.push(i)
                             }
                           }
-
                           return pages.map((pageNum) => (
                             <li key={pageNum}>
                               <button
                                 onClick={() => setCurrentPage(pageNum)}
-                                className={`px-2.5 sm:px-3 py-2 text-sm rounded-lg border transition-colors ${
-                                  currentPage === pageNum
-                                    ? "bg-[#583CF2] text-white border-[#583CF2]"
-                                    : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50"
-                                }`}
+                                className={`px-2.5 sm:px-3 py-2 text-sm rounded-lg border transition-colors ${currentPage === pageNum ? "bg-[#583CF2] text-white border-[#583CF2]" : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50"}`}
                               >
                                 {pageNum}
                               </button>
                             </li>
                           ))
                         })()}
-
                         <li>
                           <button
                             onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
@@ -267,7 +205,6 @@ const handleNoticeClick = (id: string) => {
           </div>
         </section>
       </FadeInUp>
-
       <Footer />
     </div>
   )
