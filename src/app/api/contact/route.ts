@@ -74,12 +74,15 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    // 문의 번호 생성 (DB ID 기반)
+    const inquiryNumber = `INQ${String(data?.[0]?.id || Date.now()).padStart(6, '0')}`
+
     // 4. 관리자에게 이메일 발송
     try {
       await resend.emails.send({
         from: 'sales@merlotlab.com',
         to: ['sales@merlotlab.com'],
-        subject: `[메를로랩] 새로운 ${inquiryType === 'business' ? '견적 문의' : '모의 견적'}: ${managerName}`,
+        subject: `[메를로랩] 새로운 ${inquiryType === 'business' ? '견적 문의' : '모의 견적'} #${inquiryNumber}: ${managerName}`,
         html: `
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
             <h2 style="color: #583CF2; border-bottom: 2px solid #583CF2; padding-bottom: 10px;">
@@ -88,6 +91,7 @@ export async function POST(request: NextRequest) {
             
             <div style="background-color: #f9f9f9; padding: 20px; border-radius: 8px; margin: 20px 0;">
               <h3 style="color: #333; margin-top: 0;">문의자 정보</h3>
+              <p><strong>문의 번호:</strong> ${inquiryNumber}</p>
               <p><strong>문의 구분:</strong> ${inquiryType === 'business' ? '견적 문의' : '모의 견적'}</p>
               <p><strong>사업장 유형:</strong> ${businessType}</p>
               <p><strong>담당자:</strong> ${managerName}</p>
@@ -121,7 +125,7 @@ export async function POST(request: NextRequest) {
       await resend.emails.send({
         from: 'sales@merlotlab.com',
         to: [email],
-        subject: '[메를로랩] 문의 접수 완료',
+        subject: '[메를로랩] 문의 접수 완료 #' + inquiryNumber,
         html: `
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
             <h2 style="color: #583CF2;">문의 접수가 완료되었습니다</h2>
@@ -132,6 +136,7 @@ export async function POST(request: NextRequest) {
             
             <div style="background-color: #f9f9f9; padding: 20px; border-radius: 8px; margin: 20px 0;">
               <h3 style="margin-top: 0; color: #333;">접수된 문의 정보</h3>
+              <p><strong>문의 번호:</strong> ${inquiryNumber}</p>
               <p><strong>문의 구분:</strong> ${inquiryType === 'business' ? '견적 문의' : '모의 견적'}</p>
               <p><strong>신청자 유형:</strong> ${businessType}</p>
               <p><strong>접수 시간:</strong> ${new Date().toLocaleString('ko-KR')}</p>
