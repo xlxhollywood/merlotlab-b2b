@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
       message 
     } = body
 
-    // 1. 입력값 검증 - 이 부분을 수정
+    // 1. 입력값 검증
     if (!inquiryType || !businessType || !managerName || !phone || !email || !message) {
       return NextResponse.json(
         { error: '필수 항목을 모두 입력해주세요.' },
@@ -32,7 +32,7 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // 🔥 개인이 아닌 경우 기관명 검증 추가
+    // 개인이 아닌 경우 기관명 검증 추가
     if (businessType !== "개인" && !companyName) {
       return NextResponse.json(
         { error: '기관명을 입력해주세요.' },
@@ -74,19 +74,11 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // 🔥 환경변수 디버깅
-    console.log('=== 환경변수 확인 ===')
-    console.log('ADMIN_EMAIL:', process.env.ADMIN_EMAIL)
-    console.log('RESEND_API_KEY exists:', !!process.env.RESEND_API_KEY)
-    
     // 4. 관리자에게 이메일 발송
     try {
-      console.log('=== 관리자 메일 발송 시작 ===')
-      console.log('발송 대상:', process.env.ADMIN_EMAIL)
-      
-      const adminEmailResult = await resend.emails.send({
-        from: 'onboarding@resend.dev', 
-        to: [process.env.ADMIN_EMAIL!],
+      await resend.emails.send({
+        from: 'sales@merlotlab.com',
+        to: ['sales@merlotlab.com'],
         subject: `[메를로랩] 새로운 ${inquiryType === 'business' ? '견적 문의' : '모의 견적'}: ${managerName}`,
         html: `
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
@@ -120,23 +112,14 @@ export async function POST(request: NextRequest) {
           </div>
         `,
       })
-      
-      console.log('✅ 관리자 메일 발송 성공!')
-      console.log('응답 데이터:', adminEmailResult)
-      
     } catch (emailError) {
-      console.error('❌ 관리자 메일 발송 실패!')
-      console.error('에러 상세:', emailError)
-      // 이메일 실패해도 데이터는 저장되었으므로 성공으로 처리
+      console.error('관리자 메일 발송 실패:', emailError)
     }
 
     // 5. 고객에게 자동 응답 이메일 발송
     try {
-      console.log('=== 고객 자동응답 메일 발송 시작 ===')
-      console.log('발송 대상:', email)
-      
-      const autoReplyResult = await resend.emails.send({
-        from: 'onboarding@resend.dev',
+      await resend.emails.send({
+        from: 'sales@merlotlab.com',
         to: [email],
         subject: '[메를로랩] 문의 접수 완료',
         html: `
@@ -165,22 +148,15 @@ export async function POST(request: NextRequest) {
             <div style="color: #666; font-size: 14px;">
               <p><strong>메를로랩</strong></p>
               <p>서울특별시 금천구 디지털로9길 68 (가산동) 대륭포스트 타워 5차 2002~2005호</p>
-              <p>이메일: ${process.env.ADMIN_EMAIL}</p>
+              <p>이메일: sales@merlotlab.com</p>
               <p>웹사이트: <a href="https://merlotlab.com" style="color: #583CF2;">merlotlab.com</a></p>
             </div>
           </div>
         `,
       })
-      
-      console.log('✅ 고객 자동응답 메일 발송 성공!')
-      console.log('응답 데이터:', autoReplyResult)
-      
     } catch (autoReplyError) {
-      console.error('❌ 고객 자동응답 메일 발송 실패!')
-      console.error('에러 상세:', autoReplyError)
+      console.error('고객 자동응답 메일 발송 실패:', autoReplyError)
     }
-
-    console.log('=== 전체 프로세스 완료 ===')
 
     return NextResponse.json(
       { 
