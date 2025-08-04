@@ -19,15 +19,6 @@ interface PortfolioInfiniteScrollProps {
 
 const itemsPerLoad = 5
 
-// 🔥 URL 변환 함수 추가
-const convertToProxyUrl = (url: string): string => {
-  if (!url) return url
-  return url.replace(
-    'https://dcncthzfsjsusyugdrjn.supabase.co',
-    'https://image-proxy.saint0325.workers.dev'
-  )
-}
-
 export default function PortfolioInfiniteScroll({ activeFilter = "all" }: PortfolioInfiniteScrollProps) {
   const [searchQuery, setSearchQuery] = useState("")
   const [displayedItems, setDisplayedItems] = useState<PortfolioCard[]>([])
@@ -37,8 +28,6 @@ export default function PortfolioInfiniteScroll({ activeFilter = "all" }: Portfo
   const [page, setPage] = useState(1)
   const [isInitialLoading, setIsInitialLoading] = useState(true)
   const [imageIndexes, setImageIndexes] = useState<{ [key: string]: number }>({})
-  const [preloadedImages, setPreloadedImages] = useState<Set<string>>(new Set())
-  const [imageLoadingStates, setImageLoadingStates] = useState<{ [key: string]: boolean }>({})
   const observerRef = useRef<HTMLDivElement>(null)
   const [newlyAddedItems, setNewlyAddedItems] = useState<Set<string>>(new Set())
 
@@ -59,28 +48,6 @@ export default function PortfolioInfiniteScroll({ activeFilter = "all" }: Portfo
     return categoryMap[category] || category
   }
 
-  // 이미지 프리로딩 함수
-  const preloadImages = useCallback(
-    (imageUrls: string[]) => {
-      imageUrls.forEach((url) => {
-        if (!preloadedImages.has(url) && url) {
-          setImageLoadingStates((prev) => ({ ...prev, [url]: true }))
-          const img = document.createElement("img") // new Image() 대신
-          img.crossOrigin = "anonymous"
-          img.onload = () => {
-            setPreloadedImages((prev) => new Set([...prev, url]))
-            setImageLoadingStates((prev) => ({ ...prev, [url]: false }))
-          }
-          img.onerror = () => {
-            setImageLoadingStates((prev) => ({ ...prev, [url]: false }))
-          }
-          img.src = convertToProxyUrl(url)
-        }
-      })
-    },
-    [preloadedImages],
-  )
-
   // Supabase에서 데이터 가져오기
   useEffect(() => {
     const fetchData = async () => {
@@ -100,13 +67,10 @@ export default function PortfolioInfiniteScroll({ activeFilter = "all" }: Portfo
           title: item.korean_name || item.place_name,
           subtitle: item.description || "시스템 도입 사례",
           tags: [getCategoryInKorean(item.category)],
-          images: (item.image_urls || []).map(convertToProxyUrl),
+          images: item.image_urls || [],
           description: item.description,
         }))
-
-        // 모든 이미지 URL 수집 및 프리로딩
-        const allImageUrls = transformedData.flatMap((item) => item.images).filter(Boolean)
-        preloadImages(allImageUrls)
+      
         setAllCaseStudies(transformedData)
         setIsInitialLoading(false)
       } catch (error) {
@@ -310,7 +274,6 @@ export default function PortfolioInfiniteScroll({ activeFilter = "all" }: Portfo
             const currentImageIndex = imageIndexes[caseStudy.id] || 0
             const hasMultipleImages = caseStudy.images.length > 1
             const currentImageUrl = caseStudy.images[currentImageIndex]
-            const isImageLoading = imageLoadingStates[currentImageUrl]
             const isNewlyAdded = newlyAddedItems.has(caseStudy.id)
             // 새로 추가된 아이템의 경우 해당 배치에서의 순서를 계산
             const animationDelay = isNewlyAdded ? `${(index % itemsPerLoad) * 150}ms` : "0ms"
@@ -348,21 +311,15 @@ export default function PortfolioInfiniteScroll({ activeFilter = "all" }: Portfo
                   <div className="relative rounded-md w-full md:w-[80%] md:mx-auto" style={{ height: "250px" }}>
                     {caseStudy.images.length > 0 ? (
                       <>
-                        {isImageLoading && (
-                          <div className="absolute inset-0 bg-gray-200 rounded-md flex items-center justify-center z-10">
-                            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#583CF2]"></div>
-                          </div>
-                        )}
                         <Image
                           alt={`${caseStudy.title} 이미지 ${currentImageIndex + 1}`}
                           src={currentImageUrl || "/placeholder.svg"}
                           width={400}
                           height={250}
-                          className={`h-full w-full rounded-md object-cover brightness-100 transition-all duration-300 ${isImageLoading ? "opacity-0" : "opacity-100"}`}
+                          className="h-full w-full rounded-md object-cover brightness-100 transition-all duration-300"
                           style={{
                             transition: "opacity 0.3s ease-in-out, transform 0.3s ease-in-out",
                           }}
-                          priority={index < 2}
                         />
                         {/* 이미지 슬라이더 컨트롤 */}
                         {hasMultipleImages && (
