@@ -7,6 +7,7 @@ import FadeInUp from "@/components/animation/fade-in-up"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
 import { Button } from "@/components/ui/button"
+import LogoCarouselMain from "@/components/carousel/logo-carousel-cases"
 
 const stats = [
   {
@@ -59,20 +60,23 @@ export default function UseCases() {
           <div className="absolute top-0 bottom-0 left-[1206px] right-[664px] border-l border-r border-black/5 bg-[linear-gradient(-45deg,_rgba(3,7,18,0.05),_rgba(3,7,18,0.05)_7.07%,_rgba(3,7,18,0)_7.07%,_rgba(3,7,18,0)_50%)]" />
         </div>
 
-        <div className="inner-container relative max-w-[1120px] mx-auto">
-          <div className="py-8 xs:py-12 sm:py-16 md:py-24 lg:py-32 xl:py-48 text-center text-gray-700">
+        <div className="inner-container relative max-w-full mx-auto text-primary">
+          <div className="py-4 sm:py-8">
+          {/* <h2 className="text-sm sm:text-base md:text-lg lg:text-xl">Customers</h2> */}
+          </div>
+          <div className="text-center text-gray-700">
             <FadeInUp delay={300}>
-              <h2 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight xs:leading-[1.2] sm:leading-[50px] md:leading-[60px] text-center text-gray-700 px-2 xs:px-4">
+            <h2 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight xs:leading-[1.2] sm:leading-[50px] md:leading-[60px]">
                 메를로랩이 사업장 전력 절감
-                <br className="hidden xs:block" />
-                <span className="xs:hidden"> </span>
                 <FadeInUp delay={400}>
-                  <span className="text-primary block mt-1 xs:mt-2">함께 하겠습니다</span>
+                  <span className="text-primary block mt-0 sm:mt-3 md:mt-4 lg:mt-5 xl:mt-4">함께 하겠습니다</span>
                 </FadeInUp>
               </h2>
             </FadeInUp>
+            <LogoCarouselMain /> 
           </div>
-
+          
+      <div className="inner-container relative max-w-[1300px] mx-auto">
           <Statistics stats={stats} />
 
           {/* 필터 섹션 */}
@@ -101,6 +105,7 @@ export default function UseCases() {
             <PortfolioUseCases activeFilter={activeFilter} />
           </FadeInUp>
         </div>
+      </div>
       </section>
 
       {/* Footer */}

@@ -1,13 +1,10 @@
 "use client"
-
 import Image from "next/image"
 
-
 export default function LogoCarouselMain() {
-  // 갭 조절 변수들
-  const logoContainerWidth = 256 // w-64 = 256px
-  const logoGap = 14 // mx-4 = 16px * 2 = 32px 간격
-  const totalItemWidth = logoContainerWidth + logoGap // 288px
+  // 애니메이션 계산을 위한 기준 너비 (가장 큰 화면 기준)
+  // md:w-48 (192px) + md:mx-8 (총 32px 갭) = 224px
+  const baseItemWidthForAnimation = 192 + 32
 
   const companies = [
     {
@@ -89,36 +86,32 @@ export default function LogoCarouselMain() {
     },
   ]
 
-  // 매끄러운 무한 루프를 위해 3번 복제
+  // 매끄러운 무한 루프를 위해 3번 복제 (유지)
   const triplicatedCompanies = [...companies, ...companies, ...companies]
 
   return (
-    <div className="w-full bg-gray-50/80 py-12 sm:py-16 overflow-hidden border-t border-gray-100">
-      {/* 제목 섹션 */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8 sm:mb-12">
-        <div className="text-center">
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-3 sm:mb-4">주요 도입사</h2>
-        </div>
-      </div>
-
+    <div className="w-full py-0 sm:py-8 overflow-hidden border-t border-gray-100">
       {/* 로고 캐러셀을 아래로 이동 */}
-      <div className="relative mt-12 sm:mt-16">
+      <div className="relative mt-8 sm:mt-16">
+        {/* Left gradient overlay - 모바일에서 숨김 */}
+        <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-white to-transparent z-10 hidden sm:block" />
+        {/* Right gradient overlay - 모바일에서 숨김 */}
+        <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-white to-transparent z-10 hidden sm:block" />
 
         <div
           className="flex items-center animate-scroll hover:pause-animation"
+          // 애니메이션 속도 일관성을 위해 전체 너비를 고정 (가장 큰 화면 기준)
           style={{
-            width: `${triplicatedCompanies.length * totalItemWidth}px`,
+            width: `${triplicatedCompanies.length * baseItemWidthForAnimation}px`,
           }}
         >
           {triplicatedCompanies.map((company, index) => (
             <div
               key={`${company.name}-${index}`}
-              className="flex items-center justify-center flex-shrink-0 h-18 sm:h-24"
-              style={{
-                width: `${logoContainerWidth}px`,
-                marginLeft: `${logoGap / 2}px`,
-                marginRight: `${logoGap / 2}px`,
-              }}
+              // 로고 컨테이너의 높이와 너비를 조정하여 이미지 크기를 줄였습니다.
+              // 반응형 너비 및 마진 적용: 모바일(기본)은 작게, sm 이상에서는 크게
+              // 간격을 더 넓게 조정했습니다.
+              className="flex items-center justify-center flex-shrink-0 h-14 sm:h-16 w-24 sm:w-32 md:w-48 mx-4 sm:mx-6 md:mx-8"
             >
               <Image
                 src={company.logo || "/placeholder.svg"}
@@ -131,7 +124,6 @@ export default function LogoCarouselMain() {
           ))}
         </div>
       </div>
-
       {/* 스타일은 그대로 유지 */}
       <style jsx>{`
         @keyframes scroll {
@@ -143,7 +135,7 @@ export default function LogoCarouselMain() {
           }
         }
         .animate-scroll {
-          animation: scroll 30s linear infinite;
+          animation: scroll 40s linear infinite; /* 속도를 30s로 변경 */
           will-change: transform;
         }
         .hover\\:pause-animation:hover {
