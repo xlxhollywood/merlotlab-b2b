@@ -11,6 +11,12 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
+        hostname: 'image-proxy.saint0325.workers.dev', // 🔥 Cloudflare Workers 프록시 추가
+        port: '',
+        pathname: '/**', // 모든 경로 허용
+      },
+      {
+        protocol: 'https',
         hostname: 'cdn.sanity.io',
         port: '',
         pathname: '/**', // Sanity 이미지용

@@ -19,6 +19,15 @@ interface PortfolioInfiniteScrollProps {
 
 const itemsPerLoad = 5
 
+// 🔥 URL 변환 함수 추가
+const convertToProxyUrl = (url: string): string => {
+  if (!url) return url
+  return url.replace(
+    'https://dcncthzfsjsusyugdrjn.supabase.co',
+    'https://image-proxy.saint0325.workers.dev'
+  )
+}
+
 export default function PortfolioInfiniteScroll({ activeFilter = "all" }: PortfolioInfiniteScrollProps) {
   const [searchQuery, setSearchQuery] = useState("")
   const [displayedItems, setDisplayedItems] = useState<PortfolioCard[]>([])
@@ -65,7 +74,7 @@ export default function PortfolioInfiniteScroll({ activeFilter = "all" }: Portfo
           img.onerror = () => {
             setImageLoadingStates((prev) => ({ ...prev, [url]: false }))
           }
-          img.src = url
+          img.src = convertToProxyUrl(url)
         }
       })
     },
@@ -91,7 +100,7 @@ export default function PortfolioInfiniteScroll({ activeFilter = "all" }: Portfo
           title: item.korean_name || item.place_name,
           subtitle: item.description || "시스템 도입 사례",
           tags: [getCategoryInKorean(item.category)],
-          images: item.image_urls || [],
+          images: (item.image_urls || []).map(convertToProxyUrl),
           description: item.description,
         }))
 
