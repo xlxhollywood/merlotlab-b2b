@@ -102,7 +102,6 @@ export default function KakaoMap({
       });
 
       marker.setMap(map);
-      console.log('카카오맵 초기화 성공!');
     } catch (error) {
       console.error('카카오맵 초기화 오류:', error);
       console.log('kakao 객체:', (window as any).kakao);

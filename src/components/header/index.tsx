@@ -122,7 +122,7 @@ const Header: React.FC = () => {
                 pathname === "/solutions" ? "text-[#583CF2]" : "text-gray-700 hover:text-[#583CF2]"
               }`}
             >
-              솔루션
+              EMS 솔루션
             </div>
           </Link>
           {/* 도입 사례 */}
