@@ -1,4 +1,4 @@
-// src/app/page.tsx  ✅ 서버 컴포넌트 (use client 없음)
+// src/app/page.tsx
 import type { Metadata } from "next";
 import Script from "next/script";
 import LandingClient from "./page.client";
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <>
-      {/* sitelinks를 4개로 신호 */}
+      {/* Sitelinks 힌트 */}
       <Script id="ld-sitenav" type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
@@ -28,6 +28,38 @@ export default function Page() {
           })
         }}
       />
+
+      {/* Organization */}
+      <Script id="ld-organization" type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "메를로랩",
+            "url": "https://www.merlotlab.com",
+            "logo": "https://www.merlotlab.com/og-image.png",
+            "sameAs": [] // 공식 SNS 있으면 넣어도 됨
+          })
+        }}
+      />
+
+      {/* WebSite + SearchAction (검색창 없으면 유지해도 무방) */}
+      <Script id="ld-website" type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": "메를로랩",
+            "url": "https://www.merlotlab.com",
+            "potentialAction": {
+              "@type": "SearchAction",
+              "target": "https://www.merlotlab.com/?q={search_term_string}",
+              "query-input": "required name=search_term_string"
+            }
+          })
+        }}
+      />
+
       <LandingClient />
     </>
   );

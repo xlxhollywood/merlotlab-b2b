@@ -53,8 +53,7 @@ export const metadata: Metadata = {
       "설비 환경 분석부터 현장 최적화된 에너지 운영까지, 절감의 패러다임을 바꿉니다.",
     images: ["/og-image.png"],
   },
-  robots: { index: true, follow: true },
-  alternates: { canonical: "https://www.merlotlab.com" },
+  robots: { index: true, follow: true }
 };
 
 export default function RootLayout({
