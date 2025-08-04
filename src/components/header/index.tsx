@@ -23,7 +23,7 @@ const Header: React.FC = () => {
     <div
       // scrolled 상태에 따른 조건부 클래스 제거, 항상 흰색 배경과 테두리 적용
       className="sticky top-0 left-0 w-full p-0 z-[1000] transition-all duration-300 bg-white border-b border-gray-200 shadow-sm"
-      onClick={onContainerClick}
+      onClick={onContainerClick }
     >
       <div className="max-w-[1880px] mx-auto flex items-center justify-between lg:justify-start px-4 md:px-6 h-16">
         {/* 로고 */}
@@ -92,8 +92,14 @@ const Header: React.FC = () => {
             </div>
           </Link>
         </div>
-        {/* 데스크톱 문의하기 버튼 */}
-        
+        {/* 데스크톱 문의하기 버튼 
+        <div className="hidden lg:block ml-auto 2xl:mr-36 xl:mr-10">
+          <Button asChild className="bg-[#583CF2] hover:bg-[#4a32d0] text-white">
+            <Link href="/?tab=business">문의하기</Link>
+          </Button>
+        </div>
+        */}
+
         {/* 모바일 햄버거 메뉴 버튼 */}
         <button
           className="lg:hidden text-gray-700 hover:text-[#583CF2] transition-colors duration-200"
