@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   ],
   icons: {
     icon: "/favicon.png",
-    apple: "/apple-touch-icon.png",
+    apple: "/favicon.png",
   },
   openGraph: {
     type: "website",
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     title: "메를로랩 | EMS 솔루션 · 도입 사례 · IR Center",
     description:
       "설비 환경 분석부터 현장 최적화된 에너지 운영까지, 절감의 패러다임을 바꿉니다.",
-    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "메를로랩" }],
+    images: [{ url: "/favicon.png", width: 1200, height: 630, alt: "메를로랩" }], 
     locale: "ko_KR",
   },
   twitter: {
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     title: "메를로랩 | EMS 솔루션 · 도입 사례 · IR Center",
     description:
       "설비 환경 분석부터 현장 최적화된 에너지 운영까지, 절감의 패러다임을 바꿉니다.",
-    images: ["/og-image.png"],
+    images: ["/favicon.png"],
   },
   robots: { index: true, follow: true }
 };

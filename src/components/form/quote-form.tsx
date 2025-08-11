@@ -107,7 +107,7 @@ export default function QuoteForm({
     }
 
     const count = Number.parseFloat(generalCount)
-    const power = Number.parseFloat(generalPower) // W
+    const power = Number.parseFloat(generalPower)
     const hoursPerDay = Number.parseFloat(generalHours) // h/day
     const daysPerYear = Number.parseFloat(annualDays) // days
 

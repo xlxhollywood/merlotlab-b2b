@@ -37,8 +37,8 @@ export default function Page() {
             "@type": "Organization",
             "name": "메를로랩",
             "url": "https://www.merlotlab.com",
-            "logo": "https://www.merlotlab.com/og-image.png",
-            "sameAs": [] // 공식 SNS 있으면 넣어도 됨
+            "logo": "https://www.merlotlab.com/favicon.png",
+            "sameAs": []
           })
         }}
       />
