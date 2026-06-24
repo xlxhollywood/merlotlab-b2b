@@ -12,15 +12,15 @@ import LogoCarouselMain from "@/components/carousel/logo-carousel-cases";
 const stats = [
   {
     label: "도입 사업장",
-    value: 65,
+    value: 83,
     unit: "개소",
-    description: "23.01 ~ 25.12",
+    description: "23.01 ~ 26.05",
   },
   {
-    label: "누적 설치량",
-    value: 108986,
-    unit: "개",
-    description: "전환 시스템을 개수로 표기",
+    label: "누적 면적",
+    value: 2435170,
+    unit: "m²",
+    description: "Merlot Mesh 연결 면적의 총합",
   },
   {
     label: "평균 설치 소요 기간",
