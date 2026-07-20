@@ -12,13 +12,13 @@ import LogoCarouselMain from "@/components/carousel/logo-carousel-cases";
 const stats = [
   {
     label: "도입 사업장",
-    value: 83,
+    value: 96,
     unit: "개소",
-    description: "23.01 ~ 26.05",
+    description: "23.01 ~ 26.06",
   },
   {
     label: "누적 면적",
-    value: 2435170,
+    value:  2981290,
     unit: "m²",
     description: "Merlot Mesh 연결 면적의 총합",
   },
