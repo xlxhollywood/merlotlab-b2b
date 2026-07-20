@@ -18,7 +18,7 @@ const stats = [
   },
   {
     label: "누적 면적",
-    value:  2981290,
+    value: 2981290,
     unit: "m²",
     description: "Merlot Mesh 연결 면적의 총합",
   },
