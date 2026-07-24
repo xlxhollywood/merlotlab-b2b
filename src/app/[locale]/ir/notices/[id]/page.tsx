@@ -1,5 +1,6 @@
 "use client"
-import { useRouter } from "next/navigation"
+import { useTranslations } from "next-intl"
+import { useRouter } from "@/i18n/navigation"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
 import { useState } from "react"
@@ -10,6 +11,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react"
 import IrHero from "@/components/hero/ir-hero" // IrHero 컴포넌트 임포트
 
 export default function IRNoticeDetailPage() {
+  const t = useTranslations("ir")
   const router = useRouter()
   const params = useParams()
   const [activeTab, setActiveTab] = useState("announcement") // 이 페이지는 '공고 사항' 상세이므로 기본 탭은 announcement
@@ -70,7 +72,7 @@ export default function IRNoticeDetailPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-white flex items-center justify-center">
-        <div className="text-gray-500">로딩 중...</div>
+        <div className="text-gray-500">{t("loading")}</div>
       </div>
     )
   }
@@ -78,7 +80,7 @@ export default function IRNoticeDetailPage() {
   if (!notice) {
     return (
       <div className="min-h-screen bg-white flex items-center justify-center">
-        <div className="text-gray-500">공고를 찾을 수 없습니다.</div>
+        <div className="text-gray-500">{t("notFound")}</div>
       </div>
     )
   }
@@ -98,13 +100,13 @@ export default function IRNoticeDetailPage() {
                   onClick={handleDisclosureTabClick} // 공시 정보 탭으로 이동
                   className={`flex-1 px-3 sm:px-4 py-2 text-sm font-medium rounded-md transition-colors ${activeTab === "disclosure" ? "bg-[#583CF2] text-white" : "text-gray-600 hover:text-gray-800"}`}
                 >
-                  공시 정보
+                  {t("tabDisclosure")}
                 </button>
                 <button
                   onClick={() => setActiveTab("announcement")} // 현재 페이지이므로 탭 상태만 변경
                   className={`flex-1 px-3 sm:px-4 py-2 text-sm font-medium rounded-md transition-colors ${activeTab === "announcement" ? "bg-[#583CF2] text-white" : "text-gray-600 hover:text-gray-800"}`}
                 >
-                  공고 사항
+                  {t("tabAnnouncement")}
                 </button>
               </div>
             </div>
@@ -115,13 +117,13 @@ export default function IRNoticeDetailPage() {
                   onClick={handleDisclosureTabClick} // 공시 정보 탭으로 이동
                   className={`w-full text-left px-4 py-3 rounded-lg transition-colors ${activeTab === "disclosure" ? "bg-[#583CF2] text-white" : "text-gray-600 hover:text-gray-800 hover:bg-gray-50"}`}
                 >
-                  공시 정보
+                  {t("tabDisclosure")}
                 </button>
                 <button
                   onClick={() => setActiveTab("announcement")} // 현재 페이지이므로 탭 상태만 변경
                   className={`w-full text-left px-4 py-3 rounded-lg transition-colors ${activeTab === "announcement" ? "bg-[#583CF2] text-white" : "text-gray-600 hover:text-gray-800 hover:bg-gray-50"}`}
                 >
-                  공고 사항
+                  {t("tabAnnouncement")}
                 </button>
               </div>
             </div>
@@ -137,11 +139,11 @@ export default function IRNoticeDetailPage() {
                       </h1>
                       <div className="flex flex-col sm:flex-row gap-2 sm:gap-6 text-sm text-[#8b95a1]">
                         <div className="flex items-center gap-2">
-                          <span className="font-medium text-[#4e5968]">작성일</span>
+                          <span className="font-medium text-[#4e5968]">{t("labelDate")}</span>
                           <span>{notice?.date}</span>
                         </div>
                         <div className="flex items-center gap-2">
-                          <span className="font-medium text-[#4e5968]">작성자</span>
+                          <span className="font-medium text-[#4e5968]">{t("labelAuthor")}</span>
                           <span>{notice?.author}</span>
                         </div>
                       </div>
@@ -165,7 +167,7 @@ export default function IRNoticeDetailPage() {
                           <div className="flex items-center gap-3 flex-1 min-w-0">
                             <ChevronLeft className="w-5 h-5 text-gray-400 flex-shrink-0" />
                             <div className="min-w-0">
-                              <div className="text-sm text-gray-500 mb-1">이전글</div>
+                              <div className="text-sm text-gray-500 mb-1">{t("prevPost")}</div>
                               <div className="text-gray-800 hover:text-[#583CF2] transition-colors truncate">
                                 {prevNotice.title}
                               </div>
@@ -181,7 +183,7 @@ export default function IRNoticeDetailPage() {
                         >
                           <div className="flex items-center gap-3 flex-1 min-w-0">
                             <div className="min-w-0 flex-1">
-                              <div className="text-sm text-gray-500 mb-1">다음글</div>
+                              <div className="text-sm text-gray-500 mb-1">{t("nextPost")}</div>
                               <div className="text-gray-800 hover:text-[#583CF2] transition-colors truncate">
                                 {nextNotice.title}
                               </div>
@@ -192,7 +194,7 @@ export default function IRNoticeDetailPage() {
                       )}
                       {/* 이전글/다음글이 모두 없는 경우 */}
                       {!prevNotice && !nextNotice && (
-                        <div className="text-center text-gray-500 py-4">이전글 또는 다음글이 없습니다.</div>
+                        <div className="text-center text-gray-500 py-4">{t("noAdjacent")}</div>
                       )}
                     </div>
                   </div>
@@ -203,7 +205,7 @@ export default function IRNoticeDetailPage() {
                         onClick={handleBackToList}
                         className="inline-flex items-center px-6 py-3 text-sm font-semibold text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
                       >
-                        목록
+                        {t("backToList")}
                       </button>
                     </div>
                   </div>

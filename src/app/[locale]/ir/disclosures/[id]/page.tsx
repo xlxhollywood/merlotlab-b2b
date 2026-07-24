@@ -1,5 +1,6 @@
 "use client"
-import { useRouter } from "next/navigation"
+import { useTranslations } from "next-intl"
+import { useRouter } from "@/i18n/navigation"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
 import { useState } from "react"
@@ -18,6 +19,7 @@ import { urlFor } from "@/sanity/lib/image"
 import IrHero from "@/components/hero/ir-hero" // IrHero 컴포넌트 임포트
 
 export default function IRDetailPage() {
+  const t = useTranslations("ir")
   const router = useRouter()
   const params = useParams()
   const [activeTab, setActiveTab] = useState("disclosure") // 이 페이지는 '공시 정보' 상세이므로 기본 탭은 disclosure
@@ -78,7 +80,7 @@ export default function IRDetailPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-white flex items-center justify-center">
-        <div className="text-gray-500">로딩 중...</div>
+        <div className="text-gray-500">{t("loading")}</div>
       </div>
     )
   }
@@ -86,7 +88,7 @@ export default function IRDetailPage() {
   if (!disclosure) {
     return (
       <div className="min-h-screen bg-white flex items-center justify-center">
-        <div className="text-gray-500">공고를 찾을 수 없습니다.</div>
+        <div className="text-gray-500">{t("notFound")}</div>
       </div>
     )
   }
@@ -107,14 +109,14 @@ export default function IRDetailPage() {
                   onClick={() => setActiveTab("disclosure")}
                   className={`flex-1 px-3 sm:px-4 py-2 text-sm font-medium rounded-md transition-colors ${activeTab === "disclosure" ? "bg-[#583CF2] text-white" : "text-gray-600 hover:text-gray-800"}`}
                 >
-                  공시 정보
+                  {t("tabDisclosure")}
                 </button>
                 {/* '공고 사항' 탭: 공고 사항 목록 페이지로 이동 (원래 로직 유지) */}
                 <button
                   onClick={handleAnnouncementClick}
                   className={`flex-1 px-3 sm:px-4 py-2 text-sm font-medium rounded-md transition-colors ${activeTab === "announcement" ? "bg-[#583CF2] text-white" : "text-gray-600 hover:text-gray-800"}`}
                 >
-                  공고 사항
+                  {t("tabAnnouncement")}
                 </button>
               </div>
             </div>
@@ -126,14 +128,14 @@ export default function IRDetailPage() {
                   onClick={() => setActiveTab("disclosure")}
                   className={`w-full text-left px-4 py-3 rounded-lg transition-colors ${activeTab === "disclosure" ? "bg-[#583CF2] text-white" : "text-gray-600 hover:text-gray-800 hover:bg-gray-50"}`}
                 >
-                  공시 정보
+                  {t("tabDisclosure")}
                 </button>
                 {/* '공고 사항' 탭: 공고 사항 목록 페이지로 이동 (원래 로직 유지) */}
                 <button
                   onClick={handleAnnouncementClick}
                   className={`w-full text-left px-4 py-3 rounded-lg transition-colors ${activeTab === "announcement" ? "bg-[#583CF2] text-white" : "text-gray-600 hover:text-gray-800 hover:bg-gray-50"}`}
                 >
-                  공고 사항
+                  {t("tabAnnouncement")}
                 </button>
               </div>
             </div>
@@ -149,11 +151,11 @@ export default function IRDetailPage() {
                       </h1>
                       <div className="flex flex-col sm:flex-row gap-2 sm:gap-6 text-sm text-[#8b95a1]">
                         <div className="flex items-center gap-2">
-                          <span className="font-medium text-[#4e5968]">작성일</span>
+                          <span className="font-medium text-[#4e5968]">{t("labelDate")}</span>
                           <span>{disclosure?.date}</span>
                         </div>
                         <div className="flex items-center gap-2">
-                          <span className="font-medium text-[#4e5968]">작성자</span>
+                          <span className="font-medium text-[#4e5968]">{t("labelAuthor")}</span>
                           <span>{disclosure?.author}</span>
                         </div>
                       </div>
@@ -169,7 +171,7 @@ export default function IRDetailPage() {
                       <div className="mb-8 not-prose">
                         <Image
                           src={urlFor(disclosure.featuredImage).width(800).url() || "/images/placeholder.svg"}
-                          alt={disclosure.featuredImage.alt || disclosure.title || "대표 이미지"}
+                          alt={disclosure.featuredImage.alt || disclosure.title || t("featuredImageAlt")}
                           width={800}
                           height={600}
                           className="w-full h-auto"
@@ -180,13 +182,13 @@ export default function IRDetailPage() {
                     {/* 첨부파일 갤러리 */}
                     {disclosure?.attachments && disclosure.attachments.length > 0 && (
                       <div className="mt-8">
-                        <h3 className="text-lg font-semibold mb-4">첨부파일</h3>
+                        <h3 className="text-lg font-semibold mb-4">{t("attachments")}</h3>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                           {disclosure.attachments.map((attachment: any, index: number) => (
                             <Image
                               key={index}
                               src={urlFor(attachment).width(400).height(192).url() || "/images/placeholder.svg"}
-                              alt={attachment.alt || `첨부파일 ${index + 1}`}
+                              alt={attachment.alt || t("attachmentAlt", { index: index + 1 })}
                               width={400}
                               height={192}
                               className="w-full h-48 object-cover"
@@ -208,7 +210,7 @@ export default function IRDetailPage() {
                           <div className="flex items-center gap-3 flex-1 min-w-0">
                             <ChevronLeft className="w-5 h-5 text-gray-400 flex-shrink-0" />
                             <div className="min-w-0">
-                              <div className="text-sm text-gray-500 mb-1">이전글</div>
+                              <div className="text-sm text-gray-500 mb-1">{t("prevPost")}</div>
                               <div className="text-gray-800 hover:text-[#583CF2] transition-colors truncate">
                                 {prevDisclosure.title}
                               </div>
@@ -224,7 +226,7 @@ export default function IRDetailPage() {
                         >
                           <div className="flex items-center gap-3 flex-1 min-w-0">
                             <div className="min-w-0 flex-1">
-                              <div className="text-sm text-gray-500 mb-1">다음글</div>
+                              <div className="text-sm text-gray-500 mb-1">{t("nextPost")}</div>
                               <div className="text-gray-800 hover:text-[#583CF2] transition-colors truncate">
                                 {nextDisclosure.title}
                               </div>
@@ -235,7 +237,7 @@ export default function IRDetailPage() {
                       )}
                       {/* 이전글/다음글이 모두 없는 경우 */}
                       {!prevDisclosure && !nextDisclosure && (
-                        <div className="text-center text-gray-500 py-4">이전글 또는 다음글이 없습니다.</div>
+                        <div className="text-center text-gray-500 py-4">{t("noAdjacent")}</div>
                       )}
                     </div>
                   </div>
@@ -246,7 +248,7 @@ export default function IRDetailPage() {
                         onClick={handleBackToList}
                         className="inline-flex items-center px-6 py-3 text-sm font-semibold text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
                       >
-                        목록
+                        {t("backToList")}
                       </button>
                     </div>
                   </div>

@@ -224,5 +224,27 @@
     "cardRepayWithSavings": "Investment repaid from savings",
     "cardContinuousSaving": "Ongoing energy cost savings",
     "cardUserProfit": "Realized as user profit"
+  },
+  "ir": {
+    "loading": "Loading...",
+    "notFound": "Post not found.",
+    "tabDisclosure": "Disclosures",
+    "tabAnnouncement": "Announcements",
+    "searchPlaceholder": "Search for what you're looking for",
+    "noResults": "No results found.",
+    "downloadImage": "Download image",
+    "noDownloadImage": "No image to download",
+    "noFileToDownload": "No file to download.",
+    "fetchError": "Could not fetch the file.",
+    "downloadError": "An error occurred while downloading the file.",
+    "labelDate": "Date",
+    "labelAuthor": "Author",
+    "featuredImageAlt": "Featured image",
+    "attachments": "Attachments",
+    "attachmentAlt": "Attachment {index}",
+    "prevPost": "Previous",
+    "nextPost": "Next",
+    "noAdjacent": "No previous or next post.",
+    "backToList": "List"
   }
 }
