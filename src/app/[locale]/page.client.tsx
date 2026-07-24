@@ -161,14 +161,14 @@ function LandingPage() {
                   수많은 사업장의 전력 소비를 분석하고 최적화하여, <br />
                   에너지 운영의 미래를 함께 만들어가고 있습니다.
                 </p>
-                <a href="/cases" className="inline-block">
+                <Link href="/cases" className="inline-block">
                   <button className="bg-primary hover:bg-primary/90 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-medium text-base sm:text-lg transition-all duration-300 transform hover:scale-105 shadow-lg">
                     <span className="flex items-center gap-2">
                       더 많은 사례 보기
                       <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
                     </span>
                   </button>
-                </a>
+                </Link>
               </div>
             </div>
 
