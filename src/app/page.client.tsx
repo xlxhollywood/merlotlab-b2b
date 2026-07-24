@@ -26,7 +26,7 @@ function LandingPage() {
   const searchParams = useSearchParams()
   const tabParam = searchParams.get("tab")
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
-  const images = ["/landing/3.png", "/landing/2.png", "/landing/4.png", "/landing/1.png", "/landing/5.png"]
+  const images = ["/images/landing/3.png", "/images/landing/2.png", "/images/landing/4.png", "/images/landing/1.png", "/images/landing/5.png"]
 
   const { ref: costRef, inView: costInView } = useInView({
     triggerOnce: true,
@@ -151,7 +151,7 @@ function LandingPage() {
                     에너지 절감<span className="text-gray-700">의 시작</span>
                 </h1>
                 <div className="mb-4 flex justify-center lg:justify-start">
-                  <img src="/메를로랩 로고.png" alt="메를로랩" className="h-8 sm:h-10 lg:h-12" />
+                  <img src="/images/brand/logo.png" alt="메를로랩" className="h-8 sm:h-10 lg:h-12" />
                 </div>
                 {/* 접근성 숨김: 스니펫용 문구 */}
                 <p className="sr-only">
@@ -182,7 +182,7 @@ function LandingPage() {
                   {images.map((image, index) => (
                     <div key={index} className="w-full flex-shrink-0 h-full relative">
                       <Image
-                        src={image || "/placeholder.svg"}
+                        src={image || "/images/placeholder.svg"}
                         alt={`에너지 절감 솔루션 ${index + 1}`}
                         fill
                         className="object-cover"

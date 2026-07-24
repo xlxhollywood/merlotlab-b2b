@@ -15,7 +15,7 @@ const Footer: NextPage = () => {
                   width={150} 
                   height={25} 
                   alt="메를로랩 로고" 
-                  src="/메를로랩 로고2.png" 
+                  src="/images/brand/logo-alt.png" 
                   unoptimized
                 />
               </div>
