@@ -1,14 +1,29 @@
 // src/app/page.tsx
 import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import Script from "next/script";
 import LandingClient from "./page.client";
 
-export const metadata: Metadata = {
-  title: "메를로랩",
-  description:
-    "EMS 솔루션 · 도입 사례 · 회사 소개 · IR Center — 설비 환경 분석부터 현장 최적화된 에너지 운영까지, 절감의 패러다임을 바꿉니다.",
-  alternates: { canonical: "https://www.merlotlab.com" },
-};
+const BASE = "https://www.merlotlab.com";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "metadata" });
+  const koUrl = BASE;
+  const enUrl = `${BASE}/en`;
+  return {
+    title: t("homeTitle"),
+    description: t("homeDescription"),
+    alternates: {
+      canonical: locale === "en" ? enUrl : koUrl,
+      languages: { ko: koUrl, en: enUrl },
+    },
+  };
+}
 
 export default function Page() {
   return (
