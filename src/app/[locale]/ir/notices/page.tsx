@@ -6,10 +6,12 @@ import Header from "@/components/header"
 import Footer from "@/components/footer"
 import FadeInUp from "@/components/animation/fade-in-up"
 import { Search, ChevronLeft, ChevronRight } from "lucide-react"
-import { useRouter } from "next/navigation"
+import { useTranslations } from "next-intl"
+import { useRouter } from "@/i18n/navigation"
 import IrHero from "@/components/hero/ir-hero" // IrHero 컴포넌트 임포트
 
 export default function NoticesPage() {
+  const t = useTranslations("ir")
   const [searchTerm, setSearchTerm] = useState("")
   const [currentPage, setCurrentPage] = useState(1)
   const [activeTab, setActiveTab] = useState("announcement") // 이 페이지는 '공고 사항'이므로 기본 탭은 announcement
@@ -53,7 +55,7 @@ export default function NoticesPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-white flex items-center justify-center">
-        <div className="text-gray-500">로딩 중...</div>
+        <div className="text-gray-500">{t("loading")}</div>
       </div>
     )
   }
@@ -74,13 +76,13 @@ export default function NoticesPage() {
                     onClick={handleDisclosureTabClick} // 공시 정보 탭으로 정확히 이동
                     className={`flex-1 px-3 sm:px-4 py-2 text-sm font-medium rounded-md transition-colors ${activeTab === "disclosure" ? "bg-[#583CF2] text-white" : "text-gray-600 hover:text-gray-800"}`}
                   >
-                    공시 정보
+                    {t("tabDisclosure")}
                   </button>
                   <button
                     onClick={() => setActiveTab("announcement")} // 현재 페이지이므로 탭 상태만 변경
                     className={`flex-1 px-3 sm:px-4 py-2 text-sm font-medium rounded-md transition-colors ${activeTab === "announcement" ? "bg-[#583CF2] text-white" : "text-gray-600 hover:text-gray-800"}`}
                   >
-                    공고 사항
+                    {t("tabAnnouncement")}
                   </button>
                 </div>
               </div>
@@ -91,13 +93,13 @@ export default function NoticesPage() {
                     onClick={handleDisclosureTabClick} // 공시 정보 탭으로 정확히 이동
                     className={`w-full text-left px-4 py-3 rounded-lg transition-colors ${activeTab === "disclosure" ? "bg-[#583CF2] text-white" : "text-gray-600 hover:text-gray-800 hover:bg-gray-50"}`}
                   >
-                    공시 정보
+                    {t("tabDisclosure")}
                   </button>
                   <button
                     onClick={() => setActiveTab("announcement")} // 현재 페이지이므로 탭 상태만 변경
                     className={`w-full text-left px-4 py-3 rounded-lg transition-colors ${activeTab === "announcement" ? "bg-[#583CF2] text-white" : "text-gray-600 hover:text-gray-800 hover:bg-gray-50"}`}
                   >
-                    공고 사항
+                    {t("tabAnnouncement")}
                   </button>
                 </div>
               </div>
@@ -112,7 +114,7 @@ export default function NoticesPage() {
                       </div>
                       <input
                         type="search"
-                        placeholder="찾으시는 내용을 검색해보세요"
+                        placeholder={t("searchPlaceholder")}
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                         className="block w-full pl-9 sm:pl-10 pr-3 py-2.5 sm:py-3 border border-gray-300 rounded-lg leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-[#583CF2] focus:border-[#583CF2] text-sm sm:text-base"
@@ -123,7 +125,7 @@ export default function NoticesPage() {
                   <div className="space-y-3 lg:space-y-4">
                     {currentData.length === 0 ? (
                       <div className="text-center py-12 text-gray-500">
-                        <p>검색 결과가 없습니다.</p>
+                        <p>{t("noResults")}</p>
                       </div>
                     ) : (
                       currentData.map((item) => (
