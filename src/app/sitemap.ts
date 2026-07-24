@@ -1,7 +1,6 @@
 // app/sitemap.ts
 import type { MetadataRoute } from "next";
-
-const BASE = "https://www.merlotlab.com";
+import { SITE_URL as BASE } from "@/config/site";
 
 // as-needed 전략: 기본어(ko)는 접두어 없음, 영문은 /en 접두어.
 // 각 경로마다 alternates.languages로 hreflang을 선언한다.

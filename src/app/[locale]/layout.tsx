@@ -6,10 +6,8 @@ import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
+import { SITE_URL, OG_LOCALE } from "@/config/site";
 import "../globals.css";
-
-const BASE = "https://www.merlotlab.com";
-const OG_LOCALE: Record<string, string> = { ko: "ko_KR", en: "en_US" };
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,10 +27,10 @@ export async function generateMetadata({
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "metadata" });
   // as-needed: 기본어(ko)는 접두어 없음, 그 외는 /{locale}
-  const localeRoot = locale === routing.defaultLocale ? BASE : `${BASE}/${locale}`;
+  const localeRoot = locale === routing.defaultLocale ? SITE_URL : `${SITE_URL}/${locale}`;
 
   return {
-    metadataBase: new URL(BASE),
+    metadataBase: new URL(SITE_URL),
     title: {
       default: t("titleDefault"),
       template: t("titleTemplate"),
