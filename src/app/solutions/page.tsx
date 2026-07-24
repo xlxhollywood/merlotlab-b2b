@@ -73,7 +73,7 @@ function SolutionItem({
         >
           <div className="flex-1 flex justify-center">
             <Image
-              src={imageSrc || "/placeholder.svg"}
+              src={imageSrc || "/images/placeholder.svg"}
               alt={imageAlt}
               width={imageWidth}
               height={300}
@@ -160,7 +160,7 @@ function SmartphoneSection() {
           >
             <div className="relative">
               <Image
-                src="/grid phone.png"
+                src="/images/solutions/grid-phone.png"
                 alt="전력 관리 앱 화면"
                 width={600}
                 height={1200}
@@ -231,7 +231,7 @@ export default function Solutions() {
       title: "물류 센터",
       description:
         "대형 창고와 물류 시설의 운영 효율성을 높여,  <br> 에너지 비용을 절감하는 맞춤형 솔루션을 <br> 제공합니다.",
-      imageSrc: "/물류.png",
+      imageSrc: "/images/solutions/logistics.png",
       imageAlt: "물류센터 스마트 조명",
       imageWidth: 450,
       badgeText: "물류 동선 최적화",
@@ -240,7 +240,7 @@ export default function Solutions() {
     {
       title: "제조 시설",
       description: "제조 환경에 최적화된 조도로 작업 정확도를 <br>높이고, 불필요한 에너지 낭비를 줄여드립니다.",
-      imageSrc: "/공장3.png",
+      imageSrc: "/images/solutions/factory.png",
       imageAlt: "제조시설 조명",
       imageWidth: 450,
       reverse: true,
@@ -251,7 +251,7 @@ export default function Solutions() {
       title: "주차장",
       description:
         "차량 이동과 사람의 통행이 빈번한 주차장 환경에 맞춰, 감지 기반 조명의 스케줄링과  <br>  밝기 설정을 통해 에너지를 최적화합니다.",
-      imageSrc: "/주차장.png",
+      imageSrc: "/images/solutions/parking.png",
       imageAlt: "주차장",
       imageWidth: 450,
       badgeText: "감지 기반 운영",
@@ -261,7 +261,7 @@ export default function Solutions() {
       title: "사무실",
       description:
         "눈의 피로를 줄이고 집중력을 높일 수 있는 <br> 쾌적한 근무 환경과 에너지 절감 효과를  <br> 동시에 누리세요.",
-      imageSrc: "/사무실.png",
+      imageSrc: "/images/solutions/office.png",
       imageAlt: "사무실 스마트 조명",
       imageWidth: 450,
       reverse: true,

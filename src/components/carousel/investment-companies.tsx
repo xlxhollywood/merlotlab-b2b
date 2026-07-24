@@ -6,52 +6,52 @@ export default function InvestmentCompanies() {
   const companies = [
     {
       name: "삼성전자",
-      logo: "/삼성전자.png",
+      logo: "/images/logos/samsung-electronics.png",
       alt: "삼성전자 로고",
     },
     {
       name: "현대모비스",
-      logo: "/현대모비스.png",
+      logo: "/images/logos/hyundai-mobis.png",
       alt: "현대모비스 로고",
     },
     {
       name: "SK텔레콤",
-      logo: "/SKT.png",
+      logo: "/images/logos/sk-telecom.png",
       alt: "SK텔레콤 로고",
     },
     {
       name: "GS리테일",
-      logo: "/GS리테일.png",
+      logo: "/images/logos/gs-retail.png",
       alt: "GS리테일 로고",
     },
     {
       name: "GS네트웍스",
-      logo: "/GS네트웍스.png",
+      logo: "/images/logos/gs-networks.png",
       alt: "GS네트웍스 로고",
     },
     {
       name: "CJ대한통운",
-      logo: "/CJ대한통운.png",
+      logo: "/images/logos/cj-logistics.png",
       alt: "CJ대한통운 로고",
     },
     {
       name: "이마트",
-      logo: "/이마트.png",
+      logo: "/images/logos/emart.png",
       alt: "이마트 로고",
     },
     {
       name: "BGF로지스",
-      logo: "/BGF로지스.png",
+      logo: "/images/logos/bgf-logis.png",
       alt: "BGF로지스 로고",
     },
     {
       name: "NH투자증권",
-      logo: "/NH투자증권.png",
+      logo: "/images/logos/nh-securities.png",
       alt: "NH투자증권 로고",
     },
     {
       name: "신한은행",
-      logo: "/신한은행.png",
+      logo: "/images/logos/shinhan-bank.png",
       alt: "신한은행 로고",
     },
   ]
@@ -92,7 +92,7 @@ export default function InvestmentCompanies() {
                 {/* ① 이미지 박스만 고정 크기 - 완전한 가운데 정렬 */}
                 <div className={`flex items-center justify-center ${imgBox} relative mb-2`}>
                   <Image
-                    src={company.logo || "/placeholder.svg"}
+                    src={company.logo || "/images/placeholder.svg"}
                     alt={company.alt}
                     width={imgSize}
                     height={imgSize}

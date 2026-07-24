@@ -313,7 +313,7 @@ export default function PortfolioInfiniteScroll({ activeFilter = "all" }: Portfo
                       <>
                         <Image
                           alt={`${caseStudy.title} 이미지 ${currentImageIndex + 1}`}
-                          src={currentImageUrl || "/placeholder.svg"}
+                          src={currentImageUrl || "/images/placeholder.svg"}
                           width={400}
                           height={250}
                           className="h-full w-full rounded-md object-cover brightness-100 transition-all duration-300"

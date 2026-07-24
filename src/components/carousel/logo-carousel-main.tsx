@@ -12,77 +12,77 @@ export default function LogoCarouselMain() {
   const companies = [
     {
       name: "삼성전자",
-      logo: "/삼성전자.png",
+      logo: "/images/logos/samsung-electronics.png",
       alt: "삼성전자 로고",
       width: 180,
       height: 26,
     },
     {
       name: "삼성 디스플레이",
-      logo: "/삼성 디스플레이.svg",
+      logo: "/images/logos/samsung-display.svg",
       alt: "삼성전자 디스플레이",
       width: 160,
       height: 8,
     },
     {
       name: "현대모비스",
-      logo: "/현대모비스.png",
+      logo: "/images/logos/hyundai-mobis.png",
       alt: "현대모비스 로고",
       width: 160,
       height: 10,
     },
     {
       name: "SK텔레콤",
-      logo: "/SKT.png",
+      logo: "/images/logos/sk-telecom.png",
       alt: "SK텔레콤 로고",
       width: 175,
       height: 25,
     },
     {
       name: "GS리테일",
-      logo: "/GS리테일.png",
+      logo: "/images/logos/gs-retail.png",
       alt: "GS리테일 로고",
       width: 145,
       height: 85,
     },
     {
       name: "GS네트웍스",
-      logo: "/GS네트웍스.png",
+      logo: "/images/logos/gs-networks.png",
       alt: "GS네트웍스 로고",
       width: 200,
       height: 80,
     },
     {
       name: "CJ대한통운",
-      logo: "/CJ대한통운.png",
+      logo: "/images/logos/cj-logistics.png",
       alt: "CJ대한통운 로고",
       width: 180,
       height: 80,
     },
     {
       name: "이마트",
-      logo: "/이마트.png",
+      logo: "/images/logos/emart.png",
       alt: "이마트 로고",
       width: 125,
       height: 40,
     },
     {
       name: "BGF로지스",
-      logo: "/BGF로지스.png",
+      logo: "/images/logos/bgf-logis.png",
       alt: "BGF로지스 로고",
       width: 185,
       height: 195,
     },
     {
       name: "NH투자증권",
-      logo: "/NH투자증권.png",
+      logo: "/images/logos/nh-securities.png",
       alt: "NH투자증권 로고",
       width: 225,
       height: 75,
     },
     {
       name: "신한은행",
-      logo: "/신한은행.png",
+      logo: "/images/logos/shinhan-bank.png",
       alt: "신한은행 로고",
       width: 175,
       height: 50,
@@ -121,7 +121,7 @@ export default function LogoCarouselMain() {
               }}
             >
               <Image
-                src={company.logo || "/placeholder.svg"}
+                src={company.logo || "/images/placeholder.svg"}
                 alt={company.alt}
                 width={company.width}
                 height={company.height}

@@ -35,7 +35,7 @@ const Header: React.FC = () => {
                 width={150}
                 height={25}
                 alt="메를로랩 로고"
-                src="/메를로랩 로고.png"
+                src="/images/brand/logo.png"
                 unoptimized
               />
             </Link>

@@ -4,7 +4,7 @@ import Image from "next/image"
 
 const strengths = [
   {
-    image: "/network cable.png",
+    image: "/images/icons/network-cable.png",
     title: "세계 최고 수준의 독자 기술력",
     description: (
       <>
@@ -14,7 +14,7 @@ const strengths = [
     ),
   },
   {
-    image: "/flash.png",
+    image: "/images/icons/flash.png",
     title: "국내 DR 분야 선도 기업",
     description: (
       <>
@@ -24,7 +24,7 @@ const strengths = [
     ),
   },
   {
-    image: "/white gear.png",
+    image: "/images/icons/gear-white.png",
     title: "통합 솔루션 기반 원스톱 서비스",
     description: (
       <>
@@ -36,7 +36,7 @@ const strengths = [
   },
   {
 
-    image: "/eco.png",
+    image: "/images/icons/eco.png",
     title: "경제성과 환경 가치의 동시 실현",
     description: (
       <>
@@ -80,7 +80,7 @@ export default function FloatingCards() {
             <div className="flex flex-col items-center text-center ">
               <div className={`mb-10 float-${index + 1}`}>
                 <Image
-                  src={strength.image || "/placeholder.svg"}
+                  src={strength.image || "/images/placeholder.svg"}
                   alt={strength.title}
                   width={120}
                   height={120}

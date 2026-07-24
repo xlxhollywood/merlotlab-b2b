@@ -11,15 +11,15 @@ import Link from "next/link";
 const certifications = [
   {
     title: "ISO 9001:2015 품질경영시스템 인증",
-    image: "/about/인증서1.png",
+    image: "/images/about/certificate-1.png",
   },
   {
     title: "고효율에너지기자재 인증 (스마트LED조명제어시스템)",
-    image: "/about/인증서2.png",
+    image: "/images/about/certificate-2.png",
   },
   {
     title: "상생협력제품 확인서 (중소벤처기업부장관)",
-    image: "/about/인증서6.png",
+    image: "/images/about/certificate-6.png",
   },
 ];
 
@@ -105,7 +105,7 @@ export default function About() {
             loop
             playsInline
             className="absolute top-0 left-0 w-full h-full object-cover z-0 scale-[1.01]"
-            src="/about/hero-compressed.mp4"
+            src="/videos/about-hero.mp4"
           />
         )}
 
@@ -210,7 +210,7 @@ export default function About() {
                       className="w-full h-96 relative overflow-hidden"
                     >
                       <Image
-                        src={cert.image || "/placeholder.svg"}
+                        src={cert.image || "/images/placeholder.svg"}
                         alt={cert.title}
                         fill
                         className="object-contain"
@@ -237,7 +237,7 @@ export default function About() {
                         style={{ scrollSnapAlign: "start" }}
                       >
                         <Image
-                          src={cert.image || "/placeholder.svg"}
+                          src={cert.image || "/images/placeholder.svg"}
                           alt={cert.title}
                           fill
                           className="object-contain"
@@ -316,7 +316,7 @@ export default function About() {
                         height={33}
                         sizes="100vw"
                         alt="메를로랩 로고"
-                        src="/메를로랩 로고2.png"
+                        src="/images/brand/logo-alt.png"
                       />
                       <div className="w-px bg-[#404040] h-32"></div>
                     </div>
@@ -369,7 +369,7 @@ export default function About() {
                       width={204}
                       height={33}
                       alt="메를로랩 로고"
-                      src="/메를로랩 로고2.png"
+                      src="/images/brand/logo-alt.png"
                     />
                   </div>
                   <div className="hidden sm:block w-px bg-[#404040] h-16 lg:h-32"></div>
