@@ -1,1 +1,62 @@
-{}
+{
+  "nav": {
+    "solutions": "EMS 솔루션",
+    "cases": "도입 사례",
+    "about": "회사 소개",
+    "ir": "IR Center"
+  },
+  "common": {
+    "logoAlt": "메를로랩 로고",
+    "inquiry": "문의하기"
+  },
+  "language": {
+    "korean": "한국어",
+    "english": "English",
+    "toggleLanguage": "언어 변경"
+  },
+  "footer": {
+    "tagline1": "설비 환경 분석부터 현장 최적화된 에너지 운영까지",
+    "tagline2": "절감의 패러다임을 바꿉니다",
+    "address": "서울특별시 금천구 디지털로9길 68 (가산동) 대륭포스트 타워 5차 2002~2005호",
+    "phone": "문의전화 : 02) 862-1700",
+    "businessNumber": "사업장 등록번호 : 119-86-57418",
+    "copyright": "© Copyright merlot.lab All Rights Reserved."
+  },
+  "about": {
+    "hero1": "에너지 절감의",
+    "hero2": "새로운 기준을 만듭니다",
+    "certSectionTitle": "특허 및 인증서",
+    "certSectionDesc": "메를로랩의 기술력과 품질을 인정받은 특허 및 인증서입니다",
+    "patentDomestic": "국내 특허",
+    "patentInternational": "해외 특허",
+    "certLabel": "인증서",
+    "unitCase": "건",
+    "unitCount": "개",
+    "cert1": "ISO 9001:2015 품질경영시스템 인증",
+    "cert2": "고효율에너지기자재 인증 (스마트LED조명제어시스템)",
+    "cert3": "상생협력제품 확인서 (중소벤처기업부장관)",
+    "directionsTitle": "오시는 길",
+    "directionsDesc": "메를로랩을 방문하시는 고객님을 위한 안내입니다.",
+    "labelAddress": "주소",
+    "labelHours": "운영시간",
+    "labelEmail": "이메일",
+    "labelPhone": "연락처",
+    "address": "서울특별시 금천구 디지털로9길 68 (가산동) 대륭포스트 타워 5차 2002~2005호",
+    "hours": "09:00 ~ 18:00 (토, 일, 공휴일 휴무)",
+    "phone": "02) 862 - 1700",
+    "subwayTitle": "지하철 이용시",
+    "busTitle": "버스 이용시",
+    "carTitle": "자가용 이용시",
+    "station": "가산디지털단지역",
+    "subwayDesc": "가산디지털단지역 4번 출구 도보 10분",
+    "busDesc": "가산디지털단지역 입구 정류장 하차",
+    "busTrunk": "간선",
+    "busBranch": "지선",
+    "busGeneral": "일반",
+    "tower": "대륭포스트 타워 5차",
+    "carDesc": "네비게이션 '대륭포스트 타워 5차'로 설정",
+    "ctaTitle": "내 사업장에 가장 알맞은 관리",
+    "ctaSubtitle": "전기요금 최적화 지금 시작하세요",
+    "cta": "문의 하기"
+  }
+}

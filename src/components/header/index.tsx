@@ -3,14 +3,17 @@
 import type React from "react"
 import { useCallback, useState } from "react" // useEffect, handleScroll 제거
 import Image from "next/image"
-import Link from "next/link"
 import { Menu, X } from "lucide-react"
-import { usePathname } from "next/navigation"
+import { useTranslations } from "next-intl"
+import { Link, usePathname } from "@/i18n/navigation"
 import { Button } from "@/components/ui/button" // Button 컴포넌트 임포트
+import LocaleToggle from "@/components/ui/locale-toggle"
 
 const Header: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const pathname = usePathname()
+  const t = useTranslations("nav")
+  const tCommon = useTranslations("common")
   const onContainerClick = useCallback(() => {
     // Add your code here
   }, [])
@@ -34,7 +37,7 @@ const Header: React.FC = () => {
                 className="h-auto w-36"
                 width={150}
                 height={25}
-                alt="메를로랩 로고"
+                alt={tCommon("logoAlt")}
                 src="/images/brand/logo.png"
                 unoptimized
               />
@@ -51,7 +54,7 @@ const Header: React.FC = () => {
                   pathname === "/solutions" ? "text-[#583CF2]" : "text-gray-700 group-hover:text-[#583CF2]"
                 }`}
               >
-                EMS 솔루션
+                {t("solutions")}
               </div>
             </div>
           </Link>
@@ -63,7 +66,7 @@ const Header: React.FC = () => {
                   pathname === "/cases" ? "text-[#583CF2]" : "text-gray-700 group-hover:text-[#583CF2]"
                 }`}
               >
-                도입 사례
+                {t("cases")}
               </div>
             </div>
           </Link>
@@ -75,7 +78,7 @@ const Header: React.FC = () => {
                   pathname === "/about" ? "text-[#583CF2]" : "text-gray-700 group-hover:text-[#583CF2]"
                 }`}
               >
-                회사 소개
+                {t("about")}
               </div>
             </div>
           </Link>
@@ -87,26 +90,23 @@ const Header: React.FC = () => {
                   pathname.startsWith("/ir") ? "text-[#583CF2]" : "text-gray-700 group-hover:text-[#583CF2]"
                 }`}
               >
-                IR Center
+                {t("ir")}
               </div>
             </div>
           </Link>
         </div>
-        {/* 데스크톱 문의하기 버튼 
-        <div className="hidden lg:block ml-auto 2xl:mr-36 xl:mr-10">
-          <Button asChild className="bg-[#583CF2] hover:bg-[#4a32d0] text-white">
-            <Link href="/?tab=business">문의하기</Link>
-          </Button>
-        </div>
-        */}
 
-        {/* 모바일 햄버거 메뉴 버튼 */}
-        <button
-          className="lg:hidden text-gray-700 hover:text-[#583CF2] transition-colors duration-200"
-          onClick={toggleMobileMenu}
-        >
-          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        {/* 우측: 언어 토글 + (모바일) 햄버거 */}
+        <div className="flex items-center gap-2 ml-auto 2xl:mr-36 xl:mr-10">
+          <LocaleToggle />
+          <button
+            className="lg:hidden text-gray-700 hover:text-[#583CF2] transition-colors duration-200"
+            onClick={toggleMobileMenu}
+            aria-label="menu"
+          >
+            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </div>
       {/* 모바일 메뉴 */}
       <div
@@ -122,7 +122,7 @@ const Header: React.FC = () => {
                 pathname === "/solutions" ? "text-[#583CF2]" : "text-gray-700 hover:text-[#583CF2]"
               }`}
             >
-              EMS 솔루션
+              {t("solutions")}
             </div>
           </Link>
           {/* 도입 사례 */}
@@ -132,7 +132,7 @@ const Header: React.FC = () => {
                 pathname === "/cases" ? "text-[#583CF2]" : "text-gray-700 hover:text-[#583CF2]"
               }`}
             >
-              도입 사례
+              {t("cases")}
             </div>
           </Link>
           {/* 회사 소개 */}
@@ -142,7 +142,7 @@ const Header: React.FC = () => {
                 pathname === "/about" ? "text-[#583CF2]" : "text-gray-700 hover:text-[#583CF2]"
               }`}
             >
-              회사 소개
+              {t("about")}
             </div>
           </Link>
           {/* IR Center */}
@@ -152,12 +152,12 @@ const Header: React.FC = () => {
                 pathname.startsWith("/ir") ? "text-[#583CF2]" : "text-gray-700 group-hover:text-[#583CF2]"
               }`}
             >
-              IR Center
+              {t("ir")}
             </div>
           </Link>
           {/* 모바일 문의하기 버튼 */}
           <Link href="/?tab=business" className="block" onClick={toggleMobileMenu}>
-            <Button className="w-full bg-[#583CF2] hover:bg-[#4a32d0] text-white py-2">문의하기</Button>
+            <Button className="w-full bg-[#583CF2] hover:bg-[#4a32d0] text-white py-2">{tCommon("inquiry")}</Button>
           </Link>
         </div>
       </div>
