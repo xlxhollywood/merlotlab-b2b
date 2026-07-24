@@ -5,6 +5,16 @@
     "about": "About",
     "ir": "IR Center"
   },
+  "metadata": {
+    "siteName": "MerlotLab",
+    "titleDefault": "MerlotLab",
+    "titleTemplate": "%s | MerlotLab",
+    "description": "EMS solutions · case studies · company · IR Center — from facility environment analysis to on-site optimized energy operations, we change the paradigm of savings.",
+    "ogTitle": "MerlotLab | EMS Solutions · Case Studies · IR Center",
+    "ogDescription": "From facility environment analysis to on-site optimized energy operations, we change the paradigm of savings.",
+    "homeTitle": "MerlotLab",
+    "homeDescription": "EMS solutions · case studies · company · IR Center — from facility environment analysis to on-site optimized energy operations, we change the paradigm of savings."
+  },
   "common": {
     "logoAlt": "MerlotLab logo",
     "inquiry": "Contact"
