@@ -1,6 +1,7 @@
 "use client"
 import { useState, useEffect, useRef, useCallback, useMemo } from "react"
 import { Search, X, ChevronLeft, ChevronRight } from "lucide-react"
+import { useTranslations } from "next-intl"
 import { supabase, type LocationData } from "@/components/lib/supabase"
 import Image from "next/image"
 
@@ -8,7 +9,7 @@ interface PortfolioCard {
   id: string
   title: string
   subtitle: string
-  tags: string[]
+  category: string
   images: string[]
   description: string | null
 }
@@ -20,6 +21,15 @@ interface PortfolioInfiniteScrollProps {
 const itemsPerLoad = 5
 
 export default function PortfolioInfiniteScroll({ activeFilter = "all" }: PortfolioInfiniteScrollProps) {
+  const t = useTranslations("portfolio")
+  const tCat = useTranslations("caseCategory")
+
+  // 카테고리 코드 → 현재 locale 라벨. 미지의 코드는 코드 그대로 노출.
+  const categoryLabel = useCallback(
+    (code: string) => (tCat.has(code) ? tCat(code) : code),
+    [tCat],
+  )
+
   const [searchQuery, setSearchQuery] = useState("")
   const [displayedItems, setDisplayedItems] = useState<PortfolioCard[]>([])
   const [allCaseStudies, setAllCaseStudies] = useState<PortfolioCard[]>([])
@@ -30,23 +40,6 @@ export default function PortfolioInfiniteScroll({ activeFilter = "all" }: Portfo
   const [imageIndexes, setImageIndexes] = useState<{ [key: string]: number }>({})
   const observerRef = useRef<HTMLDivElement>(null)
   const [newlyAddedItems, setNewlyAddedItems] = useState<Set<string>>(new Set())
-
-  // 카테고리 한글 변환 함수
-  const getCategoryInKorean = (category: string): string => {
-    const categoryMap: { [key: string]: string } = {
-      logistics_center: "물류센터",
-      parking_lot: "주차장",
-      factory: "공장",
-      office: "사무실",
-      warehouse: "창고",
-      retail: "소매점",
-      hospital: "병원",
-      school: "학교",
-      apartment: "아파트",
-      hotel: "호텔",
-    }
-    return categoryMap[category] || category
-  }
 
   // Supabase에서 데이터 가져오기
   useEffect(() => {
@@ -61,16 +54,16 @@ export default function PortfolioInfiniteScroll({ activeFilter = "all" }: Portfo
           return
         }
 
-        // 데이터 변환 부분에서 카테고리를 한글로 변환
+        // 카테고리는 코드(item.category)를 그대로 보관 → 표시/필터를 locale과 분리
         const transformedData: PortfolioCard[] = data.map((item: LocationData) => ({
           id: item.id,
           title: item.korean_name || item.place_name,
-          subtitle: item.description || "시스템 도입 사례",
-          tags: [getCategoryInKorean(item.category)],
+          subtitle: item.description || t("defaultSubtitle"),
+          category: item.category,
           images: item.image_urls || [],
           description: item.description,
         }))
-      
+
         setAllCaseStudies(transformedData)
         setIsInitialLoading(false)
       } catch (error) {
@@ -79,48 +72,30 @@ export default function PortfolioInfiniteScroll({ activeFilter = "all" }: Portfo
       }
     }
     fetchData()
-  }, [])
+  }, [t])
 
-  // 검색어에 따라 필터링된 데이터
+  // 검색어/필터에 따라 필터링된 데이터
   const filteredCaseStudies = useMemo(() => {
     let filtered = allCaseStudies
 
-    // 카테고리 필터 적용
+    // 카테고리 필터: 코드끼리 직접 비교 (locale 무관)
     if (activeFilter && activeFilter !== "all") {
-      // filterToKorean을 getCategoryInKorean과 동일하게 수정
-      const filterToKorean: { [key: string]: string } = {
-        logistics_center: "물류센터",
-        parking_lot: "주차장",
-        factory: "공장",
-        office: "사무실",
-        warehouse: "창고",
-        retail: "소매점",
-        hospital: "병원",
-        school: "학교",
-        apartment: "아파트",
-        hotel: "호텔",
-      }
-      const targetCategory = filterToKorean[activeFilter]
-      if (targetCategory) {
-        filtered = filtered.filter((item) => {
-          return item.tags.some((tag) => tag === targetCategory)
-        })
-      }
+      filtered = filtered.filter((item) => item.category === activeFilter)
     }
 
-    // 검색어 필터 적용
+    // 검색어 필터: 제목/부제 + 현재 locale 카테고리 라벨 대상으로 매칭
     if (searchQuery.trim()) {
       const query = searchQuery.toLowerCase()
       filtered = filtered.filter((item) => {
         return (
           item.title.toLowerCase().includes(query) ||
           item.subtitle.toLowerCase().includes(query) ||
-          item.tags.some((tag) => tag.toLowerCase().includes(query))
+          categoryLabel(item.category).toLowerCase().includes(query)
         )
       })
     }
     return filtered
-  }, [searchQuery, allCaseStudies, activeFilter])
+  }, [searchQuery, allCaseStudies, activeFilter, categoryLabel])
 
   // 검색어가 변경될 때 결과 초기화
   useEffect(() => {
@@ -212,7 +187,7 @@ export default function PortfolioInfiniteScroll({ activeFilter = "all" }: Portfo
       <div className="mt-10">
         <div className="text-center py-12">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#583CF2] mx-auto"></div>
-          <p className="mt-4 text-gray-600">데이터를 불러오는 중...</p>
+          <p className="mt-4 text-gray-600">{t("loading")}</p>
         </div>
       </div>
     )
@@ -228,7 +203,7 @@ export default function PortfolioInfiniteScroll({ activeFilter = "all" }: Portfo
           </div>
           <input
             type="text"
-            placeholder="회사명, 업종으로 검색"
+            placeholder={t("searchPlaceholder")}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="block w-full pl-10 pr-10 py-3 border border-gray-300 rounded-lg leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-2 focus:ring-[#583CF2] focus:border-transparent transition-all duration-200"
@@ -243,9 +218,7 @@ export default function PortfolioInfiniteScroll({ activeFilter = "all" }: Portfo
         {searchQuery && (
           <div className="text-center mt-4">
             <p className="text-sm text-gray-600">
-              {'"'}
-              {searchQuery}
-              {'"'}에 대한 검색 결과: {filteredCaseStudies.length}개
+              {t("searchResult", { query: searchQuery, count: filteredCaseStudies.length })}
             </p>
           </div>
         )}
@@ -261,8 +234,8 @@ export default function PortfolioInfiniteScroll({ activeFilter = "all" }: Portfo
         <div className="text-center py-12">
           <div className="text-gray-500 mb-4">
             <Search className="h-12 w-12 mx-auto mb-4 opacity-50" />
-            <p className="text-lg font-medium">검색 결과가 없습니다</p>
-            <p className="text-sm mt-2">다른 키워드로 검색해보세요</p>
+            <p className="text-lg font-medium">{t("noResultsTitle")}</p>
+            <p className="text-sm mt-2">{t("noResultsDesc")}</p>
           </div>
         </div>
       )}
@@ -296,15 +269,12 @@ export default function PortfolioInfiniteScroll({ activeFilter = "all" }: Portfo
                     </h5>
                     <div>
                       <div className="flex flex-wrap gap-2">
-                        {caseStudy.tags.map((tag, tagIndex) => (
-                          <span
-                            key={tagIndex}
-                            className="text-sm h-fit w-fit rounded-md px-3 py-1.5 text-white"
-                            style={{ backgroundColor: "#583CF2" }}
-                          >
-                            {tag}
-                          </span>
-                        ))}
+                        <span
+                          className="text-sm h-fit w-fit rounded-md px-3 py-1.5 text-white"
+                          style={{ backgroundColor: "#583CF2" }}
+                        >
+                          {categoryLabel(caseStudy.category)}
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -312,7 +282,7 @@ export default function PortfolioInfiniteScroll({ activeFilter = "all" }: Portfo
                     {caseStudy.images.length > 0 ? (
                       <>
                         <Image
-                          alt={`${caseStudy.title} 이미지 ${currentImageIndex + 1}`}
+                          alt={t("imageAlt", { title: caseStudy.title, index: currentImageIndex + 1 })}
                           src={currentImageUrl || "/images/placeholder.svg"}
                           width={400}
                           height={250}
@@ -328,7 +298,7 @@ export default function PortfolioInfiniteScroll({ activeFilter = "all" }: Portfo
                             <button
                               onClick={() => prevImage(caseStudy.id, caseStudy.images.length)}
                               className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-transparent hover:bg-white/20 text-white p-2 rounded-full transition-all duration-200"
-                              aria-label="이전 이미지"
+                              aria-label={t("prevImage")}
                             >
                               <ChevronLeft className="w-4 h-4" />
                             </button>
@@ -336,7 +306,7 @@ export default function PortfolioInfiniteScroll({ activeFilter = "all" }: Portfo
                             <button
                               onClick={() => nextImage(caseStudy.id, caseStudy.images.length)}
                               className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-transparent hover:bg-white/20 text-white p-2 rounded-full transition-all duration-200"
-                              aria-label="다음 이미지"
+                              aria-label={t("nextImage")}
                             >
                               <ChevronRight className="w-4 h-4" />
                             </button>
@@ -349,7 +319,7 @@ export default function PortfolioInfiniteScroll({ activeFilter = "all" }: Portfo
                       </>
                     ) : (
                       <div className="h-full w-full rounded-md bg-gray-200 flex items-center justify-center">
-                        <span className="text-gray-500">이미지 없음</span>
+                        <span className="text-gray-500">{t("noImage")}</span>
                       </div>
                     )}
                   </div>
@@ -369,7 +339,7 @@ export default function PortfolioInfiniteScroll({ activeFilter = "all" }: Portfo
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             className="bg-[#583CF2] hover:bg-[#583CF2]/90 text-white p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110"
-            aria-label="맨 위로 가기"
+            aria-label={t("scrollTop")}
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
