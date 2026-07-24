@@ -1,1 +1,62 @@
-{}
+{
+  "nav": {
+    "solutions": "EMS Solutions",
+    "cases": "Case Studies",
+    "about": "About",
+    "ir": "IR Center"
+  },
+  "common": {
+    "logoAlt": "MerlotLab logo",
+    "inquiry": "Contact"
+  },
+  "language": {
+    "korean": "한국어",
+    "english": "English",
+    "toggleLanguage": "Change language"
+  },
+  "footer": {
+    "tagline1": "From facility environment analysis to on-site optimized energy operations",
+    "tagline2": "We are changing the paradigm of savings",
+    "address": "#2002–2005, Daeryung Post Tower 5, 68 Digital-ro 9-gil, Geumcheon-gu, Seoul, Korea",
+    "phone": "Tel : +82-2-862-1700",
+    "businessNumber": "Business Reg. No. : 119-86-57418",
+    "copyright": "© Copyright merlot.lab All Rights Reserved."
+  },
+  "about": {
+    "hero1": "A new standard for",
+    "hero2": "energy savings",
+    "certSectionTitle": "Patents & Certifications",
+    "certSectionDesc": "Patents and certifications that recognize MerlotLab's technology and quality",
+    "patentDomestic": "Domestic Patents",
+    "patentInternational": "International Patents",
+    "certLabel": "Certifications",
+    "unitCase": "",
+    "unitCount": "",
+    "cert1": "ISO 9001:2015 Quality Management System Certification",
+    "cert2": "High-Efficiency Energy Equipment Certification (Smart LED Lighting Control System)",
+    "cert3": "Win-Win Cooperation Product Certificate (Minister of SMEs and Startups)",
+    "directionsTitle": "Directions",
+    "directionsDesc": "Information for customers visiting MerlotLab.",
+    "labelAddress": "Address",
+    "labelHours": "Hours",
+    "labelEmail": "Email",
+    "labelPhone": "Phone",
+    "address": "#2002–2005, Daeryung Post Tower 5, 68 Digital-ro 9-gil, Geumcheon-gu, Seoul, Korea",
+    "hours": "09:00 – 18:00 (Closed Sat, Sun & holidays)",
+    "phone": "+82-2-862-1700",
+    "subwayTitle": "By Subway",
+    "busTitle": "By Bus",
+    "carTitle": "By Car",
+    "station": "Gasan Digital Complex Station",
+    "subwayDesc": "10-min walk from Exit 4, Gasan Digital Complex Station",
+    "busDesc": "Get off at the Gasan Digital Complex Station entrance stop",
+    "busTrunk": "Trunk",
+    "busBranch": "Branch",
+    "busGeneral": "General",
+    "tower": "Daeryung Post Tower 5",
+    "carDesc": "Set your navigation to 'Daeryung Post Tower 5'",
+    "ctaTitle": "The right management for your site",
+    "ctaSubtitle": "Start optimizing your electricity bill today",
+    "cta": "Contact us"
+  }
+}

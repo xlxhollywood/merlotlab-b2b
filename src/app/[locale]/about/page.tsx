@@ -6,24 +6,19 @@ import KakaoMap from "@/components/ui/kakao-map";
 import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
 import { ArrowRight } from "lucide-react";
-import Link from "next/link";
-
-const certifications = [
-  {
-    title: "ISO 9001:2015 품질경영시스템 인증",
-    image: "/images/about/certificate-1.png",
-  },
-  {
-    title: "고효율에너지기자재 인증 (스마트LED조명제어시스템)",
-    image: "/images/about/certificate-2.png",
-  },
-  {
-    title: "상생협력제품 확인서 (중소벤처기업부장관)",
-    image: "/images/about/certificate-6.png",
-  },
-];
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 
 export default function About() {
+  const t = useTranslations("about");
+  const tCommon = useTranslations("common");
+
+  const certifications = [
+    { title: t("cert1"), image: "/images/about/certificate-1.png" },
+    { title: t("cert2"), image: "/images/about/certificate-2.png" },
+    { title: t("cert3"), image: "/images/about/certificate-6.png" },
+  ];
+
   const [currentCertIndex, setCurrentCertIndex] = useState(0);
   const [activePatentTab, setActivePatentTab] = useState<
     "domestic" | "international"
@@ -116,12 +111,12 @@ export default function About() {
         <div className="relative z-10 text-center text-white max-w-4xl mx-auto">
           <FadeInUp delay={300}>
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6">
-              에너지 절감의
+              {t("hero1")}
             </h1>
           </FadeInUp>
           <FadeInUp delay={600}>
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-              새로운 기준을 만듭니다
+              {t("hero2")}
             </h1>
           </FadeInUp>
         </div>
@@ -133,11 +128,10 @@ export default function About() {
           <FadeInUp delay={300}>
             <div className="text-center text-gray-700 py-8 mb-8 sm:mb-12 lg:mb-16">
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-                특허 및 인증서
+                {t("certSectionTitle")}
               </h2>
               <p className="text-base sm:text-lg text-gray-600 px-4">
-                메를로랩의 기술력과 품질을 인정받은 <br className="sm:hidden" />{" "}
-                특허 및 인증서입니다
+                {t("certSectionDesc")}
               </p>
             </div>
           </FadeInUp>
@@ -151,14 +145,14 @@ export default function About() {
                   <div className="flex items-center justify-center mb-4">
                     <div className="text-2xl sm:text-3xl mr-2">🇰🇷</div>
                     <div className="text-base sm:text-lg font-semibold text-gray-700">
-                      국내 특허
+                      {t("patentDomestic")}
                     </div>
                   </div>
                   <div className="flex items-center justify-center gap-1">
                     <div className="text-3xl sm:text-4xl font-bold text-[#583CF2]">
                       21
                     </div>
-                    <div className="text-sm text-gray-700">건</div>
+                    <div className="text-sm text-gray-700">{t("unitCase")}</div>
                   </div>
                 </div>
 
@@ -167,14 +161,14 @@ export default function About() {
                   <div className="flex items-center justify-center mb-4">
                     <div className="text-2xl sm:text-3xl mr-2">🌍</div>
                     <div className="text-base sm:text-lg font-semibold text-gray-700">
-                      해외 특허
+                      {t("patentInternational")}
                     </div>
                   </div>
                   <div className="flex items-center justify-center gap-1">
                     <div className="text-3xl sm:text-4xl font-bold text-[#583CF2]">
                       9
                     </div>
-                    <div className="text-sm text-gray-700">건</div>
+                    <div className="text-sm text-gray-700">{t("unitCase")}</div>
                   </div>
                 </div>
 
@@ -183,14 +177,14 @@ export default function About() {
                   <div className="flex items-center justify-center mb-4">
                     <div className="text-2xl sm:text-3xl mr-2">📑</div>
                     <div className="text-base sm:text-lg font-semibold text-gray-700">
-                      인증서
+                      {t("certLabel")}
                     </div>
                   </div>
                   <div className="flex items-center justify-center gap-1">
                     <div className="text-3xl sm:text-4xl font-bold text-[#583CF2]">
                       {certifications.length}
                     </div>
-                    <div className="text-sm text-gray-700">개</div>
+                    <div className="text-sm text-gray-700">{t("unitCount")}</div>
                   </div>
                 </div>
               </div>
@@ -280,10 +274,10 @@ export default function About() {
         <FadeInUp delay={300}>
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-              오시는 길
+              {t("directionsTitle")}
             </h2>
             <p className="text-lg text-gray-600">
-              메를로랩을 방문하시는 고객님을 위한 안내입니다.
+              {t("directionsDesc")}
             </p>
           </div>
         </FadeInUp>
@@ -315,7 +309,7 @@ export default function About() {
                         width={204}
                         height={33}
                         sizes="100vw"
-                        alt="메를로랩 로고"
+                        alt={tCommon("logoAlt")}
                         src="/images/brand/logo-alt.png"
                       />
                       <div className="w-px bg-[#404040] h-32"></div>
@@ -325,22 +319,21 @@ export default function About() {
                   {/* 상세 정보 섹션 */}
                   <div className="space-y-3 ml-16">
                     <div className="flex">
-                      <div className="font-bold text-gray-50 w-20">주소</div>
+                      <div className="font-bold text-gray-50 w-20">{t("labelAddress")}</div>
                       <div className="text-zinc-300 ml-2">
-                        서울특별시 금천구 디지털로9길 68 (가산동) 대륭포스트
-                        타워 5차 2002~2005호
+                        {t("address")}
                       </div>
                     </div>
                     <div className="flex">
                       <div className="font-bold text-gray-50 w-20">
-                        운영시간
+                        {t("labelHours")}
                       </div>
                       <div className="text-zinc-300 ml-2">
-                        09:00 ~ 18:00 (토, 일, 공휴일 휴무)
+                        {t("hours")}
                       </div>
                     </div>
                     <div className="flex">
-                      <div className="font-bold text-gray-50 w-20">이메일</div>
+                      <div className="font-bold text-gray-50 w-20">{t("labelEmail")}</div>
                       <div className="ml-2">
                         <a
                           className="text-zinc-300 hover:text-zinc-200"
@@ -353,8 +346,8 @@ export default function About() {
                       </div>
                     </div>
                     <div className="flex">
-                      <div className="font-bold text-gray-50 w-20">연락처</div>
-                      <div className="text-zinc-300 ml-2">02) 862 - 1700</div>
+                      <div className="font-bold text-gray-50 w-20">{t("labelPhone")}</div>
+                      <div className="text-zinc-300 ml-2">{t("phone")}</div>
                     </div>
                   </div>
                 </div>
@@ -368,7 +361,7 @@ export default function About() {
                       className="w-[150px] sm:w-[180px] lg:w-[204px] h-auto"
                       width={204}
                       height={33}
-                      alt="메를로랩 로고"
+                      alt={tCommon("logoAlt")}
                       src="/images/brand/logo-alt.png"
                     />
                   </div>
@@ -379,24 +372,23 @@ export default function About() {
                 <div className="space-y-3 sm:space-y-4 w-full">
                   <div className="flex items-center gap-2 h-12">
                     <div className="font-bold text-gray-50 w-16 flex-shrink-0 h-full items-center p-0">
-                      주소
+                      {t("labelAddress")}
                     </div>
                     <div className="text-zinc-300 text-sm sm:text-base leading-relaxed h-full items-center p-0">
-                      서울특별시 금천구 디지털로9길 68 (가산동) <br />{" "}
-                      대륭포스트 타워 5차 2002~2005호
+                      {t("address")}
                     </div>
                   </div>
                   <div className="flex items-center gap-2 h-6">
                     <div className="font-bold text-gray-50 w-16 flex-shrink-0 items-center p-0">
-                      운영시간
+                      {t("labelHours")}
                     </div>
                     <div className="text-zinc-300 text-sm sm:text-base">
-                      09:00 ~ 18:00 (토, 일, 공휴일 휴무)
+                      {t("hours")}
                     </div>
                   </div>
                   <div className="flex items-center gap-2 h-6">
                     <div className="font-bold text-gray-50 w-16 flex-shrink-0 items-center p-0">
-                      이메일
+                      {t("labelEmail")}
                     </div>
                     <div>
                       <a
@@ -411,10 +403,10 @@ export default function About() {
                   </div>
                   <div className="flex items-center gap-2 h-6">
                     <div className="font-bold text-gray-50 w-16 flex-shrink-0 items-center p-0">
-                      연락처
+                      {t("labelPhone")}
                     </div>
                     <div className="text-zinc-300 text-sm sm:text-base items-center p-0">
-                      02) 862 - 1700
+                      {t("phone")}
                     </div>
                   </div>
                 </div>
@@ -430,7 +422,7 @@ export default function About() {
               <article className="pb-6 border-b border-dashed border-gray-300">
                 <div className="mb-4">
                   <h5 className="text-lg font-bold text-gray-900">
-                    지하철 이용시
+                    {t("subwayTitle")}
                   </h5>
                 </div>
                 <div className="flex">
@@ -443,11 +435,11 @@ export default function About() {
                     </div>
                   </div>
                   <div className="font-semibold text-gray-900 mr-2">
-                    가산디지털단지역
+                    {t("station")}
                   </div>
                   <div className="w-px bg-gray-300 h-3 mt-1.5 mr-2"></div>
                   <div className="text-gray-600">
-                    가산디지털단지역 4번 출구 도보 10분
+                    {t("subwayDesc")}
                   </div>
                 </div>
               </article>
@@ -456,30 +448,30 @@ export default function About() {
               <article className="pb-6 border-b border-dashed border-gray-300">
                 <div className="mb-4">
                   <h5 className="text-lg font-bold text-gray-900">
-                    버스 이용시
+                    {t("busTitle")}
                   </h5>
                 </div>
                 <div className="flex">
                   <div className="flex space-x-1 mr-2">
                     <div className="bg-blue-500 text-white px-3 py-1 rounded-full text-xs">
-                      <span>간선 </span>
+                      <span>{t("busTrunk")} </span>
                       <span className="font-bold">643, 651</span>
                     </div>
                     <div className="bg-green-500 text-white px-3 py-1 rounded-full text-xs">
-                      <span>지선 </span>
+                      <span>{t("busBranch")} </span>
                       <span className="font-bold">5528</span>
                     </div>
                     <div className="bg-gray-500 text-white px-3 py-1 rounded-full text-xs">
-                      <span>일반 </span>
+                      <span>{t("busGeneral")} </span>
                       <span className="font-bold">388</span>
                     </div>
                   </div>
                   <div className="font-semibold text-gray-900 mr-2">
-                    가산디지털단지역
+                    {t("station")}
                   </div>
                   <div className="w-px bg-gray-300 h-3 mt-1.5 mr-2"></div>
                   <div className="text-gray-600">
-                    가산디지털단지역 입구 정류장 하차
+                    {t("busDesc")}
                   </div>
                 </div>
               </article>
@@ -488,16 +480,16 @@ export default function About() {
               <article className="pb-6">
                 <div className="mb-4">
                   <h5 className="text-lg font-bold text-gray-900">
-                    자가용 이용시
+                    {t("carTitle")}
                   </h5>
                 </div>
                 <div className="flex">
                   <div className="font-semibold text-gray-900 mr-2">
-                    대륭포스트 타워 5차
+                    {t("tower")}
                   </div>
                   <div className="w-px bg-gray-300 h-3 mt-1.5 mr-2"></div>
                   <div className="text-gray-600">
-                    네비게이션 '대륭포스트 타워 5차'로 설정
+                    {t("carDesc")}
                   </div>
                 </div>
               </article>
@@ -509,7 +501,7 @@ export default function About() {
               <article className="pb-6 border-b border-dashed border-gray-300">
                 <div className="mb-3 sm:mb-4 text-center sm:text-left">
                   <h5 className="text-base sm:text-lg font-bold text-gray-900">
-                    지하철 이용시
+                    {t("subwayTitle")}
                   </h5>
                 </div>
                 <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 items-center sm:items-start">
@@ -523,12 +515,12 @@ export default function About() {
                       </div>
                     </div>
                     <div className="font-semibold text-gray-900">
-                      가산디지털단지역
+                      {t("station")}
                     </div>
                   </div>
                   <div className="hidden sm:block w-px bg-gray-300 h-4"></div>
                   <div className="text-gray-600 text-sm sm:text-base text-center sm:text-left">
-                    가산디지털단지역 4번 출구 도보 10분
+                    {t("subwayDesc")}
                   </div>
                 </div>
               </article>
@@ -537,31 +529,31 @@ export default function About() {
               <article className="pb-6 border-b border-dashed border-gray-300">
                 <div className="mb-3 sm:mb-4 text-center sm:text-left">
                   <h5 className="text-base sm:text-lg font-bold text-gray-900">
-                    버스 이용시
+                    {t("busTitle")}
                   </h5>
                 </div>
                 <div className="flex flex-col gap-3 sm:gap-4 items-center sm:items-start">
                   <div className="flex flex-wrap gap-2 justify-center sm:justify-start">
                     <div className="bg-blue-500 text-white px-2 sm:px-3 py-1 rounded-full text-xs">
-                      <span>간선 </span>
+                      <span>{t("busTrunk")} </span>
                       <span className="font-bold">643, 651</span>
                     </div>
                     <div className="bg-green-500 text-white px-2 sm:px-3 py-1 rounded-full text-xs">
-                      <span>지선 </span>
+                      <span>{t("busBranch")} </span>
                       <span className="font-bold">5528</span>
                     </div>
                     <div className="bg-gray-500 text-white px-2 sm:px-3 py-1 rounded-full text-xs">
-                      <span>일반 </span>
+                      <span>{t("busGeneral")} </span>
                       <span className="font-bold">388</span>
                     </div>
                   </div>
                   <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 items-center sm:items-start">
                     <div className="font-semibold text-gray-900">
-                      가산디지털단지역
+                      {t("station")}
                     </div>
                     <div className="hidden sm:block w-px bg-gray-300 h-4"></div>
                     <div className="text-gray-600 text-sm sm:text-base text-center sm:text-left">
-                      가산디지털단지역 입구 정류장 하차
+                      {t("busDesc")}
                     </div>
                   </div>
                 </div>
@@ -571,16 +563,16 @@ export default function About() {
               <article className="pb-6">
                 <div className="mb-3 sm:mb-4 text-center sm:text-left">
                   <h5 className="text-base sm:text-lg font-bold text-gray-900">
-                    자가용 이용시
+                    {t("carTitle")}
                   </h5>
                 </div>
                 <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 items-center sm:items-start">
                   <div className="font-semibold text-gray-900">
-                    대륭포스트 타워 5차
+                    {t("tower")}
                   </div>
                   <div className="hidden sm:block w-px bg-gray-300 h-4"></div>
                   <div className="text-gray-600 text-sm sm:text-base text-center sm:text-left">
-                    네비게이션 '대륭포스트 타워 5차'로 설정
+                    {t("carDesc")}
                   </div>
                 </div>
               </article>
@@ -595,15 +587,15 @@ export default function About() {
           <div className="flex flex-col items-center gap-6 sm:gap-8 text-center">
             <div className="flex flex-col items-center gap-2 sm:gap-4">
               <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold">
-                내 사업장에 가장 알맞은 관리
+                {t("ctaTitle")}
               </div>
               <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold">
-                전기요금 최적화 지금 시작하세요
+                {t("ctaSubtitle")}
               </h2>
             </div>
             <Link href="/?tab=business" className="no-underline">
               <button className="shadow-sm rounded-lg bg-white border border-gray-200 h-12 sm:h-14 flex items-center justify-center py-2 px-6 sm:px-8 gap-2 text-sm sm:text-base md:text-lg text-zinc-800 hover:bg-gray-50 transition-colors cursor-pointer">
-                <span className="leading-7 font-medium">문의 하기</span>
+                <span className="leading-7 font-medium">{t("cta")}</span>
                 <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
               </button>
             </Link>
