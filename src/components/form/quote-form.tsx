@@ -8,6 +8,16 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useState, useEffect } from "react"
 import { track } from '@vercel/analytics'
+import { useTranslations } from "next-intl"
+
+// 사업장 유형: 값(한글)은 계산 로직의 객체 키로 그대로 쓰고, 표시만 번역.
+const TYPE_KEY: Record<string, string> = {
+  "제조 시설": "manufacturing",
+  "사무실": "office",
+  "물류 센터": "logistics",
+  "아파트 주차장": "apartmentParking",
+  "개인": "individual",
+}
 
 interface QuoteFormProps {
   selectedInquiry: "business" | "quote"
@@ -37,6 +47,10 @@ export default function QuoteForm({
   selectedBusinessType,
   setSelectedBusinessType,
 }: QuoteFormProps) {
+  const t = useTranslations("quoteForm")
+  const tType = useTranslations("businessType")
+  const typeLabel = (ko: string) => tType(TYPE_KEY[ko] ?? "manufacturing")
+
   const [formData, setFormData] = useState({
     area: "",
     generalHours: "",
@@ -138,7 +152,7 @@ export default function QuoteForm({
 
     // 일일 사용 시간 8시간 미만 제한
     if (hoursPerDay < 8) {
-      alert("일일 사용 시간은 8시간 이상이어야 합니다.")
+      alert(t("minHoursAlert"))
       return
     }
 
@@ -210,7 +224,7 @@ export default function QuoteForm({
           {/* 문의 구분 */}
           <div className="space-y-4">
             <Label className="text-base sm:text-lg font-semibold text-gray-700">
-              문의 구분 <span className="text-red-500">*</span>
+              {t("inquiryType")} <span className="text-red-500">*</span>
             </Label>
             <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 lg:gap-10">
               {/* 모의 견적 */}
@@ -227,9 +241,9 @@ export default function QuoteForm({
                   }}
                 >
                   <div className="space-y-2">
-                    <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold leading-tight text-zinc-800">모의 견적</h3>
+                    <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold leading-tight text-zinc-800">{t("quoteTitle")}</h3>
                     <p className="text-sm sm:text-base leading-relaxed text-zinc-500">
-                      모의 견적은 실제 견적과 다를 수 있습니다
+                      {t("quoteDesc")}
                     </p>
                   </div>
                 </div>
@@ -246,9 +260,9 @@ export default function QuoteForm({
                   onClick={() => setSelectedInquiry("business")}
                 >
                   <div className="space-y-2">
-                    <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold leading-tight text-zinc-800">견적 문의</h3>
+                    <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold leading-tight text-zinc-800">{t("businessInquiryTitle")}</h3>
                     <p className="text-sm sm:text-base leading-relaxed text-zinc-500">
-                    문의 기준으로 상세 견적을 안내합니다
+                    {t("businessInquiryDesc")}
                     </p>
                   </div>
                 </div>
@@ -259,7 +273,7 @@ export default function QuoteForm({
           {/* 사업장 유형 */}
           <div className="space-y-4">
             <Label className="text-base sm:text-lg font-semibold text-gray-700">
-              사업장 유형 <span className="text-red-500">*</span>
+              {t("businessTypeLabel")} <span className="text-red-500">*</span>
             </Label>
             <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
               {["제조 시설", "사무실", "물류 센터", "아파트 주차장"].map((type) => (
@@ -275,35 +289,35 @@ export default function QuoteForm({
                       : "border-gray-200 opacity-50 hover:opacity-75"
                   } bg-transparent`}
                 >
-                  <span className="font-medium text-sm sm:text-base text-center">{type}</span>
+                  <span className="font-medium text-sm sm:text-base text-center">{typeLabel(type)}</span>
                 </div>
               ))}
             </div>
             {isSubmitted && !selectedBusinessType && (
-              <p className="text-sm text-red-500 mt-2">사업장 유형을 선택해주세요</p>
+              <p className="text-sm text-red-500 mt-2">{t("selectBusinessType")}</p>
             )}
           </div>
 
           {/* 1. 조명 정보 입력 */}
           <div className="space-y-4 sm:space-y-6">
-            <h2 className="text-lg sm:text-xl font-bold text-gray-700">1. 사업장 정보 입력</h2>
+            <h2 className="text-lg sm:text-xl font-bold text-gray-700">{t("section1")}</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               <div className="space-y-2">
                 <Label htmlFor="area" className="text-sm font-medium text-gray-700">
-                  면적 (m²) <span className="text-red-500">*</span>
+                  {t("areaLabel")} <span className="text-red-500">*</span>
                 </Label>
                 <Input
                   id="area"
-                  placeholder="ex) 100"
+                  placeholder={t("areaPlaceholder")}
                   value={formData.area}
                   onChange={(e) => handleInputChange("area", e.target.value)}
                   className={`h-10 sm:h-12 border-2 rounded-xl focus:ring-0 ${
                     isSubmitted && !formData.area ? "border-red-300 focus:border-red-500" : "border-gray-200 focus:border-[#583CF2]"
                   }`}
                 />
-                <p className="text-xs text-gray-500">* 1평당 약 3.3m²</p>
+                <p className="text-xs text-gray-500">{t("areaHint")}</p>
                 {isSubmitted && !formData.area && (
-                  <p className="text-xs text-red-500">면적을 입력해주세요</p>
+                  <p className="text-xs text-red-500">{t("areaRequired")}</p>
                 )}
               </div>
             </div>
@@ -311,18 +325,18 @@ export default function QuoteForm({
 
           {/* 2. 사용 조건 입력 */}
           <div className="space-y-4 sm:space-y-6">
-            <h2 className="text-lg sm:text-xl font-bold text-gray-700">2. 사용 조건 입력</h2>
+            <h2 className="text-lg sm:text-xl font-bold text-gray-700">{t("section2")}</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
               <div className="space-y-2">
                 <Label htmlFor="general-hours" className="text-sm font-medium text-gray-700">
-                  일일 사용 시간 (시간) <span className="text-red-500">*</span>
+                  {t("hoursLabel")} <span className="text-red-500">*</span>
                 </Label>
                 <Input
                   id="general-hours"
                   type="number"
                   min="8"
                   step="0.1"
-                  placeholder="ex) 12 (8시간 이상)"
+                  placeholder={t("hoursPlaceholder")}
                   value={formData.generalHours}
                   onChange={(e) => handleInputChange("generalHours", e.target.value)}
                   className={`h-10 sm:h-12 border-2 rounded-xl focus:ring-0 ${
@@ -330,18 +344,18 @@ export default function QuoteForm({
                   }`}
                   required
                 />
-                <p className="text-xs text-gray-500">* 8시간 이상의 값만 입력 가능합니다</p>
+                <p className="text-xs text-gray-500">{t("hoursHint")}</p>
                 {isSubmitted && !formData.generalHours && (
-                  <p className="text-xs text-red-500">일일 사용 시간을 입력해주세요</p>
+                  <p className="text-xs text-red-500">{t("hoursRequired")}</p>
                 )}
               </div>
               <div className="space-y-2">
                 <Label htmlFor="annual-days" className="text-sm font-medium text-gray-700">
-                  연간 사용일수 (일) <span className="text-red-500">*</span>
+                  {t("daysLabel")} <span className="text-red-500">*</span>
                 </Label>
                 <Input
                   id="annual-days"
-                  placeholder="ex) 250"
+                  placeholder={t("daysPlaceholder")}
                   value={formData.annualDays}
                   onChange={(e) => handleInputChange("annualDays", e.target.value)}
                   className={`h-10 sm:h-12 border-2 rounded-xl focus:ring-0 ${
@@ -350,7 +364,7 @@ export default function QuoteForm({
                   required
                 />
                 {isSubmitted && !formData.annualDays && (
-                  <p className="text-xs text-red-500">연간 사용일수를 입력해주세요</p>
+                  <p className="text-xs text-red-500">{t("daysRequired")}</p>
                 )}
               </div>
             </div>
@@ -365,7 +379,7 @@ export default function QuoteForm({
               className="w-full bg-[#583CF2] hover:bg-[#583CF2]/90 h-12 sm:h-14 rounded-xl text-base sm:text-lg font-semibold transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <Calculator className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
-              모의 견적 계산하기
+              {t("calculate")}
             </Button>
           </div>
         </form>
@@ -375,8 +389,8 @@ export default function QuoteForm({
           <div className="mt-8 pt-8 border-t border-gray-200">
             <div className="w-full">
               <div className="mb-8">
-                <h2 className="text-2xl font-bold text-gray-900 mb-2">견적 결과</h2>
-                <p className="text-gray-600">사업장 유형의 평균 수치를 바탕으로 계산된 예시 견적입니다</p>
+                <h2 className="text-2xl font-bold text-gray-900 mb-2">{t("resultTitle")}</h2>
+                <p className="text-gray-600">{t("resultDesc")}</p>
               </div>
 
               {/* 절감 효과 */}
@@ -386,28 +400,28 @@ export default function QuoteForm({
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                   <div className="border-2 border-red-300 bg-white rounded-xl p-5">
                     <div className="flex items-center justify-between mb-2">
-                      <span className="text-sm font-medium text-gray-700">교체 전</span>
+                      <span className="text-sm font-medium text-gray-700">{t("before")}</span>
                       <div className="w-3 h-3 bg-red-400 rounded-full"></div>
                     </div>
                     <div className="text-2xl font-bold text-gray-900">
-                      {formatCurrency(calculationResult.beforeCost)}원
+                      {formatCurrency(calculationResult.beforeCost)}{t("won")}
                     </div>
-                    <div className="text-xs text-gray-500 mt-1">연간 전기 비용</div>
+                    <div className="text-xs text-gray-500 mt-1">{t("annualElectricityCost")}</div>
                     <div className="text-sm text-gray-600 mt-2">
-                      {formatPower(calculationResult.beforePowerConsumption)} kWh/년
+                      {formatPower(calculationResult.beforePowerConsumption)} {t("kwhYear")}
                     </div>
                   </div>
                   <div className="border-2 border-[#583CF2] bg-white rounded-xl p-5">
                     <div className="flex items-center justify-between mb-2">
-                      <span className="text-sm font-medium text-gray-700">교체 후</span>
+                      <span className="text-sm font-medium text-gray-700">{t("after")}</span>
                       <div className="w-3 h-3 bg-[#583CF2] rounded-full"></div>
                     </div>
                     <div className="text-2xl font-bold text-gray-900">
-                      {formatCurrency(calculationResult.afterCost)}원
+                      {formatCurrency(calculationResult.afterCost)}{t("won")}
                     </div>
-                    <div className="text-xs text-gray-500 mt-1">연간 전기 비용</div>
+                    <div className="text-xs text-gray-500 mt-1">{t("annualElectricityCost")}</div>
                     <div className="text-sm text-gray-600 mt-2">
-                      {formatPower(calculationResult.afterPowerConsumption)} kWh/년
+                      {formatPower(calculationResult.afterPowerConsumption)} {t("kwhYear")}
                     </div>
                   </div>
                 </div>
@@ -417,12 +431,12 @@ export default function QuoteForm({
                   {/* 고객사 예상 수익 */}
                   <div className="border border-gray-200 rounded-xl p-5">
                     <div className="text-center">
-                      <div className="text-sm text-gray-600 mb-1">고객사 연간 최대 예상 수익</div>
+                      <div className="text-sm text-gray-600 mb-1">{t("maxAnnualProfit")}</div>
                       <div className="text-2xl font-bold text-gray-900 mb-2">
-                        {formatCurrency(calculationResult.beforeCost * ((calculationResult.savingsRate / 100) + 0.15) - (calculationResult.beforeCost * (calculationResult.savingsRate / 100) * 0.8))}원
+                        {formatCurrency(calculationResult.beforeCost * ((calculationResult.savingsRate / 100) + 0.15) - (calculationResult.beforeCost * (calculationResult.savingsRate / 100) * 0.8))}{t("won")}
                       </div>
                       <div className="text-sm text-gray-500">
-                        월 평균 {formatCurrency((calculationResult.beforeCost * ((calculationResult.savingsRate / 100) + 0.15) - (calculationResult.beforeCost * (calculationResult.savingsRate / 100) * 0.8)) / 12)}원 수익 발생
+                        {t("monthlyProfit", { amount: formatCurrency((calculationResult.beforeCost * ((calculationResult.savingsRate / 100) + 0.15) - (calculationResult.beforeCost * (calculationResult.savingsRate / 100) * 0.8)) / 12) })}
                       </div>
                     </div>
                   </div>
@@ -430,12 +444,12 @@ export default function QuoteForm({
                   {/* 연간 절약 금액 */}
                   <div className="border border-gray-200 rounded-xl p-5">
                     <div className="text-center">
-                      <div className="text-sm text-gray-600 mb-1">연간 절약 금액</div>
+                      <div className="text-sm text-gray-600 mb-1">{t("annualSavings")}</div>
                       <div className="text-2xl font-bold text-gray-900 mb-2">
-                        {formatCurrency(calculationResult.savings)}원
+                        {formatCurrency(calculationResult.savings)}{t("won")}
                       </div>
                       <div className="text-sm text-gray-500">
-                        월 평균 {formatCurrency(calculationResult.savings / 12)}원 절약
+                        {t("monthlySavings", { amount: formatCurrency(calculationResult.savings / 12) })}
                       </div>
                     </div>
                   </div>
@@ -443,12 +457,12 @@ export default function QuoteForm({
                   {/* 연간 전력 절감량 */}
                   <div className="border border-gray-200 rounded-xl p-5">
                     <div className="text-center">
-                      <div className="text-sm text-gray-600 mb-1">연간 전력 절감량</div>
+                      <div className="text-sm text-gray-600 mb-1">{t("annualPowerSavings")}</div>
                       <div className="text-2xl font-bold text-gray-900 mb-2">
                         {formatPower(calculationResult.powerSavings)} kWh
                       </div>
                       <div className="text-sm text-gray-500">
-                        월 평균 {formatPower(calculationResult.powerSavings / 12)} kWh 절약
+                        {t("monthlyPowerSavings", { amount: formatPower(calculationResult.powerSavings / 12) })}
                       </div>
                     </div>
                   </div>
@@ -456,14 +470,14 @@ export default function QuoteForm({
 
                 {/* 상세 정보 */}
                 <div className="bg-gray-50 rounded-xl p-4 mb-6">
-                  <h3 className="text-sm font-semibold text-gray-900 mb-3">상세 정보</h3>
+                  <h3 className="text-sm font-semibold text-gray-900 mb-3">{t("details")}</h3>
                   <div className="space-y-3">
                     <div className="flex justify-between items-center py-2">
-                      <span className="text-gray-600">사업장 유형</span>
-                      <span className="font-medium text-[#583CF2]">{selectedBusinessType || "제조 시설"}</span>
+                      <span className="text-gray-600">{t("businessTypeLabel")}</span>
+                      <span className="font-medium text-[#583CF2]">{typeLabel(selectedBusinessType || "제조 시설")}</span>
                     </div>
                     <div className="flex justify-between items-center py-2">
-                      <span className="text-gray-600">면적</span>
+                      <span className="text-gray-600">{t("detailArea")}</span>
                       <span className="font-medium text-gray-900">{formData.area}m²</span>
                     </div>
                     {/* <div className="flex justify-between items-center py-2">
@@ -479,13 +493,13 @@ export default function QuoteForm({
                       <span className="font-medium text-gray-900">{afterLightPower[selectedBusinessType as keyof typeof afterLightPower] ?? 100}W</span>
                     </div> */}
                     <div className="flex justify-between items-center py-2">
-                      <span className="text-gray-600">전기 요금 단가</span>
-                      <span className="font-medium text-gray-900">{calculationResult.electricityRate}원/kWh</span>
+                      <span className="text-gray-600">{t("detailRate")}</span>
+                      <span className="font-medium text-gray-900">{calculationResult.electricityRate}{t("wonPerKwh")}</span>
                     </div>
                     <div className="flex justify-between items-center py-2">
-                      <span className="text-gray-600">연간 사용 시간</span>
+                      <span className="text-gray-600">{t("detailAnnualHours")}</span>
                       <span className="font-medium text-gray-900">
-                        {formatCurrency(calculationResult.annualHours)}시간
+                        {formatCurrency(calculationResult.annualHours)}{t("hours")}
                       </span>
                     </div>
                   </div>
@@ -512,7 +526,7 @@ export default function QuoteForm({
                 }}
                 className="w-full bg-[#583CF2] hover:bg-[#583CF2]/90 h-12 rounded-xl text-base font-semibold transition-all duration-300"
               >
-                정확한 견적 문의하기
+                {t("requestExactQuote")}
               </Button>
             </div>
           </div>
