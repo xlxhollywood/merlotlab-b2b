@@ -8,43 +8,46 @@ import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import LogoCarouselMain from "@/components/carousel/logo-carousel-cases";
-
-const stats = [
-  {
-    label: "도입 사업장",
-    value: 96,
-    unit: "개소",
-    description: "23.01 ~ 26.06",
-  },
-  {
-    label: "누적 면적",
-    value: 2981290,
-    unit: "m²",
-    description: "Merlot Mesh 연결 면적의 총합",
-  },
-  {
-    label: "평균 설치 소요 기간",
-    value: 10,
-    unit: "일",
-    description: "사업장 한 곳 설치 완료 기준",
-  },
-  {
-    label: "사업장 전력량 절감 평균",
-    value: 50,
-    unit: "%",
-    description: "시스템 도입 후 절감된 평균 수치",
-  },
-];
-
-const filterTypes = [
-  { label: "전체", value: "all" },
-  { label: "공장", value: "factory" },
-  { label: "물류센터", value: "logistics_center" },
-  { label: "주차장", value: "parking_lot" },
-  { label: "사무실", value: "office" },
-];
+import { useTranslations } from "next-intl";
 
 export default function UseCases() {
+  const t = useTranslations("cases");
+
+  const stats = [
+    {
+      label: t("statSitesLabel"),
+      value: 96,
+      unit: t("statSitesUnit"),
+      description: t("statSitesDesc"),
+    },
+    {
+      label: t("statAreaLabel"),
+      value: 2981290,
+      unit: t("statAreaUnit"),
+      description: t("statAreaDesc"),
+    },
+    {
+      label: t("statInstallLabel"),
+      value: 10,
+      unit: t("statInstallUnit"),
+      description: t("statInstallDesc"),
+    },
+    {
+      label: t("statSavingLabel"),
+      value: 50,
+      unit: t("statSavingUnit"),
+      description: t("statSavingDesc"),
+    },
+  ];
+
+  const filterTypes = [
+    { label: t("filterAll"), value: "all" },
+    { label: t("filterFactory"), value: "factory" },
+    { label: t("filterLogistics"), value: "logistics_center" },
+    { label: t("filterParking"), value: "parking_lot" },
+    { label: t("filterOffice"), value: "office" },
+  ];
+
   const [activeFilter, setActiveFilter] = useState("all");
 
   const handleFilterChange = (filterValue: string) => {
@@ -67,10 +70,10 @@ export default function UseCases() {
           <div className="text-center text-gray-700">
             <FadeInUp delay={300}>
               <h2 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight xs:leading-[1.2] sm:leading-[50px] md:leading-[60px]">
-                메를로랩이 사업장 전력 절감
+                {t("heading1")}
                 <FadeInUp delay={400}>
                   <span className="text-primary block mt-0 sm:mt-3 md:mt-4 lg:mt-5 xl:mt-4">
-                    함께 하겠습니다
+                    {t("heading2")}
                   </span>
                 </FadeInUp>
               </h2>
