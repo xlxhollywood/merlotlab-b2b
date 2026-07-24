@@ -114,5 +114,44 @@
     "officeDesc": "눈의 피로를 줄이고 집중력을 높일 수 있는 <br></br> 쾌적한 근무 환경과 에너지 절감 효과를  <br></br> 동시에 누리세요.",
     "officeAlt": "사무실 스마트 조명",
     "officeBadge": "업무 집중도 향상"
+  },
+  "caseCategory": {
+    "logistics_center": "물류센터",
+    "parking_lot": "주차장",
+    "factory": "공장",
+    "office": "사무실",
+    "warehouse": "창고",
+    "retail": "소매점",
+    "hospital": "병원",
+    "school": "학교",
+    "apartment": "아파트",
+    "hotel": "호텔"
+  },
+  "portfolio": {
+    "loading": "데이터를 불러오는 중...",
+    "searchPlaceholder": "회사명, 업종으로 검색",
+    "searchResult": "\"{query}\"에 대한 검색 결과: {count}개",
+    "noResultsTitle": "검색 결과가 없습니다",
+    "noResultsDesc": "다른 키워드로 검색해보세요",
+    "defaultSubtitle": "시스템 도입 사례",
+    "prevImage": "이전 이미지",
+    "nextImage": "다음 이미지",
+    "noImage": "이미지 없음",
+    "scrollTop": "맨 위로 가기",
+    "imageAlt": "{title} 이미지 {index}"
+  },
+  "strengths": {
+    "title1": "세계 <hl>최고 수준</hl>의 독자 기술력",
+    "desc1": "메쉬 네트워크와 Dual-Stack 기술로 <br></br> 수만 대의 기기를 하나의 네트워크로 <br></br> 빠르게 연결합니다.",
+    "alt1": "세계 최고 수준의 독자 기술력",
+    "title2": "국내 DR 분야 <hl>선도 기업</hl>",
+    "desc2": "국내 최초 조명 기반 DR 시스템을 구축 <br></br> 설치된 건물의 에너지를 분산 자원으로 <br></br> 바꿉니다.",
+    "alt2": "국내 DR 분야 선도 기업",
+    "title3": "통합 솔루션 기반 <hl>원스톱 서비스</hl>",
+    "desc3": "IC 설계부터 H/W 개발, 네트워크 구축, <br></br> S/W 운영까지 자체 개발 및 관리하여 <br></br> 맞춤형 솔루션을 제공합니다.",
+    "alt3": "통합 솔루션 기반 원스톱 서비스",
+    "title4": "경제성과 환경 가치의 <hl>동시 실현</hl>",
+    "desc4": "별도 배선 공사 없이 조명 교체만으로 <br></br> 전력 절감과 탄소 배출 감소를 <br></br> 동시에 달성합니다.",
+    "alt4": "경제성과 환경 가치의 동시 실현"
   }
 }
