@@ -7,6 +7,16 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { useState } from "react"
+import { useTranslations } from "next-intl"
+
+// 기관 유형: 값(한글)은 로직(isPersonal 체크·API 전송)에 그대로 쓰고, 표시만 번역.
+const TYPE_KEY: Record<string, string> = {
+  "개인": "individual",
+  "사업자": "business",
+  "공공 기관": "public",
+  "비영리기관": "nonprofit",
+  "기타": "other",
+}
 
 interface BusinessInquiryFormProps {
   selectedInquiry: "business" | "quote";
@@ -21,6 +31,10 @@ export default function BusinessInquiryForm({
   selectedBusinessType,
   setSelectedBusinessType,
 }: BusinessInquiryFormProps) {
+  const t = useTranslations("businessForm")
+  const tQuote = useTranslations("quoteForm")
+  const tType = useTranslations("businessType")
+  const typeLabel = (ko: string) => tType(TYPE_KEY[ko] ?? "individual")
   const isPersonal = selectedBusinessType === "개인"
   const [formData, setFormData] = useState({
     companyName: "",
@@ -48,14 +62,14 @@ export default function BusinessInquiryForm({
 
     // 기본 필수 필드 검증
   if (!selectedBusinessType || !formData.managerName || !formData.phone || !formData.email || !formData.message) {
-    alert('필수 항목을 모두 입력해주세요.')
+    alert(t("alertRequired"))
     setIsSubmitting(false)
     return
   }
 
   // 🔥 NEW: 개인이 아닌 경우 기관명 검증
   if (!isPersonal && (!formData.companyName || formData.companyName.trim() === "")) {
-    alert('기관명을 입력해주세요.')
+    alert(t("alertOrgName"))
     setIsSubmitting(false)
     return
   }
@@ -79,7 +93,7 @@ export default function BusinessInquiryForm({
       })
 
       if (response.ok) {
-        alert('문의가 성공적으로 접수되었습니다!')
+        alert(t("alertSuccess"))
         // 폼 리셋
         setFormData({
           companyName: "",
@@ -91,11 +105,11 @@ export default function BusinessInquiryForm({
         })
       } else {
         const errorData = await response.json()
-        alert(errorData.error || '접수 중 오류가 발생했습니다.')
+        alert(errorData.error || t("alertError"))
       }
     } catch (error) {
       console.error('Error:', error)
-      alert('접수 중 오류가 발생했습니다.')
+      alert(t("alertError"))
     } finally {
       setIsSubmitting(false)
     }
@@ -108,7 +122,7 @@ export default function BusinessInquiryForm({
           {/* 문의 구분 */}
           <div className="space-y-4">
             <Label className="text-base sm:text-lg font-semibold text-gray-700">
-              문의 구분 <span className="text-red-500">*</span>
+              {tQuote("inquiryType")} <span className="text-red-500">*</span>
             </Label>
             <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 lg:gap-10">
               {/* 모의 견적 */}
@@ -122,9 +136,9 @@ export default function BusinessInquiryForm({
                   onClick={() => setSelectedInquiry("quote")}
                 >
                   <div className="space-y-2">
-                    <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold leading-tight text-zinc-800">모의 견적</h3>
+                    <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold leading-tight text-zinc-800">{tQuote("quoteTitle")}</h3>
                     <p className="text-sm sm:text-base leading-relaxed text-zinc-500">
-                      모의 견적은 실제 견적과 다를 수 있습니다
+                      {tQuote("quoteDesc")}
                     </p>
                   </div>
                 </div>
@@ -141,9 +155,9 @@ export default function BusinessInquiryForm({
                   onClick={() => setSelectedInquiry("business")}
                 >
                   <div className="space-y-2">
-                    <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold leading-tight text-zinc-800">견적 문의</h3>
+                    <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold leading-tight text-zinc-800">{tQuote("businessInquiryTitle")}</h3>
                     <p className="text-sm sm:text-base leading-relaxed text-zinc-500">
-                    문의 기준으로 상세 견적을 안내합니다
+                    {tQuote("businessInquiryDesc")}
                     </p>
                   </div>
                 </div>
@@ -154,7 +168,7 @@ export default function BusinessInquiryForm({
           {/* 사업장 유형 */}
           <div className="space-y-4">
             <Label className="text-base sm:text-lg font-semibold text-gray-700">
-              문의 기관 유형 <span className="text-red-500">*</span>
+              {t("orgTypeLabel")} <span className="text-red-500">*</span>
             </Label>
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
               {["개인", "사업자", "공공 기관", "비영리기관", "기타"].map((type) => (
@@ -167,7 +181,7 @@ export default function BusinessInquiryForm({
                       : "border-gray-200 opacity-50 hover:opacity-75"
                   } bg-transparent`}
                 >
-                  <span className="font-medium text-sm sm:text-base text-center">{type}</span>
+                  <span className="font-medium text-sm sm:text-base text-center">{typeLabel(type)}</span>
                 </div>
               ))}
             </div>
@@ -175,18 +189,18 @@ export default function BusinessInquiryForm({
 
           {/* 기본 정보 */}
           <div className="space-y-4 sm:space-y-6">
-            <Label className="text-base sm:text-lg font-semibold text-gray-700">기본 정보</Label>
+            <Label className="text-base sm:text-lg font-semibold text-gray-700">{t("basicInfo")}</Label>
             <div className={`grid grid-cols-1 ${isPersonal ? "md:grid-cols-1" : "md:grid-cols-2"} gap-4 sm:gap-6`}>
               {/* 기관명 - 개인이 아닐 때만 표시 */}
               {!isPersonal && (
                 <div className="space-y-2">
                   <Label htmlFor="company" className="text-sm sm:text-base text-gray-700 font-medium">
-                    기관명 <span className="text-red-500">*</span>
+                    {t("orgName")} <span className="text-red-500">*</span>
                   </Label>
                   <Input
                     id="companyName"
                     name="companyName"
-                    placeholder="메를로랩"
+                    placeholder={t("orgNamePlaceholder")}
                     value={formData.companyName}
                     onChange={(e) => handleInputChange("companyName", e.target.value)}
                     className="h-10 sm:h-12 rounded-xl border-2 border-gray-200 focus:border-[#583CF2] focus:ring-0"
@@ -198,14 +212,14 @@ export default function BusinessInquiryForm({
               {!isPersonal && (
                 <div className="space-y-2">
                   <Label htmlFor="region" className="text-sm sm:text-base text-gray-700 font-medium">
-                    지역
+                    {t("region")}
                   </Label>
                   <Input
                     id="region"
                     name="region"
                     value={formData.region}
                     onChange={(e) => handleInputChange("region", e.target.value)}
-                    placeholder="서울"
+                    placeholder={t("regionPlaceholder")}
                     className="h-10 sm:h-12 rounded-xl border-2 border-gray-200 focus:border-[#583CF2] focus:ring-0"
                   />
                 </div>
@@ -214,14 +228,14 @@ export default function BusinessInquiryForm({
               {/* 담당자/성함 */}
               <div className="space-y-2">
                 <Label htmlFor="manager" className="text-sm sm:text-base text-gray-700 font-medium">
-                  {isPersonal ? "성함" : "담당자(직책/성명)"} <span className="text-red-500">*</span>
+                  {isPersonal ? t("nameLabel") : t("managerLabel")} <span className="text-red-500">*</span>
                 </Label>
                 <Input
                   id="manager"
                   name="managerName"
                   value={formData.managerName}
                   onChange={(e) => handleInputChange("managerName", e.target.value)}
-                  placeholder={isPersonal ? "홍길동" : "대리 홍길동"}
+                  placeholder={isPersonal ? t("namePlaceholder") : t("managerPlaceholder")}
                   className="h-10 sm:h-12 rounded-xl border-2 border-gray-200 focus:border-[#583CF2] focus:ring-0"
                 />
               </div>
@@ -229,14 +243,14 @@ export default function BusinessInquiryForm({
               {/* 전화번호 */}
               <div className="space-y-2">
                 <Label htmlFor="phone" className="text-sm sm:text-base text-gray-700 font-medium">
-                  전화번호 <span className="text-red-500">*</span>
+                  {t("phone")} <span className="text-red-500">*</span>
                 </Label>
                 <Input
                   id="phone"
                   name="phone"
                   value={formData.phone}
                   onChange={(e) => handleInputChange("phone", e.target.value)}
-                  placeholder="02-1234-5678"
+                  placeholder={t("phonePlaceholder")}
                   className="h-10 sm:h-12 rounded-xl border-2 border-gray-200 focus:border-[#583CF2] focus:ring-0"
                 />
               </div>
@@ -244,7 +258,7 @@ export default function BusinessInquiryForm({
               {/* 이메일 */}
               <div className={`space-y-2 ${isPersonal ? "md:col-span-1" : "md:col-span-2"}`}>
                 <Label htmlFor="email" className="text-sm sm:text-base text-gray-700 font-medium">
-                  이메일 <span className="text-red-500">*</span>
+                  {t("email")} <span className="text-red-500">*</span>
                 </Label>
                 <Input
                   id="email"
@@ -262,14 +276,14 @@ export default function BusinessInquiryForm({
           {/* 문의 내용 */}
           <div className="space-y-4">
             <Label htmlFor="message" className="text-base sm:text-lg font-semibold text-gray-700">
-              문의 내용 <span className="text-red-500">*</span>
+              {t("messageLabel")} <span className="text-red-500">*</span>
             </Label>
             <Textarea
               id="message"
               name="message"
               value={formData.message}
               onChange={(e) => handleInputChange("message", e.target.value)}
-              placeholder="사업장의 유형, 면적 등 상세한 정보를 주시면 더 자세한 견적을 제공해드립니다."
+              placeholder={t("messagePlaceholder")}
               className="min-h-[100px] sm:min-h-[120px] rounded-xl border-2 border-gray-200 focus:border-[#583CF2] focus:ring-0 resize-none"
             />
           </div>
@@ -277,7 +291,7 @@ export default function BusinessInquiryForm({
           {/* 제출 */}
           <div className="space-y-4 sm:space-y-6 pt-4">
             <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
-              양식을 제출하면 개인정보 제공 및 제 3자 정보 제공 활용에 동의하는 것으로 간주합니다.
+              {t("consent")}
             </p>
             <Button
               type="submit"
@@ -286,7 +300,7 @@ export default function BusinessInquiryForm({
               className="w-full bg-[#583CF2] hover:bg-[#583CF2]/90 h-12 sm:h-14 rounded-xl text-base sm:text-lg font-semibold transition-all duration-300 hover:scale-105"
             >
               <Mail className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
-              {isSubmitting ? '전송 중...' : '문의 보내기'}
+              {isSubmitting ? t("submitting") : t("submit")}
             </Button>
           </div>
         </form>
