@@ -3,8 +3,7 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import Script from "next/script";
 import LandingClient from "./page.client";
-
-const BASE = "https://www.merlotlab.com";
+import { SITE_URL } from "@/config/site";
 
 export async function generateMetadata({
   params,
@@ -13,8 +12,8 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "metadata" });
-  const koUrl = BASE;
-  const enUrl = `${BASE}/en`;
+  const koUrl = SITE_URL;
+  const enUrl = `${SITE_URL}/en`;
   return {
     title: t("homeTitle"),
     description: t("homeDescription"),

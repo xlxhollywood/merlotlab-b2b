@@ -15,7 +15,10 @@ const LANGUAGE_OPTIONS = [
 ] as const
 
 const FlagIcon = ({ flag }: { flag: string }) => (
-  <span className="w-6 h-[18px] rounded-[4px] overflow-hidden flex items-center justify-center shrink-0">
+  <span
+    aria-hidden
+    className="w-6 h-[18px] rounded-[4px] overflow-hidden flex items-center justify-center shrink-0"
+  >
     <span className={`fi ${flag} !text-2xl leading-none`} />
   </span>
 )
