@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300" role="img" aria-label="이미지 없음">
+  <rect width="400" height="300" rx="12" fill="#f4f4f5"/>
+  <g transform="translate(200 150)">
+    <rect x="-64" y="-48" width="128" height="96" rx="12" fill="#ffffff" stroke="#d4d4d8" stroke-width="3"/>
+    <circle cx="-30" cy="-18" r="11" fill="#d4d4d8"/>
+    <path d="M-58 40 L-18 -2 L8 24 L30 0 L58 40 Z" fill="#a1a1aa"/>
+  </g>
+</svg>
