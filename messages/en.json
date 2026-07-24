@@ -114,5 +114,44 @@
     "officeDesc": "Enjoy both a comfortable work environment that reduces eye strain and boosts focus <br></br> and energy savings <br></br> at the same time.",
     "officeAlt": "Smart lighting for offices",
     "officeBadge": "Improved work focus"
+  },
+  "caseCategory": {
+    "logistics_center": "Logistics Center",
+    "parking_lot": "Parking Lot",
+    "factory": "Factory",
+    "office": "Office",
+    "warehouse": "Warehouse",
+    "retail": "Retail Store",
+    "hospital": "Hospital",
+    "school": "School",
+    "apartment": "Apartment",
+    "hotel": "Hotel"
+  },
+  "portfolio": {
+    "loading": "Loading data...",
+    "searchPlaceholder": "Search by company or industry",
+    "searchResult": "Results for \"{query}\": {count}",
+    "noResultsTitle": "No results found",
+    "noResultsDesc": "Try a different keyword",
+    "defaultSubtitle": "System deployment case",
+    "prevImage": "Previous image",
+    "nextImage": "Next image",
+    "noImage": "No image",
+    "scrollTop": "Back to top",
+    "imageAlt": "{title} image {index}"
+  },
+  "strengths": {
+    "title1": "World-class <hl>proprietary technology</hl>",
+    "desc1": "With mesh networking and Dual-Stack technology, <br></br> we quickly connect tens of thousands of devices <br></br> into a single network.",
+    "alt1": "World-class proprietary technology",
+    "title2": "A <hl>leading company</hl> in Korea's DR field",
+    "desc2": "We built Korea's first lighting-based DR system, <br></br> turning a building's energy into <br></br> a distributed resource.",
+    "alt2": "A leading company in Korea's DR field",
+    "title3": "<hl>One-stop service</hl> on an integrated solution",
+    "desc3": "From IC design to hardware development, network setup, <br></br> and software operation — all developed and managed in-house <br></br> to deliver tailored solutions.",
+    "alt3": "One-stop service on an integrated solution",
+    "title4": "Economy and environmental value, <hl>realized together</hl>",
+    "desc4": "With only a lighting replacement and no extra wiring, <br></br> we achieve power savings and carbon reduction <br></br> at the same time.",
+    "alt4": "Economy and environmental value realized together"
   }
 }
