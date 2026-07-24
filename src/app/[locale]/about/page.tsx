@@ -12,6 +12,7 @@ import { Link } from "@/i18n/navigation";
 export default function About() {
   const t = useTranslations("about");
   const tCommon = useTranslations("common");
+  const tCta = useTranslations("cta");
 
   const certifications = [
     { title: t("cert1"), image: "/images/about/certificate-1.png" },
@@ -587,15 +588,15 @@ export default function About() {
           <div className="flex flex-col items-center gap-6 sm:gap-8 text-center">
             <div className="flex flex-col items-center gap-2 sm:gap-4">
               <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold">
-                {t("ctaTitle")}
+                {tCta("title")}
               </div>
               <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold">
-                {t("ctaSubtitle")}
+                {tCta("subtitle")}
               </h2>
             </div>
             <Link href="/?tab=business" className="no-underline">
               <button className="shadow-sm rounded-lg bg-white border border-gray-200 h-12 sm:h-14 flex items-center justify-center py-2 px-6 sm:px-8 gap-2 text-sm sm:text-base md:text-lg text-zinc-800 hover:bg-gray-50 transition-colors cursor-pointer">
-                <span className="leading-7 font-medium">{t("cta")}</span>
+                <span className="leading-7 font-medium">{tCta("button")}</span>
                 <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
               </button>
             </Link>

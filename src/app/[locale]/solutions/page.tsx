@@ -8,7 +8,8 @@ import { Package, Factory, Car, Users, ArrowRight } from "lucide-react"
 import { useEffect, useState, useRef } from "react"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
-import Link from "next/link"
+import { Link } from "@/i18n/navigation"
+import { useTranslations } from "next-intl"
 import SplitText from "@/components/animation/split-text"
 import FadeInUp from "@/components/animation/fade-in-up"
 import Image from "next/image"
@@ -16,7 +17,7 @@ import CompanyStrengths from "@/components/card/company-strength"
 
 interface SolutionItemProps {
   title: string
-  description: string
+  description: React.ReactNode
   imageSrc: string
   imageAlt: string
   imageWidth: number
@@ -94,8 +95,9 @@ function SolutionItem({
             <p
               style={{ color: "#4e5968" }}
               className="text-lg sm:text-xl md:text-2xl font-medium text-gray-700 leading-relaxed"
-              dangerouslySetInnerHTML={{ __html: description }}
-            />
+            >
+              {description}
+            </p>
           </div>
         </div>
       </div>
@@ -104,6 +106,7 @@ function SolutionItem({
 }
 
 function SmartphoneSection() {
+  const t = useTranslations("solutions")
   const [isVisible, setIsVisible] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
 
@@ -138,10 +141,10 @@ function SmartphoneSection() {
           }}
         >
           <div className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight sm:leading-[50px] md:leading-[60px] text-center text-gray-700">
-            <div className="m-0">손쉬운 자동화 시스템으로</div>
+            <div className="m-0">{t("phoneHeading1")}</div>
             <div className="m-0">
               <span className="text-primary">
-                <SplitText text="에너지 손실 최소화" delay={100} />
+                <SplitText text={t("phoneHeading2")} delay={100} />
               </span>
             </div>
           </div>
@@ -161,7 +164,7 @@ function SmartphoneSection() {
             <div className="relative">
               <Image
                 src="/images/solutions/grid-phone.png"
-                alt="전력 관리 앱 화면"
+                alt={t("phoneAlt")}
                 width={600}
                 height={1200}
                 className="max-w-[400px] sm:max-w-[450px] md:max-w-[500px] lg:max-w-[550px] h-auto drop-shadow-2xl"
@@ -181,9 +184,9 @@ function SmartphoneSection() {
             }}
           >
             <p className="text-xl xl:text-2xl font-bold text-gray-800 leading-relaxed max-w-[250px]">
-              <span className="block">이해하기 쉬운 용어</span>
-              <span className="block">설명이 필요 없는</span>
-              <span className="block text-primary">직관적인 화면 구성</span>
+              <span className="block">{t("phoneLeft1")}</span>
+              <span className="block">{t("phoneLeft2")}</span>
+              <span className="block text-primary">{t("phoneLeft3")}</span>
             </p>
           </div>
 
@@ -198,9 +201,9 @@ function SmartphoneSection() {
             }}
           >
             <p className="text-xl xl:text-2xl font-bold text-gray-800 leading-relaxed max-w-[250px] text-right">
-              <span className="block">실시간 모니터링으로</span>
-              <span className="block">즉시 대응 가능한</span>
-              <span className="block text-primary">스마트한 시스템</span>
+              <span className="block">{t("phoneRight1")}</span>
+              <span className="block">{t("phoneRight2")}</span>
+              <span className="block text-primary">{t("phoneRight3")}</span>
             </p>
           </div>
 
@@ -215,8 +218,8 @@ function SmartphoneSection() {
             }}
           >
             <p className="text-base sm:text-lg md:text-xl text-gray-600 leading-relaxed">
-              <span className="block">유선 공사 없이 지금 시설 그대로</span>
-              <span className="block font-semibold">맞춤형 자동화 운영 방식을 컨설팅합니다.</span>
+              <span className="block">{t("phoneBottom1")}</span>
+              <span className="block font-semibold">{t("phoneBottom2")}</span>
             </p>
           </div>
         </div>
@@ -226,46 +229,47 @@ function SmartphoneSection() {
 }
 
 export default function Solutions() {
+  const t = useTranslations("solutions")
+  const tCta = useTranslations("cta")
+
+  const br = () => <br />
   const solutionData = [
     {
-      title: "물류 센터",
-      description:
-        "대형 창고와 물류 시설의 운영 효율성을 높여,  <br> 에너지 비용을 절감하는 맞춤형 솔루션을 <br> 제공합니다.",
+      title: t("logisticsTitle"),
+      description: t.rich("logisticsDesc", { br }),
       imageSrc: "/images/solutions/logistics.png",
-      imageAlt: "물류센터 스마트 조명",
+      imageAlt: t("logisticsAlt"),
       imageWidth: 450,
-      badgeText: "물류 동선 최적화",
+      badgeText: t("logisticsBadge"),
       badgeIcon: <Package className="w-4 h-4 text-primary" />,
     },
     {
-      title: "제조 시설",
-      description: "제조 환경에 최적화된 조도로 작업 정확도를 <br>높이고, 불필요한 에너지 낭비를 줄여드립니다.",
+      title: t("factoryTitle"),
+      description: t.rich("factoryDesc", { br }),
       imageSrc: "/images/solutions/factory.png",
-      imageAlt: "제조시설 조명",
+      imageAlt: t("factoryAlt"),
       imageWidth: 450,
       reverse: true,
-      badgeText: "생산성 중심 설계",
+      badgeText: t("factoryBadge"),
       badgeIcon: <Factory className="w-4 h-4 text-primary" />,
     },
     {
-      title: "주차장",
-      description:
-        "차량 이동과 사람의 통행이 빈번한 주차장 환경에 맞춰, 감지 기반 조명의 스케줄링과  <br>  밝기 설정을 통해 에너지를 최적화합니다.",
+      title: t("parkingTitle"),
+      description: t.rich("parkingDesc", { br }),
       imageSrc: "/images/solutions/parking.png",
-      imageAlt: "주차장",
+      imageAlt: t("parkingAlt"),
       imageWidth: 450,
-      badgeText: "감지 기반 운영",
+      badgeText: t("parkingBadge"),
       badgeIcon: <Car className="w-4 h-4 text-primary" />,
     },
     {
-      title: "사무실",
-      description:
-        "눈의 피로를 줄이고 집중력을 높일 수 있는 <br> 쾌적한 근무 환경과 에너지 절감 효과를  <br> 동시에 누리세요.",
+      title: t("officeTitle"),
+      description: t.rich("officeDesc", { br }),
       imageSrc: "/images/solutions/office.png",
-      imageAlt: "사무실 스마트 조명",
+      imageAlt: t("officeAlt"),
       imageWidth: 450,
       reverse: true,
-      badgeText: "업무 집중도 향상",
+      badgeText: t("officeBadge"),
       badgeIcon: <Users className="w-4 h-4 text-primary" />,
     },
   ]
@@ -280,11 +284,11 @@ export default function Solutions() {
           <div className="flex flex-col items-center">
             <div className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight sm:leading-[50px] md:leading-[60px] text-center text-gray-700">
               <FadeInUp delay={300}>
-                <div className="m-0">사업장 유형에 알맞은</div>
+                <div className="m-0">{t("heading1")}</div>
               </FadeInUp>
               <FadeInUp delay={600}>
                 <div className="m-0">
-                  <span className="text-primary">에너지 절약 솔루션</span>
+                  <span className="text-primary">{t("heading2")}</span>
                 </div>
               </FadeInUp>
             </div>
@@ -317,10 +321,10 @@ export default function Solutions() {
         <div className="text-center mb-24 sm:mb-32 md:mb-40 gap-32 pt-16 sm:pt-0">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight sm:leading-[50px] md:leading-[60px] text-center text-gray-700">
             <FadeInUp delay={200}>
-              <span className="block">핵심 가치를 만족 시키는</span>
+              <span className="block">{t("valuesHeading1")}</span>
             </FadeInUp>
             <FadeInUp delay={400}>
-              <span className="text-primary">에너지 솔루션</span>
+              <span className="text-primary">{t("valuesHeading2")}</span>
             </FadeInUp>
           </h2>
         </div>
@@ -334,14 +338,14 @@ export default function Solutions() {
         <div className="max-w-4xl mx-auto">
           <div className="flex flex-col items-center gap-6 sm:gap-8 text-center">
             <div className="flex flex-col items-center gap-2 sm:gap-4">
-              <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold">내 사업장에 가장 알맞은 관리</div>
+              <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold">{tCta("title")}</div>
               <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold">
-                전기요금 최적화 지금 시작하세요
+                {tCta("subtitle")}
               </h2>
             </div>
             <Link href="/?tab=business" className="no-underline">
               <button className="shadow-sm rounded-lg bg-white border border-gray-200 h-12 sm:h-14 flex items-center justify-center py-2 px-6 sm:px-8 gap-2 text-sm sm:text-base md:text-lg text-zinc-800 hover:bg-gray-50 transition-colors cursor-pointer">
-                <span className="leading-7 font-medium">문의 하기</span>
+                <span className="leading-7 font-medium">{tCta("button")}</span>
                 <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
               </button>
             </Link>
