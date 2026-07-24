@@ -224,5 +224,27 @@
     "cardRepayWithSavings": "절감액으로 투자비 상환",
     "cardContinuousSaving": "에너지 비용 지속 절감",
     "cardUserProfit": "사용자 수익으로 실현"
+  },
+  "ir": {
+    "loading": "로딩 중...",
+    "notFound": "공고를 찾을 수 없습니다.",
+    "tabDisclosure": "공시 정보",
+    "tabAnnouncement": "공고 사항",
+    "searchPlaceholder": "찾으시는 내용을 검색해보세요",
+    "noResults": "검색 결과가 없습니다.",
+    "downloadImage": "이미지 다운로드",
+    "noDownloadImage": "다운로드할 이미지가 없습니다",
+    "noFileToDownload": "다운로드할 파일이 없습니다.",
+    "fetchError": "파일을 가져올 수 없습니다.",
+    "downloadError": "파일 다운로드 중 오류가 발생했습니다.",
+    "labelDate": "작성일",
+    "labelAuthor": "작성자",
+    "featuredImageAlt": "대표 이미지",
+    "attachments": "첨부파일",
+    "attachmentAlt": "첨부파일 {index}",
+    "prevPost": "이전글",
+    "nextPost": "다음글",
+    "noAdjacent": "이전글 또는 다음글이 없습니다.",
+    "backToList": "목록"
   }
 }

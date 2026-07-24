@@ -8,10 +8,12 @@ import Header from "@/components/header"
 import Footer from "@/components/footer"
 import FadeInUp from "@/components/animation/fade-in-up"
 import { Search, ChevronLeft, ChevronRight, Download } from "lucide-react" // Download 아이콘 임포트
-import { useRouter } from "next/navigation"
+import { useTranslations } from "next-intl"
+import { useRouter } from "@/i18n/navigation"
 import IrHero from "@/components/hero/ir-hero" // IrHero 컴포넌트 임포트
 
 export default function IRPage() {
+  const t = useTranslations("ir")
   const [searchTerm, setSearchTerm] = useState("")
   const [currentPage, setCurrentPage] = useState(1)
   const [activeTab, setActiveTab] = useState("disclosure") // 이 페이지는 '공시 정보'이므로 기본 탭은 disclosure
@@ -40,14 +42,14 @@ export default function IRPage() {
 
     // URL이 유효하지 않으면 리턴
     if (!url || url === "#" || !url.startsWith("http")) {
-      alert("다운로드할 파일이 없습니다.")
+      alert(t("noFileToDownload"))
       return
     }
 
     try {
       // fetch로 파일 가져오기
       const response = await fetch(url)
-      if (!response.ok) throw new Error("파일을 가져올 수 없습니다.")
+      if (!response.ok) throw new Error(t("fetchError"))
 
       // blob으로 변환
       const blob = await response.blob()
@@ -97,7 +99,7 @@ export default function IRPage() {
       window.URL.revokeObjectURL(downloadUrl)
     } catch (error) {
       console.error("다운로드 오류:", error)
-      alert("파일 다운로드 중 오류가 발생했습니다.")
+      alert(t("downloadError"))
     }
   }
 
@@ -118,7 +120,7 @@ export default function IRPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-white flex items-center justify-center">
-        <div className="text-gray-500">로딩 중...</div>
+        <div className="text-gray-500">{t("loading")}</div>
       </div>
     )
   }
@@ -139,13 +141,13 @@ export default function IRPage() {
                     onClick={() => setActiveTab("disclosure")} // 현재 페이지이므로 탭 상태만 변경
                     className={`flex-1 px-3 sm:px-4 py-2 text-sm font-medium rounded-md transition-colors ${activeTab === "disclosure" ? "bg-[#583CF2] text-white" : "text-gray-600 hover:text-gray-800"}`}
                   >
-                    공시 정보
+                    {t("tabDisclosure")}
                   </button>
                   <button
                     onClick={handleAnnouncementTabClick} // 공고 사항 페이지로 이동
                     className={`flex-1 px-3 sm:px-4 py-2 text-sm font-medium rounded-md transition-colors ${activeTab === "announcement" ? "bg-[#583CF2] text-white" : "text-gray-600 hover:text-gray-800"}`}
                   >
-                    공고 사항
+                    {t("tabAnnouncement")}
                   </button>
                 </div>
               </div>
@@ -156,13 +158,13 @@ export default function IRPage() {
                     onClick={() => setActiveTab("disclosure")} // 현재 페이지이므로 탭 상태만 변경
                     className={`w-full text-left px-4 py-3 rounded-lg transition-colors ${activeTab === "disclosure" ? "bg-[#583CF2] text-white" : "text-gray-600 hover:text-gray-800 hover:bg-gray-50"}`}
                   >
-                    공시 정보
+                    {t("tabDisclosure")}
                   </button>
                   <button
                     onClick={handleAnnouncementTabClick} // 공고 사항 페이지로 이동
                     className={`w-full text-left px-4 py-3 rounded-lg transition-colors ${activeTab === "announcement" ? "bg-[#583CF2] text-white" : "text-gray-600 hover:text-gray-800 hover:bg-gray-50"}`}
                   >
-                    공고 사항
+                    {t("tabAnnouncement")}
                   </button>
                 </div>
               </div>
@@ -177,7 +179,7 @@ export default function IRPage() {
                       </div>
                       <input
                         type="search"
-                        placeholder="찾으시는 내용을 검색해보세요"
+                        placeholder={t("searchPlaceholder")}
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                         className="block w-full pl-9 sm:pl-10 pr-3 py-2.5 sm:py-3 border border-gray-300 rounded-lg leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-[#583CF2] focus:border-[#583CF2] text-sm sm:text-base"
@@ -188,7 +190,7 @@ export default function IRPage() {
                   <div className="space-y-3 lg:space-y-4">
                     {currentData.length === 0 ? (
                       <div className="text-center py-12 text-gray-500">
-                        <p>검색 결과가 없습니다.</p>
+                        <p>{t("noResults")}</p>
                       </div>
                     ) : (
                       currentData.map((item) => (
@@ -209,7 +211,7 @@ export default function IRPage() {
                               <button
                                 onClick={(e) => handleDownload(e, item.imageUrl as string, item.title)}
                                 className="flex-shrink-0 p-2 sm:p-2.5 text-gray-400 hover:text-[#583CF2] hover:bg-gray-50 rounded-lg transition-colors group"
-                                title="이미지 다운로드"
+                                title={t("downloadImage")}
                                 type="button"
                               >
                                 <Download className="h-4 w-4 sm:h-5 sm:w-5 group-hover:scale-110 transition-transform" />
@@ -217,7 +219,7 @@ export default function IRPage() {
                             ) : (
                               <div
                                 className="flex-shrink-0 p-2 sm:p-2.5 text-gray-300 cursor-not-allowed"
-                                title="다운로드할 이미지가 없습니다"
+                                title={t("noDownloadImage")}
                               >
                                 <Download className="h-4 w-4 sm:h-5 sm:w-5 opacity-30" />
                               </div>
