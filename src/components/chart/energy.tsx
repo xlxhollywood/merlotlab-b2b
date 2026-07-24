@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react"
 import { ArrowRight, ArrowDown, Circle } from "lucide-react"
+import { useTranslations } from "next-intl"
 import { Card, CardContent } from "@/components/ui/card"
 import LogoCarouselContact from "@/components/carousel/logo-carousel-contact"
 
@@ -17,6 +18,7 @@ interface AnimationPhase {
 }
 
 export default function AnimatedEnergyChart() {
+  const t = useTranslations("energyChart")
   const [phase, setPhase] = useState<AnimationPhase>({
     investment: false,
     firstArrow: false,
@@ -138,7 +140,7 @@ export default function AnimatedEnergyChart() {
                   }}
                 >
                   <div className="flex items-center justify-center h-full text-white font-semibold text-sm xl:text-base text-center px-2 drop-shadow-sm">
-                    에너지 비용
+                    {t("energyCost")}
                   </div>
                 </div>
 
@@ -151,7 +153,7 @@ export default function AnimatedEnergyChart() {
                 )}
               </div>
               <div className="text-center">
-                <h3 className="font-semibold text-blue-700 text-base xl:text-lg drop-shadow-sm">설치 전</h3>
+                <h3 className="font-semibold text-blue-700 text-base xl:text-lg drop-shadow-sm">{t("beforeInstall")}</h3>
               </div>
             </div>
 
@@ -179,7 +181,7 @@ export default function AnimatedEnergyChart() {
                   }}
                 >
                   <div className="flex items-center justify-center h-full text-white font-semibold text-sm xl:text-base text-center px-2 drop-shadow-sm">
-                    에너지 비용
+                    {t("energyCost")}
                   </div>
                 </div>
 
@@ -193,7 +195,7 @@ export default function AnimatedEnergyChart() {
                   }}
                 >
                   <div className="flex flex-col items-center justify-center h-full text-white font-semibold text-xs xl:text-sm text-center px-2 drop-shadow-sm">
-                    <span>투자 회수</span>
+                    <span>{t("investmentRecovery")}</span>
                   </div>
                 </div>
 
@@ -207,7 +209,7 @@ export default function AnimatedEnergyChart() {
                   }}
                 >
                   <div className="flex flex-col items-center justify-center h-full text-white font-semibold text-xs xl:text-sm text-center px-2 drop-shadow-sm">
-                    <span>사업 이익</span>
+                    <span>{t("businessProfit")}</span>
                   </div>
                 </div>
 
@@ -221,7 +223,7 @@ export default function AnimatedEnergyChart() {
 
               </div>
               <div className="text-center">
-                <h3 className="font-semibold text-gray-900 text-base xl:text-lg drop-shadow-sm">상환 기간</h3>
+                <h3 className="font-semibold text-gray-900 text-base xl:text-lg drop-shadow-sm">{t("repaymentPeriod")}</h3>
               </div>
             </div>
 
@@ -249,7 +251,7 @@ export default function AnimatedEnergyChart() {
                   }}
                 >
                   <div className="flex items-center justify-center h-full text-white font-semibold text-sm xl:text-base text-center px-2 drop-shadow-sm">
-                    에너지 비용
+                    {t("energyCost")}
                   </div>
                 </div>
 
@@ -263,7 +265,7 @@ export default function AnimatedEnergyChart() {
                   }}
                 >
                   <div className="flex items-center justify-center h-full text-white font-semibold text-sm xl:text-base text-center px-2 drop-shadow-sm">
-                    사업 이익
+                    {t("businessProfit")}
                   </div>
                 </div>
 
@@ -283,7 +285,7 @@ export default function AnimatedEnergyChart() {
                 )}
               </div>
               <div className="text-center">
-                <h3 className="font-semibold text-green-700 text-base xl:text-lg drop-shadow-sm">상환 후</h3>
+                <h3 className="font-semibold text-green-700 text-base xl:text-lg drop-shadow-sm">{t("afterRepayment")}</h3>
               </div>
             </div>
           </div>
@@ -302,7 +304,7 @@ export default function AnimatedEnergyChart() {
                   }}
                 >
                   <div className="flex items-center justify-center h-full text-white font-semibold text-xs text-center px-1 drop-shadow-sm">
-                    에너지<br/>비용
+                    {t("energyCost")}
                   </div>
                 </div>
 
@@ -315,19 +317,19 @@ export default function AnimatedEnergyChart() {
                 )}
               </div>
               <div className="text-center">
-                <h3 className="font-semibold text-blue-700 text-xs drop-shadow-sm">투자 전</h3>
+                <h3 className="font-semibold text-blue-700 text-xs drop-shadow-sm">{t("beforeInvestment")}</h3>
               </div>
               
               {/* 투자 전 설명 */}
               <div className="w-full text-center h-24 flex flex-col justify-center">
                 <div className="space-y-1">
                   <div className="flex flex-col items-center">
-                    <p className="font-semibold text-gray-900 text-[12px] mb-0.5">에너지 비용 발생</p>
-                    <p className="text-[11px] text-gray-600">- 인위적 절감에 한계</p>
-                    <p className="text-[11px] text-gray-600">- 투자비 부담</p>
+                    <p className="font-semibold text-gray-900 text-[12px] mb-0.5">{t("descCostOccurs")}</p>
+                    <p className="text-[11px] text-gray-600">{t("descLimitManual")}</p>
+                    <p className="text-[11px] text-gray-600">{t("descInvestBurden")}</p>
                   </div>
                   <div className="flex flex-col items-center">
-                    <p className="font-semibold text-gray-900 text-[12px]">에너지 효율화 필요</p>
+                    <p className="font-semibold text-gray-900 text-[12px]">{t("descEfficiencyNeeded")}</p>
                   </div>
                 </div>
               </div>
@@ -346,7 +348,7 @@ export default function AnimatedEnergyChart() {
                   }}
                 >
                   <div className="flex items-center justify-center h-full text-white font-semibold text-xs text-center px-1 drop-shadow-sm">
-                    에너지<br/>비용
+                    {t("energyCost")}
                   </div>
                 </div>
 
@@ -360,7 +362,7 @@ export default function AnimatedEnergyChart() {
                   }}
                 >
                   <div className="flex items-center justify-center h-full text-white font-semibold text-[10px] leading-tight text-center px-1 pt-1 drop-shadow-sm">
-                    <span>투자<br/>회수</span>
+                    <span>{t("investmentRecovery")}</span>
                   </div>
                 </div>
 
@@ -374,7 +376,7 @@ export default function AnimatedEnergyChart() {
                   }}
                 >
                   <div className="flex items-center justify-center h-full text-white font-semibold text-[10px] text-center px-1 drop-shadow-sm">
-                    <span>사업<br/>이익</span>
+                    <span>{t("businessProfit")}</span>
                   </div>
                 </div>
 
@@ -388,21 +390,21 @@ export default function AnimatedEnergyChart() {
 
               </div>
               <div className="text-center">
-                <h3 className="font-semibold text-gray-900 text-xs drop-shadow-sm">상환 기간</h3>
+                <h3 className="font-semibold text-gray-900 text-xs drop-shadow-sm">{t("repaymentPeriod")}</h3>
               </div>
               
               {/* 상환 기간 설명 */}
               <div className="w-full text-center h-24 flex flex-col justify-center">
                 <div className="space-y-1">
                   <div className="flex flex-col items-center">
-                    <p className="font-semibold text-gray-900 text-[12px]">EMS 솔루션 설치</p>
+                    <p className="font-semibold text-gray-900 text-[12px]">{t("descEmsInstall")}</p>
                   </div>
                   <div className="flex flex-col items-center">
-                  <p className="text-[11px] text-gray-600">- 초기 비용 부담 없음</p>
+                  <p className="text-[11px] text-gray-600">{t("descNoInitialCost")}</p>
                   </div>
                   <div className="flex flex-col items-center">
-                    <p className="font-semibold text-gray-900 text-[12px]">투자비 상환</p>
-                    <p className="text-[11px] text-gray-600">- 절감액으로 상환</p>
+                    <p className="font-semibold text-gray-900 text-[12px]">{t("descRepayInvestment")}</p>
+                    <p className="text-[11px] text-gray-600">{t("descRepayWithSavings")}</p>
                   </div>
                 </div>
               </div>
@@ -421,7 +423,7 @@ export default function AnimatedEnergyChart() {
                   }}
                 >
                   <div className="flex items-center justify-center h-full text-white font-semibold text-xs text-center px-1 drop-shadow-sm">
-                    에너지<br/>비용
+                    {t("energyCost")}
                   </div>
                 </div>
 
@@ -435,7 +437,7 @@ export default function AnimatedEnergyChart() {
                   }}
                 >
                   <div className="flex items-center justify-center h-full text-white font-semibold text-xs text-center px-1 drop-shadow-sm">
-                    <span>사업<br/>이익</span>
+                    <span>{t("businessProfit")}</span>
                   </div>
                 </div>
 
@@ -455,17 +457,17 @@ export default function AnimatedEnergyChart() {
                 )}
               </div>
               <div className="text-center">
-                <h3 className="font-semibold text-green-700 text-xs drop-shadow-sm">상환 후</h3>
+                <h3 className="font-semibold text-green-700 text-xs drop-shadow-sm">{t("afterRepayment")}</h3>
               </div>
               
               {/* 상환 후 설명 */}
               <div className="w-full text-center h-24 flex flex-col justify-center">
                 <div className="space-y-1">
                   <div className="flex flex-col items-center">
-                    <p className="font-semibold text-gray-900 text-[12px]">지속적 절감</p>
+                    <p className="font-semibold text-gray-900 text-[12px]">{t("descContinuousSaving")}</p>
                   </div>
                   <div className="flex flex-col items-center mt-2">
-                  <p className="font-semibold text-gray-900 text-[12px]">수익으로 실현</p>
+                  <p className="font-semibold text-gray-900 text-[12px]">{t("descRealizeProfit")}</p>
                   </div>
                 </div>
               </div>
@@ -484,14 +486,14 @@ export default function AnimatedEnergyChart() {
               <div className="flex items-start space-x-2">
                 <Circle className="w-2 h-2 text-primary mt-1.5 sm:mt-2 flex-shrink-0 fill-current" />
                 <div>
-                  <p className="font-semibold text-gray-900 mb-1 sm:text-base">에너지 비용 발생</p>
-                  <p className="text-xs sm:text-sm text-gray-600">- 인위적 절감에 한계</p>
-                  <p className="text-xs sm:text-sm text-gray-600">- 투자비 부담</p>
+                  <p className="font-semibold text-gray-900 mb-1 sm:text-base">{t("descCostOccurs")}</p>
+                  <p className="text-xs sm:text-sm text-gray-600">{t("descLimitManual")}</p>
+                  <p className="text-xs sm:text-sm text-gray-600">{t("descInvestBurden")}</p>
                 </div>
               </div>
               <div className="flex items-start space-x-2">
                 <Circle className="w-2 h-2 text-primary mt-1.5 sm:mt-2 flex-shrink-0 fill-current" />
-                <p className="font-semibold text-gray-900 sm:text-base">에너지 효율화 필요</p>
+                <p className="font-semibold text-gray-900 sm:text-base">{t("descEfficiencyNeeded")}</p>
               </div>
             </div>
           </CardContent>
@@ -503,15 +505,15 @@ export default function AnimatedEnergyChart() {
             <div className="space-y-3 md:space-y-4">
               <div className="flex items-start space-x-2">
                 <Circle className="w-2 h-2 text-primary mt-1.5 sm:mt-2 flex-shrink-0 fill-current" />
-                <p className="font-semibold text-gray-900 sm:text-base">에너지 절약시설 설치</p>
+                <p className="font-semibold text-gray-900 sm:text-base">{t("cardEnergySaveInstall")}</p>
               </div>
               <div className="flex items-start space-x-2">
                 <Circle className="w-2 h-2 text-primary mt-1.5 sm:mt-2 flex-shrink-0 fill-current" />
-                <p className="font-semibold text-gray-900 sm:text-base">투자비 부담 없음</p>
+                <p className="font-semibold text-gray-900 sm:text-base">{t("cardNoInvestBurden")}</p>
               </div>
               <div className="flex items-start space-x-2">
                 <Circle className="w-2 h-2 text-primary mt-1.5 sm:mt-2 flex-shrink-0 fill-current" />
-                <p className="font-semibold text-gray-900 sm:text-base">절감액으로 투자비 상환</p>
+                <p className="font-semibold text-gray-900 sm:text-base">{t("cardRepayWithSavings")}</p>
               </div>
             </div>
           </CardContent>
@@ -523,12 +525,12 @@ export default function AnimatedEnergyChart() {
             <div className="space-y-3 md:space-y-4">
               <div className="flex items-start space-x-2">
                 <Circle className="w-2 h-2 text-primary mt-1.5 sm:mt-2 flex-shrink-0 fill-current" />
-                <p className="font-semibold text-gray-900 sm:text-base">에너지 비용 지속 절감
+                <p className="font-semibold text-gray-900 sm:text-base">{t("cardContinuousSaving")}
                 </p>
               </div>
               <div className="flex items-start space-x-2">
                 <Circle className="w-2 h-2 text-primary mt-1.5 sm:mt-2 flex-shrink-0 fill-current" />
-                <p className="font-semibold text-gray-900 sm:text-base">사용자 수익으로 실현</p>
+                <p className="font-semibold text-gray-900 sm:text-base">{t("cardUserProfit")}</p>
               </div>
             </div>
           </CardContent>
