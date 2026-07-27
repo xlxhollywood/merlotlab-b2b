@@ -1,6 +1,4 @@
 "use client";
-import Header from "@/components/header";
-import Footer from "@/components/footer";
 import FadeInUp from "@/components/animation/fade-in-up";
 import KakaoMap from "@/components/ui/kakao-map";
 import Image from "next/image";
@@ -86,7 +84,6 @@ export default function About() {
 
   return (
     <div>
-      <Header />
 
       {/* Hero Section */}
       <section
@@ -604,7 +601,6 @@ export default function About() {
         </div>
       </section>
 
-      <Footer />
     </div>
   );
 }

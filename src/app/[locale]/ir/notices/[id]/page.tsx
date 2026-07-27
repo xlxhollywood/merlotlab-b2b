@@ -1,8 +1,6 @@
 "use client"
 import { useTranslations } from "next-intl"
 import { useRouter } from "@/i18n/navigation"
-import Header from "@/components/header"
-import Footer from "@/components/footer"
 import { useState } from "react"
 import { useEffect } from "react"
 import { getNotice, getPrevNotice, getNextNotice, type Notice, type NavigationItem } from "@/sanity/lib/sanity"
@@ -87,7 +85,6 @@ export default function IRNoticeDetailPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <Header />
       <IrHero /> {/* IrHero 컴포넌트 사용 */}
       {/* Main Content */}
       <section className="bg-white mb-6 sm:mb-8 lg:mb-16 sm:mt-8">
@@ -215,7 +212,6 @@ export default function IRNoticeDetailPage() {
           </div>
         </div>
       </section>
-      <Footer />
     </div>
   )
 }
