@@ -4,27 +4,23 @@ import { ArrowRight } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { Link } from "@/i18n/navigation"
 
+// 홈 CTA: 단일 헤드라인 + 도입 문의 → /contact (docs/renewal/메인.png §6)
 export default function HomeCtaSection() {
   const t = useTranslations("home")
 
   return (
-    <section className="w-full relative bg-[#583cf2] flex flex-col items-center justify-start py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 text-center text-white">
-      <div className="w-full max-w-4xl flex flex-col items-center justify-start">
-        <div className="flex flex-col items-center justify-start gap-6 sm:gap-8">
-          <div className="flex flex-col items-center justify-start">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight font-bold px-4">
-              {t("ctaQuestion")}
-            </h2>
-          </div>
-          <button className="shadow-sm rounded-lg bg-white border border-gray-200 h-12 sm:h-14 flex items-center justify-center py-2 px-6 sm:px-8 gap-2 text-base sm:text-lg text-zinc-800 hover:bg-gray-50 transition-colors cursor-pointer">
-            <Link href="/cases" className="no-underline">
-              <div className="flex items-center gap-2">
-                <span className="leading-7 font-medium">{t("viewCases")}</span>
-                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
-              </div>
-            </Link>
-          </button>
-        </div>
+    <section className="w-full bg-primary py-16 sm:py-20 px-4 sm:px-6 lg:px-8 text-center text-white">
+      <div className="max-w-4xl mx-auto flex flex-col items-center gap-6 sm:gap-8">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight font-bold">
+          {t("ctaQuestion")}
+        </h2>
+        <Link
+          href="/contact"
+          className="inline-flex items-center gap-2 rounded-lg border border-gray-200 bg-white px-6 sm:px-8 h-12 sm:h-14 text-base sm:text-lg font-medium text-zinc-800 shadow-sm transition-colors hover:bg-gray-50"
+        >
+          {t("ctaButton")}
+          <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
+        </Link>
       </div>
     </section>
   )
