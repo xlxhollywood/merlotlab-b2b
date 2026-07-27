@@ -291,10 +291,10 @@ export default function AnimatedEnergyChart() {
           </div>
 
          {/* Mobile Layout (sm 미만) */}
-          <div className="sm:hidden flex flex-row items-end justify-between px-0 gap-0 z-10">
+          <div className="sm:hidden flex flex-col items-center gap-12 px-0 z-10">
             {/* Investment Phase */}
-            <div className="flex flex-col items-center space-y-2 flex-1">
-              <div className="relative w-12 h-32 bg-white rounded-t-lg overflow-hidden border-2 border-gray-300 shadow-xl drop-shadow-lg">
+            <div className="flex flex-col items-center space-y-2 w-full max-w-[280px]">
+              <div className="relative w-20 h-32 bg-white rounded-t-lg overflow-hidden border-2 border-gray-300 shadow-xl drop-shadow-lg">
                 <div
                   className={`absolute bottom-0 w-full bg-gradient-to-t from-blue-600 to-blue-400 rounded-t-lg transition-all duration-1000 ease-out shadow-inner ${
                     displayPhase.investment ? "h-full" : "h-0"
@@ -321,23 +321,25 @@ export default function AnimatedEnergyChart() {
               </div>
               
               {/* 투자 전 설명 */}
-              <div className="w-full text-center h-24 flex flex-col justify-center">
-                <div className="space-y-1">
-                  <div className="flex flex-col items-center">
-                    <p className="font-semibold text-gray-900 text-[12px] mb-0.5">{t("descCostOccurs")}</p>
-                    <p className="text-[11px] text-gray-600">{t("descLimitManual")}</p>
-                    <p className="text-[11px] text-gray-600">{t("descInvestBurden")}</p>
+              <div className="w-fit max-w-[240px] mx-auto space-y-2 text-left">
+                <div className="flex items-start gap-2">
+                  <Circle className="w-2 h-2 text-primary mt-1.5 flex-shrink-0 fill-current" />
+                  <div>
+                    <p className="font-semibold text-gray-900 text-sm">{t("descCostOccurs")}</p>
+                    <p className="text-xs text-gray-600">{t("descLimitManual")}</p>
+                    <p className="text-xs text-gray-600">{t("descInvestBurden")}</p>
                   </div>
-                  <div className="flex flex-col items-center">
-                    <p className="font-semibold text-gray-900 text-[12px]">{t("descEfficiencyNeeded")}</p>
-                  </div>
+                </div>
+                <div className="flex items-start gap-2">
+                  <Circle className="w-2 h-2 text-primary mt-1.5 flex-shrink-0 fill-current" />
+                  <p className="font-semibold text-gray-900 text-sm">{t("descEfficiencyNeeded")}</p>
                 </div>
               </div>
             </div>
 
             {/* Repayment Period */}
-            <div className="flex flex-col items-center space-y-2 flex-1">
-              <div className="relative w-12 h-32 bg-white rounded-t-lg overflow-hidden border-2 border-gray-300 shadow-xl drop-shadow-lg">
+            <div className="flex flex-col items-center space-y-2 w-full max-w-[280px]">
+              <div className="relative w-20 h-32 bg-white rounded-t-lg overflow-hidden border-2 border-gray-300 shadow-xl drop-shadow-lg">
                 {/* Energy Cost Base */}
                 <div
                   className={`absolute bottom-0 w-full bg-gradient-to-t from-blue-600 to-blue-400 transition-all duration-1000 ease-out shadow-inner ${
@@ -394,25 +396,28 @@ export default function AnimatedEnergyChart() {
               </div>
               
               {/* 상환 기간 설명 */}
-              <div className="w-full text-center h-24 flex flex-col justify-center">
-                <div className="space-y-1">
-                  <div className="flex flex-col items-center">
-                    <p className="font-semibold text-gray-900 text-[12px]">{t("descEmsInstall")}</p>
-                  </div>
-                  <div className="flex flex-col items-center">
-                  <p className="text-[11px] text-gray-600">{t("descNoInitialCost")}</p>
-                  </div>
-                  <div className="flex flex-col items-center">
-                    <p className="font-semibold text-gray-900 text-[12px]">{t("descRepayInvestment")}</p>
-                    <p className="text-[11px] text-gray-600">{t("descRepayWithSavings")}</p>
+              <div className="w-fit max-w-[240px] mx-auto space-y-2 text-left">
+                <div className="flex items-start gap-2">
+                  <Circle className="w-2 h-2 text-primary mt-1.5 flex-shrink-0 fill-current" />
+                  <p className="font-semibold text-gray-900 text-sm">{t("descEmsInstall")}</p>
+                </div>
+                <div className="flex items-start gap-2">
+                  <Circle className="w-2 h-2 text-primary mt-1.5 flex-shrink-0 fill-current" />
+                  <p className="font-semibold text-gray-900 text-sm">{t("descNoInitialCost")}</p>
+                </div>
+                <div className="flex items-start gap-2">
+                  <Circle className="w-2 h-2 text-primary mt-1.5 flex-shrink-0 fill-current" />
+                  <div>
+                    <p className="font-semibold text-gray-900 text-sm">{t("descRepayInvestment")}</p>
+                    <p className="text-xs text-gray-600">{t("descRepayWithSavings")}</p>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* Post-Repayment Period */}
-            <div className="flex flex-col items-center space-y-2 flex-1">
-              <div className="relative w-12 h-32 bg-white rounded-t-lg overflow-hidden border-2 border-gray-300 shadow-xl drop-shadow-lg">
+            <div className="flex flex-col items-center space-y-2 w-full max-w-[280px]">
+              <div className="relative w-20 h-32 bg-white rounded-t-lg overflow-hidden border-2 border-gray-300 shadow-xl drop-shadow-lg">
                 {/* Energy Cost Base */}
                 <div
                   className={`absolute bottom-0 w-full bg-gradient-to-t from-blue-600 to-blue-400 transition-all duration-1000 ease-out shadow-inner ${
@@ -461,14 +466,14 @@ export default function AnimatedEnergyChart() {
               </div>
               
               {/* 상환 후 설명 */}
-              <div className="w-full text-center h-24 flex flex-col justify-center">
-                <div className="space-y-1">
-                  <div className="flex flex-col items-center">
-                    <p className="font-semibold text-gray-900 text-[12px]">{t("descContinuousSaving")}</p>
-                  </div>
-                  <div className="flex flex-col items-center mt-2">
-                  <p className="font-semibold text-gray-900 text-[12px]">{t("descRealizeProfit")}</p>
-                  </div>
+              <div className="w-fit max-w-[240px] mx-auto space-y-2 text-left">
+                <div className="flex items-start gap-2">
+                  <Circle className="w-2 h-2 text-primary mt-1.5 flex-shrink-0 fill-current" />
+                  <p className="font-semibold text-gray-900 text-sm">{t("descContinuousSaving")}</p>
+                </div>
+                <div className="flex items-start gap-2">
+                  <Circle className="w-2 h-2 text-primary mt-1.5 flex-shrink-0 fill-current" />
+                  <p className="font-semibold text-gray-900 text-sm">{t("descRealizeProfit")}</p>
                 </div>
               </div>
             </div>

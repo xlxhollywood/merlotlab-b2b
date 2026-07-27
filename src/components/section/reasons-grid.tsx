@@ -8,8 +8,8 @@ export default function ReasonsGrid({
   heading,
   items,
 }: {
-  heading: string
-  items: { icon: string; title: string; desc: React.ReactNode }[]
+  heading: React.ReactNode
+  items: { icon: string; title: React.ReactNode; desc: React.ReactNode }[]
 }) {
   return (
     <section className="w-full bg-white py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8">
@@ -20,9 +20,9 @@ export default function ReasonsGrid({
         <FadeInUp delay={300}>
           <div className="mt-12 sm:mt-16 grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-10">
             {items.map((item) => (
-              <div key={item.title} className="flex flex-col items-center text-center">
+              <div key={item.icon} className="flex flex-col items-center text-center">
                 <div className="relative h-16 w-16">
-                  <Image src={item.icon} alt={item.title} fill className="object-contain" />
+                  <Image src={item.icon} alt="" fill className="object-contain" />
                 </div>
                 <h3 className="mt-4 text-base sm:text-lg font-bold text-gray-800">{item.title}</h3>
                 <p className="mt-2 text-sm text-gray-500 leading-relaxed">{item.desc}</p>
