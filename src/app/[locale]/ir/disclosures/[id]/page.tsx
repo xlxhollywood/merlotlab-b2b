@@ -1,8 +1,6 @@
 "use client"
 import { useTranslations } from "next-intl"
 import { useRouter } from "@/i18n/navigation"
-import Header from "@/components/header"
-import Footer from "@/components/footer"
 import { useState } from "react"
 import { useEffect } from "react"
 import {
@@ -95,7 +93,6 @@ export default function IRDetailPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <Header />
       <IrHero /> {/* IrHero 컴포넌트 사용 */}
       {/* Main Content */}
       <section className="bg-white mb-6 sm:mb-8 lg:mb-16 sm:mt-8">
@@ -258,7 +255,6 @@ export default function IRDetailPage() {
           </div>
         </div>
       </section>
-      <Footer />
     </div>
   )
 }

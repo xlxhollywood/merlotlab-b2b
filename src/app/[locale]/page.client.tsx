@@ -3,8 +3,6 @@
 import { Zap, Shield, Cpu, TrendingUp, ArrowRight } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import { useState, useEffect, useRef } from "react"
-import Footer from "@/components/footer"
-import Header from "@/components/header"
 import Image from "next/image"
 import LogoCarouselMain from "@/components/carousel/logo-carousel-main"
 import SplitText from "@/components/animation/split-text"
@@ -144,7 +142,6 @@ function LandingPage() {
 
   return (
     <div className="w-full">
-      <Header />
       {/* 첫 번째 히어로 섹션: 에너지 절감의 시작 + 이미지 슬라이더 */}
       <FadeInUp delay={200}>
         <section className="min-h-screen relative">
@@ -511,7 +508,6 @@ function LandingPage() {
         </div>
       </section>
 
-      <Footer />
     </div>
   )
 }

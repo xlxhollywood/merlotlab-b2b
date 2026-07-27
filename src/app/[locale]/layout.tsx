@@ -7,6 +7,8 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { SITE_URL, OG_LOCALE } from "@/config/site";
+import Header from "@/components/header";
+import Footer from "@/components/footer";
 import "../globals.css";
 
 const geistSans = Geist({
@@ -101,7 +103,11 @@ export default async function LocaleLayout({
         />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <NextIntlClientProvider>{children}</NextIntlClientProvider>
+        <NextIntlClientProvider>
+          <Header />
+          {children}
+          <Footer />
+        </NextIntlClientProvider>
         <Analytics />
       </body>
     </html>

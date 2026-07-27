@@ -2,8 +2,6 @@
 import { useState } from "react"
 import { useEffect } from "react"
 import { getNotices, type Notice } from "@/sanity/lib/sanity"
-import Header from "@/components/header"
-import Footer from "@/components/footer"
 import FadeInUp from "@/components/animation/fade-in-up"
 import { Search, ChevronLeft, ChevronRight } from "lucide-react"
 import { useTranslations } from "next-intl"
@@ -62,7 +60,6 @@ export default function NoticesPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <Header />
       <IrHero /> {/* IrHero 컴포넌트 사용 */}
       {/* Main Content */}
       <FadeInUp delay={300}>
@@ -207,7 +204,6 @@ export default function NoticesPage() {
           </div>
         </section>
       </FadeInUp>
-      <Footer />
     </div>
   )
 }
