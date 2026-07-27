@@ -11,10 +11,12 @@ import {
   type NavigationItem,
 } from "@/sanity/lib/sanity"
 import { useParams } from "next/navigation"
-import { ChevronLeft, ChevronRight } from "lucide-react"
 import Image from "next/image"
 import { urlFor } from "@/sanity/lib/image"
 import IrHero from "@/components/hero/ir-hero" // IrHero 컴포넌트 임포트
+import IrTabs from "@/components/ir/ir-tabs"
+import IrDetailNav from "@/components/ir/ir-detail-nav"
+import IrMessage from "@/components/ir/ir-message"
 
 export default function IRDetailPage() {
   const t = useTranslations("ir")
@@ -76,19 +78,11 @@ export default function IRDetailPage() {
   }
 
   if (loading) {
-    return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
-        <div className="text-gray-500">{t("loading")}</div>
-      </div>
-    )
+    return <IrMessage text={t("loading")} />
   }
 
   if (!disclosure) {
-    return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
-        <div className="text-gray-500">{t("notFound")}</div>
-      </div>
-    )
+    return <IrMessage text={t("notFound")} />
   }
 
   return (
@@ -98,44 +92,11 @@ export default function IRDetailPage() {
       <section className="bg-white mb-6 sm:mb-8 lg:mb-16 sm:mt-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row gap-6 sm:gap-8 lg:gap-20">
-            {/* Mobile Tabs */}
-            <div className="lg:hidden">
-              <div className="flex space-x-1 bg-gray-100 p-1 rounded-lg">
-                {/* '공시 정보' 탭: 현재 페이지이므로 탭 상태만 변경 */}
-                <button
-                  onClick={() => setActiveTab("disclosure")}
-                  className={`flex-1 px-3 sm:px-4 py-2 text-sm font-medium rounded-md transition-colors ${activeTab === "disclosure" ? "bg-[#583CF2] text-white" : "text-gray-600 hover:text-gray-800"}`}
-                >
-                  {t("tabDisclosure")}
-                </button>
-                {/* '공고 사항' 탭: 공고 사항 목록 페이지로 이동 (원래 로직 유지) */}
-                <button
-                  onClick={handleAnnouncementClick}
-                  className={`flex-1 px-3 sm:px-4 py-2 text-sm font-medium rounded-md transition-colors ${activeTab === "announcement" ? "bg-[#583CF2] text-white" : "text-gray-600 hover:text-gray-800"}`}
-                >
-                  {t("tabAnnouncement")}
-                </button>
-              </div>
-            </div>
-            {/* Desktop Sidebar */}
-            <div className="hidden lg:block lg:w-64 flex-shrink-0">
-              <div className="space-y-4">
-                {/* '공시 정보' 탭: 현재 페이지이므로 탭 상태만 변경 */}
-                <button
-                  onClick={() => setActiveTab("disclosure")}
-                  className={`w-full text-left px-4 py-3 rounded-lg transition-colors ${activeTab === "disclosure" ? "bg-[#583CF2] text-white" : "text-gray-600 hover:text-gray-800 hover:bg-gray-50"}`}
-                >
-                  {t("tabDisclosure")}
-                </button>
-                {/* '공고 사항' 탭: 공고 사항 목록 페이지로 이동 (원래 로직 유지) */}
-                <button
-                  onClick={handleAnnouncementClick}
-                  className={`w-full text-left px-4 py-3 rounded-lg transition-colors ${activeTab === "announcement" ? "bg-[#583CF2] text-white" : "text-gray-600 hover:text-gray-800 hover:bg-gray-50"}`}
-                >
-                  {t("tabAnnouncement")}
-                </button>
-              </div>
-            </div>
+            <IrTabs
+              activeTab={activeTab}
+              onDisclosureClick={() => setActiveTab("disclosure")}
+              onAnnouncementClick={handleAnnouncementClick}
+            />
             {/* Main Content Area */}
             <div className="flex-1 min-w-0">
               <div className="max-w-4xl space-y-6 sm:space-y-8">
@@ -195,60 +156,13 @@ export default function IRDetailPage() {
                       </div>
                     )}
                   </div>
-                  {/* 이전글/다음글 네비게이션 */}
-                  <div className="border-t border-gray-200 pt-8 mt-8">
-                    <div className="space-y-4">
-                      {/* 이전글 */}
-                      {prevDisclosure && (
-                        <div
-                          className="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer"
-                          onClick={handlePrevDisclosure}
-                        >
-                          <div className="flex items-center gap-3 flex-1 min-w-0">
-                            <ChevronLeft className="w-5 h-5 text-gray-400 flex-shrink-0" />
-                            <div className="min-w-0">
-                              <div className="text-sm text-gray-500 mb-1">{t("prevPost")}</div>
-                              <div className="text-gray-800 hover:text-[#583CF2] transition-colors truncate">
-                                {prevDisclosure.title}
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      )}
-                      {/* 다음글 */}
-                      {nextDisclosure && (
-                        <div
-                          className="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer"
-                          onClick={handleNextDisclosure}
-                        >
-                          <div className="flex items-center gap-3 flex-1 min-w-0">
-                            <div className="min-w-0 flex-1">
-                              <div className="text-sm text-gray-500 mb-1">{t("nextPost")}</div>
-                              <div className="text-gray-800 hover:text-[#583CF2] transition-colors truncate">
-                                {nextDisclosure.title}
-                              </div>
-                            </div>
-                            <ChevronRight className="w-5 h-5 text-gray-400 flex-shrink-0" />
-                          </div>
-                        </div>
-                      )}
-                      {/* 이전글/다음글이 모두 없는 경우 */}
-                      {!prevDisclosure && !nextDisclosure && (
-                        <div className="text-center text-gray-500 py-4">{t("noAdjacent")}</div>
-                      )}
-                    </div>
-                  </div>
-                  {/* Bottom Actions */}
-                  <div className="border-t border-gray-200 pt-8 mt-8">
-                    <div className="flex justify-center">
-                      <button
-                        onClick={handleBackToList}
-                        className="inline-flex items-center px-6 py-3 text-sm font-semibold text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
-                      >
-                        {t("backToList")}
-                      </button>
-                    </div>
-                  </div>
+                  <IrDetailNav
+                    prev={prevDisclosure}
+                    next={nextDisclosure}
+                    onPrev={handlePrevDisclosure}
+                    onNext={handleNextDisclosure}
+                    onBack={handleBackToList}
+                  />
                 </article>
               </div>
             </div>
