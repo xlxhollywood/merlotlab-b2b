@@ -1,18 +1,37 @@
+import type { Metadata } from "next"
 import { getTranslations } from "next-intl/server"
+import { SITE_URL } from "@/config/site"
+import TechHero from "../_sections/tech/hero"
+import TechVideo from "../_sections/tech/video"
+import TechAlgorithms from "../_sections/tech/algorithms"
+import TechCta from "../_sections/tech/cta"
 
-// placeholder — 03-tech 스텝에서 실제 기술소개 페이지로 교체.
-export default async function TechPage({
+export async function generateMetadata({
   params,
 }: {
   params: Promise<{ locale: string }>
-}) {
+}): Promise<Metadata> {
   const { locale } = await params
-  const t = await getTranslations({ locale, namespace: "nav" })
-  const tc = await getTranslations({ locale, namespace: "common" })
+  const t = await getTranslations({ locale, namespace: "tech" })
+  const koUrl = `${SITE_URL}/tech`
+  const enUrl = `${SITE_URL}/en/tech`
+  return {
+    title: t("heroTitle"),
+    description: t("heroSubtitle"),
+    alternates: {
+      canonical: locale === "en" ? enUrl : koUrl,
+      languages: { ko: koUrl, en: enUrl },
+    },
+  }
+}
+
+export default function TechPage() {
   return (
-    <div className="min-h-screen bg-white flex flex-col items-center justify-center gap-4 px-4 text-center">
-      <h1 className="text-3xl sm:text-4xl font-bold text-gray-700">{t("tech")}</h1>
-      <p className="text-gray-500">{tc("comingSoon")}</p>
+    <div className="w-full">
+      <TechHero />
+      <TechVideo />
+      <TechAlgorithms />
+      <TechCta />
     </div>
   )
 }
