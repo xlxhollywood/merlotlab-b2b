@@ -1,9 +1,13 @@
 {
   "nav": {
-    "solutions": "EMS Solutions",
+    "solutions": "Solutions",
     "cases": "Case Studies",
     "about": "About",
-    "ir": "IR Center"
+    "ir": "IR Center",
+    "solutionsEms": "EMS Solutions",
+    "solutionsRtls": "RTLS Solutions",
+    "tech": "Technology",
+    "contact": "Contact"
   },
   "metadata": {
     "siteName": "MerlotLab",
@@ -17,7 +21,8 @@
   },
   "common": {
     "logoAlt": "MerlotLab logo",
-    "inquiry": "Contact"
+    "inquiry": "Contact",
+    "comingSoon": "Coming soon"
   },
   "language": {
     "korean": "한국어",
