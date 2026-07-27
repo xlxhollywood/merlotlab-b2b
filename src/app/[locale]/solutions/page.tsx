@@ -1,17 +1,11 @@
-export const dynamic = "force-dynamic"
+import { redirect } from "@/i18n/navigation"
 
-import SiteTypesSection from "../_sections/solutions/site-types"
-import SmartphoneSection from "../_sections/solutions/smartphone"
-import ValuesSection from "../_sections/solutions/values"
-import CtaSection from "@/components/section/cta"
-
-export default function Solutions() {
-  return (
-    <div className="min-h-screen bg-white">
-      <SiteTypesSection />
-      <SmartphoneSection />
-      <ValuesSection />
-      <CtaSection />
-    </div>
-  )
+// /solutions 는 EMS 솔루션(/solutions/ems)으로 이관됨. 기존 URL·링크 하위호환을 위해 redirect.
+export default async function SolutionsIndex({
+  params,
+}: {
+  params: Promise<{ locale: string }>
+}) {
+  const { locale } = await params
+  redirect({ href: "/solutions/ems", locale })
 }
