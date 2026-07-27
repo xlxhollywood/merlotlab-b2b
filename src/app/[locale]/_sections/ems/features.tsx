@@ -1,0 +1,36 @@
+"use client"
+
+import { useTranslations } from "next-intl"
+import FeatureRow from "@/components/section/feature-row"
+import FadeInUp from "@/components/animation/fade-in-up"
+
+// EMS 솔루션 기능 (docs/renewal/EMS 솔루션.png §4): 제목/부제 + alternating 4행
+export default function EmsFeatures() {
+  const t = useTranslations("ems")
+
+  const rows = [
+    { eyebrow: t("feat1Eyebrow"), title: t("feat1Title"), bullets: [t("feat1B1"), t("feat1B2"), t("feat1B3")], image: "/images/ems/3-solution-1.png" },
+    { eyebrow: t("feat2Eyebrow"), title: t("feat2Title"), bullets: [t("feat2B1"), t("feat2B2"), t("feat2B3"), t("feat2B4")], image: "/images/ems/3-solution-2.png" },
+    { eyebrow: t("feat3Eyebrow"), title: t("feat3Title"), bullets: [t("feat3B1"), t("feat3B2"), t("feat3B3")], image: "/images/ems/3-solution-3.png" },
+    { eyebrow: t("feat4Eyebrow"), title: t("feat4Title"), bullets: [t("feat4B1"), t("feat4B2"), t("feat4B3")], image: "/images/ems/3-solution-4.png" },
+  ]
+
+  return (
+    <section className="w-full bg-white py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto">
+        <FadeInUp delay={200}>
+          <div className="text-center">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800">{t("featuresTitle")}</h2>
+            <p className="mt-4 sm:mt-5 text-sm sm:text-base lg:text-lg text-gray-500">{t("featuresSubtitle")}</p>
+          </div>
+        </FadeInUp>
+
+        <div className="mt-12 sm:mt-16 flex flex-col gap-14 sm:gap-20">
+          {rows.map((row, i) => (
+            <FeatureRow key={row.title} {...row} imageAlt={row.title} reverse={i % 2 === 1} />
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
