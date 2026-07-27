@@ -4,9 +4,9 @@ import type React from "react"
 
 export const dynamic = "force-dynamic"
 
-import { Package, Factory, Car, Users, ArrowRight } from "lucide-react"
+import { Package, Factory, Car, Users } from "lucide-react"
 import { useEffect, useState, useRef } from "react"
-import { Link } from "@/i18n/navigation"
+import CtaSection from "@/components/section/cta"
 import { useTranslations } from "next-intl"
 import SplitText from "@/components/animation/split-text"
 import FadeInUp from "@/components/animation/fade-in-up"
@@ -228,7 +228,6 @@ function SmartphoneSection() {
 
 export default function Solutions() {
   const t = useTranslations("solutions")
-  const tCta = useTranslations("cta")
 
   const br = () => <br />
   const solutionData = [
@@ -331,24 +330,7 @@ export default function Solutions() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 text-white bg-primary">
-        <div className="max-w-4xl mx-auto">
-          <div className="flex flex-col items-center gap-6 sm:gap-8 text-center">
-            <div className="flex flex-col items-center gap-2 sm:gap-4">
-              <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold">{tCta("title")}</div>
-              <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold">
-                {tCta("subtitle")}
-              </h2>
-            </div>
-            <Link href="/?tab=business" className="no-underline">
-              <button className="shadow-sm rounded-lg bg-white border border-gray-200 h-12 sm:h-14 flex items-center justify-center py-2 px-6 sm:px-8 gap-2 text-sm sm:text-base md:text-lg text-zinc-800 hover:bg-gray-50 transition-colors cursor-pointer">
-                <span className="leading-7 font-medium">{tCta("button")}</span>
-                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
-              </button>
-            </Link>
-          </div>
-        </div>
-      </section>
+      <CtaSection />
 
     </div>
   )
