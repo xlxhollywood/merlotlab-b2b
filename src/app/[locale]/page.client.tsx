@@ -1,62 +1,19 @@
 "use client"
 
-import { Zap, Shield, Cpu, TrendingUp, ArrowRight } from "lucide-react"
-import { Card, CardContent } from "@/components/ui/card"
-import { useState, useEffect, useRef } from "react"
-import Image from "next/image"
-import LogoCarouselMain from "@/components/carousel/logo-carousel-main"
-import SplitText from "@/components/animation/split-text"
-import FadeInUp from "@/components/animation/fade-in-up"
-import AnimatedEnergyChart from "@/components/chart/energy"
-import nextDynamic from "next/dynamic"
-import { useInView } from "react-intersection-observer"
-import QuoteForm from "@/components/form/quote-form"
-import BusinessInquiryForm from "@/components/form/business-inquiry-form"
-import { Suspense } from "react"
-import { useSearchParams } from "next/navigation"
-import { useTranslations } from "next-intl"
-import { Link } from "@/i18n/navigation"
+import { useState, useEffect, useRef, Suspense } from "react"
+import HeroSection from "./_sections/home/hero"
+import WhyChooseSection from "./_sections/home/why-choose"
+import EnergyBusinessSection from "./_sections/home/energy-business"
+import PricingSection from "./_sections/home/pricing"
+import ProcessSection from "./_sections/home/process"
+import HomeCtaSection from "./_sections/home/cta"
+import InquiryFormSection from "./_sections/home/inquiry-form"
+import TabParamSync from "./_sections/home/tab-param-sync"
 
-const CountUp = nextDynamic(() => import("react-countup"), {
-  ssr: false,
-})
-
-function LandingPage() {
-  const searchParams = useSearchParams()
-  const tabParam = searchParams.get("tab")
-  const t = useTranslations("home")
-  const hl = (chunks: React.ReactNode) => <span className="text-[#583CF2]">{chunks}</span>
-  const gray = (chunks: React.ReactNode) => <span className="text-gray-700">{chunks}</span>
-  const br = () => <br />
-  const [currentImageIndex, setCurrentImageIndex] = useState(0)
-  const images = ["/images/landing/3.png", "/images/landing/2.png", "/images/landing/4.png", "/images/landing/1.png", "/images/landing/5.png"]
-
-  const { ref: costRef, inView: costInView } = useInView({
-    triggerOnce: true,
-    threshold: 0.6,
-  })
-
-  // 카드 섹션을 위한 별도의 useInView 추가
-  const { ref: cardsRef, inView: cardsInView } = useInView({
-    triggerOnce: true,
-    threshold: 0.3,
-  })
-
-  // 실제 가격 데이터로 변경 (애니메이션 효과를 보기 위해)
-  const pricingData = [
-    { title: t("price1Title"), subtitle: t("price1Sub"), price: 1500000, unit: t("wonUnit"), icon: Cpu },
-    { title: t("price2Title"), subtitle: " ", price: 800000, unit: t("wonUnit"), icon: Shield },
-    { title: t("price3Title"), subtitle: " ", price: 200000, unit: t("wonUnit"), icon: Zap },
-    { title: t("price4Title"), subtitle: " ", price: 1200000, unit: t("wonUnit"), icon: Cpu },
-    { title: t("price5Title"), subtitle: t("price5Sub"), price: 500000, unit: t("wonUnit"), icon: Shield },
-  ]
-
+export default function LandingClient() {
   const quoteFormRef = useRef<HTMLDivElement>(null)
 
-  // URL 파라미터에 따라 초기 탭 설정 (기본값을 모의견적으로 변경)
-  const [selectedInquiry, setSelectedInquiry] = useState<"business" | "quote">(
-    tabParam === "business" ? "business" : "quote",
-  )
+  const [selectedInquiry, setSelectedInquiry] = useState<"business" | "quote">("quote")
 
   // inquiry 타입에 따라 default 값을 초기화
   const [selectedBusinessType, setSelectedBusinessType] = useState<string>(
@@ -71,451 +28,36 @@ function LandingPage() {
     }
   }, [selectedInquiry])
 
-  // URL 파라미터 변경 감지
-  useEffect(() => {
-    if (tabParam === "business") {
-      setSelectedInquiry("business")
-      // 문의 폼으로 스크롤 (200px 오프셋)
-      setTimeout(() => {
-        quoteFormRef.current?.scrollIntoView({
-          behavior: "smooth",
-          block: "center", // 또는 "start", "end", "nearest"
-        })
-      }, 100)
-    } else if (tabParam === "quote") {
-      setSelectedInquiry("quote")
-      // 모의 견적 폼으로 스크롤
-      setTimeout(() => {
-        quoteFormRef.current?.scrollIntoView({
-          behavior: "smooth",
-          block: "center",
-        })
-      }, 100)
-    } else if (tabParam === "form") {
-      // 기본적으로 모의견적 폼으로 설정하고 스크롤
-      setSelectedInquiry("quote")
-      setTimeout(() => {
-        quoteFormRef.current?.scrollIntoView({
-          behavior: "smooth",
-          block: "center",
-        })
-      }, 100)
-    }
-  }, [tabParam])
-
-  // 자동 슬라이드 기능
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentImageIndex((prevIndex) => (prevIndex === images.length - 1 ? 0 : prevIndex + 1))
-    }, 5000) // 5초마다 자동 슬라이드
-
-    return () => clearInterval(interval)
-  }, [images.length])
-
-  const projectInfo = [
-    {
-      category: t("catParking"),
-      title: "삼성전자 부품연구동 (DSR)",
-      link: "/projects/321",
-    },
-    {
-      category: t("catOfficeParking"),
-      title: "삼성전자 화성 캠퍼스",
-      link: "/projects/320",
-    },
-    {
-      category: t("catParking"),
-      title: "삼성전자 기흥 캠퍼스",
-      link: "/projects/322",
-    },
-    {
-      category: t("catLogistics"),
-      title: "CJ 대한통운 용인남사",
-      link: "/projects/348",
-    },
-    {
-      category: t("catLogistics"),
-      title: "CJ 대한통운 동탄",
-      link: "/projects/349",
-    },
-  ]
+  // 모의 견적 탭으로 설정하고 스크롤
+  const handleQuoteClick = () => {
+    setSelectedInquiry("quote")
+    setTimeout(() => {
+      quoteFormRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      })
+    }, 100)
+  }
 
   return (
     <div className="w-full">
-      {/* 첫 번째 히어로 섹션: 에너지 절감의 시작 + 이미지 슬라이더 */}
-      <FadeInUp delay={200}>
-        <section className="min-h-screen relative">
-          <div className="flex flex-col lg:grid lg:grid-cols-10 min-h-[70vh]">
-            {/* 텍스트 섹션 */}
-            <div className="lg:col-span-4 flex items-center justify-center lg:justify-end px-4 sm:px-6 lg:px-8 xl:pr-16 2xl:pr-0 py-8 lg:py-0">
-              <div className="text-gray-900 text-center lg:text-left max-w-2xl lg:max-w-none.,">
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 lg:mb-8 text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-[#583CF2] to-gray-700">
-                    {t.rich("heroStart", { gray })}
-                </h1>
-                <div className="mb-4 flex justify-center lg:justify-start">
-                  <img src="/images/brand/logo.png" alt={t("logoAlt")} className="h-8 sm:h-10 lg:h-12" />
-                </div>
-                {/* 접근성 숨김: 스니펫용 문구 */}
-                <p className="sr-only">
-                  {t("srDescription")}
-                </p>
-                <p className="text-base sm:text-xl lg:text-2xl text-gray-800 mt-6 lg:mt-10 mb-8 lg:mb-16 leading-relaxed">
-                  {t.rich("heroSubtitle", { br })}
-                </p>
-                <Link href="/cases" className="inline-block">
-                  <button className="bg-primary hover:bg-primary/90 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-medium text-base sm:text-lg transition-all duration-300 transform hover:scale-105 shadow-lg">
-                    <span className="flex items-center gap-2">
-                      {t("moreCases")}
-                      <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
-                    </span>
-                  </button>
-                </Link>
-              </div>
-            </div>
-
-            {/* 이미지 슬라이더 섹션 */}
-            <div className="lg:col-span-6 flex items-center justify-center px-4 sm:px-6 lg:px-8 py-8 lg:py-0">
-              <div className="relative w-full max-w-[600px] lg:max-w-[700px] xl:max-w-[800px] 2xl:max-w-[800px] aspect-[16/10] overflow-hidden rounded-xl shadow-2xl">
-                <div
-                  className="flex transition-transform duration-700 ease-out h-full"
-                  style={{ transform: `translateX(-${currentImageIndex * 100}%)` }}
-                >
-                  {images.map((image, index) => (
-                    <div key={index} className="w-full flex-shrink-0 h-full relative">
-                      <Image
-                        src={image || "/images/placeholder.svg"}
-                        alt={t("slideAlt", { index: index + 1 })}
-                        fill
-                        className="object-cover"
-                        priority={index === 0}
-                        quality={100}
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                      <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 lg:p-8 xl:p-12">
-                        <div className="space-y-1 sm:space-y-2">
-                          <span className="text-xs sm:text-sm lg:text-base font-medium text-white/90">
-                            {projectInfo[index]?.category || t("solutionFallback")}
-                          </span>
-                          <h2 className="text-base sm:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl font-bold text-white leading-tight">
-                            <a
-                              href={projectInfo[index]?.link || "#"}
-                              className="hover:text-gray-200 transition-colors duration-300"
-                            >
-                              {projectInfo[index]?.title || t("solutionTitleFallback", { index: index + 1 })}
-                            </a>
-                          </h2>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                {/* 네비게이션 버튼 */}
-                <button
-                  onClick={() => setCurrentImageIndex(Math.max(0, currentImageIndex - 1))}
-                  disabled={currentImageIndex === 0}
-                  className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center group"
-                >
-                  <svg
-                    className="w-5 h-5 sm:w-6 sm:h-6 lg:w-8 lg:h-8 text-white group-hover:text-gray-200 transition-colors drop-shadow-lg"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M15 19l-7-7 7-7" />
-                  </svg>
-                </button>
-
-                <button
-                  onClick={() => setCurrentImageIndex(Math.min(images.length - 1, currentImageIndex + 1))}
-                  disabled={currentImageIndex === images.length - 1}
-                  className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center group"
-                >
-                  <svg
-                    className="w-5 h-5 sm:w-6 sm:h-6 lg:w-8 lg:h-8 text-white group-hover:text-gray-200 transition-colors drop-shadow-lg"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M9 5l7 7-7 7" />
-                  </svg>
-                </button>
-
-                {/* 인디케이터 */}
-                <div className="absolute bottom-2 sm:bottom-4 left-1/2 -translate-x-1/2 flex space-x-1 sm:space-x-2">
-                  {images.map((_, index) => (
-                    <button
-                      key={index}
-                      onClick={() => setCurrentImageIndex(index)}
-                      className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full transition-all duration-300 ${
-                        currentImageIndex === index ? "bg-white shadow-lg" : "bg-white/50 hover:bg-white/70"
-                      }`}
-                    />
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* 로고 캐러셀 - 반응형 개선 */}
-          <div className="mt-8 lg:mt-16">
-            <LogoCarouselMain />
-          </div>
-        </section>
-      </FadeInUp>
-
-      {/* 두 번째 히어로 섹션: 왜 메를로랩을 선택할까요? + 모의 견적 계산하기 버튼 */}
-      <section className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto w-full">
-          <div className="text-center space-y-6 sm:space-y-8">
-            <div className="space-y-4 pt-12 sm:pt-16 lg:pt-20">
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-700 leading-tight">
-                {t.rich("whyChoose", {
-                  brand: () => (
-                    <span className="text-[#583CF2]">
-                      <SplitText text={t("brandName")} delay={400} />
-                    </span>
-                  ),
-                  br,
-                })}
-              </h1>
-            </div>
-            <div className="max-w-2xl lg:max-w-4xl mx-auto space-y-6 sm:space-y-8 lg:space-y-10">
-              <p className="text-base sm:text-lg lg:text-xl text-gray-600 leading-relaxed px-4 sm:px-0">
-                {t("whyDesc1")}<br />
-                <span className="block mt-10 text-sm sm:inline sm:mt-0 sm:text-xl">{t("whyDesc2")}</span>
-              </p>
-              
-
-              <button
-                onClick={() => {
-                  // 모의 견적 탭으로 설정하고 스크롤
-                  setSelectedInquiry("quote")
-                  setTimeout(() => {
-                    quoteFormRef.current?.scrollIntoView({
-                      behavior: "smooth",
-                      block: "center",
-                    })
-                  }, 100)
-                }}
-                className="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-3 sm:py-5 bg-[#583CF2]/5 rounded-xl sm:rounded-2xl hover:bg-[#583CF2]/10 transition-colors duration-300"
-              >
-                <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5 text-[#583CF2]" />
-                <span className="text-[#583CF2] font-semibold text-sm sm:text-base">{t("quoteButton")}</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 에너지 효율화 사업이란: 차트 포함 */}
-      <section className="mt-4 sm:mt-4 lg:mt-4 mb-24 sm:mb-32 lg:mb-40 px-4 sm:px-6 lg:px-8 bg-white">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12 sm:mb-16 lg:mb-20">
-            <div className="space-y-6 sm:space-y-8 lg:space-y-10 mb-24 sm:mb-0">
-              <FadeInUp delay={300}>
-                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold text-gray-700 mb-4 sm:mb-6">
-                  {t.rich("energyBizTitle", { hl })}
-                </h2>
-              </FadeInUp>
-              <FadeInUp delay={600}>
-                <p className="text-base sm:text-lg lg:text-xl text-gray-600 leading-relaxed px-4 sm:px-0">
-                  {t.rich("energyBizDesc", { br })}
-                </p>
-              </FadeInUp>
-            </div>
-          </div>
-          <AnimatedEnergyChart />
-        </div>
-      </section>
-
-      {/* 가격 정책: 초기 투자 비용 0원 */}
-      <section className="min-h-screen py-8 px-4 sm:px-6 lg:px-8 bg-gray-50">
-        <div className="max-w-6xl mx-auto py-16 sm:py-24 lg:py-32">
-          {/* Header Section */}
-          <div className="text-center mb-12 sm:mb-16 lg:mb-20">
-            <h2
-              ref={costRef}
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold text-gray-700 mb-4 sm:mb-6"
-            >
-              {t("costPrefix")}{costInView && <CountUp start={1000000} end={0} duration={2} separator="," />}{t("wonUnit")}
-            </h2>
-            <p className="text-lg sm:text-xl text-gray-600">{t("pricingSubtitle")}</p>
-          </div>
-
-          {/* Cards Grid - 6 column grid for offset positioning */}
-          <div ref={cardsRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4 sm:gap-6 lg:gap-4">
-            {pricingData.map((item, idx) => {
-              return (
-                <Card
-                  key={idx}
-                  className={`
-                    border border-gray-200 shadow-lg transition-all duration-300 bg-white group
-                    hover:shadow-xl hover:scale-105 hover:border-[#583CF2]/20
-                    ${
-                      idx <= 2
-                        ? "lg:col-span-2"
-                        : idx === 3
-                          ? "lg:col-start-2 lg:col-span-2"
-                          : "lg:col-start-4 lg:col-span-2"
-                    }
-                  `}
-                >
-                  <CardContent className="p-6 sm:p-8 text-center h-full flex flex-col justify-between">
-                    <div className="space-y-3 sm:space-y-4">
-                      {/* Icon */}
-                      <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[#583CF2]/10 rounded-xl sm:rounded-2xl flex items-center justify-center mx-auto group-hover:bg-[#583CF2]/20 transition-colors duration-300">
-                        <item.icon className="w-5 h-5 sm:w-6 sm:h-6 text-[#583CF2] group-hover:scale-110 transition-transform duration-300" />
-                      </div>
-
-                      {/* Title and Subtitle */}
-                      <div className="min-h-[3rem] sm:min-h-[3.5rem] flex flex-col justify-center">
-                        <h3 className="text-base sm:text-lg font-semibold text-gray-900 leading-tight">{item.title}</h3>
-                        {item.subtitle && item.subtitle.trim() && (
-                          <p className="text-xs sm:text-sm text-gray-500 mt-1 leading-tight">{item.subtitle}</p>
-                        )}
-                      </div>
-
-                      {/* Price with Animation */}
-                      <div className="pt-2">
-                        <p className="text-xl sm:text-2xl font-bold text-[#583CF2] group-hover:text-[#4c35d1] transition-colors duration-300">
-                          {cardsInView ? (
-                            <CountUp
-                              start={item.price}
-                              end={0}
-                              duration={2} // 2.5에서 2로 변경 (헤더와 동일하게)
-                              delay={0} // idx * 0.2에서 0으로 변경 (동시 시작)
-                              separator=","
-                            />
-                          ) : (
-                            item.price.toLocaleString()
-                          )}
-                          {item.unit}
-                        </p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              )
-            })}
-          </div>
-
-          {/* Footer Note */}
-          <div className="text-center mt-8 sm:mt-12 lg:mt-16">
-            <p className="text-xs sm:text-sm text-gray-500">{t("priceNote")}</p>
-          </div>
-        </div>
-      </section>
-
-      {/* 도입 프로세스: 5단계 */}
-      <section className="py-16 sm:py-24 lg:py-32 px-4 sm:px-6 lg:px-8 bg-white">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-12 sm:mb-16 lg:mb-20">
-            <FadeInUp delay={300}>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold text-gray-700 mb-4 sm:mb-6">
-                {t("processTitle")}
-              </h2>
-            </FadeInUp>
-            <FadeInUp delay={600}>
-              <p className="text-lg sm:text-xl text-gray-600">{t("processSubtitle")}</p>
-            </FadeInUp>
-          </div>
-
-          <div className="space-y-6 sm:space-y-8">
-            {[
-              { step: "01", title: t("step1Title"), description: t("step1Desc") },
-              { step: "02", title: t("step2Title"), description: t("step2Desc") },
-              { step: "03", title: t("step3Title"), description: t("step3Desc") },
-              { step: "04", title: t("step4Title"), description: t("step4Desc") },
-              { step: "05", title: t("step5Title"), description: t("step5Desc") },
-            ].map((item, idx) => (
-              <FadeInUp key={item.step /* 또는 key={idx} */} delay={600}>
-                <Card className="border border-gray-100 shadow-lg transition-all duration-300 bg-white group">
-                  <CardContent className="p-6 sm:p-8">
-                    <div className="flex items-start gap-4 sm:gap-6">
-                      <div className="flex-shrink-0">
-                        <div className="text-[#583CF2] text-xl sm:text-2xl lg:text-3xl font-bold">{item.step}</div>
-                      </div>
-                      <div className="space-y-2 flex-1">
-                        <h3 className="text-lg sm:text-xl font-bold text-gray-700">{item.title}</h3>
-                        <p className="text-sm sm:text-base text-gray-700 leading-relaxed">{item.description}</p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </FadeInUp>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA 섹션: 도입 사례 보기 */}
-      <section className="w-full relative bg-[#583cf2] flex flex-col items-center justify-start py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 text-center text-white">
-        <div className="w-full max-w-4xl flex flex-col items-center justify-start">
-          <div className="flex flex-col items-center justify-start gap-6 sm:gap-8">
-            <div className="flex flex-col items-center justify-start">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight font-bold px-4">
-                {t("ctaQuestion")}
-              </h2>
-            </div>
-            <button className="shadow-sm rounded-lg bg-white border border-gray-200 h-12 sm:h-14 flex items-center justify-center py-2 px-6 sm:px-8 gap-2 text-base sm:text-lg text-zinc-800 hover:bg-gray-50 transition-colors cursor-pointer">
-              <Link href="/cases" className="no-underline">
-                <div className="flex items-center gap-2">
-                  <span className="leading-7 font-medium">{t("viewCases")}</span>
-                  <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
-                </div>
-              </Link>
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {/* 폼 섹션: 사업 문의 / 모의 견적 */}
-      <section className="py-16 sm:py-24 lg:py-32 px-4 sm:px-6 lg:px-8 bg-gray-50">
-        <div className="max-w-4xl mx-auto">
-          <FadeInUp>
-            <div className="text-center mb-12 sm:mb-16">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-700 mb-4 sm:mb-6 leading-tight">
-                {t.rich("formTitle", { br })}
-              </h2>
-              <p className="text-base sm:text-xl text-gray-600">{t("formSubtitle")}</p>
-            </div>
-          </FadeInUp>
-
-          {selectedInquiry === "quote" ? (
-            <FadeInUp>
-              <div ref={quoteFormRef}>
-                <QuoteForm
-                  selectedInquiry={selectedInquiry}
-                  setSelectedInquiry={setSelectedInquiry}
-                  selectedBusinessType={selectedBusinessType}
-                  setSelectedBusinessType={setSelectedBusinessType}
-                />
-              </div>
-            </FadeInUp>
-          ) : (
-            <FadeInUp threshold={0.3} rootMargin="150px 0px" delay={100}>
-              <div ref={quoteFormRef}>
-                <BusinessInquiryForm
-                  selectedInquiry={selectedInquiry}
-                  setSelectedInquiry={setSelectedInquiry}
-                  selectedBusinessType={selectedBusinessType}
-                  setSelectedBusinessType={setSelectedBusinessType}
-                />
-              </div>
-            </FadeInUp>
-          )}
-        </div>
-      </section>
-
+      {/* useSearchParams는 이 컴포넌트에만 격리(Suspense) → 나머지 섹션은 SSR */}
+      <Suspense>
+        <TabParamSync setSelectedInquiry={setSelectedInquiry} quoteFormRef={quoteFormRef} />
+      </Suspense>
+      <HeroSection />
+      <WhyChooseSection onQuoteClick={handleQuoteClick} />
+      <EnergyBusinessSection />
+      <PricingSection />
+      <ProcessSection />
+      <HomeCtaSection />
+      <InquiryFormSection
+        selectedInquiry={selectedInquiry}
+        setSelectedInquiry={setSelectedInquiry}
+        selectedBusinessType={selectedBusinessType}
+        setSelectedBusinessType={setSelectedBusinessType}
+        quoteFormRef={quoteFormRef}
+      />
     </div>
-  )
-}
-
-export default function LandingClient() {
-  return (
-    <Suspense>
-      <LandingPage />
-    </Suspense>
   )
 }
