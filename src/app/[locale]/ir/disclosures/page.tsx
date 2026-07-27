@@ -4,8 +4,6 @@ import type React from "react"
 
 import { useEffect } from "react"
 import { getDisclosures, type Disclosure } from "@/sanity/lib/sanity" // getDisclosures 및 Disclosure 타입 임포트
-import Header from "@/components/header"
-import Footer from "@/components/footer"
 import FadeInUp from "@/components/animation/fade-in-up"
 import { Search, ChevronLeft, ChevronRight, Download } from "lucide-react" // Download 아이콘 임포트
 import { useTranslations } from "next-intl"
@@ -127,7 +125,6 @@ export default function IRPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <Header />
       <IrHero /> {/* Render the IrHero component here */}
       {/* Main Content */}
       <FadeInUp delay={300}>
@@ -290,7 +287,6 @@ export default function IRPage() {
           </div>
         </section>
       </FadeInUp>
-      <Footer />
     </div>
   )
 }

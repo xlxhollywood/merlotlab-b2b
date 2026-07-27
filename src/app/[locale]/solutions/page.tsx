@@ -6,8 +6,6 @@ export const dynamic = "force-dynamic"
 
 import { Package, Factory, Car, Users, ArrowRight } from "lucide-react"
 import { useEffect, useState, useRef } from "react"
-import Header from "@/components/header"
-import Footer from "@/components/footer"
 import { Link } from "@/i18n/navigation"
 import { useTranslations } from "next-intl"
 import SplitText from "@/components/animation/split-text"
@@ -276,7 +274,6 @@ export default function Solutions() {
 
   return (
     <div className="min-h-screen bg-white">
-      <Header />
 
       {/* 사업장 유형별 솔루션: 물류센터, 제조시설, 주차장, 사무실 */}
       <section className="mb-12 sm:mb-16 md:mb-24 lg:mb-8 px-4 sm:px-5 rounded">
@@ -353,7 +350,6 @@ export default function Solutions() {
         </div>
       </section>
 
-      <Footer />
     </div>
   )
 }

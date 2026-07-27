@@ -4,8 +4,6 @@ import { useState } from "react";
 import Statistics from "@/components/statistics/statistics";
 import PortfolioUseCases from "@/components/card/portfolio-use-cases";
 import FadeInUp from "@/components/animation/fade-in-up";
-import Header from "@/components/header";
-import Footer from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import LogoCarouselMain from "@/components/carousel/logo-carousel-cases";
 import { useTranslations } from "next-intl";
@@ -56,7 +54,6 @@ export default function UseCases() {
 
   return (
     <main className="min-h-screen">
-      <Header />
       <section className="relative w-full px-3 xs:px-4 sm:px-5 md:px-6 lg:px-8 py-8 xs:py-10 sm:py-12 md:py-16 lg:py-20 xl:py-24 bg-white text-center">
         <div className="absolute inset-0 pointer-events-none hidden lg:block">
           <div className="absolute top-0 bottom-0 left-[664px] right-[1300px] border-l border-r border-black/5 bg-[linear-gradient(-45deg,_rgba(3,7,18,0.05),_rgba(3,7,18,0.05)_7.07%,_rgba(3,7,18,0)_7.07%,_rgba(3,7,18,0)_50%)]" />
@@ -116,7 +113,6 @@ export default function UseCases() {
       </section>
 
       {/* Footer */}
-      <Footer />
     </main>
   );
 }
