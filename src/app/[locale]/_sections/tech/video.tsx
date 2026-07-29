@@ -4,15 +4,20 @@ import { useState } from "react"
 import { flushSync } from "react-dom"
 import Image from "next/image"
 import { Play } from "lucide-react"
-import { useTranslations } from "next-intl"
+import { useTranslations, useLocale } from "next-intl"
 import FadeInUp from "@/components/animation/fade-in-up"
 
-// TODO: 임시 영상 — 추후 실제 소개 영상 ID로 교체
-const VIDEO_ID = "fTkYVbkTq4g"
+// 기술 소개 영상 ID (로케일별)
+const VIDEO_ID: Record<string, string> = {
+  ko: "JWa9QTN-gUE",
+  en: "GjCbFwqHvaI",
+}
 
 // 기술 소개 영상 섹션 (docs/renewal/기술.png §2)
 export default function TechVideo() {
   const t = useTranslations("tech")
+  const locale = useLocale()
+  const videoId = VIDEO_ID[locale] ?? VIDEO_ID.ko
   const [playing, setPlaying] = useState(false)
 
   return (
@@ -30,7 +35,7 @@ export default function TechVideo() {
             {playing ? (
               <iframe
                 className="absolute inset-0 h-full w-full"
-                src={`https://www.youtube.com/embed/${VIDEO_ID}?autoplay=1&mute=1&rel=0&playsinline=1`}
+                src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&rel=0&playsinline=1`}
                 title={t("videoTitle")}
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
