@@ -41,8 +41,7 @@ export default function MerlotSolutionsSection() {
         <div className="mt-12 sm:mt-16 flex flex-col gap-14 sm:gap-20">
           {solutions.map((s) => (
             <FadeInUp key={s.name} delay={300}>
-              <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-8 lg:gap-12">
-                {/* 디바이스 목업 (네이티브 크기 유지, 좌측 정렬) */}
+              <div className="grid grid-cols-1 lg:grid-cols-[3fr_2fr] items-center gap-8 lg:gap-12">  {/* 디바이스 목업 (네이티브 크기 유지, 좌측 정렬) */}
                 <div className="flex justify-center">
                   <div className="relative w-full max-w-[440px] aspect-[455/232]">
                     <Image src={s.image} alt={s.name} fill className="object-contain" sizes="(max-width: 1024px) 100vw, 440px" />
