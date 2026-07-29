@@ -38,8 +38,265 @@
     "copyright": "© Copyright merlot.lab All Rights Reserved."
   },
   "about": {
-    "hero1": "A new standard for",
-    "hero2": "energy savings",
+    "heroEyebrow": "About Merlotlab",
+    "heroTitle": "About Us",
+    "heroSubtitle": "Company Overview",
+    "introHeading": "Leading the future of smart buildings.",
+    "introP1": "MerlotLab is a smart building platform company that builds wireless infrastructure connecting the entire building and expands diverse services on top of it.",
+    "introP2": "We see lighting not as mere lighting, but as the nervous system of a building. Our wireless mesh network connects the whole building, EMS controls the environment, and RTLS provides location data. This data becomes the learning foundation for AI, enabling a building to be understood and operated as a single living organism.",
+    "introP3": "Beyond Building DX, MerlotLab is preparing for the Building AX era, in which AI operates buildings autonomously. By shifting building operations that once relied on human experience and intuition to a data- and AI-driven autonomous system, we will build a safer and more efficient future for smart buildings.",
+    "introAxAlt": "MerlotLab Building AX concept diagram",
+    "overviewTitle": "Company Overview",
+    "ovNameLabel": "Company",
+    "ovName": "MerlotLab Inc.",
+    "ovCeoLabel": "CEO",
+    "ovCeo": "So-bong Shin",
+    "ovFoundedLabel": "Founded",
+    "ovFounded": "June 13, 2012",
+    "ovBizLabel": "Business",
+    "ovBiz": "Building energy management systems, smart building solutions",
+    "ovHqLabel": "Headquarters",
+    "ovHq": "#2002–2005, Daeryung Post Tower 5, 68 Digital-ro 9-gil, Geumcheon-gu, Seoul, Korea",
+    "ovSiteLabel": "Website",
+    "ovSite": "www.merlotlab.com",
+    "historyTitle": "Company History",
+    "historySubtitle": "The path MerlotLab has walked.",
+    "timeline": [
+      {
+        "year": "2026",
+        "items": [
+          {
+            "month": "03",
+            "text": "MOU with CJ Logistics for joint development of location-specific technology"
+          }
+        ]
+      },
+      {
+        "year": "2024",
+        "items": [
+          {
+            "month": "04",
+            "text": "Business agreement for a converged energy-efficiency solution"
+          }
+        ]
+      },
+      {
+        "year": "2023",
+        "items": [
+          {
+            "month": "08",
+            "text": "Joint business agreement MOU to form a National DR promotion council (with KPX et al.)"
+          },
+          {
+            "month": "",
+            "text": "Smart lighting ESG fund business agreement MOU (with Sun&Tree Asset Management et al.)"
+          },
+          {
+            "month": "07",
+            "text": "Excellent Product Designation certification — Public Procurement Service"
+          },
+          {
+            "month": "",
+            "text": "Joint business agreement MOU to form a National DR promotion council (with KPX et al.)"
+          },
+          {
+            "month": "03",
+            "text": "Business agreement MOU for convenience-store AMI smart-device-based Auto DR demonstration (with KPX et al.)"
+          }
+        ]
+      },
+      {
+        "year": "2022",
+        "items": [
+          {
+            "month": "11",
+            "text": "Successful frequency-control demonstration using IoT smart lighting (KPX)"
+          },
+          {
+            "month": "",
+            "text": "Delivered Home IoT lighting to 3,404 households at LH Incheon HQ"
+          },
+          {
+            "month": "05",
+            "text": "MOU for promoting ICT-based energy-efficiency projects (KEPCO E&S)"
+          },
+          {
+            "month": "",
+            "text": "Joint business agreement MOU to form a National DR promotion council (with KPX et al.)"
+          }
+        ]
+      },
+      {
+        "year": "2021",
+        "items": [
+          {
+            "month": "12",
+            "text": "Supplied Home IoT systems to 632 rental-housing units (LH Gwangju)"
+          },
+          {
+            "month": "11",
+            "text": "Frequency-control demonstration MOU using IoT smart lighting (KPX)"
+          },
+          {
+            "month": "06",
+            "text": "Materials, Parts & Equipment Specialized Company certificate"
+          },
+          {
+            "month": "04",
+            "text": "Eco-Label certification (Korea Environmental Industry & Technology Institute)"
+          },
+          {
+            "month": "03",
+            "text": "MOU for ICT-based system co-development and mutual cooperation (KEPCO Industrial Development)"
+          },
+          {
+            "month": "01",
+            "text": "Innovative Product Designation certificate for an industrial IoT system R&D (Minister of SMEs and Startups)"
+          }
+        ]
+      },
+      {
+        "year": "2020",
+        "items": [
+          {
+            "month": "08",
+            "text": "Win-Win Cooperation Product certificate (Minister of SMEs and Startups)"
+          },
+          {
+            "month": "03",
+            "text": "Registered as a smart grid operator (Minister of Trade, Industry and Energy)"
+          },
+          {
+            "month": "01",
+            "text": "Installed IoT panel lighting at Seoul Metro Tower"
+          }
+        ]
+      },
+      {
+        "year": "2019",
+        "items": [
+          {
+            "month": "11",
+            "text": "Launched 'Grid', the world's first fully wireless IoT collection system for process/heating applications"
+          },
+          {
+            "month": "06",
+            "text": "Launched the world-first high-efficiency AC (125 lm/W class) factory lighting"
+          },
+          {
+            "month": "",
+            "text": "LED&OLED EXPO New Technology & Excellent Product Development Award (Korea Energy Agency)"
+          },
+          {
+            "month": "01",
+            "text": "Launched IoT hub lighting (Wadiz)"
+          }
+        ]
+      },
+      {
+        "year": "2018",
+        "items": [
+          {
+            "month": "01",
+            "text": "Participated in Global Sources Hong Kong exhibition 2018"
+          },
+          {
+            "month": "",
+            "text": "Investment from KT, Kakao and others"
+          },
+          {
+            "month": "",
+            "text": "KT Partner Award — Startup Challenge Award"
+          },
+          {
+            "month": "",
+            "text": "Launched industrial IoT factory lighting"
+          }
+        ]
+      },
+      {
+        "year": "2017",
+        "items": [
+          {
+            "month": "02",
+            "text": "Developed Home IoT system"
+          },
+          {
+            "month": "01",
+            "text": "Launched RGB bulb"
+          }
+        ]
+      },
+      {
+        "year": "2016",
+        "items": [
+          {
+            "month": "12",
+            "text": "Obtained INNO-BIZ certification"
+          },
+          {
+            "month": "11",
+            "text": "Developed Merlot Mesh SoC SW v1.0"
+          },
+          {
+            "month": "",
+            "text": "Computer Lighting Exhibition System — Seoul City Award"
+          },
+          {
+            "month": "09",
+            "text": "11th Digital Innovation Grand Award (Hankook Ilbo, Marketing Science Division)"
+          },
+          {
+            "month": "01",
+            "text": "Launched 3 types of smart-system lighting"
+          },
+          {
+            "month": "",
+            "text": "Investment from Korea Development Bank and 3 others"
+          }
+        ]
+      },
+      {
+        "year": "2015",
+        "items": [
+          {
+            "month": "01",
+            "text": "Developed M3000 IC / launched floodlighting"
+          }
+        ]
+      },
+      {
+        "year": "2014",
+        "items": [
+          {
+            "month": "01",
+            "text": "Investment from KB Investment and 2 others"
+          }
+        ]
+      },
+      {
+        "year": "2013",
+        "items": [
+          {
+            "month": "02",
+            "text": "Venture company certification (Korea Technology Finance Corporation)"
+          }
+        ]
+      },
+      {
+        "year": "2012",
+        "items": [
+          {
+            "month": "11",
+            "text": "Corporate R&D center certification (Korea Industrial Technology Association)"
+          },
+          {
+            "month": "06",
+            "text": "Company founded"
+          }
+        ]
+      }
+    ],
     "certSectionTitle": "Patents & Certifications",
     "certSectionDesc": "Patents and certifications that recognize MerlotLab's technology and quality",
     "patentDomestic": "Domestic Patents",
@@ -47,9 +304,9 @@
     "certLabel": "Certifications",
     "unitCase": "",
     "unitCount": "",
-    "cert1": "ISO 9001:2015 Quality Management System Certification",
-    "cert2": "High-Efficiency Energy Equipment Certification (Smart LED Lighting Control System)",
-    "cert3": "Win-Win Cooperation Product Certificate (Minister of SMEs and Startups)",
+    "cert1": "Innovative Product Designation Certificate",
+    "cert2": "Excellent Product Designation Certificate",
+    "cert3": "High-Efficiency Energy Equipment Certification",
     "directionsTitle": "Directions",
     "directionsDesc": "Information for customers visiting MerlotLab.",
     "labelAddress": "Address",
