@@ -13,10 +13,10 @@ export default function EmsSiteTypes() {
   const br = () => <br />
 
   const types = [
-    { image: "/images/ems/4-round-1.png", name: t("site1Name"), desc: t.rich("site1Desc", { br }) },
-    { image: "/images/ems/4-round-2.png", name: t("site2Name"), desc: t.rich("site2Desc", { br }) },
-    { image: "/images/ems/4-round-3.png", name: t("site3Name"), desc: t.rich("site3Desc", { br }) },
-    { image: "/images/ems/4-round-4.png", name: t("site4Name"), desc: t.rich("site4Desc", { br }) },
+    { image: "/images/ems/4-round-1.webp", name: t("site1Name"), desc: t.rich("site1Desc", { br }) },
+    { image: "/images/ems/4-round-2.webp", name: t("site2Name"), desc: t.rich("site2Desc", { br }) },
+    { image: "/images/ems/4-round-3.webp", name: t("site3Name"), desc: t.rich("site3Desc", { br }) },
+    { image: "/images/ems/4-round-4.webp", name: t("site4Name"), desc: t.rich("site4Desc", { br }) },
   ]
 
   return (

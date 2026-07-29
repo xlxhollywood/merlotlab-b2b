@@ -48,7 +48,7 @@ export default function TechVideo() {
                 className="group absolute inset-0 h-full w-full cursor-pointer"
               >
                 <Image
-                  src="/images/tech/2-youtube.png"
+                  src="/images/tech/2-youtube.webp"
                   alt={t("videoTitle")}
                   fill
                   className="object-cover"

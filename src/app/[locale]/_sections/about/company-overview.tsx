@@ -31,7 +31,7 @@ export default function CompanyOverview() {
             {/* 로고 박스 */}
             <div className="flex items-center justify-center bg-gray-50 rounded-lg py-14 lg:py-0">
               <Image
-                src="/images/brand/logo.png"
+                src="/images/brand/logo.webp"
                 alt={t("ovName")}
                 width={220}
                 height={40}
