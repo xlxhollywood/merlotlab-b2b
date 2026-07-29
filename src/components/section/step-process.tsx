@@ -23,9 +23,13 @@ export default function StepProcess({
         </FadeInUp>
 
         <FadeInUp delay={300}>
-          <div className="mt-10 sm:mt-14 grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+          {/* 모바일 세로 적층 시 하단 포커스 그림자가 다음 카드에 가려지지 않도록 간격 확보 */}
+          <div className="mt-10 sm:mt-14 grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-6">
             {steps.map((step) => (
-              <div key={step.no} className="flex flex-col rounded-2xl bg-white p-6 lg:p-8 shadow-sm min-h-[220px]">
+              <div
+                key={step.no}
+                className="flex flex-col rounded-2xl bg-white p-6 lg:p-8 shadow-[0_12px_24px_-8px_rgba(17,17,26,0.16),0_2px_8px_-2px_rgba(17,17,26,0.06)] min-h-[220px]"
+              >
                 <p className="text-sm font-bold text-primary">{step.no}</p>
                 <h3 className="mt-3 text-lg sm:text-xl font-bold text-gray-800">{step.title}</h3>
                 <p className="mt-auto pt-8 text-sm text-gray-500 leading-relaxed">{step.desc}</p>

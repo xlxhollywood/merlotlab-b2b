@@ -21,13 +21,18 @@ export default function FeatureRow({
 }) {
   return (
     <FadeInUp delay={150}>
-      <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-8 lg:gap-16">
+      {/* 이미지:텍스트 = 5:3, 넓은 거터 (피그마 비율) — reverse 행은 트랙을 좌우 반전 */}
+      <div
+        className={`grid grid-cols-1 items-center gap-8 lg:gap-24 xl:gap-44 ${
+          reverse ? "lg:grid-cols-[3fr_5fr]" : "lg:grid-cols-[5fr_3fr]"
+        }`}
+      >
         {/* 이미지 */}
         <div className={`relative w-full aspect-[650/432] overflow-hidden rounded-2xl ${reverse ? "lg:order-2" : ""}`}>
           <Image src={image} alt={imageAlt} fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
         </div>
-        {/* 텍스트 */}
-        <div className={reverse ? "lg:order-1" : ""}>
+        {/* 텍스트: reverse 행은 블록을 이미지 쪽(우측)으로 붙이고 바깥쪽에 여백을 남김 (피그마) */}
+        <div className={reverse ? "lg:order-1 lg:ml-auto lg:w-fit lg:max-w-full" : ""}>
           <p className="text-sm font-semibold text-primary">{eyebrow}</p>
           <h3 className="mt-2 text-2xl sm:text-3xl font-bold text-gray-800">{title}</h3>
           <ul className="mt-5 space-y-2.5">
