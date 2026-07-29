@@ -9,9 +9,9 @@ export default function CertificationsSection() {
   const t = useTranslations("about")
 
   const certifications = [
-    { title: t("cert1"), image: "/images/about/certificate-1.png" },
-    { title: t("cert2"), image: "/images/about/certificate-2.png" },
-    { title: t("cert3"), image: "/images/about/certificate-6.png" },
+    { title: t("cert1"), image: "/images/about/3-cert-1.png" },
+    { title: t("cert2"), image: "/images/about/3-cert-2.png" },
+    { title: t("cert3"), image: "/images/about/3-cert-3.png" },
   ]
 
   const [mobileCertIndex, setMobileCertIndex] = useState(0)

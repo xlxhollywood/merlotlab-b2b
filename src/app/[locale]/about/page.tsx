@@ -1,15 +1,19 @@
 import AboutHeroSection from "../_sections/about/hero";
-import CertificationsSection from "../_sections/about/certifications";
+import AboutIntro from "../_sections/about/intro";
+import CompanyOverview from "../_sections/about/company-overview";
 import DirectionsSection from "../_sections/about/directions";
-import CtaSection from "@/components/section/cta";
+import AboutHistory from "../_sections/about/history";
+import CertificationsSection from "../_sections/about/certifications";
 
 export default function About() {
   return (
     <div>
       <AboutHeroSection />
-      <CertificationsSection />
+      <AboutIntro />
+      <CompanyOverview />
       <DirectionsSection />
-      <CtaSection />
+      <AboutHistory />
+      <CertificationsSection />
     </div>
   );
 }
