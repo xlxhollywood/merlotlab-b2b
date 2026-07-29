@@ -25,7 +25,9 @@ export default function ReasonsGrid({
                   <Image src={item.icon} alt="" fill sizes="64px" className="object-contain" />
                 </div>
                 <h3 className="mt-4 text-base sm:text-lg font-bold text-gray-800">{item.title}</h3>
-                <p className="mt-2 text-sm text-gray-500 leading-relaxed">{item.desc}</p>
+                {/* 제목/본문 구분선 (피그마) */}
+                <hr className="mt-3 w-11/12 border-t border-gray-200" />
+                <p className="mt-3 text-sm text-gray-500 leading-relaxed">{item.desc}</p>
               </div>
             ))}
           </div>
