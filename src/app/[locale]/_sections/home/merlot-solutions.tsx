@@ -13,13 +13,13 @@ export default function MerlotSolutionsSection() {
 
   const solutions = [
     {
-      image: "/images/main/3-device-1.png",
+      image: "/images/main/3-device-1.webp",
       name: t("emsName"),
       descKey: "emsDesc",
       href: "/solutions/ems",
     },
     {
-      image: "/images/main/3-device-2.png",
+      image: "/images/main/3-device-2.webp",
       name: t("rtlsName"),
       descKey: "rtlsDesc",
       href: "/solutions/rtls",

@@ -13,10 +13,10 @@ export default function PlatformSection() {
   const mbr = () => <br className="sm:hidden" />
 
   const steps = [
-    { no: "01", icon: "/images/main/2-platform-1.png", title: t("platform1Title"), descKey: "platform1Desc" },
-    { no: "02", icon: "/images/main/2-platform-2.png", title: t("platform2Title"), descKey: "platform2Desc" },
-    { no: "03", icon: "/images/main/2-platform-3.png", title: t("platform3Title"), descKey: "platform3Desc" },
-    { no: "04", icon: "/images/main/2-platform-4.png", title: t("platform4Title"), descKey: "platform4Desc" },
+    { no: "01", icon: "/images/main/2-platform-1.webp", title: t("platform1Title"), descKey: "platform1Desc" },
+    { no: "02", icon: "/images/main/2-platform-2.webp", title: t("platform2Title"), descKey: "platform2Desc" },
+    { no: "03", icon: "/images/main/2-platform-3.webp", title: t("platform3Title"), descKey: "platform3Desc" },
+    { no: "04", icon: "/images/main/2-platform-4.webp", title: t("platform4Title"), descKey: "platform4Desc" },
   ] as const
 
   return (
@@ -38,7 +38,7 @@ export default function PlatformSection() {
             {steps.map((step) => (
               <div key={step.no} className="rounded-2xl bg-gray-50 p-6 lg:p-7 text-left">
                 <div className="relative w-24 h-24 mx-auto">
-                  <Image src={step.icon} alt={step.title} fill className="object-contain" />
+                  <Image src={step.icon} alt={step.title} fill sizes="96px" className="object-contain" />
                 </div>
                 <div className="mt-6 flex items-baseline gap-2">
                   <span className="text-xl font-bold text-primary">{step.no}</span>
