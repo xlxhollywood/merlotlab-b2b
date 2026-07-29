@@ -47,7 +47,7 @@ export default function InquiryFormSection({
             </div>
           </FadeInUp>
         ) : (
-          <FadeInUp threshold={0.3} rootMargin="150px 0px" delay={100}>
+          <FadeInUp rootMargin="150px 0px" delay={100}>
             <div ref={quoteFormRef}>
               <BusinessInquiryForm
                 selectedInquiry={selectedInquiry}
