@@ -10,8 +10,8 @@ export default function RtlsComponents() {
   const br = () => <br />
 
   const cards = [
-    { image: "/images/rtls/4-component-1.png", name: t("comp1Name"), desc: t.rich("comp1Desc", { br }) },
-    { image: "/images/rtls/4-component-2.png", name: t("comp2Name"), desc: t.rich("comp2Desc", { br }) },
+    { image: "/images/rtls/4-component-1.webp", name: t("comp1Name"), desc: t.rich("comp1Desc", { br }) },
+    { image: "/images/rtls/4-component-2.webp", name: t("comp2Name"), desc: t.rich("comp2Desc", { br }) },
   ]
 
   return (

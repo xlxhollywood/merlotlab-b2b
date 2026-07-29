@@ -9,10 +9,10 @@ export default function EmsFeatures() {
   const t = useTranslations("ems")
 
   const rows = [
-    { eyebrow: t("feat1Eyebrow"), title: t("feat1Title"), bullets: [t("feat1B1"), t("feat1B2"), t("feat1B3")], image: "/images/ems/3-solution-1.png" },
-    { eyebrow: t("feat2Eyebrow"), title: t("feat2Title"), bullets: [t("feat2B1"), t("feat2B2"), t("feat2B3"), t("feat2B4")], image: "/images/ems/3-solution-2.png" },
-    { eyebrow: t("feat3Eyebrow"), title: t("feat3Title"), bullets: [t("feat3B1"), t("feat3B2"), t("feat3B3")], image: "/images/ems/3-solution-3.png" },
-    { eyebrow: t("feat4Eyebrow"), title: t("feat4Title"), bullets: [t("feat4B1"), t("feat4B2"), t("feat4B3")], image: "/images/ems/3-solution-4.png" },
+    { eyebrow: t("feat1Eyebrow"), title: t("feat1Title"), bullets: [t("feat1B1"), t("feat1B2"), t("feat1B3")], image: "/images/ems/3-solution-1.webp" },
+    { eyebrow: t("feat2Eyebrow"), title: t("feat2Title"), bullets: [t("feat2B1"), t("feat2B2"), t("feat2B3"), t("feat2B4")], image: "/images/ems/3-solution-2.webp" },
+    { eyebrow: t("feat3Eyebrow"), title: t("feat3Title"), bullets: [t("feat3B1"), t("feat3B2"), t("feat3B3")], image: "/images/ems/3-solution-3.webp" },
+    { eyebrow: t("feat4Eyebrow"), title: t("feat4Title"), bullets: [t("feat4B1"), t("feat4B2"), t("feat4B3")], image: "/images/ems/3-solution-4.webp" },
   ]
 
   return (

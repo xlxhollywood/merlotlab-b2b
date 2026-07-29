@@ -12,7 +12,7 @@ export default function EmsIntro() {
       title={t.rich("introTitle", { hl })}
       subtitle={t.rich("introSubtitle", { br: () => <br /> })}
       chips={[t("introChip1"), t("introChip2"), t("introChip3"), t("introChip4")]}
-      image="/images/ems/2-device.png"
+      image="/images/ems/2-device.webp"
       imageAlt={t("heroEyebrow")}
     />
   )

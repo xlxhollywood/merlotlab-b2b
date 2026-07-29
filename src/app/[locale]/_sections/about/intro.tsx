@@ -28,7 +28,7 @@ export default function AboutIntro() {
       <FadeInUp delay={400}>
         <div className="mt-12 sm:mt-16 max-w-4xl mx-auto">
           <Image
-            src="/images/about/2-ax.png"
+            src="/images/about/2-ax.webp"
             alt={t("introAxAlt")}
             width={1100}
             height={720}
