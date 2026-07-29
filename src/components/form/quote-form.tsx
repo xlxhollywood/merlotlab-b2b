@@ -150,9 +150,8 @@ export default function QuoteForm({
     const hoursPerDay = Number.parseFloat(generalHours) // h/day
     const daysPerYear = Number.parseFloat(annualDays) // days
 
-    // 일일 사용 시간 8시간 미만 제한
+    // 일일 사용 시간 8시간 미만 제한 (인라인 에러로 노출 — isSubmitted가 이미 true)
     if (hoursPerDay < 8) {
-      alert(t("minHoursAlert"))
       return
     }
 
@@ -220,7 +219,7 @@ export default function QuoteForm({
   return (
     <Card className="border-0 shadow-lg bg-white">
       <CardContent className="p-4 sm:p-6 md:p-8 lg:p-12">
-        <form onSubmit={calculateQuote} className="space-y-6 sm:space-y-8">
+        <form onSubmit={calculateQuote} noValidate className="space-y-6 sm:space-y-8">
           {/* 문의 구분 */}
           <div className="space-y-4">
             <Label className="text-base sm:text-lg font-semibold text-gray-700">
@@ -340,13 +339,16 @@ export default function QuoteForm({
                   value={formData.generalHours}
                   onChange={(e) => handleInputChange("generalHours", e.target.value)}
                   className={`h-10 sm:h-12 border-2 rounded-xl focus:ring-0 ${
-                    isSubmitted && !formData.generalHours ? "border-red-300 focus:border-red-500" : "border-gray-200 focus:border-[#583CF2]"
+                    isSubmitted && (!formData.generalHours || Number(formData.generalHours) < 8) ? "border-red-300 focus:border-red-500" : "border-gray-200 focus:border-[#583CF2]"
                   }`}
                   required
                 />
                 <p className="text-xs text-gray-500">{t("hoursHint")}</p>
                 {isSubmitted && !formData.generalHours && (
                   <p className="text-xs text-red-500">{t("hoursRequired")}</p>
+                )}
+                {isSubmitted && formData.generalHours && Number(formData.generalHours) < 8 && (
+                  <p className="text-xs text-red-500">{t("minHoursAlert")}</p>
                 )}
               </div>
               <div className="space-y-2">

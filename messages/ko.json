@@ -584,10 +584,12 @@
     "consent": "양식을 제출하면 개인정보 제공 및 제 3자 정보 제공 활용에 동의하는 것으로 간주합니다.",
     "submitting": "전송 중...",
     "submit": "문의 보내기",
-    "alertRequired": "필수 항목을 모두 입력해주세요.",
-    "alertOrgName": "기관명을 입력해주세요.",
-    "alertSuccess": "문의가 성공적으로 접수되었습니다!",
-    "alertError": "접수 중 오류가 발생했습니다."
+    "fieldRequired": "필수 입력 항목입니다.",
+    "invalidEmail": "올바른 이메일 형식이 아닙니다.",
+    "successHeading": "문의가 접수되었습니다",
+    "errorHeading": "전송에 실패했습니다",
+    "alertSuccess": "빠른 시일 내에 담당자가 연락드리겠습니다.",
+    "alertError": "전송 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요."
   },
   "quoteForm": {
     "inquiryType": "문의 구분",
