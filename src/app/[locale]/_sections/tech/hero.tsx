@@ -8,7 +8,7 @@ export default function TechHero() {
   const t = useTranslations("tech")
   return (
     <HeroOverlay
-      image="/images/tech/1-banner.png"
+      image="/images/tech/1-banner.webp"
       imageAlt={t("heroTitle")}
       eyebrow={t("heroEyebrow")}
       title={t("heroTitle")}
