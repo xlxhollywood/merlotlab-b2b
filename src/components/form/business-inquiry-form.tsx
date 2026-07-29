@@ -1,6 +1,6 @@
 "use client"
 
-import { Mail } from "lucide-react"
+import { Mail, CheckCircle2, AlertCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -45,35 +45,45 @@ export default function BusinessInquiryForm({
     message: "",
   })
 
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle")
+  const [errorMsg, setErrorMsg] = useState("")
 
-  // 🔥 입력 핸들러
+  const emailValid = (v: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)
+
+  // 인라인 검증: 제출 시도(submitted) 시에만 각 필드 에러 노출
+  const errors = {
+    businessType: !selectedBusinessType ? t("fieldRequired") : "",
+    companyName: !isPersonal && !formData.companyName.trim() ? t("fieldRequired") : "",
+    managerName: !formData.managerName.trim() ? t("fieldRequired") : "",
+    phone: !formData.phone.trim() ? t("fieldRequired") : "",
+    email: !formData.email.trim() ? t("fieldRequired") : !emailValid(formData.email) ? t("invalidEmail") : "",
+    message: !formData.message.trim() ? t("fieldRequired") : "",
+  }
+  const hasErrors = Object.values(errors).some(Boolean)
+  const err = (field: keyof typeof errors) => (submitted ? errors[field] : "")
+
+  // 🔥 입력 핸들러 (입력 재개 시 결과 패널 dismiss)
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({
       ...prev,
       [field]: value
     }))
+    if (status === "success" || status === "error") setStatus("idle")
   }
 
   // 🔥 폼 제출 함수
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setIsSubmitting(true)
+    setSubmitted(true)
 
-    // 기본 필수 필드 검증
-  if (!selectedBusinessType || !formData.managerName || !formData.phone || !formData.email || !formData.message) {
-    alert(t("alertRequired"))
-    setIsSubmitting(false)
-    return
-  }
+    // 검증 실패 시 인라인 에러가 노출됨 (alert 없음)
+    if (hasErrors) {
+      setStatus("idle")
+      return
+    }
 
-  // 🔥 NEW: 개인이 아닌 경우 기관명 검증
-  if (!isPersonal && (!formData.companyName || formData.companyName.trim() === "")) {
-    alert(t("alertOrgName"))
-    setIsSubmitting(false)
-    return
-  }
-
+    setStatus("submitting")
     try {
       const response = await fetch('/api/contact', {
         method: 'POST',
@@ -93,7 +103,8 @@ export default function BusinessInquiryForm({
       })
 
       if (response.ok) {
-        alert(t("alertSuccess"))
+        setStatus("success")
+        setSubmitted(false)
         // 폼 리셋
         setFormData({
           companyName: "",
@@ -104,21 +115,23 @@ export default function BusinessInquiryForm({
           message: "",
         })
       } else {
-        const errorData = await response.json()
-        alert(errorData.error || t("alertError"))
+        const errorData = await response.json().catch(() => ({}))
+        setErrorMsg(errorData.error || t("alertError"))
+        setStatus("error")
       }
     } catch (error) {
       console.error('Error:', error)
-      alert(t("alertError"))
-    } finally {
-      setIsSubmitting(false)
+      setErrorMsg(t("alertError"))
+      setStatus("error")
     }
   }
-  
+
+  const isSubmitting = status === "submitting"
+
   return (
     <Card className="border-0 shadow-lg bg-white">
       <CardContent className="p-4 sm:p-6 md:p-8 lg:p-12">
-        <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-8">
+        <form onSubmit={handleSubmit} noValidate className="space-y-6 sm:space-y-8">
           {/* 문의 구분 */}
           <div className="space-y-4">
             <Label className="text-base sm:text-lg font-semibold text-gray-700">
@@ -185,6 +198,9 @@ export default function BusinessInquiryForm({
                 </div>
               ))}
             </div>
+            {err("businessType") && (
+              <p className="text-sm text-red-500">{err("businessType")}</p>
+            )}
           </div>
 
           {/* 기본 정보 */}
@@ -203,8 +219,13 @@ export default function BusinessInquiryForm({
                     placeholder={t("orgNamePlaceholder")}
                     value={formData.companyName}
                     onChange={(e) => handleInputChange("companyName", e.target.value)}
-                    className="h-10 sm:h-12 rounded-xl border-2 border-gray-200 focus:border-[#583CF2] focus:ring-0"
+                    aria-invalid={!!err("companyName")}
+                    aria-describedby={err("companyName") ? "err-companyName" : undefined}
+                    className={`h-10 sm:h-12 rounded-xl border-2 focus:ring-0 ${err("companyName") ? "border-red-300 focus:border-red-500" : "border-gray-200 focus:border-[#583CF2]"}`}
                   />
+                  {err("companyName") && (
+                    <p id="err-companyName" className="text-sm text-red-500">{err("companyName")}</p>
+                  )}
                 </div>
               )}
 
@@ -236,8 +257,13 @@ export default function BusinessInquiryForm({
                   value={formData.managerName}
                   onChange={(e) => handleInputChange("managerName", e.target.value)}
                   placeholder={isPersonal ? t("namePlaceholder") : t("managerPlaceholder")}
-                  className="h-10 sm:h-12 rounded-xl border-2 border-gray-200 focus:border-[#583CF2] focus:ring-0"
+                  aria-invalid={!!err("managerName")}
+                  aria-describedby={err("managerName") ? "err-manager" : undefined}
+                  className={`h-10 sm:h-12 rounded-xl border-2 focus:ring-0 ${err("managerName") ? "border-red-300 focus:border-red-500" : "border-gray-200 focus:border-[#583CF2]"}`}
                 />
+                {err("managerName") && (
+                  <p id="err-manager" className="text-sm text-red-500">{err("managerName")}</p>
+                )}
               </div>
 
               {/* 전화번호 */}
@@ -251,8 +277,13 @@ export default function BusinessInquiryForm({
                   value={formData.phone}
                   onChange={(e) => handleInputChange("phone", e.target.value)}
                   placeholder={t("phonePlaceholder")}
-                  className="h-10 sm:h-12 rounded-xl border-2 border-gray-200 focus:border-[#583CF2] focus:ring-0"
+                  aria-invalid={!!err("phone")}
+                  aria-describedby={err("phone") ? "err-phone" : undefined}
+                  className={`h-10 sm:h-12 rounded-xl border-2 focus:ring-0 ${err("phone") ? "border-red-300 focus:border-red-500" : "border-gray-200 focus:border-[#583CF2]"}`}
                 />
+                {err("phone") && (
+                  <p id="err-phone" className="text-sm text-red-500">{err("phone")}</p>
+                )}
               </div>
 
               {/* 이메일 */}
@@ -267,8 +298,13 @@ export default function BusinessInquiryForm({
                   onChange={(e) => handleInputChange("email", e.target.value)}
                   type="email"
                   placeholder="example@email.com"
-                  className="h-10 sm:h-12 rounded-xl border-2 border-gray-200 focus:border-[#583CF2] focus:ring-0"
+                  aria-invalid={!!err("email")}
+                  aria-describedby={err("email") ? "err-email" : undefined}
+                  className={`h-10 sm:h-12 rounded-xl border-2 focus:ring-0 ${err("email") ? "border-red-300 focus:border-red-500" : "border-gray-200 focus:border-[#583CF2]"}`}
                 />
+                {err("email") && (
+                  <p id="err-email" className="text-sm text-red-500">{err("email")}</p>
+                )}
               </div>
             </div>
           </div>
@@ -284,9 +320,34 @@ export default function BusinessInquiryForm({
               value={formData.message}
               onChange={(e) => handleInputChange("message", e.target.value)}
               placeholder={t("messagePlaceholder")}
-              className="min-h-[100px] sm:min-h-[120px] rounded-xl border-2 border-gray-200 focus:border-[#583CF2] focus:ring-0 resize-none"
+              aria-invalid={!!err("message")}
+              aria-describedby={err("message") ? "err-message" : undefined}
+              className={`min-h-[100px] sm:min-h-[120px] rounded-xl border-2 focus:ring-0 resize-none ${err("message") ? "border-red-300 focus:border-red-500" : "border-gray-200 focus:border-[#583CF2]"}`}
             />
+            {err("message") && (
+              <p id="err-message" className="text-sm text-red-500">{err("message")}</p>
+            )}
           </div>
+
+          {/* 제출 결과 패널 */}
+          {status === "success" && (
+            <div role="status" aria-live="polite" className="flex items-start gap-3 rounded-xl border border-green-200 bg-green-50 p-4 sm:p-5">
+              <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-green-600" />
+              <div>
+                <p className="font-semibold text-green-800">{t("successHeading")}</p>
+                <p className="mt-0.5 text-sm text-green-700">{t("alertSuccess")}</p>
+              </div>
+            </div>
+          )}
+          {status === "error" && (
+            <div role="alert" aria-live="assertive" className="flex items-start gap-3 rounded-xl border border-red-200 bg-red-50 p-4 sm:p-5">
+              <AlertCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-red-600" />
+              <div>
+                <p className="font-semibold text-red-800">{t("errorHeading")}</p>
+                <p className="mt-0.5 text-sm text-red-700">{errorMsg || t("alertError")}</p>
+              </div>
+            </div>
+          )}
 
           {/* 제출 */}
           <div className="space-y-4 sm:space-y-6 pt-4">
