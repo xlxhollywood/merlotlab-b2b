@@ -11,7 +11,7 @@ export default function HomeCtaSection() {
   return (
     <section className="w-full bg-primary py-16 sm:py-20 px-4 sm:px-6 lg:px-8 text-center text-white">
       <div className="max-w-4xl mx-auto flex flex-col items-center gap-6 sm:gap-8">
-        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight font-bold">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight font-bold break-keep">
           {t("ctaQuestion")}
         </h2>
         <Link

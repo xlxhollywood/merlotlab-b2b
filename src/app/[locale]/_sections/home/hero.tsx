@@ -25,10 +25,10 @@ export default function HeroSection() {
       {/* 텍스트 (수직 중앙보다 약간 위) */}
       <div className="relative z-10 max-w-[1880px] mx-auto flex min-h-[calc(100vh-4rem)] items-center px-6 sm:px-10 lg:px-20 2xl:px-48">
         <div className="max-w-3xl text-white">
-          <h1 className="text-4xl sm:text-5xl font-bold leading-[1.15]">
+          <h1 className="text-4xl/[1.15] sm:text-5xl/[1.5] font-bold">
             {t.rich("heroHeadline", { br })}
           </h1>
-          <p className="mt-6 text-sm sm:text-base text-white/85 leading-relaxed">
+          <p className="mt-8 sm:mt-20 text-sm sm:text-lg text-white/85 leading-relaxed break-keep">
             {t.rich("heroBannerSubtitle", { br })}
           </p>
         </div>
