@@ -19,7 +19,7 @@ export default function EmsPricingZero() {
   const Card = ({ item }: { item: (typeof items)[number] }) => {
     const Icon = item.icon
     return (
-      <div className="flex flex-col items-center rounded-2xl bg-white p-6 lg:p-8 text-center shadow-sm">
+      <div className="flex flex-col items-center rounded-2xl bg-white p-6 lg:p-8 text-center shadow-[0_12px_24px_-8px_rgba(17,17,26,0.16),0_2px_8px_-2px_rgba(17,17,26,0.06)]">
         <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10">
           <Icon className="h-6 w-6 text-primary" />
         </span>
@@ -41,12 +41,13 @@ export default function EmsPricingZero() {
         </FadeInUp>
 
         <FadeInUp delay={300}>
-          <div className="mt-10 sm:mt-12 grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
+          {/* 카드 하단 포커스 그림자가 다음 카드에 가려지지 않도록 간격 확보 */}
+          <div className="mt-10 sm:mt-12 grid grid-cols-1 sm:grid-cols-3 gap-6">
             {items.slice(0, 3).map((item) => (
               <Card key={item.title} item={item} />
             ))}
           </div>
-          <div className="mt-4 sm:mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 sm:max-w-[calc(66.666%-0.5rem)] sm:mx-auto">
+          <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-6 sm:max-w-[calc(66.666%-0.5rem)] sm:mx-auto">
             {items.slice(3).map((item) => (
               <Card key={item.title} item={item} />
             ))}
