@@ -12,7 +12,7 @@ export default function HeroSection() {
     <section className="relative w-full min-h-[calc(100vh-4rem)] overflow-hidden">
       {/* 배경 배너 이미지 */}
       <Image
-        src="/images/main/1-banner.png"
+        src="/images/main/1-banner.webp"
         alt={t("logoAlt")}
         fill
         priority

@@ -8,7 +8,7 @@ export default function RtlsHero() {
   const t = useTranslations("rtls")
   return (
     <HeroOverlay
-      image="/images/rtls/1-banner.png"
+      image="/images/rtls/1-banner.webp"
       imageAlt={t("heroTitle")}
       eyebrow={t("heroEyebrow")}
       title={t("heroTitle")}

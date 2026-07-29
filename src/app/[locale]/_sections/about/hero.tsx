@@ -8,7 +8,7 @@ export default function AboutHeroSection() {
   const t = useTranslations("about")
   return (
     <HeroOverlay
-      image="/images/about/1-banner.png"
+      image="/images/about/1-banner.webp"
       imageAlt={t("heroTitle")}
       eyebrow={t("heroEyebrow")}
       title={t("heroTitle")}

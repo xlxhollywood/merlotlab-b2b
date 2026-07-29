@@ -8,7 +8,7 @@ export default function EmsHero() {
   const t = useTranslations("ems")
   return (
     <HeroOverlay
-      image="/images/ems/1-banner.png"
+      image="/images/ems/1-banner.webp"
       imageAlt={t("heroTitle")}
       eyebrow={t("heroEyebrow")}
       title={t("heroTitle")}
