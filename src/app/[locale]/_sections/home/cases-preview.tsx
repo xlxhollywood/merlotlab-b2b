@@ -12,12 +12,12 @@ export default function CasesPreviewSection() {
   const br = () => <br />
 
   const cases = [
-    { image: "/images/main/4-building-1.png", name: t("case1Name"), type: t("case1Type") },
-    { image: "/images/main/4-building-2.png", name: t("case2Name"), type: t("case2Type") },
-    { image: "/images/main/4-building-3.png", name: t("case3Name"), type: t("case3Type") },
-    { image: "/images/main/4-building-4.png", name: t("case4Name"), type: t("case4Type") },
-    { image: "/images/main/4-building-5.png", name: t("case5Name"), type: t("case5Type") },
-    { image: "/images/main/4-building-6.png", name: t("case6Name"), type: t("case6Type") },
+    { image: "/images/main/4-building-1.webp", name: t("case1Name"), type: t("case1Type") },
+    { image: "/images/main/4-building-2.webp", name: t("case2Name"), type: t("case2Type") },
+    { image: "/images/main/4-building-3.webp", name: t("case3Name"), type: t("case3Type") },
+    { image: "/images/main/4-building-4.webp", name: t("case4Name"), type: t("case4Type") },
+    { image: "/images/main/4-building-5.webp", name: t("case5Name"), type: t("case5Type") },
+    { image: "/images/main/4-building-6.webp", name: t("case6Name"), type: t("case6Type") },
   ]
 
   return (

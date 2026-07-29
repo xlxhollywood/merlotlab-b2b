@@ -25,7 +25,7 @@ export default function TechAlgorithms() {
       title: t("meshTitle"),
       subtitle: t("meshSubtitle"),
       chips: [t("meshChip1"), t("meshChip2"), t("meshChip3"), t("meshChip4"), t("meshChip5")],
-      image: { src: "/images/tech/3-algo-1.png", alt: t("meshTitle"), width: 930, height: 403, maxW: "900px" },
+      image: { src: "/images/tech/3-algo-1.webp", alt: t("meshTitle"), width: 930, height: 403, maxW: "900px" },
       descBlocks: [t.rich("meshDesc1", { br }), t.rich("meshDesc2", { br })],
     },
     {
@@ -33,7 +33,7 @@ export default function TechAlgorithms() {
       title: withMobileBreak(t("floodingTitle")),
       subtitle: t("floodingSubtitle"),
       chips: [t("floodingChip1"), t("floodingChip2"), t("floodingChip3"), t("floodingChip4")],
-      image: { src: "/images/tech/3-algo-2.png", alt: t("floodingTitle"), width: 855, height: 452, maxW: "820px" },
+      image: { src: "/images/tech/3-algo-2.webp", alt: t("floodingTitle"), width: 855, height: 452, maxW: "820px" },
       descBlocks: [t.rich("floodingDesc1", { br }), t.rich("floodingDesc2", { br })],
     },
     {
@@ -41,7 +41,7 @@ export default function TechAlgorithms() {
       title: t("anchorTitle"),
       subtitle: t("anchorSubtitle"),
       chips: [t("anchorChip1"), t("anchorChip2"), t("anchorChip3"), t("anchorChip4")],
-      image: { src: "/images/tech/3-algo-3.png", alt: t("anchorTitle"), width: 1056, height: 369, maxW: "1000px" },
+      image: { src: "/images/tech/3-algo-3.webp", alt: t("anchorTitle"), width: 1056, height: 369, maxW: "1000px" },
       descBlocks: [t.rich("anchorDesc1", { br }), t.rich("anchorDesc2", { br })],
     },
   ]

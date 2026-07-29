@@ -50,7 +50,7 @@ export default function DirectionsSection() {
                         height={33}
                         sizes="100vw"
                         alt={tCommon("logoAlt")}
-                        src="/images/brand/logo-alt.png"
+                        src="/images/brand/logo-alt.webp"
                       />
                       <div className="w-px bg-[#404040] h-32"></div>
                     </div>
@@ -102,7 +102,7 @@ export default function DirectionsSection() {
                       width={204}
                       height={33}
                       alt={tCommon("logoAlt")}
-                      src="/images/brand/logo-alt.png"
+                      src="/images/brand/logo-alt.webp"
                     />
                   </div>
                   <div className="hidden sm:block w-px bg-[#404040] h-16 lg:h-32"></div>
