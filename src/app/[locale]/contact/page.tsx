@@ -1,18 +1,31 @@
+import type { Metadata } from "next"
 import { getTranslations } from "next-intl/server"
+import { SITE_URL } from "@/config/site"
+import ContactInquiry from "../_sections/contact/inquiry"
 
-// placeholder — 07-contact 스텝에서 실제 도입 문의 페이지로 교체.
-export default async function ContactPage({
+export async function generateMetadata({
   params,
 }: {
   params: Promise<{ locale: string }>
-}) {
+}): Promise<Metadata> {
   const { locale } = await params
-  const t = await getTranslations({ locale, namespace: "nav" })
-  const tc = await getTranslations({ locale, namespace: "common" })
+  const t = await getTranslations({ locale, namespace: "contact" })
+  const koUrl = `${SITE_URL}/contact`
+  const enUrl = `${SITE_URL}/en/contact`
+  return {
+    title: t("title"),
+    description: t("subtitle"),
+    alternates: {
+      canonical: locale === "en" ? enUrl : koUrl,
+      languages: { ko: koUrl, en: enUrl },
+    },
+  }
+}
+
+export default function ContactPage() {
   return (
-    <div className="min-h-screen bg-white flex flex-col items-center justify-center gap-4 px-4 text-center">
-      <h1 className="text-3xl sm:text-4xl font-bold text-gray-700">{t("contact")}</h1>
-      <p className="text-gray-500">{tc("comingSoon")}</p>
+    <div className="w-full">
+      <ContactInquiry />
     </div>
   )
 }
