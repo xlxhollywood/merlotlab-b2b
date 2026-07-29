@@ -25,9 +25,13 @@ export default function RtlsComponents() {
         </FadeInUp>
 
         <FadeInUp delay={300}>
-          <div className="mt-10 sm:mt-12 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+          {/* 모바일 세로 적층 시 하단 포커스 그림자가 다음 카드에 가려지지 않도록 간격 확보 */}
+          <div className="mt-10 sm:mt-12 grid grid-cols-1 sm:grid-cols-2 gap-6">
             {cards.map((card) => (
-              <div key={card.name} className="rounded-2xl bg-white p-6 lg:p-8 shadow-sm">
+              <div
+                key={card.name}
+                className="rounded-2xl bg-white p-6 lg:p-8 shadow-[0_12px_24px_-8px_rgba(17,17,26,0.16),0_2px_8px_-2px_rgba(17,17,26,0.06)]"
+              >
                 <div className="relative mx-auto h-40 w-full">
                   <Image src={card.image} alt={card.name} fill className="object-contain" />
                 </div>
