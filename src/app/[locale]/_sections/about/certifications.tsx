@@ -50,7 +50,7 @@ export default function CertificationsSection() {
           </FadeInUp>
 
           {/* 특허 및 인증서 통계 */}
-          <FadeInUp delay={600} threshold={0.1}>
+          <FadeInUp delay={600}>
             <div className="mb-12 sm:mb-16">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                 {/* 국내 특허 */}
@@ -105,7 +105,7 @@ export default function CertificationsSection() {
           </FadeInUp>
 
           {/* 인증서 */}
-          <FadeInUp delay={600} threshold={0.1}>
+          <FadeInUp delay={600}>
             <div className="relative pt-20 pb-32">
               {/* 데스크톱 버전 - 화살표 버튼 제거 */}
               <div className="hidden lg:block">

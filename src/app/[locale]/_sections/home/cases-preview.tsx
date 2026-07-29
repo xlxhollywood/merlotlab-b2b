@@ -42,7 +42,7 @@ export default function CasesPreviewSection() {
         {/* 카드별 개별 FadeInUp → 모바일에서 스크롤 시 하나씩 등장 */}
         <div className="mt-10 sm:mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
           {cases.map((c) => (
-            <FadeInUp key={c.name} delay={150} threshold={0.2}>
+            <FadeInUp key={c.name} delay={150}>
               <div className="relative aspect-[400/380] overflow-hidden">
                 <Image src={c.image} alt={c.name} fill className="object-cover" sizes="(max-width: 1024px) 100vw, 33vw" />
                 {/* 하단 그라디언트 + 유형(위) + 이름(아래) */}

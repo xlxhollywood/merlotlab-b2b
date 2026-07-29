@@ -19,6 +19,17 @@ const TYPE_KEY: Record<string, string> = {
   "개인": "individual",
 }
 
+// role="radio" 컨트롤 키보드 선택 (Enter/Space)
+function onRadioKey(e: React.KeyboardEvent, select: () => void) {
+  if (e.key === " " || e.key === "Enter") {
+    e.preventDefault()
+    select()
+  }
+}
+
+const RADIO_FOCUS =
+  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#583CF2] focus-visible:ring-offset-2"
+
 interface QuoteFormProps {
   selectedInquiry: "business" | "quote"
   setSelectedInquiry: (value: "business" | "quote") => void
@@ -225,19 +236,26 @@ export default function QuoteForm({
             <Label className="text-base sm:text-lg font-semibold text-gray-700">
               {t("inquiryType")} <span className="text-red-500">*</span>
             </Label>
-            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 lg:gap-10">
+            <div role="radiogroup" aria-label={t("inquiryType")} className="flex flex-col sm:flex-row gap-4 sm:gap-6 lg:gap-10">
               {/* 모의 견적 */}
               <div className="flex-1">
                 <div
-                  className={`rounded-xl sm:rounded-2xl bg-white border-2 h-auto sm:h-[120px] lg:h-[143px] p-4 sm:p-6 lg:p-10 cursor-pointer transition-all ${
-                    selectedInquiry === "quote"
-                      ? "border-[#583cf2] opacity-100"
-                      : "border-zinc-300 opacity-50 hover:opacity-75"
-                  }`}
+                  role="radio"
+                  aria-checked={selectedInquiry === "quote"}
+                  tabIndex={0}
                   onClick={() => {
                     setSelectedInquiry("quote")
                     setSelectedBusinessType("제조 시설")
                   }}
+                  onKeyDown={(e) => onRadioKey(e, () => {
+                    setSelectedInquiry("quote")
+                    setSelectedBusinessType("제조 시설")
+                  })}
+                  className={`rounded-xl sm:rounded-2xl bg-white border-2 h-auto sm:h-[120px] lg:h-[143px] p-4 sm:p-6 lg:p-10 cursor-pointer transition-all ${RADIO_FOCUS} ${
+                    selectedInquiry === "quote"
+                      ? "border-[#583cf2] opacity-100"
+                      : "border-zinc-300 opacity-50 hover:opacity-75"
+                  }`}
                 >
                   <div className="space-y-2">
                     <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold leading-tight text-zinc-800">{t("quoteTitle")}</h3>
@@ -251,12 +269,16 @@ export default function QuoteForm({
               {/* 사업 문의 */}
               <div className="flex-1">
                 <div
-                  className={`rounded-xl sm:rounded-2xl bg-white border-2 h-auto sm:h-[120px] lg:h-[143px] p-4 sm:p-6 lg:p-10 cursor-pointer transition-all ${
+                  role="radio"
+                  aria-checked={selectedInquiry === "business"}
+                  tabIndex={0}
+                  onClick={() => setSelectedInquiry("business")}
+                  onKeyDown={(e) => onRadioKey(e, () => setSelectedInquiry("business"))}
+                  className={`rounded-xl sm:rounded-2xl bg-white border-2 h-auto sm:h-[120px] lg:h-[143px] p-4 sm:p-6 lg:p-10 cursor-pointer transition-all ${RADIO_FOCUS} ${
                     selectedInquiry === "business"
                       ? "border-[#583cf2] opacity-100"
                       : "border-zinc-300 opacity-50 hover:opacity-75"
                   }`}
-                  onClick={() => setSelectedInquiry("business")}
                 >
                   <div className="space-y-2">
                     <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold leading-tight text-zinc-800">{t("businessInquiryTitle")}</h3>
@@ -274,15 +296,22 @@ export default function QuoteForm({
             <Label className="text-base sm:text-lg font-semibold text-gray-700">
               {t("businessTypeLabel")} <span className="text-red-500">*</span>
             </Label>
-            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+            <div role="radiogroup" aria-label={t("businessTypeLabel")} className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
               {["제조 시설", "사무실", "물류 센터", "아파트 주차장"].map((type) => (
                 <div
                   key={type}
+                  role="radio"
+                  aria-checked={selectedBusinessType === type}
+                  tabIndex={0}
                   onClick={() => {
                     setSelectedBusinessType(type)
                     setSelectedLightType(businessTypeLightMapping[type as keyof typeof businessTypeLightMapping])
                   }}
-                  className={`justify-center border-2 rounded-xl sm:rounded-2xl p-3 sm:p-4 h-auto cursor-pointer transition-all flex items-center ${
+                  onKeyDown={(e) => onRadioKey(e, () => {
+                    setSelectedBusinessType(type)
+                    setSelectedLightType(businessTypeLightMapping[type as keyof typeof businessTypeLightMapping])
+                  })}
+                  className={`justify-center border-2 rounded-xl sm:rounded-2xl p-3 sm:p-4 h-auto cursor-pointer transition-all flex items-center ${RADIO_FOCUS} ${
                     selectedBusinessType === type
                       ? "border-[#583CF2] opacity-100"
                       : "border-gray-200 opacity-50 hover:opacity-75"

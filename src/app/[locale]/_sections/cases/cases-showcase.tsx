@@ -81,7 +81,7 @@ export default function CasesShowcase() {
             <Statistics stats={stats} />
 
             {/* 필터 섹션 */}
-            <FadeInUp delay={300} threshold={0.1}>
+            <FadeInUp delay={300}>
               <div className="my-6 xs:my-8 sm:my-10 md:my-12">
                 <div className="flex flex-wrap justify-center gap-1.5 xs:gap-2 sm:gap-3 mb-4 xs:mb-6 sm:mb-8 px-2 xs:px-4">
                   {filterTypes.map((filter) => (
@@ -104,7 +104,7 @@ export default function CasesShowcase() {
               </div>
             </FadeInUp>
 
-            <FadeInUp delay={300} threshold={0.1}>
+            <FadeInUp delay={300}>
               <PortfolioUseCases activeFilter={activeFilter} />
             </FadeInUp>
           </div>

@@ -232,7 +232,7 @@ export default function Timeline() {
         </div>
 
         {/* Timeline */}
-        <FadeInUp delay={600} threshold={0.1} rootMargin="100px">
+        <FadeInUp delay={600} rootMargin="100px">
         <div className="relative">
           <div className="mx-auto grid w-fit grid-cols-[auto_auto_1fr] gap-x-8 sm:gap-x-10">
             {visibleData.map((yearData, yearIndex) => (

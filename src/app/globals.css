@@ -133,3 +133,15 @@ body {
     display: none;  /* Chrome, Safari and Opera */
   }
 }
+
+/* 접근성: '동작 줄이기' 선호 시 모든 애니메이션/트랜지션 무력화 (콘텐츠는 즉시 최종 상태) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
