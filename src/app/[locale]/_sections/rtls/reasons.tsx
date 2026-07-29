@@ -11,10 +11,10 @@ export default function RtlsReasons() {
     <ReasonsGrid
       heading={t("reasonsHeading")}
       items={[
-        { icon: "/images/rtls/5-reason-1.png", title: t("reason1Title"), desc: t.rich("reason1Desc", { br }) },
-        { icon: "/images/rtls/5-reason-2.png", title: t("reason2Title"), desc: t.rich("reason2Desc", { br }) },
-        { icon: "/images/rtls/5-reason-3.png", title: t("reason3Title"), desc: t.rich("reason3Desc", { br }) },
-        { icon: "/images/rtls/5-reason-4.png", title: t("reason4Title"), desc: t.rich("reason4Desc", { br }) },
+        { icon: "/images/rtls/5-reason-1.webp", title: t("reason1Title"), desc: t.rich("reason1Desc", { br }) },
+        { icon: "/images/rtls/5-reason-2.webp", title: t("reason2Title"), desc: t.rich("reason2Desc", { br }) },
+        { icon: "/images/rtls/5-reason-3.webp", title: t("reason3Title"), desc: t.rich("reason3Desc", { br }) },
+        { icon: "/images/rtls/5-reason-4.webp", title: t("reason4Title"), desc: t.rich("reason4Desc", { br }) },
       ]}
     />
   )

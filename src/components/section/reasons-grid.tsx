@@ -22,7 +22,7 @@ export default function ReasonsGrid({
             {items.map((item) => (
               <div key={item.icon} className="flex flex-col items-center text-center">
                 <div className="relative h-16 w-16">
-                  <Image src={item.icon} alt="" fill className="object-contain" />
+                  <Image src={item.icon} alt="" fill sizes="64px" className="object-contain" />
                 </div>
                 <h3 className="mt-4 text-base sm:text-lg font-bold text-gray-800">{item.title}</h3>
                 <p className="mt-2 text-sm text-gray-500 leading-relaxed">{item.desc}</p>
