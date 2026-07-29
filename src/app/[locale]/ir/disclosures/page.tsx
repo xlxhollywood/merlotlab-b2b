@@ -11,7 +11,7 @@ import { useRouter } from "@/i18n/navigation"
 import IrHero from "@/components/hero/ir-hero" // IrHero 컴포넌트 임포트
 import IrTabs from "@/components/ir/ir-tabs"
 import IrPagination from "@/components/ir/ir-pagination"
-import IrMessage from "@/components/ir/ir-message"
+import { IrListSkeleton } from "@/components/ir/ir-skeletons"
 
 export default function IRPage() {
   const t = useTranslations("ir")
@@ -118,10 +118,6 @@ export default function IRPage() {
     fetchDisclosures()
   }, [])
 
-  if (loading) {
-    return <IrMessage text={t("loading")} />
-  }
-
   return (
     <div className="min-h-screen bg-white">
       <IrHero /> {/* Render the IrHero component here */}
@@ -156,7 +152,9 @@ export default function IRPage() {
                   </div>
                   {/* Disclosure List */}
                   <div className="space-y-3 lg:space-y-4">
-                    {currentData.length === 0 ? (
+                    {loading ? (
+                      <IrListSkeleton />
+                    ) : currentData.length === 0 ? (
                       <div className="text-center py-12 text-gray-500">
                         <p>{t("noResults")}</p>
                       </div>

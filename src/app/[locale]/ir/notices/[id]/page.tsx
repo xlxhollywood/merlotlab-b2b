@@ -8,7 +8,7 @@ import { useParams } from "next/navigation"
 import IrHero from "@/components/hero/ir-hero" // IrHero 컴포넌트 임포트
 import IrTabs from "@/components/ir/ir-tabs"
 import IrDetailNav from "@/components/ir/ir-detail-nav"
-import IrMessage from "@/components/ir/ir-message"
+import { IrDetailSkeleton } from "@/components/ir/ir-skeletons"
 
 export default function IRNoticeDetailPage() {
   const t = useTranslations("ir")
@@ -69,14 +69,6 @@ export default function IRNoticeDetailPage() {
     }
   }
 
-  if (loading) {
-    return <IrMessage text={t("loading")} />
-  }
-
-  if (!notice) {
-    return <IrMessage text={t("notFound")} />
-  }
-
   return (
     <div className="min-h-screen bg-white">
       <IrHero /> {/* IrHero 컴포넌트 사용 */}
@@ -91,6 +83,11 @@ export default function IRNoticeDetailPage() {
             />
             {/* Main Content Area */}
             <div className="flex-1 min-w-0">
+              {loading ? (
+                <IrDetailSkeleton />
+              ) : !notice ? (
+                <div className="py-12 text-center text-gray-500">{t("notFound")}</div>
+              ) : (
               <div className="max-w-4xl space-y-6 sm:space-y-8">
                 <article className="bg-white">
                   {/* Article Header */}
@@ -126,6 +123,7 @@ export default function IRNoticeDetailPage() {
                   />
                 </article>
               </div>
+              )}
             </div>
           </div>
         </div>

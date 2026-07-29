@@ -24,6 +24,7 @@
     "next": "^15.5.9",
     "next-intl": "^4.13.4",
     "next-sanity": "^9.12.3",
+    "nextjs-toploader": "^3.9.17",
     "react": "^19.0.0",
     "react-countup": "^6.5.3",
     "react-dom": "^19.0.0",
