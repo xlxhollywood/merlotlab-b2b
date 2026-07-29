@@ -584,10 +584,12 @@
     "consent": "By submitting this form, you are deemed to consent to the provision and use of your personal information, including to third parties.",
     "submitting": "Sending...",
     "submit": "Send inquiry",
-    "alertRequired": "Please fill in all required fields.",
-    "alertOrgName": "Please enter the organization name.",
-    "alertSuccess": "Your inquiry has been submitted successfully!",
-    "alertError": "An error occurred while submitting."
+    "fieldRequired": "This field is required.",
+    "invalidEmail": "Please enter a valid email address.",
+    "successHeading": "Your inquiry has been received",
+    "errorHeading": "Submission failed",
+    "alertSuccess": "Our team will get back to you shortly.",
+    "alertError": "An error occurred while submitting. Please try again later."
   },
   "quoteForm": {
     "inquiryType": "Inquiry type",
