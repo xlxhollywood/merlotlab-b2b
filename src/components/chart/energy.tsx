@@ -317,7 +317,7 @@ export default function AnimatedEnergyChart() {
                 )}
               </div>
               <div className="text-center">
-                <h3 className="font-semibold text-blue-700 text-xs drop-shadow-sm">{t("beforeInvestment")}</h3>
+                <h3 className="font-semibold text-blue-700 text-xs drop-shadow-sm">{t("beforeInstall")}</h3>
               </div>
               
               {/* 투자 전 설명 */}
@@ -371,7 +371,7 @@ export default function AnimatedEnergyChart() {
                 {/* Customer Profit Overlay */}
                 <div
                   className={`absolute w-full bg-gradient-to-t from-green-500 to-green-400 transition-all duration-1000 ease-out shadow-inner ${
-                    displayPhase.repaymentSavings ? "bottom-22 h-8" : "bottom-22 h-0"
+                    displayPhase.repaymentSavings ? "bottom-24 h-8" : "bottom-24 h-0"
                   }`}
                   style={{
                     boxShadow: displayPhase.shadows ? "inset 0 -4px 8px rgba(0, 0, 0, 0.1), inset 2px 0 6px rgba(255, 255, 255, 0.3)" : "none",
@@ -399,18 +399,15 @@ export default function AnimatedEnergyChart() {
               <div className="w-fit max-w-[240px] mx-auto space-y-2 text-left">
                 <div className="flex items-start gap-2">
                   <Circle className="w-2 h-2 text-primary mt-1.5 flex-shrink-0 fill-current" />
-                  <p className="font-semibold text-gray-900 text-sm">{t("descEmsInstall")}</p>
+                  <p className="font-semibold text-gray-900 text-sm">{t("cardEnergySaveInstall")}</p>
                 </div>
                 <div className="flex items-start gap-2">
                   <Circle className="w-2 h-2 text-primary mt-1.5 flex-shrink-0 fill-current" />
-                  <p className="font-semibold text-gray-900 text-sm">{t("descNoInitialCost")}</p>
+                  <p className="font-semibold text-gray-900 text-sm">{t("cardNoInvestBurden")}</p>
                 </div>
                 <div className="flex items-start gap-2">
                   <Circle className="w-2 h-2 text-primary mt-1.5 flex-shrink-0 fill-current" />
-                  <div>
-                    <p className="font-semibold text-gray-900 text-sm">{t("descRepayInvestment")}</p>
-                    <p className="text-xs text-gray-600">{t("descRepayWithSavings")}</p>
-                  </div>
+                  <p className="font-semibold text-gray-900 text-sm">{t("cardRepayWithSavings")}</p>
                 </div>
               </div>
             </div>
@@ -469,11 +466,11 @@ export default function AnimatedEnergyChart() {
               <div className="w-fit max-w-[240px] mx-auto space-y-2 text-left">
                 <div className="flex items-start gap-2">
                   <Circle className="w-2 h-2 text-primary mt-1.5 flex-shrink-0 fill-current" />
-                  <p className="font-semibold text-gray-900 text-sm">{t("descContinuousSaving")}</p>
+                  <p className="font-semibold text-gray-900 text-sm">{t("cardContinuousSaving")}</p>
                 </div>
                 <div className="flex items-start gap-2">
                   <Circle className="w-2 h-2 text-primary mt-1.5 flex-shrink-0 fill-current" />
-                  <p className="font-semibold text-gray-900 text-sm">{t("descRealizeProfit")}</p>
+                  <p className="font-semibold text-gray-900 text-sm">{t("cardUserProfit")}</p>
                 </div>
               </div>
             </div>
@@ -481,11 +478,11 @@ export default function AnimatedEnergyChart() {
         </div>
       </CardContent>
       
-      {/*3카드 섹션 - PC용 (lg 이상) */}
-      <div className="hidden lg:flex flex-col md:flex-row px-4 gap-6 sm:gap-16 lg:px-40 xl:px-32 ">
+      {/*3카드 섹션 - 데스크톱 막대와 함께 sm 이상에서 노출 (좁은 폭에선 flex-1로 축소) */}
+      <div className="hidden sm:flex flex-row justify-center px-4 gap-4 sm:gap-6 lg:gap-16 lg:px-40 xl:px-32 ">
         
         {/* 첫 번째 카드 */}
-        <Card className="w-full max-w-[220px] mx-auto border-none shadow-none w-64">
+        <Card className="flex-1 min-w-0 max-w-[220px] border-none shadow-none">
         <CardContent className="p-0 flex flex-col items-center justify-center">
             <div className="space-y-3 md:space-y-4">
               <div className="flex items-start space-x-2">
@@ -505,7 +502,7 @@ export default function AnimatedEnergyChart() {
         </Card>
 
         {/* 두 번째 카드 */}
-        <Card className="w-full max-w-[220px] mx-auto border-none bg-white shadow-none  w-64">
+        <Card className="flex-1 min-w-0 max-w-[220px] border-none bg-white shadow-none">
           <CardContent className="p-0 flex flex-col items-center justify-center">
             <div className="space-y-3 md:space-y-4">
               <div className="flex items-start space-x-2">
@@ -525,7 +522,7 @@ export default function AnimatedEnergyChart() {
         </Card>
 
         {/* 세 번째 카드 */}
-        <Card className="w-full max-w-[220px] mx-auto border-none shadow-none w-64">
+        <Card className="flex-1 min-w-0 max-w-[220px] border-none shadow-none">
           <CardContent className="p-0 flex flex-col items-center justify-center">
             <div className="space-y-3 md:space-y-4">
               <div className="flex items-start space-x-2">
