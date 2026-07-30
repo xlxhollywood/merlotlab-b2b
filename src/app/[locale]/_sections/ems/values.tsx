@@ -2,11 +2,12 @@
 
 import { useTranslations } from "next-intl"
 import ReasonsGrid from "@/components/section/reasons-grid"
+import SoftBreak from "@/components/ui/soft-break"
 
 // 핵심 가치 (docs/renewal/EMS 솔루션.png §9)
 export default function EmsValues() {
   const t = useTranslations("ems")
-  const br = () => <br />
+  const br = () => <SoftBreak />
   const hl = (chunks: React.ReactNode) => <span className="text-primary">{chunks}</span>
   return (
     <ReasonsGrid

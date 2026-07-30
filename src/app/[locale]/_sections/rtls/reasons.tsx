@@ -2,11 +2,12 @@
 
 import { useTranslations } from "next-intl"
 import ReasonsGrid from "@/components/section/reasons-grid"
+import SoftBreak from "@/components/ui/soft-break"
 
 // 선택 이유 (docs/renewal/RTLS 솔루션.png §6)
 export default function RtlsReasons() {
   const t = useTranslations("rtls")
-  const br = () => <br />
+  const br = () => <SoftBreak />
   return (
     <ReasonsGrid
       heading={t("reasonsHeading")}

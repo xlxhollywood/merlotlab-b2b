@@ -35,7 +35,7 @@ export default function EmsPricingZero() {
         </span>
         <h3 className="mt-4 text-base sm:text-lg font-bold text-gray-800">{item.title}</h3>
         {item.sub && <p className="mt-1 text-xs text-gray-400">{item.sub}</p>}
-        <p className="mt-4 text-xl font-bold text-primary">
+        <p className="mt-auto pt-4 text-xl font-bold text-primary">
           {inView ? (
             <CountUp start={item.amount} end={0} duration={2} separator="," suffix={unit} />
           ) : (
@@ -55,7 +55,7 @@ export default function EmsPricingZero() {
         <FadeInUp delay={200}>
           <div className="text-center">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800">{t("pricingTitle")}</h2>
-            <p className="mt-4 sm:mt-5 text-sm sm:text-base lg:text-lg text-gray-500">{t("pricingSubtitle")}</p>
+            <p className="mt-4 sm:mt-5 text-sm sm:text-base lg:text-lg text-gray-500 break-keep">{t("pricingSubtitle")}</p>
           </div>
         </FadeInUp>
 

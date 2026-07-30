@@ -15,7 +15,7 @@ export default function ReasonsGrid({
     <section className="w-full bg-white py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
         <FadeInUp delay={200}>
-          <h2 className="text-center text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800">{heading}</h2>
+          <h2 className="text-center text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 break-keep">{heading}</h2>
         </FadeInUp>
         <FadeInUp delay={300}>
           <div className="mt-12 sm:mt-16 grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-10">
@@ -24,10 +24,12 @@ export default function ReasonsGrid({
                 <div className="relative h-16 w-16">
                   <Image src={item.icon} alt="" fill sizes="64px" className="object-contain" />
                 </div>
-                <h3 className="mt-4 text-base sm:text-lg font-bold text-gray-800">{item.title}</h3>
+                <h3 className="mt-4 lg:min-h-[5.25rem] flex items-center justify-center text-base sm:text-lg font-bold text-gray-800">
+                  <span className="text-balance break-keep">{item.title}</span>
+                </h3>
                 {/* 제목/본문 구분선 (피그마) */}
                 <hr className="mt-3 w-11/12 border-t border-gray-200" />
-                <p className="mt-3 text-sm text-gray-500 leading-relaxed">{item.desc}</p>
+                <p className="mt-3 text-sm text-gray-500 leading-relaxed text-balance break-keep">{item.desc}</p>
               </div>
             ))}
           </div>
