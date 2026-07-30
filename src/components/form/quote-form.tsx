@@ -251,7 +251,7 @@ export default function QuoteForm({
                     setSelectedInquiry("quote")
                     setSelectedBusinessType("제조 시설")
                   })}
-                  className={`rounded-xl sm:rounded-2xl bg-white border-2 h-auto sm:h-[120px] lg:h-[143px] p-4 sm:p-6 lg:p-10 cursor-pointer transition-all ${RADIO_FOCUS} ${
+                  className={`rounded-xl sm:rounded-2xl bg-white border-2 h-full sm:min-h-[120px] lg:min-h-[143px] p-4 sm:p-6 lg:p-10 cursor-pointer transition-all ${RADIO_FOCUS} ${
                     selectedInquiry === "quote"
                       ? "border-[#583cf2] opacity-100"
                       : "border-zinc-300 opacity-50 hover:opacity-75"
@@ -274,7 +274,7 @@ export default function QuoteForm({
                   tabIndex={0}
                   onClick={() => setSelectedInquiry("business")}
                   onKeyDown={(e) => onRadioKey(e, () => setSelectedInquiry("business"))}
-                  className={`rounded-xl sm:rounded-2xl bg-white border-2 h-auto sm:h-[120px] lg:h-[143px] p-4 sm:p-6 lg:p-10 cursor-pointer transition-all ${RADIO_FOCUS} ${
+                  className={`rounded-xl sm:rounded-2xl bg-white border-2 h-full sm:min-h-[120px] lg:min-h-[143px] p-4 sm:p-6 lg:p-10 cursor-pointer transition-all ${RADIO_FOCUS} ${
                     selectedInquiry === "business"
                       ? "border-[#583cf2] opacity-100"
                       : "border-zinc-300 opacity-50 hover:opacity-75"
