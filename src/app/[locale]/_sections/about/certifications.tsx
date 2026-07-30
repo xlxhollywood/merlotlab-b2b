@@ -1,185 +1,78 @@
 "use client"
 
-import { useState, useRef, useEffect } from "react"
 import { useTranslations } from "next-intl"
 import Image from "next/image"
 import FadeInUp from "@/components/animation/fade-in-up"
 
+const CARD_SHADOW =
+  "shadow-[0_12px_24px_-8px_rgba(17,17,26,0.16),0_2px_8px_-2px_rgba(17,17,26,0.06)]"
+
 export default function CertificationsSection() {
   const t = useTranslations("about")
 
-  const certifications = [
-    { title: t("cert1"), image: "/images/about/3-cert-1.png" },
-    { title: t("cert2"), image: "/images/about/3-cert-2.png" },
-    { title: t("cert3"), image: "/images/about/3-cert-3.png" },
+  // 특허 통계 (가로형 2카드)
+  const stats = [
+    { flag: "🇰🇷", label: t("patentDomestic"), value: "21", unit: t("unitCase") },
+    { flag: "🌍", label: t("patentInternational"), value: "9", unit: t("unitCase") },
   ]
 
-  const [mobileCertIndex, setMobileCertIndex] = useState(0)
-  const certScrollRef = useRef<HTMLDivElement>(null)
-
-  // 모바일 인증서 스크롤 감지
-  useEffect(() => {
-    const handleScroll = () => {
-      if (certScrollRef.current) {
-        const scrollLeft = certScrollRef.current.scrollLeft
-        const itemWidth = 320 + 16 // w-80 (320px) + gap-4 (16px)
-        const currentIndex = Math.round(scrollLeft / itemWidth)
-        setMobileCertIndex(currentIndex)
-      }
-    }
-
-    const scrollContainer = certScrollRef.current
-    if (scrollContainer) {
-      scrollContainer.addEventListener("scroll", handleScroll)
-      return () => scrollContainer.removeEventListener("resize", handleScroll)
-    }
-  }, [])
+  // 인증서 10종 (cert-1 ~ cert-10.webp), 캡션은 로케일별 cert1~cert10
+  const certifications = Array.from({ length: 10 }, (_, i) => ({
+    title: t(`cert${i + 1}`),
+    image: `/images/about/cert-${i + 1}.webp`,
+  }))
 
   return (
-      <section className="relative w-full px-4 sm:px-6 lg:px-8 bg-gray-50 pt-16 sm:pt-20 md:pt-24 lg:pt-32 pb-16 sm:pb-20 md:pb-24 lg:pb-32">
-        <div className="max-w-6xl mx-auto">
-          <FadeInUp delay={300}>
-            <div className="text-center text-gray-700 py-8 mb-8 sm:mb-12 lg:mb-16">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-                {t("certSectionTitle")}
-              </h2>
-              <p className="text-base sm:text-lg text-gray-600 px-4">
-                {t("certSectionDesc")}
-              </p>
-            </div>
-          </FadeInUp>
+    <section className="relative w-full px-4 sm:px-6 lg:px-8 bg-gray-50 pt-16 sm:pt-20 md:pt-24 lg:pt-32 pb-16 sm:pb-20 md:pb-24 lg:pb-32">
+      <div className="max-w-6xl mx-auto">
+        <FadeInUp delay={300}>
+          <div className="text-center text-gray-700 mb-8 sm:mb-12 lg:mb-16">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">{t("certSectionTitle")}</h2>
+            <p className="text-base sm:text-lg text-gray-600 px-4 break-keep">{t("certSectionDesc")}</p>
+          </div>
+        </FadeInUp>
 
-          {/* 특허 및 인증서 통계 */}
-          <FadeInUp delay={600}>
-            <div className="mb-12 sm:mb-16">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-                {/* 국내 특허 */}
-                <div className="bg-white p-6 sm:p-8 rounded-lg shadow-sm border border-gray-100 text-center hover:shadow-md transition-shadow">
-                  <div className="flex items-center justify-center mb-4">
-                    <div className="text-2xl sm:text-3xl mr-2">🇰🇷</div>
-                    <div className="text-base sm:text-lg font-semibold text-gray-700">
-                      {t("patentDomestic")}
-                    </div>
-                  </div>
-                  <div className="flex items-center justify-center gap-1">
-                    <div className="text-3xl sm:text-4xl font-bold text-[#583CF2]">
-                      21
-                    </div>
-                    <div className="text-sm text-gray-700">{t("unitCase")}</div>
-                  </div>
+        {/* 특허 통계 — 가로형 2카드 (아이콘·라벨 좌 / 숫자 우) */}
+        <FadeInUp delay={600}>
+          <div className="mb-12 sm:mb-16 grid grid-cols-1 sm:grid-cols-2 gap-6">
+            {stats.map((s) => (
+              <div
+                key={s.label}
+                className={`flex items-center justify-between rounded-xl bg-white px-6 py-5 sm:px-8 sm:py-6 ${CARD_SHADOW}`}
+              >
+                <div className="flex items-center gap-2">
+                  <span className="text-2xl sm:text-3xl">{s.flag}</span>
+                  <span className="text-base sm:text-lg font-semibold text-gray-700">{s.label}</span>
                 </div>
-
-                {/* 해외 특허 */}
-                <div className="bg-white p-6 sm:p-8 rounded-lg shadow-sm border border-gray-100 text-center hover:shadow-md transition-shadow">
-                  <div className="flex items-center justify-center mb-4">
-                    <div className="text-2xl sm:text-3xl mr-2">🌍</div>
-                    <div className="text-base sm:text-lg font-semibold text-gray-700">
-                      {t("patentInternational")}
-                    </div>
-                  </div>
-                  <div className="flex items-center justify-center gap-1">
-                    <div className="text-3xl sm:text-4xl font-bold text-[#583CF2]">
-                      9
-                    </div>
-                    <div className="text-sm text-gray-700">{t("unitCase")}</div>
-                  </div>
-                </div>
-
-                {/* 인증서 */}
-                <div className="bg-white p-6 sm:p-8 rounded-lg shadow-sm border border-gray-100 text-center hover:shadow-md transition-shadow sm:col-span-2 lg:col-span-1">
-                  <div className="flex items-center justify-center mb-4">
-                    <div className="text-2xl sm:text-3xl mr-2">📑</div>
-                    <div className="text-base sm:text-lg font-semibold text-gray-700">
-                      {t("certLabel")}
-                    </div>
-                  </div>
-                  <div className="flex items-center justify-center gap-1">
-                    <div className="text-3xl sm:text-4xl font-bold text-[#583CF2]">
-                      {certifications.length}
-                    </div>
-                    <div className="text-sm text-gray-700">{t("unitCount")}</div>
-                  </div>
+                <div className="flex items-baseline gap-1">
+                  <span className="text-3xl sm:text-4xl font-bold text-[#583CF2]">{s.value}</span>
+                  {s.unit && <span className="text-sm text-gray-700">{s.unit}</span>}
                 </div>
               </div>
-            </div>
-          </FadeInUp>
+            ))}
+          </div>
+        </FadeInUp>
 
-          {/* 인증서 */}
-          <FadeInUp delay={600}>
-            <div className="relative pt-20 pb-32">
-              {/* 데스크톱 버전 - 화살표 버튼 제거 */}
-              <div className="hidden lg:block">
-                {/* 인증서 그리드 */}
-                <div className="grid grid-cols-3 gap-6 px-16">
-                  {certifications.map((cert, index) => (
-                    <div
-                      key={index}
-                      className="w-full h-96 relative overflow-hidden"
-                    >
-                      <Image
-                        src={cert.image || "/images/placeholder.svg"}
-                        alt={cert.title}
-                        fill
-                        className="object-contain"
-                      />
-                    </div>
-                  ))}
+        {/* 인증서 — width에 따라 유동 반응형 그리드 (캐러셀 없음, 아래로 나열) */}
+        <FadeInUp delay={600}>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-10">
+            {certifications.map((cert) => (
+              <figure key={cert.image} className="flex flex-col">
+                <div className="relative aspect-[800/1131] w-full overflow-hidden rounded-lg border border-gray-200 bg-white">
+                  <Image
+                    src={cert.image}
+                    alt={cert.title}
+                    fill
+                    sizes="(max-width: 640px) 45vw, (max-width: 1024px) 30vw, 380px"
+                    className="object-contain"
+                  />
                 </div>
-              </div>
-
-              {/* 모바일 버전 - 터치 스와이프 */}
-              <div className="lg:hidden">
-                <div
-                  ref={certScrollRef}
-                  className="overflow-x-auto scrollbar-hide"
-                >
-                  <div
-                    className="flex gap-4 px-4"
-                    style={{ scrollSnapType: "x mandatory" }}
-                  >
-                    {certifications.map((cert, index) => (
-                      <div
-                        key={index}
-                        className="flex-shrink-0 w-80 h-96 relative overflow-hidden rounded-lg"
-                        style={{ scrollSnapAlign: "start" }}
-                      >
-                        <Image
-                          src={cert.image || "/images/placeholder.svg"}
-                          alt={cert.title}
-                          fill
-                          className="object-contain"
-                        />
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* 모바일 인디케이터 - 3개 */}
-                <div className="flex justify-center mt-6 gap-2">
-                  {certifications.map((_, index) => (
-                    <button
-                      key={index}
-                      onClick={() => {
-                        if (certScrollRef.current) {
-                          const itemWidth = 320 + 16; // w-80 (320px) + gap-4 (16px)
-                          certScrollRef.current.scrollTo({
-                            left: index * itemWidth,
-                            behavior: "smooth",
-                          });
-                        }
-                      }}
-                      className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                        mobileCertIndex === index
-                          ? "bg-[#583CF2]"
-                          : "bg-gray-300"
-                      }`}
-                    />
-                  ))}
-                </div>
-              </div>
-            </div>
-          </FadeInUp>
-        </div>
-      </section>
+                <figcaption className="mt-3 text-center font-bold text-base text-black break-keep">{cert.title}</figcaption>
+              </figure>
+            ))}
+          </div>
+        </FadeInUp>
+      </div>
+    </section>
   )
 }
