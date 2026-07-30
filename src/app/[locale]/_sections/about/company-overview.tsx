@@ -31,11 +31,12 @@ export default function CompanyOverview() {
             {/* 로고 박스 */}
             <div className="flex items-center justify-center bg-gray-50 rounded-lg py-14 lg:py-0">
               <Image
-                src="/images/brand/logo.webp"
+                src="/images/brand/logo.svg"
                 alt={t("ovName")}
                 width={220}
                 height={40}
                 className="w-[180px] sm:w-[220px] h-auto"
+                unoptimized
               />
             </div>
 

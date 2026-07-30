@@ -14,11 +14,11 @@ const Footer: NextPage = () => {
             <div className="flex flex-col items-start justify-start">
               <div className="w-32 sm:w-40 h-8 sm:h-[35px] flex items-center justify-center">
                 <Image
-                  className="w-[120px] sm:w-[150px] h-[20px] sm:h-[25px] object-cover"
+                  className="w-[120px] sm:w-[150px] h-[20px] sm:h-[25px] object-contain"
                   width={150}
                   height={25}
                   alt={tCommon("logoAlt")}
-                  src="/images/brand/logo-alt.webp"
+                  src="/images/brand/logo-white.svg"
                   unoptimized
                 />
               </div>
