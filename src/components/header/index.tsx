@@ -42,7 +42,7 @@ const Header: React.FC = () => {
                 width={150}
                 height={25}
                 alt={tCommon("logoAlt")}
-                src="/images/brand/logo.webp"
+                src="/images/brand/logo.svg"
                 unoptimized
               />
             </Link>
