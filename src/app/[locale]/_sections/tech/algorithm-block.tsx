@@ -48,7 +48,7 @@ export default function AlgorithmBlock({ title, subtitle, chips, image, descBloc
           {/* 설명 문단 (블록 간 간격) */}
           <div className="mt-10 space-y-6">
             {descBlocks.map((block, i) => (
-              <p key={i} className="text-sm sm:text-base text-gray-500 leading-relaxed">
+              <p key={i} className="text-sm sm:text-base/10 text-gray-500 leading-relaxed break-keep">
                 {block}
               </p>
             ))}
