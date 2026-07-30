@@ -24,7 +24,15 @@ export async function generateMetadata({
   };
 }
 
-export default function Page() {
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const tNav = await getTranslations({ locale, namespace: "nav" });
+  const tMeta = await getTranslations({ locale, namespace: "metadata" });
+  const siteName = tMeta("siteName");
   return (
     <>
       {/* Sitelinks 힌트 */}
@@ -34,10 +42,10 @@ export default function Page() {
             "@context": "https://schema.org",
             "@type": "ItemList",
             "itemListElement": [
-              { "@type": "SiteNavigationElement", "name": "EMS 솔루션", "url": "https://www.merlotlab.com/solutions" },
-              { "@type": "SiteNavigationElement", "name": "도입 사례", "url": "https://www.merlotlab.com/cases" },
-              { "@type": "SiteNavigationElement", "name": "회사 소개", "url": "https://www.merlotlab.com/about" },
-              { "@type": "SiteNavigationElement", "name": "IR Center", "url": "https://www.merlotlab.com/ir/disclosures" }
+              { "@type": "SiteNavigationElement", "name": tNav("solutionsEms"), "url": "https://www.merlotlab.com/solutions" },
+              { "@type": "SiteNavigationElement", "name": tNav("cases"), "url": "https://www.merlotlab.com/cases" },
+              { "@type": "SiteNavigationElement", "name": tNav("about"), "url": "https://www.merlotlab.com/about" },
+              { "@type": "SiteNavigationElement", "name": tNav("ir"), "url": "https://www.merlotlab.com/ir/disclosures" }
             ]
           })
         }}
@@ -49,7 +57,7 @@ export default function Page() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Organization",
-            "name": "메를로랩",
+            "name": siteName,
             "url": "https://www.merlotlab.com",
             "logo": "https://www.merlotlab.com/favicon.png",
             "sameAs": []
@@ -63,7 +71,7 @@ export default function Page() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "WebSite",
-            "name": "메를로랩",
+            "name": siteName,
             "url": "https://www.merlotlab.com",
             "potentialAction": {
               "@type": "SearchAction",

@@ -1,9 +1,11 @@
 "use client"
 
 import Image from "next/image"
+import { useTranslations } from "next-intl"
 
 
 export default function LogoCarouselMain() {
+  const t = useTranslations("common")
   // 갭 조절 변수들
   const logoContainerWidth = 256 // w-64 = 256px
   const logoGap = 14 // mx-4 = 16px * 2 = 32px 간격
@@ -97,7 +99,7 @@ export default function LogoCarouselMain() {
       {/* 제목 섹션 */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8 sm:mb-12">
         <div className="text-center">
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-3 sm:mb-4">주요 도입사</h2>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-3 sm:mb-4">{t("partnersTitle")}</h2>
         </div>
       </div>
 
