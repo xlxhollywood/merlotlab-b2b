@@ -2,6 +2,7 @@
 
 import { useTranslations } from "next-intl"
 import ProductIntro from "@/components/section/product-intro"
+import SoftBreak from "@/components/ui/soft-break"
 
 // "Merlot RTLS란?" (docs/renewal/RTLS 솔루션.png §2)
 export default function RtlsIntro() {
@@ -10,7 +11,7 @@ export default function RtlsIntro() {
   return (
     <ProductIntro
       title={t.rich("introTitle", { hl })}
-      subtitle={t.rich("introSubtitle", { br: () => <br /> })}
+      subtitle={t.rich("introSubtitle", { br: () => <SoftBreak /> })}
       chips={[t("introChip1"), t("introChip2"), t("introChip3"), t("introChip4")]}
       image="/images/rtls/2-device.webp"
       imageAlt={t("heroEyebrow")}

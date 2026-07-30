@@ -17,8 +17,8 @@ export default function StepProcess({
       <div className="max-w-6xl mx-auto">
         <FadeInUp delay={200}>
           <div className="text-center">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 leading-snug">{heading}</h2>
-            <p className="mt-4 sm:mt-5 text-sm sm:text-base lg:text-lg text-gray-500 leading-relaxed">{subtitle}</p>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 leading-snug break-keep">{heading}</h2>
+            <p className="mt-4 sm:mt-5 text-sm sm:text-base lg:text-lg text-gray-500 leading-relaxed break-keep">{subtitle}</p>
           </div>
         </FadeInUp>
 
@@ -31,8 +31,8 @@ export default function StepProcess({
                 className="flex flex-col rounded-2xl bg-white p-6 lg:p-8 shadow-[0_12px_24px_-8px_rgba(17,17,26,0.16),0_2px_8px_-2px_rgba(17,17,26,0.06)] min-h-[220px]"
               >
                 <p className="text-sm font-bold text-primary">{step.no}</p>
-                <h3 className="mt-3 text-lg sm:text-xl font-bold text-gray-800">{step.title}</h3>
-                <p className="mt-auto pt-8 text-sm text-gray-500 leading-relaxed">{step.desc}</p>
+                <h3 className="mt-3 md:min-h-[3.5rem] text-lg sm:text-xl font-bold text-gray-800 break-keep">{step.title}</h3>
+                <p className="mt-8 text-sm text-gray-500 leading-relaxed break-keep">{step.desc}</p>
               </div>
             ))}
           </div>

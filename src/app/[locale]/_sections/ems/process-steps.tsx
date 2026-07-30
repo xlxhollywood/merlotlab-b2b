@@ -32,8 +32,8 @@ export default function EmsProcessSteps() {
               <div className="flex items-start gap-4 sm:gap-6 rounded-2xl bg-white p-5 sm:p-6 shadow-[0_12px_24px_-8px_rgba(17,17,26,0.16),0_2px_8px_-2px_rgba(17,17,26,0.06)] ring-1 ring-gray-100">
                 <span className="text-xl sm:text-2xl font-bold text-primary shrink-0">{step.no}</span>
                 <div>
-                  <h3 className="text-base sm:text-lg font-bold text-gray-800">{step.title}</h3>
-                  <p className="mt-1 text-sm text-gray-500 leading-relaxed">{step.desc}</p>
+                  <h3 className="text-base sm:text-lg font-bold text-gray-800 break-keep">{step.title}</h3>
+                  <p className="mt-1 text-sm text-gray-500 leading-relaxed break-keep">{step.desc}</p>
                 </div>
               </div>
             </FadeInUp>

@@ -25,8 +25,8 @@ export default function ProductIntro({
       <div className="max-w-5xl mx-auto">
         <FadeInUp delay={200}>
           <div className="text-center">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800">{title}</h2>
-            <p className="mt-4 sm:mt-5 text-sm sm:text-base lg:text-lg text-gray-500 leading-relaxed">{subtitle}</p>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 break-keep">{title}</h2>
+            <p className="mt-4 sm:mt-5 text-sm sm:text-base lg:text-lg text-gray-500 leading-relaxed break-keep">{subtitle}</p>
             <div className="mt-6 flex flex-wrap justify-center gap-x-6 gap-y-3">
               {chips.map((chip) => (
                 <span key={chip} className="inline-flex items-center gap-2">

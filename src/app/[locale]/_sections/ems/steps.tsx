@@ -2,11 +2,12 @@
 
 import { useTranslations } from "next-intl"
 import StepProcess from "@/components/section/step-process"
+import SoftBreak from "@/components/ui/soft-break"
 
 // STEP 프로세스 (docs/renewal/EMS 솔루션.png §3)
 export default function EmsSteps() {
   const t = useTranslations("ems")
-  const br = () => <br />
+  const br = () => <SoftBreak />
   const hl = (chunks: React.ReactNode) => <span className="text-primary">{chunks}</span>
   return (
     <StepProcess
