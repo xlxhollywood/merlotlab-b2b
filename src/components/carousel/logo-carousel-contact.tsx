@@ -1,7 +1,9 @@
 "use client"
 import Image from "next/image"
+import { useTranslations } from "next-intl"
 
 export default function LogoCarouselContact() {
+  const t = useTranslations("common")
   // 갭 조절 변수들
   const itemWidth = 144 // w-36 = 144px (각 아이템의 기본 너비)
   const itemGap = 80 // gap-24 = 96px (아이템 간 간격)
@@ -86,7 +88,7 @@ export default function LogoCarouselContact() {
   return (
     <div className="w-full max-w-[1150px] mx-auto px-4 py-8">
       <div className="text-center mb-8">
-        <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-2">솔루션 도입사</h2>
+        <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-2">{t("clientsTitle")}</h2>
       </div>
 
       <div className="relative overflow-hidden bg-gradient-to-r from-gray-50 via-white to-gray-50 rounded-xl py-6">
@@ -137,7 +139,7 @@ export default function LogoCarouselContact() {
       </div>
 
       <div className="text-center mt-6">
-        <p className="text-sm text-gray-500">메를로랩은 고객사의 효율적인 에너지 관리를 지원합니다</p>
+        <p className="text-sm text-gray-500">{t("clientsDesc")}</p>
       </div>
 
       <style jsx>{`

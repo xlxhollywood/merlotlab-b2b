@@ -11,6 +11,7 @@
   },
   "metadata": {
     "siteName": "MerlotLab",
+    "keywords": ["MerlotLab", "merlotlab", "EMS", "energy management", "case studies", "IR Center", "energy optimization", "smart building"],
     "titleDefault": "MerlotLab",
     "titleTemplate": "%s | MerlotLab",
     "description": "EMS solutions · case studies · company · IR Center — from facility environment analysis to on-site optimized energy operations, we change the paradigm of savings.",
@@ -22,7 +23,10 @@
   "common": {
     "logoAlt": "MerlotLab logo",
     "inquiry": "Contact",
-    "comingSoon": "Coming soon"
+    "comingSoon": "Coming soon",
+    "partnersTitle": "Key Clients",
+    "clientsTitle": "Our Clients",
+    "clientsDesc": "MerlotLab supports efficient energy management for our clients."
   },
   "language": {
     "korean": "한국어",
@@ -40,7 +44,7 @@
   "about": {
     "heroEyebrow": "About Merlotlab",
     "heroTitle": "About Us",
-    "heroSubtitle": "Company Overview",
+    "heroSubtitle": "The future of smart buildings and the journey of growth<br></br>that MerlotLab is creating.",
     "introHeading": "Making Building AX a reality.",
     "introP1": "Beyond Building DX, MerlotLab is preparing for the Building AX era, in which AI operates buildings on its own.",
     "introP2": "We see the lighting installed throughout a building as its nervous system. By applying our in-house Merlot Mesh to lighting across the entire building, we connect the whole building into a single wireless network.",

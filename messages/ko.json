@@ -11,6 +11,7 @@
   },
   "metadata": {
     "siteName": "메를로랩",
+    "keywords": ["메를로랩", "merlotlab", "MerlotLab", "EMS", "에너지 관리", "도입 사례", "IR Center", "에너지 최적화"],
     "titleDefault": "메를로랩",
     "titleTemplate": "%s | 메를로랩",
     "description": "EMS 솔루션 · 도입 사례 · 회사 소개 · IR Center — 설비 환경 분석부터 현장 최적화된 에너지 운영까지, 절감의 패러다임을 바꿉니다.",
@@ -22,7 +23,10 @@
   "common": {
     "logoAlt": "메를로랩 로고",
     "inquiry": "문의하기",
-    "comingSoon": "준비 중입니다"
+    "comingSoon": "준비 중입니다",
+    "partnersTitle": "주요 도입사",
+    "clientsTitle": "솔루션 도입사",
+    "clientsDesc": "메를로랩은 고객사의 효율적인 에너지 관리를 지원합니다"
   },
   "language": {
     "korean": "한국어",
@@ -40,7 +44,7 @@
   "about": {
     "heroEyebrow": "About Merlotlab",
     "heroTitle": "회사 소개",
-    "heroSubtitle": "상세 설명",
+    "heroSubtitle": "메를로랩이 만들어가는<br></br>스마트 빌딩의 미래와 성장의 여정을 소개합니다.",
     "introHeading": "Building AX를 현실로 만들어갑니다.",
     "introP1": "메를로랩은 Building DX를 넘어 AI가 스스로 건물을 운영하는 Building AX 시대를 준비합니다.",
     "introP2": "메를로랩은 건물 곳곳에 설치된 조명을 건물의 신경망으로 바라봅니다. 건물 전역에 설치된 조명에 자체 개발한 Merlot Mesh를 적용하여 건물 전체를 하나의 무선 네트워크로 연결합니다.",

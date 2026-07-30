@@ -39,17 +39,7 @@ export async function generateMetadata({
       template: t("titleTemplate"),
     },
     description: t("description"),
-    keywords: [
-      "메를로랩",
-      "merlotlab",
-      "MerlotLab",
-      "EMS",
-      "에너지 관리",
-      "energy management",
-      "도입 사례",
-      "IR Center",
-      "에너지 최적화",
-    ],
+    keywords: t.raw("keywords") as string[],
     icons: {
       icon: "/favicon.png",
       apple: "/favicon.png",
