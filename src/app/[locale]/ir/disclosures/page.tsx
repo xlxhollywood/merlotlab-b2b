@@ -151,7 +151,7 @@ export default function IRPage() {
                         placeholder={t("searchPlaceholder")}
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
-                        className="block w-full pl-9 sm:pl-10 pr-3 py-2.5 sm:py-3 border border-gray-300 rounded-lg leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-[#583CF2] focus:border-[#583CF2] text-sm sm:text-base"
+                        className="block w-full pl-9 sm:pl-10 pr-3 py-2.5 sm:py-3 border border-gray-300 rounded-lg leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-primary focus:border-primary text-sm sm:text-base"
                       />
                     </div>
                   </div>
@@ -181,7 +181,7 @@ export default function IRPage() {
                             {item.imageUrl ? (
                               <button
                                 onClick={(e) => handleDownload(e, item.imageUrl as string, item.title)}
-                                className="flex-shrink-0 p-2 sm:p-2.5 text-gray-400 hover:text-[#583CF2] hover:bg-gray-50 rounded-lg transition-colors group"
+                                className="flex-shrink-0 p-2 sm:p-2.5 text-gray-400 hover:text-primary hover:bg-gray-50 rounded-lg transition-colors group"
                                 title={t("downloadImage")}
                                 type="button"
                               >

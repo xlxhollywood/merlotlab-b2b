@@ -33,7 +33,7 @@ export default function WhyChooseSection({ onQuoteClick }: { onQuoteClick: () =>
 
             <button
               onClick={onQuoteClick}
-              className="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-3 sm:py-5 bg-[#583CF2]/5 rounded-xl sm:rounded-2xl hover:bg-[#583CF2]/10 transition-colors duration-300"
+              className="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-3 sm:py-5 bg-primary/5 rounded-xl sm:rounded-2xl hover:bg-primary/10 transition-colors duration-300"
             >
               <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
               <span className="text-primary font-semibold text-sm sm:text-base">{t("quoteButton")}</span>
