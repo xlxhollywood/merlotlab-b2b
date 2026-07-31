@@ -35,7 +35,7 @@ export default function IrDetailNav({
                 <ChevronLeft className="w-5 h-5 text-gray-400 flex-shrink-0" />
                 <div className="min-w-0">
                   <div className="text-sm text-gray-500 mb-1">{t("prevPost")}</div>
-                  <div className="text-gray-800 hover:text-[#583CF2] transition-colors truncate">
+                  <div className="text-gray-800 hover:text-primary transition-colors truncate">
                     {prev.title}
                   </div>
                 </div>
@@ -51,7 +51,7 @@ export default function IrDetailNav({
               <div className="flex items-center gap-3 flex-1 min-w-0">
                 <div className="min-w-0 flex-1">
                   <div className="text-sm text-gray-500 mb-1">{t("nextPost")}</div>
-                  <div className="text-gray-800 hover:text-[#583CF2] transition-colors truncate">
+                  <div className="text-gray-800 hover:text-primary transition-colors truncate">
                     {next.title}
                   </div>
                 </div>

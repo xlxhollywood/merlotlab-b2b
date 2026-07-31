@@ -31,7 +31,7 @@ const Footer: NextPage = () => {
             <div className="w-full lg:w-1/2 flex flex-col items-start justify-start">
               <div className="relative leading-6 sm:leading-7">
                 <p className="m-0 text-sm sm:text-base">{t("tagline1")}</p>
-                <p className="m-0 text-[#583cf2] font-semibold text-sm sm:text-base">
+                <p className="m-0 text-primary font-semibold text-sm sm:text-base">
                   {t("tagline2")}
                 </p>
               </div>

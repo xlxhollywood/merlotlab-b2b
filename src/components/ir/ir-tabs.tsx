@@ -23,13 +23,13 @@ export default function IrTabs({
         <div className="flex space-x-1 bg-gray-100 p-1 rounded-lg">
           <button
             onClick={onDisclosureClick}
-            className={`flex-1 px-3 sm:px-4 py-2 text-sm font-medium rounded-md transition-colors ${activeTab === "disclosure" ? "bg-[#583CF2] text-white" : "text-gray-600 hover:text-gray-800"}`}
+            className={`flex-1 px-3 sm:px-4 py-2 text-sm font-medium rounded-md transition-colors ${activeTab === "disclosure" ? "bg-primary text-white" : "text-gray-600 hover:text-gray-800"}`}
           >
             {t("tabDisclosure")}
           </button>
           <button
             onClick={onAnnouncementClick}
-            className={`flex-1 px-3 sm:px-4 py-2 text-sm font-medium rounded-md transition-colors ${activeTab === "announcement" ? "bg-[#583CF2] text-white" : "text-gray-600 hover:text-gray-800"}`}
+            className={`flex-1 px-3 sm:px-4 py-2 text-sm font-medium rounded-md transition-colors ${activeTab === "announcement" ? "bg-primary text-white" : "text-gray-600 hover:text-gray-800"}`}
           >
             {t("tabAnnouncement")}
           </button>
@@ -40,13 +40,13 @@ export default function IrTabs({
         <div className="space-y-4">
           <button
             onClick={onDisclosureClick}
-            className={`w-full text-left px-4 py-3 rounded-lg transition-colors ${activeTab === "disclosure" ? "bg-[#583CF2] text-white" : "text-gray-600 hover:text-gray-800 hover:bg-gray-50"}`}
+            className={`w-full text-left px-4 py-3 rounded-lg transition-colors ${activeTab === "disclosure" ? "bg-primary text-white" : "text-gray-600 hover:text-gray-800 hover:bg-gray-50"}`}
           >
             {t("tabDisclosure")}
           </button>
           <button
             onClick={onAnnouncementClick}
-            className={`w-full text-left px-4 py-3 rounded-lg transition-colors ${activeTab === "announcement" ? "bg-[#583CF2] text-white" : "text-gray-600 hover:text-gray-800 hover:bg-gray-50"}`}
+            className={`w-full text-left px-4 py-3 rounded-lg transition-colors ${activeTab === "announcement" ? "bg-primary text-white" : "text-gray-600 hover:text-gray-800 hover:bg-gray-50"}`}
           >
             {t("tabAnnouncement")}
           </button>
