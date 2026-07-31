@@ -1,6 +1,7 @@
 "use client"
 
 import { useTranslations } from "next-intl"
+import { Heading, Text } from "@/components/ui/typography"
 import FadeInUp from "@/components/animation/fade-in-up"
 import AnimatedEnergyChart from "@/components/chart/energy"
 import SoftBreak from "@/components/ui/soft-break"
@@ -15,8 +16,8 @@ export default function EmsCostBars() {
       <div className="max-w-6xl mx-auto">
         <FadeInUp delay={200}>
           <div className="text-center">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-content break-keep">{t("costHeading")}</h2>
-            <p className="mt-4 sm:mt-5 text-sm sm:text-base lg:text-lg text-content-subtle leading-relaxed break-keep">{t.rich("costSubtitle", { br })}</p>
+            <Heading as="h2" variant="section">{t("costHeading")}</Heading>
+            <Text as="p" variant="subtitle" color="subtle" className="mt-4 sm:mt-5 leading-relaxed">{t.rich("costSubtitle", { br })}</Text>
           </div>
         </FadeInUp>
         <div className="mt-10 sm:mt-12">

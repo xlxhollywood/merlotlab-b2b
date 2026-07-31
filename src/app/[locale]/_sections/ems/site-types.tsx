@@ -1,6 +1,7 @@
 "use client"
 
 import Image from "next/image"
+import { Heading, Text } from "@/components/ui/typography"
 import { ArrowRight } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { Link } from "@/i18n/navigation"
@@ -24,9 +25,9 @@ export default function EmsSiteTypes() {
       <div className="max-w-6xl mx-auto">
         <FadeInUp delay={200}>
           <div className="text-center">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-content leading-snug">
+            <Heading as="h2" variant="section" className="leading-snug">
               {t.rich("siteTypesHeading", { hl, br })}
-            </h2>
+            </Heading>
             <Link
               href="/cases"
               className="mt-6 inline-flex items-center gap-2 rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-primary shadow-sm transition-colors hover:bg-gray-50"

@@ -1,6 +1,7 @@
 "use client"
 
 import Image from "next/image"
+import { Heading, Text } from "@/components/ui/typography"
 import { useTranslations } from "next-intl"
 import FadeInUp from "@/components/animation/fade-in-up"
 
@@ -19,8 +20,8 @@ export default function RtlsComponents() {
       <div className="max-w-4xl mx-auto">
         <FadeInUp delay={200}>
           <div className="text-center">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-content">{t("componentsTitle")}</h2>
-            <p className="mt-4 sm:mt-5 text-sm sm:text-base lg:text-lg text-content-subtle">{t("componentsSubtitle")}</p>
+            <Heading as="h2" variant="section">{t("componentsTitle")}</Heading>
+            <Text as="p" variant="subtitle" color="subtle" className="mt-4 sm:mt-5">{t("componentsSubtitle")}</Text>
           </div>
         </FadeInUp>
 
@@ -35,8 +36,8 @@ export default function RtlsComponents() {
                 <div className="relative mx-auto h-40 w-full">
                   <Image src={card.image} alt={card.name} fill className="object-contain" />
                 </div>
-                <h3 className="mt-4 text-lg sm:text-xl font-bold text-content">{card.name}</h3>
-                <p className="mt-2 text-sm text-content-subtle leading-relaxed">{card.desc}</p>
+                <Heading as="h3" variant="card" className="mt-4">{card.name}</Heading>
+                <Text as="p" variant="body-sm" color="subtle" className="mt-2">{card.desc}</Text>
               </div>
             ))}
           </div>
