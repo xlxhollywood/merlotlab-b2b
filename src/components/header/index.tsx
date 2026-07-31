@@ -11,7 +11,7 @@ import LocaleToggle from "@/components/ui/locale-toggle"
 
 // 데스크톱 nav 공통 pill: hover 시 연한 회색 라운드 배경 (리뉴얼 헤더)
 const navPill =
-  "inline-flex items-center px-3 py-2 rounded-lg text-base font-medium transition-colors duration-200 hover:bg-gray-100"
+  "inline-flex items-center whitespace-nowrap px-3 py-2 rounded-lg text-base font-medium transition-colors duration-200 hover:bg-gray-100"
 
 const Header: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -32,9 +32,9 @@ const Header: React.FC = () => {
       className="sticky top-0 left-0 w-full p-0 z-[1000] transition-all duration-300 bg-white border-b border-gray-200 shadow-sm"
       onClick={onContainerClick }
     >
-      <div className="max-w-[1880px] mx-auto flex items-center justify-between lg:justify-start px-4 md:px-6 h-16">
+      <div className="max-w-[1880px] mx-auto flex items-center justify-between xl:justify-start px-4 md:px-6 h-16">
         {/* 로고 */}
-        <div className="sm:ml-2 md:m-2 lg:ml-2 xl:ml-2 2xl:ml-48">
+        <div className="shrink-0 sm:ml-2 md:m-2 lg:ml-2 xl:ml-2 2xl:ml-48">
           <div className="flex items-center relative">
             <Link href="/" className="flex items-center relative">
               <Image
@@ -49,7 +49,7 @@ const Header: React.FC = () => {
           </div>
         </div>
         {/* 데스크톱 네비게이션 메뉴 */}
-        <div className="hidden lg:flex items-center gap-8 ml-32">
+        <div className="hidden xl:flex items-center gap-8 ml-32">
           {/* 솔루션 드롭다운 (EMS / RTLS) — group-hover라 드롭다운 열림 상태에서도 pill 유지 */}
           <div className="relative group">
             <button
@@ -123,7 +123,7 @@ const Header: React.FC = () => {
         <div className="flex items-center gap-2 ml-auto 2xl:mr-36 xl:mr-10">
           <LocaleToggle />
           <button
-            className="lg:hidden text-gray-700 hover:text-[#583CF2] transition-colors duration-200"
+            className="xl:hidden text-gray-700 hover:text-[#583CF2] transition-colors duration-200"
             onClick={toggleMobileMenu}
             aria-label="menu"
           >
@@ -133,7 +133,7 @@ const Header: React.FC = () => {
       </div>
       {/* 모바일 메뉴 */}
       <div
-        className={`lg:hidden transition-all duration-300 ease-in-out overflow-hidden bg-white ${
+        className={`xl:hidden transition-all duration-300 ease-in-out overflow-hidden bg-white ${
           isMobileMenuOpen ? "max-h-[520px] opacity-100" : "max-h-0 opacity-0"
         }`}
       >
