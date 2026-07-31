@@ -3,6 +3,7 @@
 import { useTranslations } from "next-intl"
 import FadeInUp from "@/components/animation/fade-in-up"
 import AnimatedEnergyChart from "@/components/chart/energy"
+import { Heading, Text } from "@/components/ui/typography"
 
 export default function EnergyBusinessSection() {
   const t = useTranslations("home")
@@ -15,14 +16,14 @@ export default function EnergyBusinessSection() {
         <div className="text-center mb-12 sm:mb-16 lg:mb-20">
           <div className="space-y-6 sm:space-y-8 lg:space-y-10 mb-24 sm:mb-0">
             <FadeInUp delay={300}>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold text-content-muted mb-4 sm:mb-6">
+              <Heading as="h2" variant="section" className="mb-4 sm:mb-6">
                 {t.rich("energyBizTitle", { hl })}
-              </h2>
+              </Heading>
             </FadeInUp>
             <FadeInUp delay={600}>
-              <p className="text-base sm:text-lg lg:text-xl text-content-muted leading-relaxed px-4 sm:px-0">
+              <Text as="p" variant="subtitle-lg" color="muted" className="leading-relaxed px-4 sm:px-0">
                 {t.rich("energyBizDesc", { br })}
-              </p>
+              </Text>
             </FadeInUp>
           </div>
         </div>

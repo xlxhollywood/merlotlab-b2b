@@ -4,6 +4,7 @@ import Image from "next/image"
 import { ArrowRight } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { Link } from "@/i18n/navigation"
+import { Heading, Text } from "@/components/ui/typography"
 import FadeInUp from "@/components/animation/fade-in-up"
 
 // Merlot 솔루션 개요: EMS / RTLS 2행 (docs/renewal/메인.png §3)
@@ -31,10 +32,10 @@ export default function MerlotSolutionsSection() {
       <div className="max-w-5xl mx-auto">
         <FadeInUp delay={200}>
           <div className="text-center">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-content">{t("solutionsTitle")}</h2>
-            <p className="mt-4 sm:mt-5 text-sm sm:text-base lg:text-lg text-content-subtle leading-relaxed">
+            <Heading as="h2" variant="section">{t("solutionsTitle")}</Heading>
+            <Text as="p" variant="subtitle" color="subtle" className="mt-4 sm:mt-5 leading-relaxed">
               {t("solutionsSubtitle")}
-            </p>
+            </Text>
           </div>
         </FadeInUp>
 
@@ -49,11 +50,11 @@ export default function MerlotSolutionsSection() {
                 </div>
                 {/* 텍스트 */}
                 <div className="text-center lg:text-left">
-                  <h3 className="text-lg sm:text-xl font-semibold text-content">{s.name}</h3>
-                  <p className="mt-3 text-sm sm:text-base text-content-subtle leading-relaxed">{t.rich(s.descKey, { br })}</p>
+                  <Heading as="h3" variant="card" className="font-semibold">{s.name}</Heading>
+                  <Text as="p" variant="body" color="subtle" className="mt-3">{t.rich(s.descKey, { br })}</Text>
                   <Link
                     href={s.href}
-                    className="mt-5 inline-flex items-center gap-2 rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium shadow-sm transition-colors hover:bg-gray-50 text-primary"
+                    className="mt-5 inline-flex items-center gap-2 rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-base font-medium shadow-sm transition-colors hover:bg-gray-50 text-primary"
                   >
                     {t("learnMore")}
                     <ArrowRight className="w-4 h-4 text-primary" />

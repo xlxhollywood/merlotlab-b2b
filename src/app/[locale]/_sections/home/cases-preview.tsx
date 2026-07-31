@@ -4,6 +4,7 @@ import Image from "next/image"
 import { ArrowRight } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { Link } from "@/i18n/navigation"
+import { Heading, Text } from "@/components/ui/typography"
 import FadeInUp from "@/components/animation/fade-in-up"
 
 // 도입 사례 프리뷰: 정적 6카드 (docs/renewal/메인.png §5). 카드 비인터랙티브, 직각 모서리.
@@ -25,13 +26,13 @@ export default function CasesPreviewSection() {
       <div className="max-w-6xl mx-auto">
         <FadeInUp delay={200}>
           <div className="text-center">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-content">{t("casesTitle")}</h2>
-            <p className="mt-4 sm:mt-5 text-sm sm:text-base lg:text-lg text-content-subtle leading-relaxed">
+            <Heading as="h2" variant="section">{t("casesTitle")}</Heading>
+            <Text as="p" variant="subtitle" color="subtle" className="mt-4 sm:mt-5 leading-relaxed">
               {t.rich("casesSubtitle", { br })}
-            </p>
+            </Text>
             <Link
               href="/cases"
-              className="mt-6 inline-flex items-center gap-1.5 rounded-lg bg-primary px-5 py-3 text-sm font-medium text-white transition-colors hover:bg-primary/90"
+              className="mt-6 inline-flex items-center gap-1.5 rounded-lg bg-primary px-5 py-3 text-base font-medium text-white transition-colors hover:bg-primary/90"
             >
               {t("moreCases")}
               <ArrowRight className="w-4 h-4" />
@@ -47,8 +48,8 @@ export default function CasesPreviewSection() {
                 <Image src={c.image} alt={c.name} fill className="object-cover" sizes="(max-width: 1024px) 100vw, 33vw" />
                 {/* 하단 그라디언트 + 유형(위) + 이름(아래) */}
                 <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent p-4">
-                  <p className="text-xs text-white/75">{c.type}</p>
-                  <p className="mt-0.5 text-sm sm:text-base font-semibold text-white">{c.name}</p>
+                  <p className="text-sm text-white/75">{c.type}</p>
+                  <p className="mt-0.5 text-base sm:text-lg font-semibold text-white">{c.name}</p>
                 </div>
               </div>
             </FadeInUp>
