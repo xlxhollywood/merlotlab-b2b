@@ -3,6 +3,7 @@
 import { useTranslations } from "next-intl"
 import Image from "next/image"
 import FadeInUp from "@/components/animation/fade-in-up"
+import { Heading } from "@/components/ui/typography"
 
 // About 회사 개요 (docs/renewal/회사소개.png §3): 중앙 헤딩 + 좌 로고박스 / 우 정보 테이블.
 export default function CompanyOverview() {
@@ -21,9 +22,9 @@ export default function CompanyOverview() {
     <section className="w-full bg-white pb-16 sm:pb-20 lg:pb-24 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
         <FadeInUp delay={200}>
-          <h2 className="text-center text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800">
+          <Heading as="h2" variant="section" className="text-center">
             {t("overviewTitle")}
-          </h2>
+          </Heading>
         </FadeInUp>
 
         <FadeInUp delay={300}>
@@ -47,10 +48,10 @@ export default function CompanyOverview() {
                   key={row.label}
                   className="flex flex-col sm:flex-row gap-1 sm:gap-6 py-5 border-b border-gray-200"
                 >
-                  <div className="w-full sm:w-32 flex-shrink-0 font-semibold text-gray-800 sm:text-center">
+                  <div className="w-full sm:w-32 flex-shrink-0 font-semibold text-content sm:text-center">
                     {row.label}
                   </div>
-                  <div className="text-gray-600">{row.value}</div>
+                  <div className="text-content-muted">{row.value}</div>
                 </div>
               ))}
             </div>

@@ -3,6 +3,7 @@
 import { useTranslations } from "next-intl"
 import Image from "next/image"
 import FadeInUp from "@/components/animation/fade-in-up"
+import { Heading } from "@/components/ui/typography"
 
 // About Intro (docs/renewal/회사소개.png §2): 중앙 헤딩 + 좌측정렬 3문단 + 하단 중앙 AX 일러스트.
 export default function AboutIntro() {
@@ -11,13 +12,13 @@ export default function AboutIntro() {
     <section className="w-full bg-white py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
         <FadeInUp delay={200}>
-          <h2 className="text-center text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 leading-snug break-keep">
+          <Heading as="h2" variant="section" className="text-center leading-snug">
             {t("introHeading")}
-          </h2>
+          </Heading>
         </FadeInUp>
 
         <FadeInUp delay={300}>
-          <div className="mt-8 sm:mt-10 space-y-6 text-sm/8 sm:text-base/9 lg:text-lg/10 text-gray-600 break-keep">
+          <div className="mt-8 sm:mt-10 space-y-6 text-base/8 sm:text-lg/9 lg:text-xl/10 text-content-muted break-keep">
             <p>{t("introP1")}</p>
             <p>{t("introP2")}</p>
             <p>{t("introP3")}</p>

@@ -2,6 +2,7 @@
 
 import { useTranslations } from "next-intl"
 import FadeInUp from "@/components/animation/fade-in-up"
+import { Heading, Text } from "@/components/ui/typography"
 
 type TimelineItem = { month: string; text: string }
 type TimelineYear = { year: string; items: TimelineItem[] }
@@ -16,12 +17,12 @@ export default function AboutHistory() {
       <div className="max-w-4xl mx-auto">
         <FadeInUp delay={200}>
           <div className="text-center">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800">
+            <Heading as="h2" variant="section">
               {t("historyTitle")}
-            </h2>
-            <p className="mt-4 text-sm sm:text-base lg:text-lg text-gray-500">
+            </Heading>
+            <Text as="p" variant="subtitle" color="subtle" className="mt-4">
               {t("historySubtitle")}
-            </p>
+            </Text>
           </div>
         </FadeInUp>
 
@@ -40,24 +41,24 @@ export default function AboutHistory() {
                     className="grid grid-cols-[56px_28px_1fr] sm:grid-cols-[80px_40px_1fr]"
                   >
                     {/* 연도 (연도 그룹 첫 항목에만) */}
-                    <div className={`${topPad} text-right pr-3 sm:pr-4 text-lg sm:text-xl font-bold text-primary`}>
+                    <div className={`${topPad} text-right pr-3 sm:pr-4 text-2xl sm:text-3xl font-bold text-primary`}>
                       {isYearStart ? yearBlock.year : ""}
                     </div>
 
                     {/* 세로선 + 노드 */}
                     <div className="relative">
-                      <div className="absolute inset-y-0 left-1/2 -translate-x-1/2 w-px bg-primary/40" />
+                      <div className="absolute inset-y-0 left-1/2 -translate-x-1/2 w-[4px] bg-primary " />
                       {isYearStart && (
-                        <div className={`absolute left-1/2 ${nodeTop} -translate-x-1/2 translate-y-1 w-3.5 h-3.5 rounded-full border-2 border-primary bg-white`} />
+                        <div className={`absolute left-1/2 ${nodeTop} -translate-x-1/2 translate-y-1 w-6 h-6 rounded-full border-4 border-primary bg-white`} />
                       )}
                     </div>
 
                     {/* 월 + 텍스트 */}
-                    <div className={`flex gap-3 sm:gap-4 ${topPad} pb-4 pl-2 sm:pl-4`}>
-                      <div className="w-6 flex-shrink-0 font-bold text-gray-800">
+                    <div className={`flex gap-5 sm:gap-8 ${topPad} pb-4 pl-6 sm:pl-10`}>
+                      <div className="w-6 flex-shrink-0 font-bold text-content text-xl">
                         {item.month}
                       </div>
-                      <p className="text-sm sm:text-base text-gray-600 leading-relaxed break-keep">
+                      <p className="text-lg sm:text-xl text-content-muted leading-relaxed break-keep">
                         {item.text}
                       </p>
                     </div>

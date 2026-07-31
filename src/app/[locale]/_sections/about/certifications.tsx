@@ -3,6 +3,7 @@
 import { useTranslations } from "next-intl"
 import Image from "next/image"
 import FadeInUp from "@/components/animation/fade-in-up"
+import { Heading, Text } from "@/components/ui/typography"
 
 const CARD_SHADOW =
   "shadow-[0_12px_24px_-8px_rgba(17,17,26,0.16),0_2px_8px_-2px_rgba(17,17,26,0.06)]"
@@ -26,9 +27,9 @@ export default function CertificationsSection() {
     <section className="relative w-full px-4 sm:px-6 lg:px-8 bg-gray-50 pt-16 sm:pt-20 md:pt-24 lg:pt-32 pb-16 sm:pb-20 md:pb-24 lg:pb-32">
       <div className="max-w-6xl mx-auto">
         <FadeInUp delay={300}>
-          <div className="text-center text-gray-700 mb-8 sm:mb-12 lg:mb-16">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">{t("certSectionTitle")}</h2>
-            <p className="text-base sm:text-lg text-gray-600 px-4 break-keep">{t("certSectionDesc")}</p>
+          <div className="text-center mb-8 sm:mb-12 lg:mb-16">
+            <Heading as="h2" variant="section" className="mb-4">{t("certSectionTitle")}</Heading>
+            <Text as="p" variant="subtitle" color="subtle" className="px-4">{t("certSectionDesc")}</Text>
           </div>
         </FadeInUp>
 
@@ -38,15 +39,15 @@ export default function CertificationsSection() {
             {stats.map((s) => (
               <div
                 key={s.label}
-                className={`flex items-center justify-between rounded-xl bg-white px-6 py-5 sm:px-8 sm:py-6 ${CARD_SHADOW}`}
+                className={`flex items-center justify-between rounded-xl bg-white px-10 py-10 sm:px-14 sm:py-14 ${CARD_SHADOW}`}
               >
-                <div className="flex items-center gap-2">
-                  <span className="text-2xl sm:text-3xl">{s.flag}</span>
-                  <span className="text-base sm:text-lg font-semibold text-gray-700">{s.label}</span>
+                <div className="flex items-center gap-10">
+                  <span className="text-3xl sm:text-4xl">{s.flag}</span>
+                  <span className="text-xl sm:text-2xl font-semibold text-content">{s.label}</span>
                 </div>
                 <div className="flex items-baseline gap-1">
-                  <span className="text-3xl sm:text-4xl font-bold text-[#583CF2]">{s.value}</span>
-                  {s.unit && <span className="text-sm text-gray-700">{s.unit}</span>}
+                  <span className="text-4xl sm:text-5xl font-bold text-primary">{s.value}</span>
+                  {s.unit && <span className="text-base text-content-muted">{s.unit}</span>}
                 </div>
               </div>
             ))}
@@ -67,7 +68,7 @@ export default function CertificationsSection() {
                     className="object-contain"
                   />
                 </div>
-                <figcaption className="mt-3 text-center font-bold text-base text-black break-keep">{cert.title}</figcaption>
+                <figcaption className="mt-3 text-center font-bold text-lg text-black break-keep">{cert.title}</figcaption>
               </figure>
             ))}
           </div>
