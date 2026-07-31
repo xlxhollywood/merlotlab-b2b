@@ -40,11 +40,11 @@ export default function PricingSection() {
         <div className="text-center mb-12 sm:mb-16 lg:mb-20">
           <h2
             ref={costRef}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold text-gray-700 mb-4 sm:mb-6"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold text-content-muted mb-4 sm:mb-6"
           >
             {t("costPrefix")}{costInView && <CountUp start={1000000} end={0} duration={2} separator="," />}{t("wonUnit")}
           </h2>
-          <p className="text-lg sm:text-xl text-gray-600">{t("pricingSubtitle")}</p>
+          <p className="text-lg sm:text-xl text-content-muted">{t("pricingSubtitle")}</p>
         </div>
 
         {/* Cards Grid - 6 column grid for offset positioning */}
@@ -69,20 +69,20 @@ export default function PricingSection() {
                   <div className="space-y-3 sm:space-y-4">
                     {/* Icon */}
                     <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[#583CF2]/10 rounded-xl sm:rounded-2xl flex items-center justify-center mx-auto group-hover:bg-[#583CF2]/20 transition-colors duration-300">
-                      <item.icon className="w-5 h-5 sm:w-6 sm:h-6 text-[#583CF2] group-hover:scale-110 transition-transform duration-300" />
+                      <item.icon className="w-5 h-5 sm:w-6 sm:h-6 text-primary group-hover:scale-110 transition-transform duration-300" />
                     </div>
 
                     {/* Title and Subtitle */}
                     <div className="min-h-[3rem] sm:min-h-[3.5rem] flex flex-col justify-center">
-                      <h3 className="text-base sm:text-lg font-semibold text-gray-900 leading-tight">{item.title}</h3>
+                      <h3 className="text-base sm:text-lg font-semibold text-content-strong leading-tight">{item.title}</h3>
                       {item.subtitle && item.subtitle.trim() && (
-                        <p className="text-xs sm:text-sm text-gray-500 mt-1 leading-tight">{item.subtitle}</p>
+                        <p className="text-xs sm:text-sm text-content-subtle mt-1 leading-tight">{item.subtitle}</p>
                       )}
                     </div>
 
                     {/* Price with Animation */}
                     <div className="pt-2">
-                      <p className="text-xl sm:text-2xl font-bold text-[#583CF2] group-hover:text-[#4c35d1] transition-colors duration-300">
+                      <p className="text-xl sm:text-2xl font-bold text-primary group-hover:text-[#4c35d1] transition-colors duration-300">
                         {cardsInView ? (
                           <CountUp
                             start={item.price}
@@ -106,7 +106,7 @@ export default function PricingSection() {
 
         {/* Footer Note */}
         <div className="text-center mt-8 sm:mt-12 lg:mt-16">
-          <p className="text-xs sm:text-sm text-gray-500">{t("priceNote")}</p>
+          <p className="text-xs sm:text-sm text-content-subtle">{t("priceNote")}</p>
         </div>
       </div>
     </section>

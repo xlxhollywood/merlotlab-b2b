@@ -28,10 +28,10 @@ export default function InquiryFormSection({
       <div className="max-w-4xl mx-auto">
         <FadeInUp>
           <div className="text-center mb-12 sm:mb-16">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-700 mb-4 sm:mb-6 leading-tight">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-content-muted mb-4 sm:mb-6 leading-tight">
               {t.rich("formTitle", { br })}
             </h2>
-            <p className="text-base sm:text-xl text-gray-600">{t("formSubtitle")}</p>
+            <p className="text-base sm:text-xl text-content-muted">{t("formSubtitle")}</p>
           </div>
         </FadeInUp>
 

@@ -117,7 +117,7 @@ export default function DirectionsSection() {
                     <div className="font-bold text-gray-50 w-16 flex-shrink-0 h-full items-center p-0">
                       {t("labelAddress")}
                     </div>
-                    <div className="text-zinc-300 text-sm sm:text-base leading-relaxed h-full items-center p-0">
+                    <div className="text-zinc-300 text-base sm:text-lg leading-relaxed h-full items-center p-0">
                       {t("address")}
                     </div>
                   </div>
@@ -125,7 +125,7 @@ export default function DirectionsSection() {
                     <div className="font-bold text-gray-50 w-16 flex-shrink-0 items-center p-0">
                       {t("labelHours")}
                     </div>
-                    <div className="text-zinc-300 text-sm sm:text-base">
+                    <div className="text-zinc-300 text-base sm:text-lg">
                       {t("hours")}
                     </div>
                   </div>
@@ -135,7 +135,7 @@ export default function DirectionsSection() {
                     </div>
                     <div>
                       <a
-                        className="text-zinc-300 hover:text-zinc-200 text-sm sm:text-base"
+                        className="text-zinc-300 hover:text-zinc-200 text-base sm:text-lg"
                         href="mailto:info@merlotlab.com"
                         target="_blank"
                         rel="noreferrer"
@@ -148,7 +148,7 @@ export default function DirectionsSection() {
                     <div className="font-bold text-gray-50 w-16 flex-shrink-0 items-center p-0">
                       {t("labelPhone")}
                     </div>
-                    <div className="text-zinc-300 text-sm sm:text-base items-center p-0">
+                    <div className="text-zinc-300 text-base sm:text-lg items-center p-0">
                       {t("phone")}
                     </div>
                   </div>
@@ -164,24 +164,24 @@ export default function DirectionsSection() {
               {/* 지하철 */}
               <article className="pb-6 border-b border-dashed border-gray-300">
                 <div className="mb-4">
-                  <h5 className="text-lg font-bold text-gray-900">
+                  <h5 className="text-xl font-bold text-content-strong">
                     {t("subwayTitle")}
                   </h5>
                 </div>
                 <div className="flex">
                   <div className="flex space-x-1 mr-2">
                     <div className="w-6 h-6 bg-[#2B387C] rounded-full flex items-center justify-center">
-                      <div className="text-white text-xs font-bold">1</div>
+                      <div className="text-white text-sm font-bold">1</div>
                     </div>
                     <div className="w-6 h-6 bg-[#737E00] rounded-full flex items-center justify-center">
-                      <div className="text-white text-xs font-bold">7</div>
+                      <div className="text-white text-sm font-bold">7</div>
                     </div>
                   </div>
-                  <div className="font-semibold text-gray-900 mr-2">
+                  <div className="font-semibold text-content-strong mr-2">
                     {t("station")}
                   </div>
                   <div className="w-px bg-gray-300 h-3 mt-1.5 mr-2"></div>
-                  <div className="text-gray-600">
+                  <div className="text-content-muted">
                     {t("subwayDesc")}
                   </div>
                 </div>
@@ -190,30 +190,30 @@ export default function DirectionsSection() {
               {/* 버스 */}
               <article className="pb-6 border-b border-dashed border-gray-300">
                 <div className="mb-4">
-                  <h5 className="text-lg font-bold text-gray-900">
+                  <h5 className="text-xl font-bold text-content-strong">
                     {t("busTitle")}
                   </h5>
                 </div>
                 <div className="flex">
                   <div className="flex space-x-1 mr-2">
-                    <div className="bg-blue-500 text-white px-3 py-1 rounded-full text-xs">
+                    <div className="bg-blue-500 text-white px-3 py-1 rounded-full text-sm">
                       <span>{t("busTrunk")} </span>
                       <span className="font-bold">643, 651</span>
                     </div>
-                    <div className="bg-green-500 text-white px-3 py-1 rounded-full text-xs">
+                    <div className="bg-green-500 text-white px-3 py-1 rounded-full text-sm">
                       <span>{t("busBranch")} </span>
                       <span className="font-bold">5528</span>
                     </div>
-                    <div className="bg-gray-500 text-white px-3 py-1 rounded-full text-xs">
+                    <div className="bg-gray-500 text-white px-3 py-1 rounded-full text-sm">
                       <span>{t("busGeneral")} </span>
                       <span className="font-bold">388</span>
                     </div>
                   </div>
-                  <div className="font-semibold text-gray-900 mr-2">
+                  <div className="font-semibold text-content-strong mr-2">
                     {t("station")}
                   </div>
                   <div className="w-px bg-gray-300 h-3 mt-1.5 mr-2"></div>
-                  <div className="text-gray-600">
+                  <div className="text-content-muted">
                     {t("busDesc")}
                   </div>
                 </div>
@@ -222,16 +222,16 @@ export default function DirectionsSection() {
               {/* 자가용 */}
               <article className="pb-6">
                 <div className="mb-4">
-                  <h5 className="text-lg font-bold text-gray-900">
+                  <h5 className="text-xl font-bold text-content-strong">
                     {t("carTitle")}
                   </h5>
                 </div>
                 <div className="flex">
-                  <div className="font-semibold text-gray-900 mr-2">
+                  <div className="font-semibold text-content-strong mr-2">
                     {t("tower")}
                   </div>
                   <div className="w-px bg-gray-300 h-3 mt-1.5 mr-2"></div>
-                  <div className="text-gray-600">
+                  <div className="text-content-muted">
                     {t("carDesc")}
                   </div>
                 </div>
@@ -243,7 +243,7 @@ export default function DirectionsSection() {
               {/* 지하철 */}
               <article className="pb-6 border-b border-dashed border-gray-300">
                 <div className="mb-3 sm:mb-4 text-center sm:text-left">
-                  <h5 className="text-base sm:text-lg font-bold text-gray-900">
+                  <h5 className="text-lg sm:text-xl font-bold text-content-strong">
                     {t("subwayTitle")}
                   </h5>
                 </div>
@@ -251,18 +251,18 @@ export default function DirectionsSection() {
                   <div className="flex flex-wrap items-center gap-2 justify-center sm:justify-start">
                     <div className="flex space-x-1">
                       <div className="w-6 h-6 bg-[#2B387C] rounded-full flex items-center justify-center">
-                        <div className="text-white text-xs font-bold">1</div>
+                        <div className="text-white text-sm font-bold">1</div>
                       </div>
                       <div className="w-6 h-6 bg-[#737E00] rounded-full flex items-center justify-center">
-                        <div className="text-white text-xs font-bold">7</div>
+                        <div className="text-white text-sm font-bold">7</div>
                       </div>
                     </div>
-                    <div className="font-semibold text-gray-900">
+                    <div className="font-semibold text-content-strong">
                       {t("station")}
                     </div>
                   </div>
                   <div className="hidden sm:block w-px bg-gray-300 h-4"></div>
-                  <div className="text-gray-600 text-sm sm:text-base text-center sm:text-left">
+                  <div className="text-content-muted text-base sm:text-lg text-center sm:text-left">
                     {t("subwayDesc")}
                   </div>
                 </div>
@@ -271,31 +271,31 @@ export default function DirectionsSection() {
               {/* 버스 */}
               <article className="pb-6 border-b border-dashed border-gray-300">
                 <div className="mb-3 sm:mb-4 text-center sm:text-left">
-                  <h5 className="text-base sm:text-lg font-bold text-gray-900">
+                  <h5 className="text-lg sm:text-xl font-bold text-content-strong">
                     {t("busTitle")}
                   </h5>
                 </div>
                 <div className="flex flex-col gap-3 sm:gap-4 items-center sm:items-start">
                   <div className="flex flex-wrap gap-2 justify-center sm:justify-start">
-                    <div className="bg-blue-500 text-white px-2 sm:px-3 py-1 rounded-full text-xs">
+                    <div className="bg-blue-500 text-white px-2 sm:px-3 py-1 rounded-full text-sm">
                       <span>{t("busTrunk")} </span>
                       <span className="font-bold">643, 651</span>
                     </div>
-                    <div className="bg-green-500 text-white px-2 sm:px-3 py-1 rounded-full text-xs">
+                    <div className="bg-green-500 text-white px-2 sm:px-3 py-1 rounded-full text-sm">
                       <span>{t("busBranch")} </span>
                       <span className="font-bold">5528</span>
                     </div>
-                    <div className="bg-gray-500 text-white px-2 sm:px-3 py-1 rounded-full text-xs">
+                    <div className="bg-gray-500 text-white px-2 sm:px-3 py-1 rounded-full text-sm">
                       <span>{t("busGeneral")} </span>
                       <span className="font-bold">388</span>
                     </div>
                   </div>
                   <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 items-center sm:items-start">
-                    <div className="font-semibold text-gray-900">
+                    <div className="font-semibold text-content-strong">
                       {t("station")}
                     </div>
                     <div className="hidden sm:block w-px bg-gray-300 h-4"></div>
-                    <div className="text-gray-600 text-sm sm:text-base text-center sm:text-left">
+                    <div className="text-content-muted text-base sm:text-lg text-center sm:text-left">
                       {t("busDesc")}
                     </div>
                   </div>
@@ -305,16 +305,16 @@ export default function DirectionsSection() {
               {/* 자가용 */}
               <article className="pb-6">
                 <div className="mb-3 sm:mb-4 text-center sm:text-left">
-                  <h5 className="text-base sm:text-lg font-bold text-gray-900">
+                  <h5 className="text-lg sm:text-xl font-bold text-content-strong">
                     {t("carTitle")}
                   </h5>
                 </div>
                 <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 items-center sm:items-start">
-                  <div className="font-semibold text-gray-900">
+                  <div className="font-semibold text-content-strong">
                     {t("tower")}
                   </div>
                   <div className="hidden sm:block w-px bg-gray-300 h-4"></div>
-                  <div className="text-gray-600 text-sm sm:text-base text-center sm:text-left">
+                  <div className="text-content-muted text-base sm:text-lg text-center sm:text-left">
                     {t("carDesc")}
                   </div>
                 </div>

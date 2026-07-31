@@ -31,8 +31,8 @@ export default function MerlotSolutionsSection() {
       <div className="max-w-5xl mx-auto">
         <FadeInUp delay={200}>
           <div className="text-center">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800">{t("solutionsTitle")}</h2>
-            <p className="mt-4 sm:mt-5 text-sm sm:text-base lg:text-lg text-gray-500 leading-relaxed">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-content">{t("solutionsTitle")}</h2>
+            <p className="mt-4 sm:mt-5 text-sm sm:text-base lg:text-lg text-content-subtle leading-relaxed">
               {t("solutionsSubtitle")}
             </p>
           </div>
@@ -49,8 +49,8 @@ export default function MerlotSolutionsSection() {
                 </div>
                 {/* 텍스트 */}
                 <div className="text-center lg:text-left">
-                  <h3 className="text-lg sm:text-xl font-semibold text-gray-800">{s.name}</h3>
-                  <p className="mt-3 text-sm sm:text-base text-gray-500 leading-relaxed">{t.rich(s.descKey, { br })}</p>
+                  <h3 className="text-lg sm:text-xl font-semibold text-content">{s.name}</h3>
+                  <p className="mt-3 text-sm sm:text-base text-content-subtle leading-relaxed">{t.rich(s.descKey, { br })}</p>
                   <Link
                     href={s.href}
                     className="mt-5 inline-flex items-center gap-2 rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium shadow-sm transition-colors hover:bg-gray-50 text-primary"

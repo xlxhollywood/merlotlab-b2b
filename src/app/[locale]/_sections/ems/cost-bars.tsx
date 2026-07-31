@@ -15,8 +15,8 @@ export default function EmsCostBars() {
       <div className="max-w-6xl mx-auto">
         <FadeInUp delay={200}>
           <div className="text-center">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 break-keep">{t("costHeading")}</h2>
-            <p className="mt-4 sm:mt-5 text-sm sm:text-base lg:text-lg text-gray-500 leading-relaxed break-keep">{t.rich("costSubtitle", { br })}</p>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-content break-keep">{t("costHeading")}</h2>
+            <p className="mt-4 sm:mt-5 text-sm sm:text-base lg:text-lg text-content-subtle leading-relaxed break-keep">{t.rich("costSubtitle", { br })}</p>
           </div>
         </FadeInUp>
         <div className="mt-10 sm:mt-12">

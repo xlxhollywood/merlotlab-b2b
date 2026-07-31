@@ -13,10 +13,10 @@ export default function WhyChooseSection({ onQuoteClick }: { onQuoteClick: () =>
       <div className="max-w-4xl mx-auto w-full">
         <div className="text-center space-y-6 sm:space-y-8">
           <div className="space-y-4 pt-12 sm:pt-16 lg:pt-20">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-700 leading-tight">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-content-muted leading-tight">
               {t.rich("whyChoose", {
                 brand: () => (
-                  <span className="text-[#583CF2]">
+                  <span className="text-primary">
                     <SplitText text={t("brandName")} delay={400} />
                   </span>
                 ),
@@ -25,7 +25,7 @@ export default function WhyChooseSection({ onQuoteClick }: { onQuoteClick: () =>
             </h1>
           </div>
           <div className="max-w-2xl lg:max-w-4xl mx-auto space-y-6 sm:space-y-8 lg:space-y-10">
-            <p className="text-base sm:text-lg lg:text-xl text-gray-600 leading-relaxed px-4 sm:px-0">
+            <p className="text-base sm:text-lg lg:text-xl text-content-muted leading-relaxed px-4 sm:px-0">
               {t("whyDesc1")}<br />
               <span className="block mt-10 text-sm sm:inline sm:mt-0 sm:text-xl">{t("whyDesc2")}</span>
             </p>
@@ -35,8 +35,8 @@ export default function WhyChooseSection({ onQuoteClick }: { onQuoteClick: () =>
               onClick={onQuoteClick}
               className="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-3 sm:py-5 bg-[#583CF2]/5 rounded-xl sm:rounded-2xl hover:bg-[#583CF2]/10 transition-colors duration-300"
             >
-              <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5 text-[#583CF2]" />
-              <span className="text-[#583CF2] font-semibold text-sm sm:text-base">{t("quoteButton")}</span>
+              <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
+              <span className="text-primary font-semibold text-sm sm:text-base">{t("quoteButton")}</span>
             </button>
           </div>
         </div>

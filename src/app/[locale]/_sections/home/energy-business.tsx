@@ -6,7 +6,7 @@ import AnimatedEnergyChart from "@/components/chart/energy"
 
 export default function EnergyBusinessSection() {
   const t = useTranslations("home")
-  const hl = (chunks: React.ReactNode) => <span className="text-[#583CF2]">{chunks}</span>
+  const hl = (chunks: React.ReactNode) => <span className="text-primary">{chunks}</span>
   const br = () => <br />
 
   return (
@@ -15,12 +15,12 @@ export default function EnergyBusinessSection() {
         <div className="text-center mb-12 sm:mb-16 lg:mb-20">
           <div className="space-y-6 sm:space-y-8 lg:space-y-10 mb-24 sm:mb-0">
             <FadeInUp delay={300}>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold text-gray-700 mb-4 sm:mb-6">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold text-content-muted mb-4 sm:mb-6">
                 {t.rich("energyBizTitle", { hl })}
               </h2>
             </FadeInUp>
             <FadeInUp delay={600}>
-              <p className="text-base sm:text-lg lg:text-xl text-gray-600 leading-relaxed px-4 sm:px-0">
+              <p className="text-base sm:text-lg lg:text-xl text-content-muted leading-relaxed px-4 sm:px-0">
                 {t.rich("energyBizDesc", { br })}
               </p>
             </FadeInUp>

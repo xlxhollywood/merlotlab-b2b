@@ -19,8 +19,8 @@ export default function RtlsComponents() {
       <div className="max-w-4xl mx-auto">
         <FadeInUp delay={200}>
           <div className="text-center">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800">{t("componentsTitle")}</h2>
-            <p className="mt-4 sm:mt-5 text-sm sm:text-base lg:text-lg text-gray-500">{t("componentsSubtitle")}</p>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-content">{t("componentsTitle")}</h2>
+            <p className="mt-4 sm:mt-5 text-sm sm:text-base lg:text-lg text-content-subtle">{t("componentsSubtitle")}</p>
           </div>
         </FadeInUp>
 
@@ -35,8 +35,8 @@ export default function RtlsComponents() {
                 <div className="relative mx-auto h-40 w-full">
                   <Image src={card.image} alt={card.name} fill className="object-contain" />
                 </div>
-                <h3 className="mt-4 text-lg sm:text-xl font-bold text-gray-800">{card.name}</h3>
-                <p className="mt-2 text-sm text-gray-500 leading-relaxed">{card.desc}</p>
+                <h3 className="mt-4 text-lg sm:text-xl font-bold text-content">{card.name}</h3>
+                <p className="mt-2 text-sm text-content-subtle leading-relaxed">{card.desc}</p>
               </div>
             ))}
           </div>

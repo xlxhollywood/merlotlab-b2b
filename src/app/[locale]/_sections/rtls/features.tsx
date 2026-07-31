@@ -20,8 +20,8 @@ export default function RtlsFeatures() {
       <div className="max-w-6xl mx-auto">
         <FadeInUp delay={200}>
           <div className="text-center">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800">{t("featuresTitle")}</h2>
-            <p className="mt-4 sm:mt-5 text-sm sm:text-base lg:text-lg text-gray-500">{t("featuresSubtitle")}</p>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-content">{t("featuresTitle")}</h2>
+            <p className="mt-4 sm:mt-5 text-sm sm:text-base lg:text-lg text-content-subtle">{t("featuresSubtitle")}</p>
           </div>
         </FadeInUp>
 
