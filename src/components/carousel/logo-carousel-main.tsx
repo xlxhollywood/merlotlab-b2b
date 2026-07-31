@@ -56,14 +56,14 @@ export default function LogoCarouselMain() {
     },
     {
       name: "CJ대한통운",
-      logo: "/images/logos/cj-logistics.png",
+      logo: "/images/logos/cj-logistics.webp",
       alt: "CJ대한통운 로고",
       width: 180,
       height: 80,
     },
     {
       name: "이마트",
-      logo: "/images/logos/emart.png",
+      logo: "/images/logos/emart.webp",
       alt: "이마트 로고",
       width: 125,
       height: 40,
