@@ -20,11 +20,16 @@ const buttonVariants = cva(
         ghost:
           "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
         link: "text-primary underline-offset-4 hover:underline",
+        // 디자인 시스템: 브랜드 채움(폼) / 흰 pill(CTA·hero)
+        brand: "bg-primary text-white shadow-xs hover:bg-primary/90",
+        pill: "border border-line bg-white text-content shadow-sm hover:bg-surface-subtle",
       },
       size: {
         default: "h-9 px-4 py-2 has-[>svg]:px-3",
         sm: "h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5",
         lg: "h-10 rounded-md px-6 has-[>svg]:px-4",
+        // 디자인 시스템: CTA·폼 대형 버튼 높이 통일
+        xl: "h-12 sm:h-14 rounded-lg px-6 sm:px-8 text-base sm:text-lg has-[>svg]:px-6",
         icon: "size-9",
       },
     },
