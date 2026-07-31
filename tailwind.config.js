@@ -53,6 +53,19 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        // 디자인 시스템 콘텐츠(텍스트) 컬러 — Figma 실측 쿨그레이(Toss류). 신규 토큰(Tailwind gray 미오버라이드).
+        content: {
+          DEFAULT: "#333D4B", // 제목·강조 (≈gray-800)
+          strong: "#191F28", // 최강조 (≈gray-900)
+          muted: "#4E5968", // 본문 (≈gray-600)
+          subtle: "#6B7684", // 부제·설명 (≈gray-500)
+          faint: "#8B95A1", // 힌트·메타 (≈gray-400, AA 미달이라 소형/장식 한정)
+        },
+        line: "#E5E8EB", // 구분선·테두리 (≈gray-200)
+        surface: {
+          DEFAULT: "#FFFFFF",
+          subtle: "#F2F4F6", // 섹션 교대 배경 (≈gray-50)
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
