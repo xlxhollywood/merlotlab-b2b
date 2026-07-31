@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl"
 import Image from "next/image"
 import KakaoMap from "@/components/ui/kakao-map"
 import FadeInUp from "@/components/animation/fade-in-up"
+import { Heading, Text } from "@/components/ui/typography"
 
 export default function DirectionsSection() {
   const t = useTranslations("about")
@@ -13,12 +14,12 @@ export default function DirectionsSection() {
       <section className="py-16 lg:py-24">
         <FadeInUp delay={300}>
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            <Heading as="h2" variant="section" className="mb-4">
               {t("directionsTitle")}
-            </h2>
-            <p className="text-lg text-gray-600">
+            </Heading>
+            <Text as="p" variant="subtitle" color="subtle">
               {t("directionsDesc")}
-            </p>
+            </Text>
           </div>
         </FadeInUp>
 
