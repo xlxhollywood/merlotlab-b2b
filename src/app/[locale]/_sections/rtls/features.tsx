@@ -1,6 +1,7 @@
 "use client"
 
 import { useTranslations } from "next-intl"
+import { Heading, Text } from "@/components/ui/typography"
 import FeatureRow from "@/components/section/feature-row"
 import FadeInUp from "@/components/animation/fade-in-up"
 
@@ -20,8 +21,8 @@ export default function RtlsFeatures() {
       <div className="max-w-6xl mx-auto">
         <FadeInUp delay={200}>
           <div className="text-center">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-content">{t("featuresTitle")}</h2>
-            <p className="mt-4 sm:mt-5 text-sm sm:text-base lg:text-lg text-content-subtle">{t("featuresSubtitle")}</p>
+            <Heading as="h2" variant="section">{t("featuresTitle")}</Heading>
+            <Text as="p" variant="subtitle" color="subtle" className="mt-4 sm:mt-5">{t("featuresSubtitle")}</Text>
           </div>
         </FadeInUp>
 

@@ -1,6 +1,7 @@
 "use client"
 
 import { useTranslations } from "next-intl"
+import { Heading, Text } from "@/components/ui/typography"
 import FadeInUp from "@/components/animation/fade-in-up"
 
 // 도입 프로세스 (docs/renewal/EMS 솔루션.png §8): 5단계 번호 카드
@@ -20,8 +21,8 @@ export default function EmsProcessSteps() {
       <div className="max-w-4xl mx-auto">
         <FadeInUp delay={200}>
           <div className="text-center">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-content">{t("processTitle")}</h2>
-            <p className="mt-4 sm:mt-5 text-sm sm:text-base lg:text-lg text-content-subtle">{t("processSubtitle")}</p>
+            <Heading as="h2" variant="section">{t("processTitle")}</Heading>
+            <Text as="p" variant="subtitle" color="subtle" className="mt-4 sm:mt-5">{t("processSubtitle")}</Text>
           </div>
         </FadeInUp>
 
@@ -30,10 +31,10 @@ export default function EmsProcessSteps() {
           {steps.map((step) => (
             <FadeInUp key={step.no} delay={150}>
               <div className="flex items-start gap-4 sm:gap-6 rounded-2xl bg-white p-5 sm:p-6 shadow-[0_12px_24px_-8px_rgba(17,17,26,0.16),0_2px_8px_-2px_rgba(17,17,26,0.06)] ring-1 ring-gray-100">
-                <span className="text-xl sm:text-2xl font-bold text-primary shrink-0">{step.no}</span>
+                <span className="text-2xl sm:text-3xl font-bold text-primary shrink-0">{step.no}</span>
                 <div>
-                  <h3 className="text-base sm:text-lg font-bold text-content break-keep">{step.title}</h3>
-                  <p className="mt-1 text-sm text-content-subtle leading-relaxed break-keep">{step.desc}</p>
+                  <Heading as="h3" variant="card" className="break-keep">{step.title}</Heading>
+                  <Text as="p" variant="body-sm" color="subtle" className="mt-1 break-keep">{step.desc}</Text>
                 </div>
               </div>
             </FadeInUp>
