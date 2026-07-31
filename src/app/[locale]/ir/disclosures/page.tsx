@@ -23,9 +23,14 @@ export default function IRPage() {
 
   const itemsPerPage = 10
   const [disclosures, setDisclosures] = useState<Disclosure[]>([]) // notices를 disclosures로 변경
-  const totalPages = Math.ceil(disclosures.length / itemsPerPage)
   const filteredData = disclosures.filter((item) => item.title.toLowerCase().includes(searchTerm.toLowerCase()))
+  const totalPages = Math.ceil(filteredData.length / itemsPerPage)
   const currentData = filteredData.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
+
+  // 검색어가 바뀌면 1페이지로 리셋 (필터 후 현재 페이지가 범위를 벗어나 빈 목록이 뜨는 문제 방지)
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [searchTerm])
 
   // '공고 사항' 탭으로 이동하는 함수
   const handleAnnouncementTabClick = () => {

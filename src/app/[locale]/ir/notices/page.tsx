@@ -21,9 +21,14 @@ export default function NoticesPage() {
 
   const itemsPerPage = 10
   const [notices, setNotices] = useState<Notice[]>([])
-  const totalPages = Math.ceil(notices.length / itemsPerPage)
   const filteredData = notices.filter((item) => item.title.toLowerCase().includes(searchTerm.toLowerCase()))
+  const totalPages = Math.ceil(filteredData.length / itemsPerPage)
   const currentData = filteredData.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
+
+  // 검색어가 바뀌면 1페이지로 리셋 (필터 후 현재 페이지가 범위를 벗어나 빈 목록이 뜨는 문제 방지)
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [searchTerm])
 
   // '공시 정보' 탭으로 이동하는 함수 (정확한 경로로 수정)
   const handleDisclosureTabClick = () => {
