@@ -61,11 +61,12 @@ export default function CasesShowcase() {
 
         <div className="inner-container relative max-w-full mx-auto text-primary">
           <div className="py-4 sm:py-8">
-            {/* <h2 className="text-sm sm:text-base md:text-lg lg:text-xl">Customers</h2> */}
+            {/* <h2 className="text-base sm:text-lg md:text-xl lg:text-2xl">Customers</h2> */}
           </div>
-          <div className="text-center text-gray-700">
+          <div className="text-center text-content-muted">
             <FadeInUp delay={300}>
-              <h2 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight xs:leading-[1.2] sm:leading-[50px] md:leading-[60px]">
+              {/* 프리미티브 미적용(의도): breakpoint별 커스텀 leading(50px·60px)이 있어 raw 유지 */}
+              <h2 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight xs:leading-[1.2] sm:leading-[50px] md:leading-[60px]">
                 {t("heading1")}
                 <FadeInUp delay={400}>
                   <span className="text-primary block mt-0 sm:mt-3 md:mt-4 lg:mt-5 xl:mt-4">
@@ -91,7 +92,7 @@ export default function CasesShowcase() {
                         activeFilter === filter.value ? "default" : "outline"
                       }
                       onClick={() => handleFilterChange(filter.value)}
-                      className={`px-2.5 xs:px-3 sm:px-4 md:px-6 py-1 xs:py-1.5 sm:py-2 text-xs xs:text-sm sm:text-base rounded-full transition-all duration-200 whitespace-nowrap ${
+                      className={`px-2.5 xs:px-3 sm:px-4 md:px-6 py-1 xs:py-1.5 sm:py-2 text-sm xs:text-base sm:text-lg rounded-full transition-all duration-200 whitespace-nowrap ${
                         activeFilter === filter.value
                           ? "bg-primary text-white hover:bg-primary/90"
                           : "border-primary text-primary hover:bg-primary hover:text-white"

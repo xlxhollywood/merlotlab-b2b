@@ -25,8 +25,8 @@ export default function TechVideo() {
       <div className="max-w-4xl mx-auto">
         <FadeInUp delay={200}>
           <div className="text-center">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800">{t("videoTitle")}</h2>
-            <p className="mt-4 sm:mt-5 text-sm sm:text-base lg:text-lg text-gray-500">{t("videoSubtitle")}</p>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-content">{t("videoTitle")}</h2>
+            <p className="mt-4 sm:mt-5 text-sm sm:text-base lg:text-lg text-content-subtle">{t("videoSubtitle")}</p>
           </div>
         </FadeInUp>
 

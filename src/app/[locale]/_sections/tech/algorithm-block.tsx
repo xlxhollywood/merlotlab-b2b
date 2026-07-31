@@ -3,6 +3,7 @@
 import Image from "next/image"
 import { Check } from "lucide-react"
 import FadeInUp from "@/components/animation/fade-in-up"
+import { Heading, Text } from "@/components/ui/typography"
 
 export type AlgorithmBlockProps = {
   title: React.ReactNode
@@ -18,17 +19,17 @@ export default function AlgorithmBlock({ title, subtitle, chips, image, descBloc
     <section className="w-full bg-white pt-4 pb-16 sm:pb-20 lg:pb-24 px-4 sm:px-6 lg:px-8">
       <FadeInUp delay={150}>
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-2xl sm:text-3xl font-bold text-gray-800">{title}</h2>
-          <p className="mt-3 text-base sm:text-lg font-semibold text-gray-700">{subtitle}</p>
+          <Heading as="h2" variant="section">{title}</Heading>
+          <Text as="p" variant="subtitle-lg" color="muted" className="mt-3 font-semibold">{subtitle}</Text>
 
           {/* 체크 칩 */}
           <div className="mt-6 flex flex-wrap gap-x-6 gap-y-3">
             {chips.map((chip) => (
               <span key={chip} className="inline-flex items-center gap-2">
-                <span className="flex h-5 w-5 items-center justify-center rounded-full bg-primary/10">
-                  <Check className="h-3 w-3 text-primary" />
+                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10">
+                  <Check className="h-4 w-4 text-primary" />
                 </span>
-                <span className="text-sm text-gray-600">{chip}</span>
+                <span className="text-xl text-content-muted">{chip}</span>
               </span>
             ))}
           </div>
@@ -48,9 +49,9 @@ export default function AlgorithmBlock({ title, subtitle, chips, image, descBloc
           {/* 설명 문단 (블록 간 간격) */}
           <div className="mt-10 space-y-6">
             {descBlocks.map((block, i) => (
-              <p key={i} className="text-sm sm:text-base/10 text-gray-500 leading-relaxed break-keep">
+              <Text key={i} as="p" variant="subtitle" color="subtle" className="break-keep">
                 {block}
-              </p>
+              </Text>
             ))}
           </div>
         </div>

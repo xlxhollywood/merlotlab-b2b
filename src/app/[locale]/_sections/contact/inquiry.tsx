@@ -18,10 +18,10 @@ export default function ContactInquiry() {
       <div className="max-w-4xl mx-auto">
         <FadeInUp delay={200}>
           <div className="text-center">
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-800 leading-tight break-keep">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-content leading-tight break-keep">
               {t("title")}
             </h1>
-            <p className="mt-4 sm:mt-5 text-base sm:text-lg text-gray-500">{t("subtitle")}</p>
+            <p className="mt-4 sm:mt-5 text-base sm:text-lg text-content-subtle">{t("subtitle")}</p>
           </div>
         </FadeInUp>
 

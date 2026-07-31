@@ -24,7 +24,7 @@ export default function EmsSiteTypes() {
       <div className="max-w-6xl mx-auto">
         <FadeInUp delay={200}>
           <div className="text-center">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 leading-snug">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-content leading-snug">
               {t.rich("siteTypesHeading", { hl, br })}
             </h2>
             <Link
@@ -44,8 +44,8 @@ export default function EmsSiteTypes() {
                 <div className="relative aspect-square w-full max-w-[220px] overflow-hidden rounded-full">
                   <Image src={type.image} alt={type.name} fill className="object-cover" sizes="(max-width: 1024px) 45vw, 220px" />
                 </div>
-                <h3 className="mt-5 text-lg sm:text-xl font-bold text-gray-800">{type.name}</h3>
-                <p className="mt-2 text-sm text-gray-500 leading-relaxed">{type.desc}</p>
+                <h3 className="mt-5 text-lg sm:text-xl font-bold text-content">{type.name}</h3>
+                <p className="mt-2 text-sm text-content-subtle leading-relaxed">{type.desc}</p>
               </div>
             ))}
           </div>

@@ -24,10 +24,10 @@ export default function PlatformSection() {
       <div className="max-w-6xl mx-auto">
         <FadeInUp delay={200}>
           <div className="text-center">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 leading-snug">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-content leading-snug">
               {t.rich("platformTitle", { hl, mbr })}
             </h2>
-            <p className="mt-4 sm:mt-5 text-sm sm:text-base lg:text-lg text-gray-500 leading-relaxed">
+            <p className="mt-4 sm:mt-5 text-sm sm:text-base lg:text-lg text-content-subtle leading-relaxed">
               {t.rich("platformSubtitle", { br })}
             </p>
           </div>
@@ -42,9 +42,9 @@ export default function PlatformSection() {
                 </div>
                 <div className="mt-6 flex items-baseline gap-2">
                   <span className="text-xl font-bold text-primary">{step.no}</span>
-                  <span className="text-base sm:text-lg font-bold text-gray-800">{step.title}</span>
+                  <span className="text-base sm:text-lg font-bold text-content">{step.title}</span>
                 </div>
-                <p className="mt-2 text-sm text-gray-500 leading-relaxed">{t.rich(step.descKey, { br })}</p>
+                <p className="mt-2 text-sm text-content-subtle leading-relaxed">{t.rich(step.descKey, { br })}</p>
               </div>
             ))}
           </div>
