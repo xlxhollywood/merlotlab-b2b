@@ -36,16 +36,16 @@ export default function HeroOverlay({
       <div className={`relative z-10 max-w-[1880px] mx-auto flex ${heightClass} items-center px-6 sm:px-10 lg:px-20 2xl:px-48`}>
         <div className="max-w-2xl">
           {eyebrow && (
-            <p className={`text-sm sm:text-base font-medium ${isLight ? "text-content-subtle" : "text-white/80"}`}>{eyebrow}</p>
+            <p className={`text-base sm:text-lg font-medium ${isLight ? "text-content-subtle" : "text-white/80"}`}>{eyebrow}</p>
           )}
           <Heading as="h1" variant="hero" color={isLight ? "default" : "white"} className="mt-3 leading-tight">
             {title}
           </Heading>
-          <p className={`mt-4 text-sm sm:text-base lg:text-lg ${isLight ? "text-content-muted" : "text-white/85"}`}>{subtitle}</p>
+          <p className={`mt-4 text-base sm:text-lg lg:text-2xl/relaxed ${isLight ? "text-content-muted" : "text-white/85"}`}>{subtitle}</p>
           {action && (
             <Link
               href={action.href}
-              className="mt-7 inline-flex items-center gap-2 rounded-lg border border-gray-200 bg-white px-5 sm:px-6 h-11 sm:h-12 text-sm sm:text-base font-medium text-zinc-800 shadow-sm transition-colors hover:bg-gray-50"
+              className="mt-7 inline-flex items-center gap-2 rounded-lg border border-line bg-white px-5 sm:px-6 h-11 sm:h-12 text-base sm:text-lg font-medium text-content shadow-sm transition-colors hover:bg-surface-subtle"
             >
               {action.label}
               <ArrowRight className="w-4 h-4" />

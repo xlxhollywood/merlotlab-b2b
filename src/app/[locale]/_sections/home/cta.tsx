@@ -3,6 +3,8 @@
 import { ArrowRight } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { Link } from "@/i18n/navigation"
+import { Button } from "@/components/ui/button"
+import { Heading } from "@/components/ui/typography"
 
 // 홈 CTA: 단일 헤드라인 + 도입 문의 → /contact (docs/renewal/메인.png §6)
 export default function HomeCtaSection() {
@@ -11,16 +13,15 @@ export default function HomeCtaSection() {
   return (
     <section className="w-full bg-primary py-16 sm:py-20 px-4 sm:px-6 lg:px-8 text-center text-white">
       <div className="max-w-4xl mx-auto flex flex-col items-center gap-6 sm:gap-8">
-        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight font-bold break-keep">
+        <Heading as="h2" variant="section" color="white">
           {t.rich("ctaQuestion", { br: () => <br /> })}
-        </h2>
-        <Link
-          href="/contact"
-          className="inline-flex items-center gap-2 rounded-lg border border-gray-200 bg-white px-6 sm:px-8 h-12 sm:h-14 text-base sm:text-lg font-medium text-zinc-800 shadow-sm transition-colors hover:bg-gray-50"
-        >
-          {t("ctaButton")}
-          <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
-        </Link>
+        </Heading>
+        <Button asChild variant="pill" size="xl" >
+          <Link href="/contact">
+            {t("ctaButton")}
+            <ArrowRight className="size-4 sm:size-5" />
+          </Link>
+        </Button>
       </div>
     </section>
   )
