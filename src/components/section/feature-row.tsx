@@ -2,6 +2,7 @@
 
 import Image from "next/image"
 import FadeInUp from "@/components/animation/fade-in-up"
+import { Heading, Text } from "@/components/ui/typography"
 
 // 기능 소개 행 (rtls/ems 공용): 이미지 + 텍스트(eyebrow/title/불릿), reverse로 좌우 교대.
 export default function FeatureRow({
@@ -33,11 +34,11 @@ export default function FeatureRow({
         </div>
         {/* 텍스트: reverse 행은 블록을 이미지 쪽(우측)으로 붙이고 바깥쪽에 여백을 남김 (피그마) */}
         <div className={reverse ? "lg:order-1 lg:ml-auto lg:w-fit lg:max-w-full" : ""}>
-          <p className="text-sm font-semibold text-primary">{eyebrow}</p>
-          <h3 className="mt-2 text-2xl sm:text-3xl font-bold text-gray-800">{title}</h3>
+          <Text as="p" variant="eyebrow" color="brand">{eyebrow}</Text>
+          <Heading as="h3" variant="section" className="mt-2">{title}</Heading>
           <ul className="mt-5 space-y-2.5">
             {bullets.map((b) => (
-              <li key={b} className="flex items-center gap-2.5 text-base text-gray-600">
+              <li key={b} className="flex items-center gap-2.5 text-lg text-content-muted">
                 <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
                 {b}
               </li>

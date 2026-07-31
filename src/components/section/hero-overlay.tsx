@@ -35,12 +35,12 @@ export default function HeroOverlay({
       <div className={`relative z-10 max-w-[1880px] mx-auto flex ${heightClass} items-center px-6 sm:px-10 lg:px-20 2xl:px-48`}>
         <div className="max-w-2xl">
           {eyebrow && (
-            <p className={`text-sm sm:text-base font-medium ${isLight ? "text-gray-500" : "text-white/80"}`}>{eyebrow}</p>
+            <p className={`text-sm sm:text-base font-medium ${isLight ? "text-content-subtle" : "text-white/80"}`}>{eyebrow}</p>
           )}
-          <h1 className={`mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight ${isLight ? "text-gray-900" : "text-white"}`}>
+          <h1 className={`mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight ${isLight ? "text-content" : "text-white"}`}>
             {title}
           </h1>
-          <p className={`mt-4 text-sm sm:text-base lg:text-lg ${isLight ? "text-gray-600" : "text-white/85"}`}>{subtitle}</p>
+          <p className={`mt-4 text-sm sm:text-base lg:text-lg ${isLight ? "text-content-muted" : "text-white/85"}`}>{subtitle}</p>
           {action && (
             <Link
               href={action.href}
