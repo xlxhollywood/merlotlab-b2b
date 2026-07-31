@@ -2,6 +2,7 @@
 
 import Image from "next/image"
 import { Heading, Text } from "@/components/ui/typography"
+import { SectionHeader } from "@/components/layout/section"
 import { ArrowRight } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { Link } from "@/i18n/navigation"
@@ -25,12 +26,10 @@ export default function EmsSiteTypes() {
       <div className="max-w-6xl mx-auto">
         <FadeInUp delay={200}>
           <div className="text-center">
-            <Heading as="h2" variant="section" className="leading-snug">
-              {t.rich("siteTypesHeading", { hl, br })}
-            </Heading>
+            <SectionHeader title={t.rich("siteTypesHeading", { hl, br })} />
             <Link
               href="/cases"
-              className="mt-6 inline-flex items-center gap-2 rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-primary shadow-sm transition-colors hover:bg-gray-50"
+              className="mt-6 inline-flex items-center gap-2 rounded-lg border border-line bg-white px-8 py-4 text-lg font-medium text-primary shadow-sm transition-colors hover:bg-surface-subtle"
             >
               {t("siteTypesButton")}
               <ArrowRight className="w-4 h-4 text-primary" />
@@ -45,8 +44,8 @@ export default function EmsSiteTypes() {
                 <div className="relative aspect-square w-full max-w-[220px] overflow-hidden rounded-full">
                   <Image src={type.image} alt={type.name} fill className="object-cover" sizes="(max-width: 1024px) 45vw, 220px" />
                 </div>
-                <h3 className="mt-5 text-lg sm:text-xl font-bold text-content">{type.name}</h3>
-                <p className="mt-2 text-sm text-content-subtle leading-relaxed">{type.desc}</p>
+                <Heading as="h3" variant="card" className="mt-5">{type.name}</Heading>
+                <Text as="p" variant="body-sm" color="subtle" className="mt-2">{type.desc}</Text>
               </div>
             ))}
           </div>
