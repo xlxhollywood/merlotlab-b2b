@@ -3,6 +3,7 @@
 import Image from "next/image"
 import { ArrowRight } from "lucide-react"
 import { Link } from "@/i18n/navigation"
+import { Heading } from "@/components/ui/typography"
 
 // 풀블리드 배너형 Hero (tech·about·ems·rtls 공용). 배경 이미지에 좌측 텍스트 오버레이.
 // variant: "dark" = 어두운 사진 + 흰 텍스트(tech/about), "light" = 밝은 배경 이미지 + 어두운 텍스트(ems/rtls).
@@ -37,9 +38,9 @@ export default function HeroOverlay({
           {eyebrow && (
             <p className={`text-sm sm:text-base font-medium ${isLight ? "text-content-subtle" : "text-white/80"}`}>{eyebrow}</p>
           )}
-          <h1 className={`mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight ${isLight ? "text-content" : "text-white"}`}>
+          <Heading as="h1" variant="hero" color={isLight ? "default" : "white"} className="mt-3 leading-tight">
             {title}
-          </h1>
+          </Heading>
           <p className={`mt-4 text-sm sm:text-base lg:text-lg ${isLight ? "text-content-muted" : "text-white/85"}`}>{subtitle}</p>
           {action && (
             <Link
