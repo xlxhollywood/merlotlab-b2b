@@ -57,7 +57,7 @@ export default function PricingSection() {
                 key={idx}
                 className={`
                   border border-gray-200 shadow-lg transition-all duration-300 bg-white group
-                  hover:shadow-xl hover:scale-105 hover:border-[#583CF2]/20
+                  hover:shadow-xl hover:scale-105 hover:border-primary/20
                   ${
                     idx <= 2
                       ? "lg:col-span-2"
@@ -70,7 +70,7 @@ export default function PricingSection() {
                 <CardContent className="p-6 sm:p-8 text-center h-full flex flex-col justify-between">
                   <div className="space-y-3 sm:space-y-4">
                     {/* Icon */}
-                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[#583CF2]/10 rounded-xl sm:rounded-2xl flex items-center justify-center mx-auto group-hover:bg-[#583CF2]/20 transition-colors duration-300">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primary/10 rounded-xl sm:rounded-2xl flex items-center justify-center mx-auto group-hover:bg-primary/20 transition-colors duration-300">
                       <item.icon className="w-5 h-5 sm:w-6 sm:h-6 text-primary group-hover:scale-110 transition-transform duration-300" />
                     </div>
 
@@ -84,7 +84,7 @@ export default function PricingSection() {
 
                     {/* Price with Animation */}
                     <div className="pt-2">
-                      <p className="text-xl sm:text-2xl font-bold text-primary group-hover:text-[#4c35d1] transition-colors duration-300">
+                      <p className="text-xl sm:text-2xl font-bold text-primary group-hover:text-primary-700 transition-colors duration-300">
                         {cardsInView ? (
                           <CountUp
                             start={item.price}
