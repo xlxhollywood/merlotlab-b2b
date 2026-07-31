@@ -1,6 +1,7 @@
 "use client"
 
 import FadeInUp from "@/components/animation/fade-in-up"
+import { Heading, Text } from "@/components/ui/typography"
 
 // STEP 프로세스 (rtls/ems 공용): 회색 배경 + 중앙 제목/부제 + 3 STEP 카드.
 export default function StepProcess({
@@ -17,8 +18,8 @@ export default function StepProcess({
       <div className="max-w-6xl mx-auto">
         <FadeInUp delay={200}>
           <div className="text-center">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 leading-snug break-keep">{heading}</h2>
-            <p className="mt-4 sm:mt-5 text-sm sm:text-base lg:text-lg text-gray-500 leading-relaxed break-keep">{subtitle}</p>
+            <Heading as="h2" variant="section" className="leading-snug">{heading}</Heading>
+            <Text as="p" variant="subtitle" color="subtle" className="mt-4 sm:mt-5 leading-relaxed">{subtitle}</Text>
           </div>
         </FadeInUp>
 
@@ -30,9 +31,9 @@ export default function StepProcess({
                 key={step.no}
                 className="flex flex-col rounded-2xl bg-white p-6 lg:p-8 shadow-[0_12px_24px_-8px_rgba(17,17,26,0.16),0_2px_8px_-2px_rgba(17,17,26,0.06)] min-h-[220px]"
               >
-                <p className="text-sm font-bold text-primary">{step.no}</p>
-                <h3 className="mt-3 md:min-h-[3.5rem] text-lg sm:text-xl font-bold text-gray-800 break-keep">{step.title}</h3>
-                <p className="mt-8 text-sm text-gray-500 leading-relaxed break-keep">{step.desc}</p>
+                <p className="text-base font-bold text-primary">{step.no}</p>
+                <Heading as="h3" variant="card" className="mt-3 md:min-h-[3.5rem] break-keep">{step.title}</Heading>
+                <Text as="p" variant="body-sm" color="subtle" className="mt-8 break-keep">{step.desc}</Text>
               </div>
             ))}
           </div>
