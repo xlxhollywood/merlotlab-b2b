@@ -3,6 +3,7 @@
 import Image from "next/image"
 import { useTranslations } from "next-intl"
 import FadeInUp from "@/components/animation/fade-in-up"
+import { Heading, Text } from "@/components/ui/typography"
 
 // 확장형 플랫폼 4스텝 (docs/renewal/메인.png §2)
 export default function PlatformSection() {
@@ -24,12 +25,12 @@ export default function PlatformSection() {
       <div className="max-w-6xl mx-auto">
         <FadeInUp delay={200}>
           <div className="text-center">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-content leading-snug">
+            <Heading as="h2" variant="section" className="leading-snug">
               {t.rich("platformTitle", { hl, mbr })}
-            </h2>
-            <p className="mt-4 sm:mt-5 text-sm sm:text-base lg:text-lg text-content-subtle leading-relaxed">
+            </Heading>
+            <Text as="p" variant="subtitle" color="subtle" className="mt-4 sm:mt-5 leading-relaxed">
               {t.rich("platformSubtitle", { br })}
-            </p>
+            </Text>
           </div>
         </FadeInUp>
 
@@ -41,10 +42,10 @@ export default function PlatformSection() {
                   <Image src={step.icon} alt={step.title} fill sizes="96px" className="object-contain" />
                 </div>
                 <div className="mt-6 flex items-baseline gap-2">
-                  <span className="text-xl font-bold text-primary">{step.no}</span>
-                  <span className="text-base sm:text-lg font-bold text-content">{step.title}</span>
+                  <span className="text-2xl font-bold text-primary">{step.no}</span>
+                  <Heading as="h3" variant="card">{step.title}</Heading>
                 </div>
-                <p className="mt-2 text-sm text-content-subtle leading-relaxed">{t.rich(step.descKey, { br })}</p>
+                <Text as="p" variant="body-sm" color="subtle" className="mt-2">{t.rich(step.descKey, { br })}</Text>
               </div>
             ))}
           </div>

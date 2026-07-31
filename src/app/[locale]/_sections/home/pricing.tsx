@@ -4,6 +4,8 @@ import { Zap, Shield, Cpu } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { Card, CardContent } from "@/components/ui/card"
 import { useInView } from "react-intersection-observer"
+import { cn } from "@/lib/utils"
+import { headingVariants, Text } from "@/components/ui/typography"
 import nextDynamic from "next/dynamic"
 
 const CountUp = nextDynamic(() => import("react-countup"), {
@@ -40,11 +42,11 @@ export default function PricingSection() {
         <div className="text-center mb-12 sm:mb-16 lg:mb-20">
           <h2
             ref={costRef}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold text-content-muted mb-4 sm:mb-6"
+            className={cn(headingVariants({ variant: "section" }), "mb-4 sm:mb-6")}
           >
             {t("costPrefix")}{costInView && <CountUp start={1000000} end={0} duration={2} separator="," />}{t("wonUnit")}
           </h2>
-          <p className="text-lg sm:text-xl text-content-muted">{t("pricingSubtitle")}</p>
+          <Text as="p" variant="subtitle-lg" color="muted">{t("pricingSubtitle")}</Text>
         </div>
 
         {/* Cards Grid - 6 column grid for offset positioning */}

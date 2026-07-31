@@ -3,6 +3,7 @@
 import { useTranslations } from "next-intl"
 import { Card, CardContent } from "@/components/ui/card"
 import FadeInUp from "@/components/animation/fade-in-up"
+import { Heading, Text } from "@/components/ui/typography"
 
 export default function ProcessSection() {
   const t = useTranslations("home")
@@ -12,12 +13,12 @@ export default function ProcessSection() {
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12 sm:mb-16 lg:mb-20">
           <FadeInUp delay={300}>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold text-content-muted mb-4 sm:mb-6">
+            <Heading as="h2" variant="section" className="mb-4 sm:mb-6">
               {t("processTitle")}
-            </h2>
+            </Heading>
           </FadeInUp>
           <FadeInUp delay={600}>
-            <p className="text-lg sm:text-xl text-content-muted">{t("processSubtitle")}</p>
+            <Text as="p" variant="subtitle-lg" color="muted">{t("processSubtitle")}</Text>
           </FadeInUp>
         </div>
 

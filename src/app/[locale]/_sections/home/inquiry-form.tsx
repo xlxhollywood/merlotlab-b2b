@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl"
 import FadeInUp from "@/components/animation/fade-in-up"
 import QuoteForm from "@/components/form/quote-form"
 import BusinessInquiryForm from "@/components/form/business-inquiry-form"
+import { Heading, Text } from "@/components/ui/typography"
 
 interface InquiryFormSectionProps {
   selectedInquiry: "business" | "quote"
@@ -28,10 +29,10 @@ export default function InquiryFormSection({
       <div className="max-w-4xl mx-auto">
         <FadeInUp>
           <div className="text-center mb-12 sm:mb-16">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-content-muted mb-4 sm:mb-6 leading-tight">
+            <Heading as="h2" variant="section" className="mb-4 sm:mb-6 leading-tight">
               {t.rich("formTitle", { br })}
-            </h2>
-            <p className="text-base sm:text-xl text-content-muted">{t("formSubtitle")}</p>
+            </Heading>
+            <Text as="p" variant="subtitle-lg" color="muted">{t("formSubtitle")}</Text>
           </div>
         </FadeInUp>
 
