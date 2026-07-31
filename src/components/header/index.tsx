@@ -55,18 +55,18 @@ const Header: React.FC = () => {
             <button
               type="button"
               className={`${navPill} gap-1 cursor-pointer group-hover:bg-gray-100 ${
-                pathname.startsWith("/solutions") ? "text-[#583CF2]" : "text-gray-700 group-hover:text-[#583CF2]"
+                pathname.startsWith("/solutions") ? "text-primary" : "text-gray-700 group-hover:text-primary"
               }`}
             >
               {t("solutions")}
-              <ChevronDown className="w-4 h-4 text-gray-400 group-hover:text-[#583CF2] transition-colors" />
+              <ChevronDown className="w-4 h-4 text-gray-400 group-hover:text-primary transition-colors" />
             </button>
             <div className="absolute left-0 top-full pt-3 hidden group-hover:block">
               <div className="min-w-[160px] rounded-lg bg-white p-1 shadow-[0_0_2px_0_rgba(145,158,171,0.24),0_12px_24px_-4px_rgba(145,158,171,0.24)]">
                 <Link
                   href="/solutions/ems"
                   className={`block px-4 py-2.5 rounded-md text-sm transition-colors hover:bg-gray-50 ${
-                    pathname === "/solutions/ems" ? "text-[#583CF2] font-semibold" : "text-gray-700 hover:text-[#583CF2]"
+                    pathname === "/solutions/ems" ? "text-primary font-semibold" : "text-gray-700 hover:text-primary"
                   }`}
                 >
                   {t("solutionsEms")}
@@ -74,7 +74,7 @@ const Header: React.FC = () => {
                 <Link
                   href="/solutions/rtls"
                   className={`block px-4 py-2.5 rounded-md text-sm transition-colors hover:bg-gray-50 ${
-                    pathname === "/solutions/rtls" ? "text-[#583CF2] font-semibold" : "text-gray-700 hover:text-[#583CF2]"
+                    pathname === "/solutions/rtls" ? "text-primary font-semibold" : "text-gray-700 hover:text-primary"
                   }`}
                 >
                   {t("solutionsRtls")}
@@ -85,35 +85,35 @@ const Header: React.FC = () => {
           {/* 도입 사례 */}
           <Link
             href="/cases"
-            className={`${navPill} ${pathname === "/cases" ? "text-[#583CF2]" : "text-gray-700 hover:text-[#583CF2]"}`}
+            className={`${navPill} ${pathname === "/cases" ? "text-primary" : "text-gray-700 hover:text-primary"}`}
           >
             {t("cases")}
           </Link>
           {/* 기술 소개 */}
           <Link
             href="/tech"
-            className={`${navPill} ${pathname === "/tech" ? "text-[#583CF2]" : "text-gray-700 hover:text-[#583CF2]"}`}
+            className={`${navPill} ${pathname === "/tech" ? "text-primary" : "text-gray-700 hover:text-primary"}`}
           >
             {t("tech")}
           </Link>
           {/* 회사 소개 */}
           <Link
             href="/about"
-            className={`${navPill} ${pathname === "/about" ? "text-[#583CF2]" : "text-gray-700 hover:text-[#583CF2]"}`}
+            className={`${navPill} ${pathname === "/about" ? "text-primary" : "text-gray-700 hover:text-primary"}`}
           >
             {t("about")}
           </Link>
           {/* IR Center */}
           <Link
             href="/ir/disclosures"
-            className={`${navPill} ${pathname.startsWith("/ir") ? "text-[#583CF2]" : "text-gray-700 hover:text-[#583CF2]"}`}
+            className={`${navPill} ${pathname.startsWith("/ir") ? "text-primary" : "text-gray-700 hover:text-primary"}`}
           >
             {t("ir")}
           </Link>
           {/* 도입 문의 */}
           <Link
             href="/contact"
-            className={`${navPill} ${pathname === "/contact" ? "text-[#583CF2]" : "text-gray-700 hover:text-[#583CF2]"}`}
+            className={`${navPill} ${pathname === "/contact" ? "text-primary" : "text-gray-700 hover:text-primary"}`}
           >
             {t("contact")}
           </Link>
@@ -123,7 +123,7 @@ const Header: React.FC = () => {
         <div className="flex items-center gap-2 ml-auto 2xl:mr-36 xl:mr-10">
           <LocaleToggle />
           <button
-            className="xl:hidden text-gray-700 hover:text-[#583CF2] transition-colors duration-200"
+            className="xl:hidden text-gray-700 hover:text-primary transition-colors duration-200"
             onClick={toggleMobileMenu}
             aria-label="menu"
           >
@@ -142,7 +142,7 @@ const Header: React.FC = () => {
           <Link href="/solutions/ems" className="block" onClick={toggleMobileMenu}>
             <div
               className={`text-base font-medium cursor-pointer transition-colors duration-200 py-2 ${
-                pathname === "/solutions/ems" ? "text-[#583CF2]" : "text-gray-700 hover:text-[#583CF2]"
+                pathname === "/solutions/ems" ? "text-primary" : "text-gray-700 hover:text-primary"
               }`}
             >
               {t("solutionsEms")}
@@ -151,7 +151,7 @@ const Header: React.FC = () => {
           <Link href="/solutions/rtls" className="block" onClick={toggleMobileMenu}>
             <div
               className={`text-base font-medium cursor-pointer transition-colors duration-200 py-2 ${
-                pathname === "/solutions/rtls" ? "text-[#583CF2]" : "text-gray-700 hover:text-[#583CF2]"
+                pathname === "/solutions/rtls" ? "text-primary" : "text-gray-700 hover:text-primary"
               }`}
             >
               {t("solutionsRtls")}
@@ -161,7 +161,7 @@ const Header: React.FC = () => {
           <Link href="/cases" className="block" onClick={toggleMobileMenu}>
             <div
               className={`text-base font-medium cursor-pointer transition-colors duration-200 py-2 ${
-                pathname === "/cases" ? "text-[#583CF2]" : "text-gray-700 hover:text-[#583CF2]"
+                pathname === "/cases" ? "text-primary" : "text-gray-700 hover:text-primary"
               }`}
             >
               {t("cases")}
@@ -171,7 +171,7 @@ const Header: React.FC = () => {
           <Link href="/tech" className="block" onClick={toggleMobileMenu}>
             <div
               className={`text-base font-medium cursor-pointer transition-colors duration-200 py-2 ${
-                pathname === "/tech" ? "text-[#583CF2]" : "text-gray-700 hover:text-[#583CF2]"
+                pathname === "/tech" ? "text-primary" : "text-gray-700 hover:text-primary"
               }`}
             >
               {t("tech")}
@@ -181,7 +181,7 @@ const Header: React.FC = () => {
           <Link href="/about" className="block" onClick={toggleMobileMenu}>
             <div
               className={`text-base font-medium cursor-pointer transition-colors duration-200 py-2 ${
-                pathname === "/about" ? "text-[#583CF2]" : "text-gray-700 hover:text-[#583CF2]"
+                pathname === "/about" ? "text-primary" : "text-gray-700 hover:text-primary"
               }`}
             >
               {t("about")}
@@ -191,7 +191,7 @@ const Header: React.FC = () => {
           <Link href="/ir/disclosures" className="block" onClick={toggleMobileMenu}>
             <div
               className={`text-base font-medium cursor-pointer transition-colors duration-200 py-2 ${
-                pathname.startsWith("/ir") ? "text-[#583CF2]" : "text-gray-700 group-hover:text-[#583CF2]"
+                pathname.startsWith("/ir") ? "text-primary" : "text-gray-700 group-hover:text-primary"
               }`}
             >
               {t("ir")}
@@ -199,7 +199,7 @@ const Header: React.FC = () => {
           </Link>
           {/* 모바일 문의하기 버튼 */}
           <Link href="/contact" className="block" onClick={toggleMobileMenu}>
-            <Button className="w-full bg-[#583CF2] hover:bg-[#4a32d0] text-white py-2">{tCommon("inquiry")}</Button>
+            <Button className="w-full bg-primary hover:bg-primary-700 text-white py-2">{tCommon("inquiry")}</Button>
           </Link>
         </div>
       </div>

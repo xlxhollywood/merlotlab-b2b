@@ -28,7 +28,7 @@ function onRadioKey(e: React.KeyboardEvent, select: () => void) {
 }
 
 const RADIO_FOCUS =
-  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#583CF2] focus-visible:ring-offset-2"
+  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
 
 interface QuoteFormProps {
   selectedInquiry: "business" | "quote"
@@ -253,7 +253,7 @@ export default function QuoteForm({
                   })}
                   className={`rounded-xl sm:rounded-2xl bg-white border-2 h-full sm:min-h-[120px] lg:min-h-[143px] p-4 sm:p-6 lg:p-10 cursor-pointer transition-all ${RADIO_FOCUS} ${
                     selectedInquiry === "quote"
-                      ? "border-[#583cf2] opacity-100"
+                      ? "border-primary opacity-100"
                       : "border-zinc-300 opacity-50 hover:opacity-75"
                   }`}
                 >
@@ -276,7 +276,7 @@ export default function QuoteForm({
                   onKeyDown={(e) => onRadioKey(e, () => setSelectedInquiry("business"))}
                   className={`rounded-xl sm:rounded-2xl bg-white border-2 h-full sm:min-h-[120px] lg:min-h-[143px] p-4 sm:p-6 lg:p-10 cursor-pointer transition-all ${RADIO_FOCUS} ${
                     selectedInquiry === "business"
-                      ? "border-[#583cf2] opacity-100"
+                      ? "border-primary opacity-100"
                       : "border-zinc-300 opacity-50 hover:opacity-75"
                   }`}
                 >
@@ -313,7 +313,7 @@ export default function QuoteForm({
                   })}
                   className={`justify-center border-2 rounded-xl sm:rounded-2xl p-3 sm:p-4 h-auto cursor-pointer transition-all flex items-center ${RADIO_FOCUS} ${
                     selectedBusinessType === type
-                      ? "border-[#583CF2] opacity-100"
+                      ? "border-primary opacity-100"
                       : "border-gray-200 opacity-50 hover:opacity-75"
                   } bg-transparent`}
                 >
@@ -340,7 +340,7 @@ export default function QuoteForm({
                   value={formData.area}
                   onChange={(e) => handleInputChange("area", e.target.value)}
                   className={`h-10 sm:h-12 border-2 rounded-xl focus:ring-0 ${
-                    isSubmitted && !formData.area ? "border-red-300 focus:border-red-500" : "border-gray-200 focus:border-[#583CF2]"
+                    isSubmitted && !formData.area ? "border-red-300 focus:border-red-500" : "border-gray-200 focus:border-primary"
                   }`}
                 />
                 <p className="text-xs text-gray-500">{t("areaHint")}</p>
@@ -368,7 +368,7 @@ export default function QuoteForm({
                   value={formData.generalHours}
                   onChange={(e) => handleInputChange("generalHours", e.target.value)}
                   className={`h-10 sm:h-12 border-2 rounded-xl focus:ring-0 ${
-                    isSubmitted && (!formData.generalHours || Number(formData.generalHours) < 8) ? "border-red-300 focus:border-red-500" : "border-gray-200 focus:border-[#583CF2]"
+                    isSubmitted && (!formData.generalHours || Number(formData.generalHours) < 8) ? "border-red-300 focus:border-red-500" : "border-gray-200 focus:border-primary"
                   }`}
                   required
                 />
@@ -390,7 +390,7 @@ export default function QuoteForm({
                   value={formData.annualDays}
                   onChange={(e) => handleInputChange("annualDays", e.target.value)}
                   className={`h-10 sm:h-12 border-2 rounded-xl focus:ring-0 ${
-                    isSubmitted && !formData.annualDays ? "border-red-300 focus:border-red-500" : "border-gray-200 focus:border-[#583CF2]"
+                    isSubmitted && !formData.annualDays ? "border-red-300 focus:border-red-500" : "border-gray-200 focus:border-primary"
                   }`}
                   required
                 />
@@ -407,7 +407,7 @@ export default function QuoteForm({
               type="submit"
               disabled={!isFormValid()}
               size="lg"
-              className="w-full bg-[#583CF2] hover:bg-[#583CF2]/90 h-12 sm:h-14 rounded-xl text-base sm:text-lg font-semibold transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-primary hover:bg-primary/90 h-12 sm:h-14 rounded-xl text-base sm:text-lg font-semibold transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <Calculator className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
               {t("calculate")}
@@ -442,10 +442,10 @@ export default function QuoteForm({
                       {formatPower(calculationResult.beforePowerConsumption)} {t("kwhYear")}
                     </div>
                   </div>
-                  <div className="border-2 border-[#583CF2] bg-white rounded-xl p-5">
+                  <div className="border-2 border-primary bg-white rounded-xl p-5">
                     <div className="flex items-center justify-between mb-2">
                       <span className="text-sm font-medium text-gray-700">{t("after")}</span>
-                      <div className="w-3 h-3 bg-[#583CF2] rounded-full"></div>
+                      <div className="w-3 h-3 bg-primary rounded-full"></div>
                     </div>
                     <div className="text-2xl font-bold text-gray-900">
                       {formatCurrency(calculationResult.afterCost)}{t("won")}
@@ -505,7 +505,7 @@ export default function QuoteForm({
                   <div className="space-y-3">
                     <div className="flex justify-between items-center py-2">
                       <span className="text-gray-600">{t("businessTypeLabel")}</span>
-                      <span className="font-medium text-[#583CF2]">{typeLabel(selectedBusinessType || "제조 시설")}</span>
+                      <span className="font-medium text-primary">{typeLabel(selectedBusinessType || "제조 시설")}</span>
                     </div>
                     <div className="flex justify-between items-center py-2">
                       <span className="text-gray-600">{t("detailArea")}</span>
@@ -555,7 +555,7 @@ export default function QuoteForm({
                   })
                   setSelectedInquiry("business")
                 }}
-                className="w-full bg-[#583CF2] hover:bg-[#583CF2]/90 h-12 rounded-xl text-base font-semibold transition-all duration-300"
+                className="w-full bg-primary hover:bg-primary/90 h-12 rounded-xl text-base font-semibold transition-all duration-300"
               >
                 {t("requestExactQuote")}
               </Button>

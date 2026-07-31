@@ -186,7 +186,7 @@ export default function PortfolioInfiniteScroll({ activeFilter = "all" }: Portfo
     return (
       <div className="mt-10">
         <div className="text-center py-12">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#583CF2] mx-auto"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
           <p className="mt-4 text-gray-600">{t("loading")}</p>
         </div>
       </div>
@@ -206,7 +206,7 @@ export default function PortfolioInfiniteScroll({ activeFilter = "all" }: Portfo
             placeholder={t("searchPlaceholder")}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="block w-full pl-10 pr-10 py-3 border border-gray-300 rounded-lg leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-2 focus:ring-[#583CF2] focus:border-transparent transition-all duration-200"
+            className="block w-full pl-10 pr-10 py-3 border border-gray-300 rounded-lg leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200"
           />
           {searchQuery && (
             <button onClick={clearSearch} className="absolute inset-y-0 right-0 pr-3 flex items-center">
@@ -338,7 +338,7 @@ export default function PortfolioInfiniteScroll({ activeFilter = "all" }: Portfo
         <div className="fixed bottom-6 right-6">
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="bg-[#583CF2] hover:bg-[#583CF2]/90 text-white p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110"
+            className="bg-primary hover:bg-primary/90 text-white p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110"
             aria-label={t("scrollTop")}
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

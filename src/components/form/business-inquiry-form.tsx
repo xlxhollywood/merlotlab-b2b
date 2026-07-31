@@ -27,7 +27,7 @@ function onRadioKey(e: React.KeyboardEvent, select: () => void) {
 }
 
 const RADIO_FOCUS =
-  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#583CF2] focus-visible:ring-offset-2"
+  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
 
 interface BusinessInquiryFormProps {
   selectedInquiry: "business" | "quote";
@@ -159,7 +159,7 @@ export default function BusinessInquiryForm({
                   onKeyDown={(e) => onRadioKey(e, () => setSelectedInquiry("quote"))}
                   className={`rounded-xl sm:rounded-2xl bg-white border-2 h-full sm:min-h-[120px] lg:min-h-[143px] p-4 sm:p-6 lg:p-10 cursor-pointer transition-all ${RADIO_FOCUS} ${
                     selectedInquiry === "quote"
-                      ? "border-[#583cf2] opacity-100"
+                      ? "border-primary opacity-100"
                       : "border-zinc-300 opacity-50 hover:opacity-75"
                   }`}
                 >
@@ -182,7 +182,7 @@ export default function BusinessInquiryForm({
                   onKeyDown={(e) => onRadioKey(e, () => setSelectedInquiry("business"))}
                   className={`rounded-xl sm:rounded-2xl bg-white border-2 h-full sm:min-h-[120px] lg:min-h-[143px] p-4 sm:p-6 lg:p-10 cursor-pointer transition-all ${RADIO_FOCUS} ${
                     selectedInquiry === "business"
-                      ? "border-[#583cf2] opacity-100"
+                      ? "border-primary opacity-100"
                       : "border-zinc-300 opacity-50 hover:opacity-75"
                   }`}
                 >
@@ -213,7 +213,7 @@ export default function BusinessInquiryForm({
                   onKeyDown={(e) => onRadioKey(e, () => setSelectedBusinessType(type))}
                   className={`justify-center border-2 rounded-xl sm:rounded-2xl p-3 sm:p-4 h-auto cursor-pointer transition-all flex items-center ${RADIO_FOCUS} ${
                     selectedBusinessType === type
-                      ? "border-[#583CF2] opacity-100"
+                      ? "border-primary opacity-100"
                       : "border-gray-200 opacity-50 hover:opacity-75"
                   } bg-transparent`}
                 >
@@ -244,7 +244,7 @@ export default function BusinessInquiryForm({
                     onChange={(e) => handleInputChange("companyName", e.target.value)}
                     aria-invalid={!!err("companyName")}
                     aria-describedby={err("companyName") ? "err-companyName" : undefined}
-                    className={`h-10 sm:h-12 rounded-xl border-2 focus:ring-0 ${err("companyName") ? "border-red-300 focus:border-red-500" : "border-gray-200 focus:border-[#583CF2]"}`}
+                    className={`h-10 sm:h-12 rounded-xl border-2 focus:ring-0 ${err("companyName") ? "border-red-300 focus:border-red-500" : "border-gray-200 focus:border-primary"}`}
                   />
                   {err("companyName") && (
                     <p id="err-companyName" className="text-sm text-red-500">{err("companyName")}</p>
@@ -264,7 +264,7 @@ export default function BusinessInquiryForm({
                     value={formData.region}
                     onChange={(e) => handleInputChange("region", e.target.value)}
                     placeholder={t("regionPlaceholder")}
-                    className="h-10 sm:h-12 rounded-xl border-2 border-gray-200 focus:border-[#583CF2] focus:ring-0"
+                    className="h-10 sm:h-12 rounded-xl border-2 border-gray-200 focus:border-primary focus:ring-0"
                   />
                 </div>
               )}
@@ -282,7 +282,7 @@ export default function BusinessInquiryForm({
                   placeholder={isPersonal ? t("namePlaceholder") : t("managerPlaceholder")}
                   aria-invalid={!!err("managerName")}
                   aria-describedby={err("managerName") ? "err-manager" : undefined}
-                  className={`h-10 sm:h-12 rounded-xl border-2 focus:ring-0 ${err("managerName") ? "border-red-300 focus:border-red-500" : "border-gray-200 focus:border-[#583CF2]"}`}
+                  className={`h-10 sm:h-12 rounded-xl border-2 focus:ring-0 ${err("managerName") ? "border-red-300 focus:border-red-500" : "border-gray-200 focus:border-primary"}`}
                 />
                 {err("managerName") && (
                   <p id="err-manager" className="text-sm text-red-500">{err("managerName")}</p>
@@ -302,7 +302,7 @@ export default function BusinessInquiryForm({
                   placeholder={t("phonePlaceholder")}
                   aria-invalid={!!err("phone")}
                   aria-describedby={err("phone") ? "err-phone" : undefined}
-                  className={`h-10 sm:h-12 rounded-xl border-2 focus:ring-0 ${err("phone") ? "border-red-300 focus:border-red-500" : "border-gray-200 focus:border-[#583CF2]"}`}
+                  className={`h-10 sm:h-12 rounded-xl border-2 focus:ring-0 ${err("phone") ? "border-red-300 focus:border-red-500" : "border-gray-200 focus:border-primary"}`}
                 />
                 {err("phone") && (
                   <p id="err-phone" className="text-sm text-red-500">{err("phone")}</p>
@@ -323,7 +323,7 @@ export default function BusinessInquiryForm({
                   placeholder="example@email.com"
                   aria-invalid={!!err("email")}
                   aria-describedby={err("email") ? "err-email" : undefined}
-                  className={`h-10 sm:h-12 rounded-xl border-2 focus:ring-0 ${err("email") ? "border-red-300 focus:border-red-500" : "border-gray-200 focus:border-[#583CF2]"}`}
+                  className={`h-10 sm:h-12 rounded-xl border-2 focus:ring-0 ${err("email") ? "border-red-300 focus:border-red-500" : "border-gray-200 focus:border-primary"}`}
                 />
                 {err("email") && (
                   <p id="err-email" className="text-sm text-red-500">{err("email")}</p>
@@ -345,7 +345,7 @@ export default function BusinessInquiryForm({
               placeholder={t("messagePlaceholder")}
               aria-invalid={!!err("message")}
               aria-describedby={err("message") ? "err-message" : undefined}
-              className={`min-h-[100px] sm:min-h-[120px] rounded-xl border-2 focus:ring-0 resize-none ${err("message") ? "border-red-300 focus:border-red-500" : "border-gray-200 focus:border-[#583CF2]"}`}
+              className={`min-h-[100px] sm:min-h-[120px] rounded-xl border-2 focus:ring-0 resize-none ${err("message") ? "border-red-300 focus:border-red-500" : "border-gray-200 focus:border-primary"}`}
             />
             {err("message") && (
               <p id="err-message" className="text-sm text-red-500">{err("message")}</p>
@@ -381,7 +381,7 @@ export default function BusinessInquiryForm({
               type="submit"
               disabled={isSubmitting}
               size="lg"
-              className="w-full bg-[#583CF2] hover:bg-[#583CF2]/90 h-12 sm:h-14 rounded-xl text-base sm:text-lg font-semibold transition-all duration-300 hover:scale-105"
+              className="w-full bg-primary hover:bg-primary/90 h-12 sm:h-14 rounded-xl text-base sm:text-lg font-semibold transition-all duration-300 hover:scale-105"
             >
               <Mail className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
               {isSubmitting ? t("submitting") : t("submit")}

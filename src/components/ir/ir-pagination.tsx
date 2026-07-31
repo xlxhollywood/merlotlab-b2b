@@ -49,7 +49,7 @@ export default function IrPagination({
             <li key={pageNum}>
               <button
                 onClick={() => onPageChange(pageNum)}
-                className={`px-2.5 sm:px-3 py-2 text-sm rounded-lg border transition-colors ${currentPage === pageNum ? "bg-[#583CF2] text-white border-[#583CF2]" : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50"}`}
+                className={`px-2.5 sm:px-3 py-2 text-sm rounded-lg border transition-colors ${currentPage === pageNum ? "bg-primary text-white border-primary" : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50"}`}
               >
                 {pageNum}
               </button>
