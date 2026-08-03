@@ -45,6 +45,7 @@
     "heroEyebrow": "About Merlotlab",
     "heroTitle": "회사 소개",
     "heroSubtitle": "메를로랩이 만들어가는<br></br>스마트 빌딩의 미래와 성장의 여정을 소개합니다.",
+    "metaDescription": "메를로랩이 만들어가는 스마트 빌딩의 미래와 성장의 여정을 소개합니다.",
     "introHeading": "Building AX를 현실로 만들어갑니다.",
     "introP1": "메를로랩은 Building DX를 넘어 AI가 스스로 건물을 운영하는 Building AX 시대를 준비합니다.",
     "introP2": "메를로랩은 건물 곳곳에 설치된 조명을 건물의 신경망으로 바라봅니다. 건물 전역에 설치된 조명에 자체 개발한 Merlot Mesh를 적용하여 건물 전체를 하나의 무선 네트워크로 연결합니다.",
@@ -344,6 +345,7 @@
     "button": "문의 하기"
   },
   "cases": {
+    "metaDescription": "공장·물류센터·주차장·사무실 — 메를로랩 EMS를 도입한 사업장의 전력 절감 실적을 소개합니다.",
     "heading1": "메를로랩이 사업장 전력 절감",
     "heading2": "함께 하겠습니다",
     "statSitesLabel": "도입 사업장",
