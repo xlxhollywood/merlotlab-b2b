@@ -35,19 +35,24 @@ type SectionHeaderProps = {
   title: React.ReactNode
   subtitle?: React.ReactNode
   eyebrow?: React.ReactNode
-  headingVariant?: "display" | "section"
+  as?: "h1" | "h2"
+  headingVariant?: "display" | "hero" | "section" | "subSection"
   subtitleVariant?: "subtitle" | "subtitle-lg"
+  subtitleColor?: "subtle" | "muted" | "default"
   align?: "center" | "left"
   className?: string
 }
 
 // 섹션 타이틀+부제(+eyebrow) 공통 블록. 대부분 섹션 헤더가 이 형태.
+// 제목/부제 line-height는 각 variant에 내장(/snug·/loose). 여기선 크기(subtitle-lg 기본)·색·간격만 관리.
 function SectionHeader({
   title,
   subtitle,
   eyebrow,
+  as = "h2",
   headingVariant = "section",
-  subtitleVariant = "subtitle",
+  subtitleVariant = "subtitle-lg",
+  subtitleColor = "default",
   align = "center",
   className,
 }: SectionHeaderProps) {
@@ -58,9 +63,11 @@ function SectionHeader({
           {eyebrow}
         </Text>
       ) : null}
-      <Heading variant={headingVariant}>{title}</Heading>
+      <Heading as={as} variant={headingVariant}>
+        {title}
+      </Heading>
       {subtitle ? (
-        <Text as="p" variant={subtitleVariant} color="subtle" className="mt-4 sm:mt-5">
+        <Text as="p" variant={subtitleVariant} color={subtitleColor} className="mt-6 sm:mt-10">
           {subtitle}
         </Text>
       ) : null}

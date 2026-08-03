@@ -11,9 +11,11 @@ const headingVariants = cva("font-bold break-keep", {
   variants: {
     variant: {
       display: "text-4xl sm:text-5xl lg:text-6xl", // 페이지 인트로 대제목 (~60px)
-      hero: "text-4xl sm:text-5xl lg:text-6xl", // 배너형 히어로 H1 (hero-overlay·contact 공통)
-      section: "text-3xl sm:text-4xl lg:text-5xl", // 표준 섹션 제목 (~48px)
+      hero: "text-3xl sm:text-4xl lg:text-5xl", // 배너형 히어로 H1 (hero-overlay·contact 공통)
+      section: "text-3xl/snug sm:text-4xl/snug lg:text-5xl/snug", // 표준 섹션 제목 (~48px, 줄바꿈 대비 line-height 내장)
+      subSection: "text-2xl/snug sm:text-3xl/snug lg:text-4xl/snug", // 서브섹션 제목 (feature-row 등, ~36px)
       card: "text-xl sm:text-2xl", // 카드 h3
+      cardSmall: "text-lg sm:text-xl", // 카드 h4
     },
     color: {
       default: "text-content",
@@ -37,8 +39,8 @@ function Heading({ className, variant, color, as: Tag = "h2", ...props }: Headin
 const textVariants = cva("break-keep", {
   variants: {
     variant: {
-      "subtitle-lg": "text-lg sm:text-xl lg:text-2xl", // home/인트로 부제 (~24px)
-      subtitle: "text-base sm:text-lg lg:text-xl", // 표준 부제 (~18-20px)
+      "subtitle-lg": "text-lg/loose sm:text-xl/loose lg:text-2xl/loose", // home/인트로 부제 (~24px, line-height 내장)
+      subtitle: "text-base/loose sm:text-lg/loose lg:text-xl/loose", // 표준 부제 (~18-20px)
       body: "text-base sm:text-lg leading-relaxed", // 본문 문단
       "body-sm": "text-base leading-relaxed", // 카드 본문
       eyebrow: "text-base font-semibold", // STEP·라벨

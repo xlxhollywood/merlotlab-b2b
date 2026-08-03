@@ -1,7 +1,8 @@
 "use client"
 
 import { Cpu, Wrench, Wifi, Server, ShieldCheck } from "lucide-react"
-import { Heading, Text } from "@/components/ui/typography"
+import { Heading } from "@/components/ui/typography"
+import { SectionHeader } from "@/components/layout/section"
 import { useTranslations } from "next-intl"
 import { useInView } from "react-intersection-observer"
 import nextDynamic from "next/dynamic"
@@ -34,7 +35,7 @@ export default function EmsPricingZero() {
         <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10">
           <Icon className="h-6 w-6 text-primary" />
         </span>
-        <Heading as="h3" variant="card" className="mt-4">{item.title}</Heading>
+        <Heading as="h3" variant="cardSmall" className="mt-4">{item.title}</Heading>
         {item.sub && <p className="mt-1 text-sm text-content-faint">{item.sub}</p>}
         <p className="mt-auto pt-4 text-2xl font-bold text-primary">
           {inView ? (
@@ -54,10 +55,7 @@ export default function EmsPricingZero() {
     <section className="w-full bg-gray-50 py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8">
       <div className="max-w-5xl mx-auto">
         <FadeInUp delay={200}>
-          <div className="text-center">
-            <Heading as="h2" variant="section">{t("pricingTitle")}</Heading>
-            <Text as="p" variant="subtitle" color="subtle" className="mt-4 sm:mt-5">{t("pricingSubtitle")}</Text>
-          </div>
+          <SectionHeader title={t("pricingTitle")} subtitle={t("pricingSubtitle")} />
         </FadeInUp>
 
         <FadeInUp delay={300}>

@@ -2,6 +2,7 @@
 
 import FadeInUp from "@/components/animation/fade-in-up"
 import { Heading, Text } from "@/components/ui/typography"
+import { SectionHeader } from "@/components/layout/section"
 
 // STEP 프로세스 (rtls/ems 공용): 회색 배경 + 중앙 제목/부제 + 3 STEP 카드.
 export default function StepProcess({
@@ -17,10 +18,7 @@ export default function StepProcess({
     <section className="w-full bg-gray-50 py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
         <FadeInUp delay={200}>
-          <div className="text-center">
-            <Heading as="h2" variant="section" className="leading-snug">{heading}</Heading>
-            <Text as="p" variant="subtitle" color="subtle" className="mt-4 sm:mt-5 leading-relaxed">{subtitle}</Text>
-          </div>
+          <SectionHeader title={heading} subtitle={subtitle} subtitleColor="default" />
         </FadeInUp>
 
         <FadeInUp delay={300}>

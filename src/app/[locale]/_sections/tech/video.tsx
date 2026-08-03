@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Heading, Text } from "@/components/ui/typography"
+import { SectionHeader } from "@/components/layout/section"
 import { flushSync } from "react-dom"
 import Image from "next/image"
 import { Play } from "lucide-react"
@@ -25,10 +25,7 @@ export default function TechVideo() {
     <section className="w-full bg-white py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
         <FadeInUp delay={200}>
-          <div className="text-center">
-            <Heading as="h2" variant="section">{t("videoTitle")}</Heading>
-            <Text as="p" variant="subtitle" color="subtle" className="mt-4 sm:mt-5">{t("videoSubtitle")}</Text>
-          </div>
+          <SectionHeader title={t("videoTitle")} subtitle={t("videoSubtitle")} />
         </FadeInUp>
 
         <FadeInUp delay={300}>
