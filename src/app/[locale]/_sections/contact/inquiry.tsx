@@ -11,8 +11,13 @@ import BusinessInquiryForm from "@/components/form/business-inquiry-form"
 // 폼은 기존 QuoteForm(모의 견적)/BusinessInquiryForm(견적 문의)을 그대로 재사용.
 export default function ContactInquiry() {
   const t = useTranslations("contact")
-  const [selectedInquiry, setSelectedInquiry] = useState<"business" | "quote">("quote")
-  const [selectedBusinessType, setSelectedBusinessType] = useState("제조 시설")
+  const [selectedInquiry, setInquiry] = useState<"business" | "quote">("quote")
+  const [selectedBusinessType, setSelectedBusinessType] = useState("")
+  
+  const setSelectedInquiry = (value: "business" | "quote") => {
+    setInquiry(value)
+    setSelectedBusinessType("")
+  }
 
   return (
     <section className="w-full bg-gray-50 py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8">
