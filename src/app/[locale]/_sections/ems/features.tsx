@@ -1,7 +1,7 @@
 "use client"
 
 import { useTranslations } from "next-intl"
-import { Heading, Text } from "@/components/ui/typography"
+import { SectionHeader } from "@/components/layout/section"
 import FeatureRow from "@/components/section/feature-row"
 import FadeInUp from "@/components/animation/fade-in-up"
 
@@ -20,10 +20,7 @@ export default function EmsFeatures() {
     <section className="w-full bg-white py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
         <FadeInUp delay={200}>
-          <div className="text-center">
-            <Heading as="h2" variant="section">{t("featuresTitle")}</Heading>
-            <Text as="p" variant="subtitle" color="subtle" className="mt-4 sm:mt-5">{t("featuresSubtitle")}</Text>
-          </div>
+          <SectionHeader title={t("featuresTitle")} subtitle={t("featuresSubtitle")} />
         </FadeInUp>
 
         <div className="mt-12 sm:mt-16 flex flex-col gap-14 sm:gap-20">

@@ -5,6 +5,7 @@ import { ArrowRight } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { Link } from "@/i18n/navigation"
 import { Heading, Text } from "@/components/ui/typography"
+import { SectionHeader } from "@/components/layout/section"
 import FadeInUp from "@/components/animation/fade-in-up"
 
 // Merlot 솔루션 개요: EMS / RTLS 2행 (docs/renewal/메인.png §3)
@@ -31,12 +32,7 @@ export default function MerlotSolutionsSection() {
     <section className="w-full bg-white py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8">
       <div className="max-w-5xl mx-auto">
         <FadeInUp delay={200}>
-          <div className="text-center">
-            <Heading as="h2" variant="section">{t("solutionsTitle")}</Heading>
-            <Text as="p" variant="subtitle" color="subtle" className="mt-4 sm:mt-5 leading-relaxed">
-              {t("solutionsSubtitle")}
-            </Text>
-          </div>
+          <SectionHeader title={t("solutionsTitle")} subtitle={t("solutionsSubtitle")} />
         </FadeInUp>
 
         <div className="mt-12 sm:mt-16 flex flex-col gap-14 sm:gap-20">

@@ -4,6 +4,7 @@ import Image from "next/image"
 import { useTranslations } from "next-intl"
 import FadeInUp from "@/components/animation/fade-in-up"
 import { Heading, Text } from "@/components/ui/typography"
+import { SectionHeader } from "@/components/layout/section"
 
 // 확장형 플랫폼 4스텝 (docs/renewal/메인.png §2)
 export default function PlatformSection() {
@@ -24,14 +25,10 @@ export default function PlatformSection() {
     <section className="w-full bg-white py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
         <FadeInUp delay={200}>
-          <div className="text-center">
-            <Heading as="h2" variant="section" className="leading-snug">
-              {t.rich("platformTitle", { hl, mbr })}
-            </Heading>
-            <Text as="p" variant="subtitle" color="subtle" className="mt-4 sm:mt-5 leading-relaxed">
-              {t.rich("platformSubtitle", { br })}
-            </Text>
-          </div>
+          <SectionHeader
+            title={t.rich("platformTitle", { hl, mbr })}
+            subtitle={t.rich("platformSubtitle", { br })}
+          />
         </FadeInUp>
 
         <FadeInUp delay={300}>
@@ -42,10 +39,10 @@ export default function PlatformSection() {
                   <Image src={step.icon} alt={step.title} fill sizes="96px" className="object-contain" />
                 </div>
                 <div className="mt-6 flex items-baseline gap-2">
-                  <span className="text-2xl font-bold text-primary">{step.no}</span>
-                  <Heading as="h3" variant="card">{step.title}</Heading>
+                  <span className="text-xl font-bold text-primary">{step.no}</span>
+                  <Text as="p" variant="subtitle" className="font-bold">{step.title}</Text>
                 </div>
-                <Text as="p" variant="body-sm" color="subtle" className="mt-2">{t.rich(step.descKey, { br })}</Text>
+                <Text as="p" variant="body" color="subtle" className="mt-2">{t.rich(step.descKey, { br })}</Text>
               </div>
             ))}
           </div>

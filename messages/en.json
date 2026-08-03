@@ -42,7 +42,7 @@
     "copyright": "© Copyright merlot.lab All Rights Reserved."
   },
   "about": {
-    "heroEyebrow": "About Merlotlab",
+    "heroEyebrow": "About MerlotLab",
     "heroTitle": "About Us",
     "heroSubtitle": "The future of smart buildings and the journey of growth<br></br>that MerlotLab is creating.",
     "introHeading": "Making Building AX a reality.",
@@ -344,8 +344,8 @@
     "button": "Contact us"
   },
   "cases": {
-    "heading1": "MerlotLab reduces your site's",
-    "heading2": "power consumption with you",
+    "heading1": "MerlotLab helps reduces",
+    "heading2": "your site's power consumption",
     "statSitesLabel": "Sites deployed",
     "statSitesUnit": "sites",
     "statSitesDesc": "Jan 2023 – Jun 2026",
@@ -483,7 +483,7 @@
     "formTitle": "Feel free to reach out, <br></br> and we'll consult in detail",
     "formSubtitle": "Ask us anything, anytime",
     "heroHeadline": "One Wireless Infrastructure<br></br>Infinite Possibilities",
-    "heroBannerSubtitle": "Build a wireless infrastructure that connects the entire building — from energy management<br></br>to a wide range of future smart building services, all on a single platform.",
+    "heroBannerSubtitle": "Build a wireless infrastructure that connects the entire building from energy management<br></br>to a wide range of future smart building services, all on a single platform.",
     "platformTitle": "An <hl>expandable platform</hl> that starts from one infrastructure",
     "platformSubtitle": "Build a 100% wireless mesh network simply by replacing lighting,<br></br>then continuously expand smart building services on top of one infrastructure.",
     "platform1Title": "Lighting installation",
@@ -788,6 +788,7 @@
     "site4Desc": "Automatic control tailored to the work environment<br></br>by occupancy status and time",
     "costHeading": "Start with no upfront cost.",
     "costSubtitle": "With the goal of reducing energy costs, the investor fully covers the initial equipment investment<br></br>and recovers it through the savings.",
+    "costBadge": "Energy Efficiency Business",
     "pricingTitle": "Zero initial investment",
     "pricingSubtitle": "A transparent and reasonable pricing policy",
     "priceZero": "0 KRW",

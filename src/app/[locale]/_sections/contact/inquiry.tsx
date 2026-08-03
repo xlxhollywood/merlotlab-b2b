@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { useTranslations } from "next-intl"
-import { Heading, Text } from "@/components/ui/typography"
+import { SectionHeader } from "@/components/layout/section"
 import FadeInUp from "@/components/animation/fade-in-up"
 import QuoteForm from "@/components/form/quote-form"
 import BusinessInquiryForm from "@/components/form/business-inquiry-form"
@@ -18,12 +18,7 @@ export default function ContactInquiry() {
     <section className="w-full bg-gray-50 py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
         <FadeInUp delay={200}>
-          <div className="text-center">
-            <Heading as="h1" variant="hero" className="leading-tight">
-              {t("title")}
-            </Heading>
-            <Text as="p" variant="subtitle" color="subtle" className="mt-4 sm:mt-5">{t("subtitle")}</Text>
-          </div>
+          <SectionHeader as="h1" headingVariant="hero" title={t("title")} subtitle={t("subtitle")} />
         </FadeInUp>
 
         <FadeInUp delay={300}>

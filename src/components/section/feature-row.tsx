@@ -35,12 +35,12 @@ export default function FeatureRow({
         {/* 텍스트: reverse 행은 블록을 이미지 쪽(우측)으로 붙이고 바깥쪽에 여백을 남김 (피그마) */}
         <div className={reverse ? "lg:order-1 lg:ml-auto lg:w-fit lg:max-w-full" : ""}>
           <Text as="p" variant="eyebrow" color="brand">{eyebrow}</Text>
-          <Heading as="h3" variant="section" className="mt-2">{title}</Heading>
+          <Heading as="h3" variant="subSection" className="mt-2">{title}</Heading>
           <ul className="mt-5 space-y-2.5">
             {bullets.map((b) => (
               <li key={b} className="flex items-center gap-2.5 text-lg text-content-muted">
-                <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
-                {b}
+                <span className="h-2 w-2 shrink-0 rounded-full bg-primary" />
+                <Text as="p" variant="subtitle-lg" color="default">{b}</Text>
               </li>
             ))}
           </ul>
