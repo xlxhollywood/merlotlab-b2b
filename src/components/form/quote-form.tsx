@@ -106,11 +106,6 @@ export default function QuoteForm({
     }
   }, [selectedBusinessType])
 
-  // 폼 유효성 검사 함수
-  const isFormValid = () => {
-    return selectedBusinessType && formData.area && formData.generalHours && formData.annualDays
-  }
-
   const businessTypeSavings = {
     "물류 센터": 0.4,
     "제조 시설": 0.3,
@@ -405,9 +400,8 @@ export default function QuoteForm({
           <div className="space-y-4 sm:space-y-6 pt-4">
             <Button
               type="submit"
-              disabled={!isFormValid()}
               size="lg"
-              className="w-full bg-primary hover:bg-primary/90 h-12 sm:h-14 rounded-xl text-base sm:text-lg font-semibold transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-primary hover:bg-primary/90 h-12 sm:h-14 rounded-xl text-base sm:text-lg font-semibold transition-all duration-300 hover:scale-105"
             >
               <Calculator className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
               {t("calculate")}
