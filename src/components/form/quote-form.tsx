@@ -238,14 +238,8 @@ export default function QuoteForm({
                   role="radio"
                   aria-checked={selectedInquiry === "quote"}
                   tabIndex={0}
-                  onClick={() => {
-                    setSelectedInquiry("quote")
-                    setSelectedBusinessType("제조 시설")
-                  }}
-                  onKeyDown={(e) => onRadioKey(e, () => {
-                    setSelectedInquiry("quote")
-                    setSelectedBusinessType("제조 시설")
-                  })}
+                  onClick={() => setSelectedInquiry("quote")}
+                  onKeyDown={(e) => onRadioKey(e, () => setSelectedInquiry("quote"))}
                   className={`rounded-xl sm:rounded-2xl bg-white border-2 h-full sm:min-h-[120px] lg:min-h-[143px] p-4 sm:p-6 lg:p-10 cursor-pointer transition-all ${RADIO_FOCUS} ${
                     selectedInquiry === "quote"
                       ? "border-primary opacity-100"
