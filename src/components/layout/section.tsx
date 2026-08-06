@@ -52,7 +52,7 @@ function SectionHeader({
   as = "h2",
   headingVariant = "section",
   subtitleVariant = "subtitle-lg",
-  subtitleColor = "default",
+  subtitleColor = "subtle",
   align = "center",
   className,
 }: SectionHeaderProps) {
