@@ -13,8 +13,9 @@ export default function ContactInquiry() {
   const t = useTranslations("contact")
   const [selectedInquiry, setInquiry] = useState<"business" | "quote">("quote")
   const [selectedBusinessType, setSelectedBusinessType] = useState("")
-  
+
   const setSelectedInquiry = (value: "business" | "quote") => {
+    if (value === selectedInquiry) return
     setInquiry(value)
     setSelectedBusinessType("")
   }
