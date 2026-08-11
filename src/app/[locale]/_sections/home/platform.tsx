@@ -26,7 +26,7 @@ export default function PlatformSection() {
       <div className="max-w-6xl mx-auto">
         <FadeInUp delay={200}>
           <SectionHeader
-            title={t.rich("platformTitle", { hl, mbr })}
+            title={t.rich("platformTitle", { hl, mbr, br })}
             subtitle={t.rich("platformSubtitle", { br })}
           />
         </FadeInUp>
