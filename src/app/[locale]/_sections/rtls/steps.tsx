@@ -12,7 +12,7 @@ export default function RtlsSteps() {
 
   return (
     <StepProcess
-      heading={t.rich("stepsHeading", { hl })}
+      heading={t.rich("stepsHeading", { hl, br })}
       subtitle={t.rich("stepsSubtitle", { br })}
       steps={[
         { no: "STEP 1", title: t("step1Title"), desc: t.rich("step1Desc", { br }) },
