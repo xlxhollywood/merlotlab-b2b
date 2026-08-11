@@ -1,6 +1,7 @@
 "use client"
 
 import Image from "next/image"
+import { useLocale } from "next-intl"
 import FadeInUp from "@/components/animation/fade-in-up"
 import { Heading, Text } from "@/components/ui/typography"
 
@@ -20,6 +21,10 @@ export default function FeatureRow({
   imageAlt: string
   reverse?: boolean
 }) {
+  const locale = useLocale()
+  // 영어는 한글보다 줄이 길어져 한 단계 작게
+  const bulletVariant = locale === "en" ? "subtitle" : "subtitle-lg"
+
   return (
     <FadeInUp delay={150}>
       {/* 이미지:텍스트 = 5:3, 넓은 거터 (피그마 비율) — reverse 행은 트랙을 좌우 반전 */}
@@ -40,7 +45,7 @@ export default function FeatureRow({
             {bullets.map((b) => (
               <li key={b} className="flex items-center gap-2.5 text-lg text-content-muted">
                 <span className="h-2 w-2 shrink-0 rounded-full bg-primary" />
-                <Text as="p" variant="subtitle-lg" color="default">{b}</Text>
+                <Text as="p" variant={bulletVariant} color="default">{b}</Text>
               </li>
             ))}
           </ul>
